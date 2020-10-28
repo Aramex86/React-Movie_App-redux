@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import NavBar from "./components/NaigationBar/NavBar";
+import MovielistContainer from "./components/MovieList/MovielistContainer";
+import { Switch, Route} from "react-router-dom";
+import MovieCardContainer from "./components/MovieCard/MovieCardContainer";
+import withMovies from "./Hoc/withmovies";
 
-function App() {
+
+
+
+function App(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <Switch>
+        <Route exact path='/' component={MovielistContainer}/>
+        <Route path='/movie-card/:id' component={withMovies(MovieCardContainer)}/>
+      </Switch>
+
     </div>
   );
 }

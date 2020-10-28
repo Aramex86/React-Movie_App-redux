@@ -1,0 +1,12 @@
+@import "../components/MovieList/movielist";
+@import "../components/NaigationBar/navbar";
+@import "../components/MovieCard/movieCard";
+@import "../components/Common/loader";
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
