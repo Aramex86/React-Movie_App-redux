@@ -44,6 +44,14 @@ export type WithMoviePropsType = {
   match: MatchType
   movieId:number
   credits:Array<CreditsType>
+  genres:Array<GenresType>
   requestMovieList: () => void;
   requestCredits: (movieId: number) => void
+  requestGenres:()=>void
 };
+
+// 
+export type GenresType={
+  id:number
+  name:string
+}

@@ -1,13 +1,15 @@
 import { getMoviesApi } from "../../../Api/Api";
-import { CreditsType, MovieListType } from "../../../Types/Types";
+import { CreditsType, GenresType, MovieListType } from "../../../Types/Types";
 
 const GET_MOVIES = "GET_MOVIES";
 const FETCHING_REQUEST = "FETCHING_REQUEST";
 const GET_CREDITS ="GET_CREDITS";
+const GET_GENRES ="GET_GENRES";
 
 const initialState = {
   movieList: [] as Array<MovieListType>,
   credits: [] as Array<CreditsType>,
+  genres: [] as Array<GenresType>,
   isFetching: false,
 };
 
@@ -35,7 +37,13 @@ const movieListReducer = (
         ...state,
         credits: action.credits
       }
+   }
+   case GET_GENRES:{
+    return{
+      ...state,
+      genres:action.genres
     }
+  }
     default:
       return state;
   }
@@ -71,7 +79,15 @@ type GetCreditsType={
 export const getCredits=(credits:Array<CreditsType>):GetCreditsType=>{
   return{type: GET_CREDITS, credits}
 }
+// Genres 
+type GetGenresType={
+  type: typeof GET_GENRES
+  genres:Array<GenresType>
+}
 
+export const getGenres=(genres:Array<GenresType>):GetGenresType=>{
+  return{type:GET_GENRES , genres}
+}
 
 
 // Thuck
@@ -87,5 +103,11 @@ export const requestCredits=(movieId:number)=>async(dispatch:any)=>{
  const res = await getMoviesApi.getCast(movieId);
   dispatch(getCredits(res.cast));
 }
+
+export const requestGenres=()=>async(dispatch:any)=>{
+  const res = await getMoviesApi.getGenre();
+  dispatch(getGenres(res))
+}
+
 
 export default movieListReducer;

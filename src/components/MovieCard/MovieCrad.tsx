@@ -1,19 +1,23 @@
 import React from "react";
-import { CreditsType, MovieListType } from "../../Types/Types";
+import { CreditsType, GenresType, MovieListType } from "../../Types/Types";
+import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
+import ThumbDownAltRoundedIcon from '@material-ui/icons/ThumbDownAltRounded';
 
 type PropsType = {
   movieList: Array<MovieListType>;
   match?: any;
   credits: Array<CreditsType>;
+  genres:Array<GenresType>
 };
 
-const MovieCrad = ({ movieList, match, credits }: PropsType) => {
+const MovieCrad = ({ movieList, match, credits,genres }: PropsType) => {
   const movieId = match.params.id;
   const movieMatchId = movieList.filter((movie) => movie.id == movieId);
   const actors = credits.slice(0, 10);
-   console.log(movieList)
-  // console.log(movieMatchId);
-  console.log(actors);
+   //console.log(movieList)
+   console.log(movieMatchId);
+ // console.log(actors);
+ console.log(genres);
   return (
     <>
       {movieMatchId.map((movie) => (
@@ -27,15 +31,19 @@ const MovieCrad = ({ movieList, match, credits }: PropsType) => {
             </div>
           </div>
           <div className="movieCard-wrapp__right">
+
             <h2 className="movieCard-wrapp__right-title">{movie.title}</h2>
             <ul className="movieCard-wrapp__right-list">
+              <li className="movieCard-wrapp__right-item">
+                <h3>{movie.title}</h3>
+              </li>
               <li className="movieCard-wrapp__right-item">
                 <span>Realese date : </span>
                 {movie.release_date}
               </li>
               <li className="movieCard-wrapp__right-item">
                 <span>Raiting : </span>
-                {movie.vote_average}
+                {movie.vote_average >= 5?<span className='movieCard-wrapp__right-average'>{movie.vote_average} <ThumbUpAltRoundedIcon/></span> :<span>{movie.vote_average} <ThumbDownAltRoundedIcon/></span>}
               </li>
               <li className="movieCard-wrapp__right-item">
                 <span>Total votes : </span>

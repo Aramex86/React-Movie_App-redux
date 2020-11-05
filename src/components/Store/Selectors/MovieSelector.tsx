@@ -11,3 +11,7 @@ export const isFetchingSelector=(state:AppStateType)=>{
 export const creditsSelector=(state:AppStateType)=>{
     return state.movies.credits
 }
+
+export const genresSelector=(state:AppStateType)=>{
+    return state.movies.genres
+}

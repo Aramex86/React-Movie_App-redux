@@ -35,6 +35,8 @@ export const getMoviesApi = {
     return axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=en-US`).
     then(res=>{
       return res.data.genres;
+
+      // res.data.genres
     })
   },
   getSearch(movieSearch:string){
