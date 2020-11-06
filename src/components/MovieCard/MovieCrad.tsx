@@ -1,23 +1,33 @@
 import React from "react";
 import { CreditsType, GenresType, MovieListType } from "../../Types/Types";
-import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
-import ThumbDownAltRoundedIcon from '@material-ui/icons/ThumbDownAltRounded';
+import ThumbUpAltRoundedIcon from "@material-ui/icons/ThumbUpAltRounded";
+import ThumbDownAltRoundedIcon from "@material-ui/icons/ThumbDownAltRounded";
+
+import { matchIdFunc } from "../Helper/mtchId";
 
 type PropsType = {
   movieList: Array<MovieListType>;
   match?: any;
   credits: Array<CreditsType>;
-  genres:Array<GenresType>
+  genres: Array<GenresType>;
 };
 
-const MovieCrad = ({ movieList, match, credits,genres }: PropsType) => {
+const MovieCrad = ({ movieList, match, credits, genres }: PropsType) => {
   const movieId = match.params.id;
-  const movieMatchId = movieList.filter((movie) => movie.id == movieId);
+  const movieMatchId = matchIdFunc(movieList, movieId);
   const actors = credits.slice(0, 10);
-   //console.log(movieList)
-   console.log(movieMatchId);
- // console.log(actors);
- console.log(genres);
+  const genreId = movieMatchId.map((m) => Object.values(m.genre_ids).flat());
+
+  const movieGenre = [] as Array<GenresType>;
+
+  genres.filter((item) => {
+    return genreId.flat().filter((g) => {
+      if (item.id === g) {
+        return movieGenre.push(item);
+      }
+    });
+  });
+
   return (
     <>
       {movieMatchId.map((movie) => (
@@ -31,7 +41,6 @@ const MovieCrad = ({ movieList, match, credits,genres }: PropsType) => {
             </div>
           </div>
           <div className="movieCard-wrapp__right">
-
             <h2 className="movieCard-wrapp__right-title">{movie.title}</h2>
             <ul className="movieCard-wrapp__right-list">
               <li className="movieCard-wrapp__right-item">
@@ -43,7 +52,15 @@ const MovieCrad = ({ movieList, match, credits,genres }: PropsType) => {
               </li>
               <li className="movieCard-wrapp__right-item">
                 <span>Raiting : </span>
-                {movie.vote_average >= 5?<span className='movieCard-wrapp__right-average'>{movie.vote_average} <ThumbUpAltRoundedIcon/></span> :<span>{movie.vote_average} <ThumbDownAltRoundedIcon/></span>}
+                {movie.vote_average >= 5 ? (
+                  <span className="movieCard-wrapp__right-average">
+                    {movie.vote_average} <ThumbUpAltRoundedIcon />
+                  </span>
+                ) : (
+                  <span>
+                    {movie.vote_average} <ThumbDownAltRoundedIcon />
+                  </span>
+                )}
               </li>
               <li className="movieCard-wrapp__right-item">
                 <span>Total votes : </span>
@@ -51,7 +68,14 @@ const MovieCrad = ({ movieList, match, credits,genres }: PropsType) => {
               </li>
               {movie.adult ? <li>adult:18+</li> : ""}
               <li className="movieCard-wrapp__right-item">
-                <span>Genre : </span>
+                <span>
+                  Genre :{" "}
+                  {movieGenre.map((m) => (
+                    <span className="movieCard-wrapp__right-genre" key={m.id}>
+                      {m.name}
+                    </span>
+                  ))}
+                </span>
               </li>
               <li className="movieCard-wrapp__right-item">
                 <span>Actors : </span>

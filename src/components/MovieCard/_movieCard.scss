@@ -18,7 +18,6 @@
     }
     &__right{
         width: 50%;
-        margin-top: 2rem;
         
         &-title{
             text-align: center;
@@ -31,6 +30,10 @@
         &-item{
             padding: 5px 0;
             font-weight: 500;
+        }
+        &-genre{
+            margin-right: 10px;
+            cursor: pointer;
         }
         &-average{
             position: relative;
