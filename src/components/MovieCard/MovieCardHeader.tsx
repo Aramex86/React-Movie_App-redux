@@ -7,23 +7,7 @@ import { Link } from "react-router-dom";
 import { MovieListType } from "../../Types/Types";
 import { matchIdFunc } from "../Helper/mtchId";
 
-// type MoviesIdType = {
-//   vote_count: number;
-//   popularity: number;
-//   id: number;
-//   video: boolean;
-//   media_type: string;
-//   vote_average: number;
-//   title: string;
-//   release_date: number;
-//   original_language: string;
-//   original_title: string;
-//   genre_ids: Array<number>;
-//   backdrop_path: string;
-//   adult: boolean;
-//   overview: string;
-//   poster_path: string;
-// };
+
 
 type PropsType = {
   movieList: Array<MovieListType>;
@@ -70,7 +54,8 @@ const MovieCardHeader = ({ movieList, match }: PropsType) => {
             <ArrowBackOutlinedIcon />
           </Button>
           {title}
-        </Link>
+         
+       </Link>
       </div>
       <div
         style={{ width: "50%", display: "flex", justifyContent: "flex-end" }}

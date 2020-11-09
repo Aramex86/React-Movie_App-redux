@@ -1,62 +1,152 @@
-.movieCard-wrapp{
-    background: #333;
-    color:#fff;
-    display: flex;
-    min-height: 100vh;
-    padding: 2rem 0;
-    &__left{
-        width: 40%;
-        display: flex;
-        justify-content: flex-end;
-       &-poster{
-            width: 70%;
-            padding: 0 1rem;
-            & img{
-                width:100%;
-            }
-        }
-    }
-    &__right{
-        width: 50%;
-        
-        &-title{
-            text-align: center;
-            margin-bottom: 25px;    
-        }
+// .movieCard-wrapp{
+//     background: #333;
+//     color:#fff;
+//     display: flex;
+//     min-height: 100vh;
+//     padding: 2rem 0;
+//     &__left{
+//         width: 40%;
+//         display: flex;
+//         justify-content: flex-end;
+//        &-poster{
+//             width: 70%;
+//             padding: 0 1rem;
+//             & img{
+//                 width:100%;
+//             }
+//         }
+//     }
+//     &__right{
+//         width: 50%;
 
-        &-list{
-           list-style: none;
-        }
-        &-item{
-            padding: 5px 0;
-            font-weight: 500;
-        }
-        &-genre{
-            margin-right: 10px;
-            cursor: pointer;
-        }
-        &-average{
-            position: relative;
-            & svg{
-                position: absolute;
-                font-size: 19px;
-                margin-top: 0px;
-                left: 26px;
-                top: -2px;
-            }
-        }
-        &-actorname{
-            margin-right: 10px;
-        }
-        &-actorImg{
-            width: 13%;
-            padding: 7px;
-            margin-bottom: 10px;
-        }
-        &-overview{
-            line-height: 25px;
-            font-size: 1.1rem;
-            width: 90%;
-        }
+//         &-title{
+//             text-align: center;
+//             margin-bottom: 25px;
+//         }
+
+//         &-list{
+//            list-style: none;
+//         }
+//         &-item{
+//             padding: 5px 0;
+//             font-weight: 500;
+//         }
+//         &-genre{
+//             margin-right: 10px;
+//             cursor: pointer;
+//         }
+//         &-average{
+//             position: relative;
+//             & svg{
+//                 position: absolute;
+//                 font-size: 19px;
+//                 margin-top: 0px;
+//                 left: 26px;
+//                 top: -2px;
+//             }
+//         }
+//         &-actorname{
+//             margin-right: 10px;
+//         }
+//         &-actorImg{
+//             width: 13%;
+//             padding: 7px;
+//             margin-bottom: 10px;
+//         }
+//         &-overview{
+//             line-height: 25px;
+//             font-size: 1.1rem;
+//             width: 90%;
+//         }
+//     }
+// }
+
+.cardWrapper {
+}
+//Header
+.cardheader__wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.menuWrapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  &__list {
+    // display: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 20px 0;
+  }
+  &__item {
+    padding: 0 40px;
+    cursor: pointer;
+
+    & span {
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
     }
+  }
+  &__item:hover &__drop {
+    opacity: 5;
+    visibility: visible;
+  }
+  &__drop {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    background: #fff;
+    width: 12rem;
+    border: 1px solid #bfbebe2b;
+    border-radius: 5px;
+    padding: 5px 0;
+    &-link {
+      color: rgb(78, 78, 78);
+      padding: 5px 18px;
+      text-transform: capitalize;
+      font-size: 0.9rem;
+    }
+    &-link:hover {
+      background: #bfbebe2b;
+    }
+  }
+}
+//Poster
+.posterWrapp {
+  width: 100%;
+  min-height: 510px;
+  background: linear-gradient(to left, #7f7f7f9e, black),
+    url(../../assets/testbanner.jpg);
+  background-size: cover;
+  background-position-y: 45%;
+  display: flex;
+justify-content: space-around;
+padding: 2rem 0;
+
+  outline: 1px solid red;
+  &__img{
+    min-height: 450px;
+    width:20%;
+    outline: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & img{
+        width: 100%;
+    }
+  }
+  &__info{
+      display: flex;
+    //  width: 40%;
+    flex: 1 1 auto;
+     outline: 1px solid red;
+
+  }
 }
