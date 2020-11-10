@@ -18,6 +18,7 @@ import MovieCrad from "./MovieCrad";
 import MovieCardHeader from './MovieCardHeader';
 import CradHeader from './CardHeader';
 import CardPoster from './CardPoster';
+import CardActors from './CardActors';
 class MovieCardContainer extends Component<WithMoviePropsType> {
   componentDidMount() {
     const movieId = this.props.match.params.id;
@@ -38,6 +39,7 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
       /> */}
          <CradHeader/>
           <CardPoster/>
+          <CardActors/>
      
       </div>
     );

@@ -80,7 +80,7 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
-    padding: 20px 0;
+    padding: 15px 0;
   }
   &__item {
     padding: 0 40px;
@@ -130,12 +130,10 @@
   justify-content: center;
   padding: 2rem 0;
   flex-wrap: wrap;
-
-  outline: 1px solid red;
+  margin-bottom: 40px;
   &__img {
     min-height: 450px;
     width: 20%;
-    outline: 1px solid #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -146,48 +144,46 @@
   &__info {
     display: flex;
     flex: 0 1 50%;
-    outline: 1px solid red;
     color: #fff;
     flex-direction: column;
     padding: 80px 40px;
-    &-heading{
+    &-heading {
       margin-bottom: 25px;
-      & h2{
+      & h2 {
         margin-bottom: 15px;
-        & span{
+        & span {
           color: #d3d8d4;
         }
       }
     }
-    &-actions{
+    &-actions {
       margin-bottom: 25px;
-      &-list{
+      &-list {
         display: flex;
         list-style: none;
         align-items: center;
       }
-      &-item{
+      &-item {
         padding: 0 20px;
-        position: relative;       
+        position: relative;
       }
 
-      &-item:hover .movieCrad__tolltip{
+      &-item:hover .movieCrad__tolltip {
         opacity: 5;
         visibility: visible;
-        
       }
-      &-item:first-child{
+      &-item:first-child {
         padding: 0;
       }
-     
-      &-link{
-        &--video{
+
+      &-link {
+        &--video {
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        
-        &--styled{
+
+        &--styled {
           width: 45px;
           height: 45px;
           display: flex;
@@ -195,31 +191,70 @@
           justify-content: center;
           border-radius: 50%;
           background: #032541;
-          & svg{
+          & svg {
             font-size: 1rem;
           }
-          
+        }
+        &--score{
+          display: flex;
+          align-items: center;
+          font-size: 1rem;
+          & div{
+            width: 65px;
+           margin-right: 10px;
+           transition: all .5s ease;
+          }
+          & div:hover{
+            transform: scale(1.1);
+          }
         }
       }
-
     }
-    &-overview{
+    &-overview {
       margin-bottom: 25px;
     }
-    &-cast{
-      &-list{
+    &-cast {
+      &-list {
         list-style: none;
         display: flex;
         flex-wrap: wrap;
         justify-content: start;
       }
-      &-item{
+      &-item {
         width: 20%;
         padding: 1rem 0;
         padding-right: 4rem;
       }
-      &-link{}
+      &-link {
+        & p:nth-child(1) {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+        & p:nth-child(2) {
+          font-size: 0.8rem;
+          font-weight: normal;
+        }
+      }
     }
-
   }
+}
+
+//Actors
+.actorsWrapp{ 
+  outline: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  flex-direction: column;
+  &__heading{
+    font-size: 1.5rem;
+  }
+  &__cards{
+    display: inline-flex;
+  }
+}
+
+.name1{
+  font-size: 1rem !important;
 }

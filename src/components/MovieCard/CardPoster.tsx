@@ -6,8 +6,13 @@ import BookmarkRoundedIcon from '@material-ui/icons/BookmarkRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 
 const CardPoster = () => {
+const percent = 82;
+
   return (
     <div className="posterWrapp">
       <div className="posterWrapp__img">
@@ -21,8 +26,8 @@ const CardPoster = () => {
         <div className="posterWrapp__info-actions">
           <ul className="posterWrapp__info-actions-list">
             <li className="posterWrapp__info-actions-item">
-              <a href="#" className="posterWrapp__info-actions-link ">
-                user raiting
+              <a href="#" className="posterWrapp__info-actions-link posterWrapp__info-actions-link--score">
+              <div> <CircularProgressbar value={percent} text={`${percent}%`} styles={{trail:{stroke:'#fff'},text:{fill:'#fff',fontSize: '28px',},path:{stroke:'rgb(127, 247, 116)'}}}/></div>  User Score
               </a>
             </li>
             <li className="posterWrapp__info-actions-item">
