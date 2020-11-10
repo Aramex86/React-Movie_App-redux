@@ -70,9 +70,9 @@
   justify-content: space-around;
 }
 .menuWrapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &__list {
     // display: none;
     list-style: none;
@@ -127,26 +127,99 @@
   background-size: cover;
   background-position-y: 45%;
   display: flex;
-justify-content: space-around;
-padding: 2rem 0;
+  justify-content: center;
+  padding: 2rem 0;
+  flex-wrap: wrap;
 
   outline: 1px solid red;
-  &__img{
+  &__img {
     min-height: 450px;
-    width:20%;
+    width: 20%;
     outline: 1px solid #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    & img{
-        width: 100%;
+    & img {
+      width: 100%;
     }
   }
-  &__info{
-      display: flex;
-    //  width: 40%;
-    flex: 1 1 auto;
-     outline: 1px solid red;
+  &__info {
+    display: flex;
+    flex: 0 1 50%;
+    outline: 1px solid red;
+    color: #fff;
+    flex-direction: column;
+    padding: 80px 40px;
+    &-heading{
+      margin-bottom: 25px;
+      & h2{
+        margin-bottom: 15px;
+        & span{
+          color: #d3d8d4;
+        }
+      }
+    }
+    &-actions{
+      margin-bottom: 25px;
+      &-list{
+        display: flex;
+        list-style: none;
+        align-items: center;
+      }
+      &-item{
+        padding: 0 20px;
+        position: relative;       
+      }
+
+      &-item:hover .movieCrad__tolltip{
+        opacity: 5;
+        visibility: visible;
+        
+      }
+      &-item:first-child{
+        padding: 0;
+      }
+     
+      &-link{
+        &--video{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        &--styled{
+          width: 45px;
+          height: 45px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: #032541;
+          & svg{
+            font-size: 1rem;
+          }
+          
+        }
+      }
+
+    }
+    &-overview{
+      margin-bottom: 25px;
+    }
+    &-cast{
+      &-list{
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+      }
+      &-item{
+        width: 20%;
+        padding: 1rem 0;
+        padding-right: 4rem;
+      }
+      &-link{}
+    }
 
   }
 }
