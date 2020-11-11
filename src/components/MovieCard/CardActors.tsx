@@ -7,6 +7,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 
 import testactor from "../../assets/testactor.jpg";
 
@@ -22,7 +23,8 @@ const CardActors = () => {
   return (
     <div className="actorsWrapp">
       <h3 className="actorsWrapp__heading">Top Billed Cast</h3>
-      <div className="actorsWrapp__cards">
+      <div className="actorsWrapp__cardsWrapp">
+      <div className="actorsWrapp__cardsWrapp-cards">
         <Card className={classes.root}>
           <CardActionArea>
             <CardMedia
@@ -233,7 +235,11 @@ const CardActors = () => {
           </CardActionArea>
           <CardActions></CardActions>
         </Card>
+
+        <a href="#">View More <ArrowForwardRoundedIcon/></a>
       </div>
+      </div>
+      <h4><a href='#'>Full Cast & Crew</a></h4>
     </div>
   );
 };

@@ -15,10 +15,11 @@ import {
 } from "../Store/Reducers/MovieListReducer";
 
 import MovieCrad from "./MovieCrad";
-import MovieCardHeader from './MovieCardHeader';
-import CradHeader from './CardHeader';
-import CardPoster from './CardPoster';
-import CardActors from './CardActors';
+import MovieCardHeader from "./MovieCardHeader";
+import CradHeader from "./CardHeader";
+import CardPoster from "./CardPoster";
+import CardActors from "./CardActors";
+import  CardSocial  from "./CardSocial";
 class MovieCardContainer extends Component<WithMoviePropsType> {
   componentDidMount() {
     const movieId = this.props.match.params.id;
@@ -29,18 +30,18 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
   render() {
     console.log(this.props);
     return (
-    <div className='cardWrapper'>
-      {/* <MovieCardHeader movieList={this.props.movieList} match={this.props.match}/> */}
-      {/* <MovieCrad
+      <div className="cardWrapper">
+        {/* <MovieCardHeader movieList={this.props.movieList} match={this.props.match}/> */}
+        {/* <MovieCrad
         match={this.props.match}
         movieList={this.props.movieList}
         credits={this.props.credits}
         genres={this.props.genres}
       /> */}
-         <CradHeader/>
-          <CardPoster/>
-          <CardActors/>
-     
+        <CradHeader />
+        <CardPoster />
+        <CardActors />
+        <CardSocial/>
       </div>
     );
   }

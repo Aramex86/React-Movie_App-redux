@@ -131,6 +131,9 @@
   padding: 2rem 0;
   flex-wrap: wrap;
   margin-bottom: 40px;
+  & a {
+    color: #fff;
+  }
   &__img {
     min-height: 450px;
     width: 20%;
@@ -195,16 +198,16 @@
             font-size: 1rem;
           }
         }
-        &--score{
+        &--score {
           display: flex;
           align-items: center;
           font-size: 1rem;
-          & div{
+          & div {
             width: 65px;
-           margin-right: 10px;
-           transition: all .5s ease;
+            margin-right: 10px;
+            transition: all 0.5s ease;
           }
-          & div:hover{
+          & div:hover {
             transform: scale(1.1);
           }
         }
@@ -240,21 +243,136 @@
 }
 
 //Actors
-.actorsWrapp{ 
-  outline: 1px solid red;
+.actorsWrapp {
   display: flex;
   justify-content: center;
-  align-items: center;
   padding: 20px 0;
   flex-direction: column;
-  &__heading{
+  max-width: 68rem;
+  margin: 0 auto;
+  border-bottom: 1px solid #d7d7d7;
+  margin-bottom: 25px;
+
+  &__heading {
     font-size: 1.5rem;
+    margin-bottom: 20px;
   }
-  &__cards{
-    display: inline-flex;
+  &__cardsWrapp {
+    width: 61rem;
+    overflow: auto;
+    margin-bottom: 20px;
+
+    &-cards {
+      display: inline-flex;
+      width: 80rem;
+      align-items: center;
+      & div {
+        margin: 0 5px 0 5px;
+      }
+      & a {
+        color: black;
+        margin-left: 25px;
+        display: flex;
+        width: 120px;
+        align-items: center;
+        font-weight: 700;
+      }
+    }
   }
 }
 
-.name1{
+.name1 {
   font-size: 1rem !important;
+}
+
+//Social
+.socialWrapp {
+  width: 68rem;
+  margin: 0 auto;
+  border-bottom: 1px solid #d7d7d7;
+  padding: 20px 0;
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 25px;
+    &-heading {
+      font-size: 1.5rem;
+    }
+    &-list {
+      list-style: none;
+      display: flex;
+      margin-left: 4rem;
+    }
+    &-item {
+      padding: 0 2rem;
+    }
+    &-link {
+      &--active {
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          background-color: #000;
+          bottom: -2px;
+        }
+      }
+
+      & span {
+        color: rgb(107, 107, 107);
+      }
+    }
+  }
+  &__reviews {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #cecece8a;
+    box-shadow: 0px 0px 2px 3px #f7f5f5;
+    padding: 0.7rem 2rem;
+    border-radius: 7px;
+    //
+    margin-bottom: 50px;
+    &-header {
+      display: flex;
+      margin-bottom: 25px;
+      & img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+      & h3 {
+        display: flex;
+        font-size: 1.3rem;
+      }
+      & span:nth-child(1) {
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        width: 50px;
+        height: 22px;
+        background: #000;
+        color: #fff;
+        justify-content: center;
+        border-radius: 5px;
+        margin-left: 10px;
+      }
+      & span:nth-child(2) {
+        font-size: 0.9rem;
+        font-weight: 100;
+        color: #5d5d5dd1;
+        & b {
+          color: #000;
+        }
+      }
+    }
+    &-body {
+      padding-left: 4rem;
+      & p {
+        margin-bottom: 25px;
+      }
+    }
+  }
 }
