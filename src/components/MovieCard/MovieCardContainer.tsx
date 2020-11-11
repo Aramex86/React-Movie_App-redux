@@ -20,6 +20,7 @@ import CradHeader from "./CardHeader";
 import CardPoster from "./CardPoster";
 import CardActors from "./CardActors";
 import  CardSocial  from "./CardSocial";
+import CardMedia from "./CardMedia";
 class MovieCardContainer extends Component<WithMoviePropsType> {
   componentDidMount() {
     const movieId = this.props.match.params.id;
@@ -42,6 +43,7 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
         <CardPoster />
         <CardActors />
         <CardSocial/>
+        <CardMedia/>
       </div>
     );
   }
