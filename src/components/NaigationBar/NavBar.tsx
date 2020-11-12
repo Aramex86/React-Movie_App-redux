@@ -176,7 +176,7 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Link to='/'>
+          <Link to='/' style={{color:'#fff'}}>
           <Typography className={classes.title} variant="h6" noWrap>
             Movie-App
           </Typography>

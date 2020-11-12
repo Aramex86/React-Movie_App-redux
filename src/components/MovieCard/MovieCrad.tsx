@@ -18,6 +18,9 @@ const MovieCrad = ({ movieList, match, credits, genres }: PropsType) => {
   const actors = credits.slice(0, 10);
   const genreId = movieMatchId.map((m) => Object.values(m.genre_ids).flat());
 
+  console.log(movieId)
+  console.log(movieMatchId)
+
   const movieGenre = [] as Array<GenresType>;
 
   genres.filter((item) => {

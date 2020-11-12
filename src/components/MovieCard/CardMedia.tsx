@@ -1,5 +1,5 @@
 import React from "react";
-import StarRateRoundedIcon from "@material-ui/icons/StarRateRounded";
+import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
 //test
 import test from "../../assets/mediatest.jpg";
 
@@ -19,26 +19,32 @@ const CardMedia = () => {
           </li>
           <li className="mediaWrapp__header-item">
             <a href="#" className="mediaWrapp__header-link">
-            Videos  <span>4</span>
+              Videos <span>4</span>
             </a>
           </li>
           <li className="mediaWrapp__header-item">
             <a href="#" className="mediaWrapp__header-link">
-            Backdrops  <span>6</span>
+              Backdrops <span>6</span>
             </a>
           </li>
           <li className="mediaWrapp__header-item">
             <a href="#" className="mediaWrapp__header-link">
-            Posters  <span>12</span>
+              Posters <span>12</span>
             </a>
           </li>
         </ul>
       </div>
       <div className="mediaWrapp__wrapper">
         <div className="mediaWrapp__wrapper-media">
-          <img src={test} alt=""/>
-          <img src={test} alt=""/>
-          <img src={test} alt=""/>
+          <img src={test} alt="" />
+
+          <img src={test} alt="" />
+
+          <img src={test} alt="" />
+
+          <a href="#">
+            View More <ArrowForwardRoundedIcon />
+          </a>
         </div>
       </div>
     </div>
