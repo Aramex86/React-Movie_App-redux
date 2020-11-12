@@ -1,17 +1,16 @@
 import React from "react";
 import poster from "../../assets/testbanner.jpg";
 
-import FormatListBulletedRoundedIcon from '@material-ui/icons/FormatListBulletedRounded';
-import BookmarkRoundedIcon from '@material-ui/icons/BookmarkRounded';
-import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
-import StarRoundedIcon from '@material-ui/icons/StarRounded';
-import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-
+import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
+import BookmarkRoundedIcon from "@material-ui/icons/BookmarkRounded";
+import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
+import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const CardPoster = () => {
-const percent = 82;
+  const percent =84;
 
   return (
     <div className="posterWrapp">
@@ -20,43 +19,80 @@ const percent = 82;
       </div>
       <div className="posterWrapp__info">
         <div className="posterWrapp__info-heading">
-          <h2>Joker <span>(2019)</span> </h2>
+          <h2>
+            Joker <span>(2019)</span>{" "}
+          </h2>
           <p>03/10/2019 (AU)Crime, Thriller, Drama - 2h 2m</p>
         </div>
         <div className="posterWrapp__info-actions">
           <ul className="posterWrapp__info-actions-list">
             <li className="posterWrapp__info-actions-item">
-              <a href="#" className="posterWrapp__info-actions-link posterWrapp__info-actions-link--score">
-              <div> <CircularProgressbar value={percent} text={`${percent}%`} styles={{trail:{stroke:'#fff'},text:{fill:'#fff',fontSize: '28px',},path:{stroke:'rgb(127, 247, 116)'}}}/></div>  User Score
+              <a
+                href="#"
+                className="posterWrapp__info-actions-link posterWrapp__info-actions-link--score"
+              >
+                <div>
+                  <CircularProgressbar
+                    value={percent}
+                    text={`${percent}%`}
+                    styles={{
+                      trail: { stroke: "#fff" },
+                      text: { fill: "#fff", fontSize: "28px" },
+                      path: {stroke:`${percent < 30?'red':'#4aff5d'}`},
+                    }}
+                  />
+                </div>
+                User Score
               </a>
             </li>
             <li className="posterWrapp__info-actions-item">
-              <a href="#" className="posterWrapp__info-actions-link posterWrapp__info-actions-link--styled">
-               <FormatListBulletedRoundedIcon/>
+              <a
+                href="#"
+                className="posterWrapp__info-actions-link posterWrapp__info-actions-link--styled"
+              >
+                <FormatListBulletedRoundedIcon />
               </a>
-              <div className='movieCrad__tolltip'>Login to create and edit custom lists</div>
+              <div className="movieCrad__tolltip">
+                Login to create and edit custom lists
+              </div>
             </li>
             <li className="posterWrapp__info-actions-item">
-              <a href="#" className="posterWrapp__info-actions-link posterWrapp__info-actions-link--styled">
-                <FavoriteRoundedIcon/> 
+              <a
+                href="#"
+                className="posterWrapp__info-actions-link posterWrapp__info-actions-link--styled"
+              >
+                <FavoriteRoundedIcon />
               </a>
-               <div className='movieCrad__tolltip'>Login to add this movie to your favourite list</div>
+              <div className="movieCrad__tolltip">
+                Login to add this movie to your favourite list
+              </div>
             </li>
             <li className="posterWrapp__info-actions-item">
-              <a href="#" className="posterWrapp__info-actions-link posterWrapp__info-actions-link--styled">
-                <BookmarkRoundedIcon/>
+              <a
+                href="#"
+                className="posterWrapp__info-actions-link posterWrapp__info-actions-link--styled"
+              >
+                <BookmarkRoundedIcon />
               </a>
-               <div className='movieCrad__tolltip'>Login to add this movie to your watchlist</div>
+              <div className="movieCrad__tolltip">
+                Login to add this movie to your watchlist
+              </div>
             </li>
             <li className="posterWrapp__info-actions-item">
-              <a href="#" className="posterWrapp__info-actions-link posterWrapp__info-actions-link--styled">
-                <StarRoundedIcon/>
+              <a
+                href="#"
+                className="posterWrapp__info-actions-link posterWrapp__info-actions-link--styled"
+              >
+                <StarRoundedIcon />
               </a>
-               <p className='movieCrad__tolltip'>Login to rate this movie</p>
+              <p className="movieCrad__tolltip">Login to rate this movie</p>
             </li>
             <li className="posterWrapp__info-actions-item">
-              <a href="#" className="posterWrapp__info-actions-link posterWrapp__info-actions-link--video">
-            <PlayArrowRoundedIcon/> Play Trailer
+              <a
+                href="#"
+                className="posterWrapp__info-actions-link posterWrapp__info-actions-link--video"
+              >
+                <PlayArrowRoundedIcon /> Play Trailer
               </a>
             </li>
           </ul>
