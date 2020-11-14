@@ -15,3 +15,7 @@ export const creditsSelector=(state:AppStateType)=>{
 export const genresSelector=(state:AppStateType)=>{
     return state.movies.genres
 }
+
+export const detailsSelector=(state:AppStateType)=>{
+    return state.movies.movieDetails
+}

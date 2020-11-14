@@ -4,6 +4,7 @@ import { WithMoviePropsType } from "../../Types/Types";
 
 import {
   creditsSelector,
+  detailsSelector,
   genresSelector,
 } from "../Store/Selectors/MovieSelector";
 import { AppStateType } from "../Store/store";
@@ -12,6 +13,8 @@ import {
   getCredits,
   getGenres,
   requestGenres,
+  getDeatails,
+  requestDetails
 } from "../Store/Reducers/MovieListReducer";
 
 import MovieCrad from "./MovieCrad";
@@ -22,17 +25,18 @@ import CardActors from "./CardActors";
 import  CardSocial  from "./CardSocial";
 import CardMedia from "./CardMedia";
 import CardRecomand from './CardRecomand';
-import CradInfo from './CardInfo';
 import CardInfo from "./CardInfo";
 class MovieCardContainer extends Component<WithMoviePropsType> {
   componentDidMount() {
     const movieId = this.props.match.params.id;
     this.props.requestCredits(movieId);
     this.props.requestGenres();
+    this.props.requestDetails(movieId);
+
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.props.details);
     return (
       <div className="cardWrapper">
         {/* <MovieCardHeader movieList={this.props.movieList} match={this.props.match}/> */}
@@ -43,7 +47,19 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
         genres={this.props.genres}
       /> */}
         <CradHeader />
-        <CardPoster />
+        <CardPoster 
+         poster_path={this.props.details?.poster_path}
+         original_title={this.props.details?.original_title}
+         release_date={this.props.details?.release_date}
+         original_language={this.props.details?.original_language}
+         genres={this.props.details?.genres}
+         runtime={this.props.details?.runtime}
+         popularity={this.props.details?.popularity}
+         overview={this.props.details?.overview}
+         credits={this.props.credits}
+         
+        
+        />
         <div className='cardWrapper__body'>
         <div className='cardWrapper__body-left'>
         <CardActors />
@@ -64,6 +80,7 @@ const mapStateToProps = (state: AppStateType) => {
   return {
     credits: creditsSelector(state),
     genres: genresSelector(state),
+    details: detailsSelector(state)
   };
 };
 
@@ -72,4 +89,6 @@ export default connect(mapStateToProps, {
   getCredits,
   requestGenres,
   getGenres,
+  requestDetails,
+  getDeatails
 })(MovieCardContainer);

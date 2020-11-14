@@ -8,21 +8,44 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { CreditsType, GenresType } from "../../Types/Types";
 
-const CardPoster = () => {
-  const percent =84;
+  type PropsType={
+    poster_path: undefined|string
+    original_title:undefined|string
+    release_date:undefined|string
+    original_language:undefined|string
+    genres:undefined|Array<GenresType>
+    runtime:undefined|number
+    popularity:undefined|number
+    overview:undefined|string
+    credits: Array<CreditsType>
+  }
+  
+
+
+
+const CardPoster = (props:PropsType) => {
+  
+  const usersScore = props.popularity?Math.ceil(props.popularity):'';
+  
+  const percent = +usersScore
+  console.log(usersScore)
+  
+console.log(props)
+console.log(props.credits)
 
   return (
     <div className="posterWrapp">
       <div className="posterWrapp__img">
-        <img src={poster} alt="poster" />
+        <img src={`https://image.tmdb.org/t/p/w500/${props.poster_path}`} alt="poster" />
       </div>
       <div className="posterWrapp__info">
         <div className="posterWrapp__info-heading">
           <h2>
-            Joker <span>(2019)</span>{" "}
+            {props.original_title} <span>({props.release_date?.slice(0,4)})</span>{" "}
           </h2>
-          <p>03/10/2019 (AU)Crime, Thriller, Drama - 2h 2m</p>
+  <p>{props.release_date?.replaceAll('-','/')} ({props.original_language?.toUpperCase()}) {props.genres?.map(g=><span key={g.id}>{g.name}</span>)} - {props.runtime? `${props.runtime/60} h`:''}</p>
         </div>
         <div className="posterWrapp__info-actions">
           <ul className="posterWrapp__info-actions-list">
@@ -99,9 +122,7 @@ const CardPoster = () => {
         </div>
         <div className="posterWrapp__info-overview">
           <p>
-            During the 1980s, a failed stand-up comedian is driven insane and
-            turns to a life of crime and chaos in Gotham City while becoming an
-            infamous psychopathic crime figure.
+           {props.overview}
           </p>
         </div>
         <div className="posterWrapp__info-cast">
