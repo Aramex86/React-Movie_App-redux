@@ -22,6 +22,8 @@ import CardActors from "./CardActors";
 import  CardSocial  from "./CardSocial";
 import CardMedia from "./CardMedia";
 import CardRecomand from './CardRecomand';
+import CradInfo from './CardInfo';
+import CardInfo from "./CardInfo";
 class MovieCardContainer extends Component<WithMoviePropsType> {
   componentDidMount() {
     const movieId = this.props.match.params.id;
@@ -50,7 +52,7 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
         <CardRecomand/>
         </div>
         <div className='cardWrapper__body-right'>
-          <h1>Right side</h1>
+          <CardInfo/>
         </div>
         </div>
       </div>
