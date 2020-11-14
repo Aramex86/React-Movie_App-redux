@@ -76,10 +76,10 @@
 .posterWrapp {
   width: 100%;
   min-height: 510px;
-  background: linear-gradient(to left, #7f7f7f9e, black),
-    url(../../assets/testbanner.jpg);
-  background-size: cover;
-  background-position-y: 45%;
+  // background: linear-gradient(to left, #7f7f7f9e, black),
+  //   url(../../assets/testbanner.jpg);
+  background-size: cover !important;
+  background-position:center 11% !important;
   display: flex;
   justify-content: center;
   padding: 2rem 0;

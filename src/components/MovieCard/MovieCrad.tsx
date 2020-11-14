@@ -84,22 +84,22 @@ const MovieCrad = ({ movieList, match, credits, genres }: PropsType) => {
                 <span>Actors : </span>
                 {actors.map((actor) => (
                   <span
-                    key={actor.id}
+                   /*  key={actor.id} */
                     className="movieCard-wrapp__right-actorName"
                   >
-                    {actor.name}
+                    {/* {actor.name} */}
                   </span>
                 ))}
               </li>
             </ul>
             <div className="movieCard-wrapp__right-actorsImg">
               {actors.slice(0, 6).map((actor) => (
-                <img
+                {/* <img
                   src={"https://image.tmdb.org/t/p/w500/" + actor.profile_path}
                   alt="Actors"
                   key={actor.id}
                   className="movieCard-wrapp__right-actorImg"
-                />
+                /> */}
               ))}
             </div>
             <p className="movieCard-wrapp__right-overview">{movie.overview}</p>

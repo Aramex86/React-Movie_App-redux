@@ -12,7 +12,7 @@ const GET_DETAILS ="GET_DETAILS";
 
 const initialState = {
   movieList: [] as Array<MovieListType>,
-  credits: [] as Array<CreditsType>,
+  credits: null as CreditsType | null,
   genres: [] as Array<GenresType>,
   isFetching: false,
   movieDetails: null as MovieDetailsType | null,
@@ -85,10 +85,10 @@ export const isFetchingReq = (isFetching: boolean): IsFetchingReqType => {
 
 type GetCreditsType={
   type:typeof GET_CREDITS
-  credits: Array<CreditsType>
+  credits: CreditsType
 }
 
-export const getCredits=(credits:Array<CreditsType>):GetCreditsType=>{
+export const getCredits=(credits:CreditsType):GetCreditsType=>{
   return{type: GET_CREDITS, credits}
 }
 // Genres 
@@ -123,7 +123,7 @@ export const requestMovieList = () => async (dispatch: any) => {
 
 export const requestCredits=(movieId:number)=>async(dispatch:any)=>{
  const res = await getMoviesApi.getCast(movieId);
-  dispatch(getCredits(res.cast));
+  dispatch(getCredits(res));
 }
 
 export const requestGenres=()=>async(dispatch:any)=>{
@@ -133,9 +133,8 @@ export const requestGenres=()=>async(dispatch:any)=>{
 
 export const requestDetails=(movieId:number)=>async(dispatch:any)=>{
   const res = await getMoviesApi.getDetails(movieId);
-  console.log(res);
   const err = await getMoviesApi.getDetails(movieId);
-  console.log(err)
+  //console.log(err)
   dispatch(getDeatails(res))
 }
 

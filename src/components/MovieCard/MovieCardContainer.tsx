@@ -17,7 +17,7 @@ import {
   requestDetails
 } from "../Store/Reducers/MovieListReducer";
 
-import MovieCrad from "./MovieCrad";
+//import MovieCrad from "./MovieCrad";
 import MovieCardHeader from "./MovieCardHeader";
 import CradHeader from "./CardHeader";
 import CardPoster from "./CardPoster";
@@ -36,7 +36,7 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
   }
 
   render() {
-    console.log(this.props.details);
+    console.log(this.props);
     return (
       <div className="cardWrapper">
         {/* <MovieCardHeader movieList={this.props.movieList} match={this.props.match}/> */}

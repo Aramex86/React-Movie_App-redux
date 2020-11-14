@@ -16,15 +16,39 @@ export type MovieListType = {
   release_date: string;
 };
 
+type CastType={
+  adult: boolean
+cast_id: number
+character: string
+credit_id: string
+gender: number
+id: number
+known_for_department: string
+name: string
+order: number
+original_name: string
+popularity: number
+profile_path: string
+}
+type CrewType={
+  adult: boolean
+credit_id: string
+department:string
+gender: number
+id: number
+job: string
+known_for_department: string
+name: string
+original_name: string
+popularity: number
+profile_path: null
+}
+
+
+
 export type CreditsType = {
-  cast_id: number;
-  character: string;
-  credit_id: string;
-  gender: number;
-  id: number;
-  name: string;
-  order: number;
-  profile_path: string;
+  cast:Array<CastType>
+  crew:Array<CrewType>
 };
 
 type ParamsType = {
@@ -43,7 +67,7 @@ export type WithMoviePropsType = {
   isFetching: boolean
   match: MatchType
   movieId:number
-  credits:Array<CreditsType>
+  credits:CreditsType |null
   genres:Array<GenresType>
   details: MovieDetailsType|null
   requestMovieList: () => void;

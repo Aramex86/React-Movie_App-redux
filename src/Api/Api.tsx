@@ -39,7 +39,7 @@ export const getMoviesApi = {
       .then((res) => {
         return res.data.genres;
 
-        // res.data.genres
+       
       });
   },
   getSearch(movieSearch: string) {
@@ -57,7 +57,6 @@ export const getMoviesApi = {
         `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=en-US`
       )
       .then((res) => {
-        console.log(res.data);
         return res.data;
       })
       .catch((error) => {

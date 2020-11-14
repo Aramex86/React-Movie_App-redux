@@ -1,5 +1,4 @@
 import React from "react";
-import poster from "../../assets/testbanner.jpg";
 
 import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
 import BookmarkRoundedIcon from "@material-ui/icons/BookmarkRounded";
@@ -10,42 +9,60 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { CreditsType, GenresType } from "../../Types/Types";
 
-  type PropsType={
-    poster_path: undefined|string
-    original_title:undefined|string
-    release_date:undefined|string
-    original_language:undefined|string
-    genres:undefined|Array<GenresType>
-    runtime:undefined|number
-    popularity:undefined|number
-    overview:undefined|string
-    credits: Array<CreditsType>
-  }
-  
+type PropsType = {
+  poster_path: undefined | string;
+  original_title: undefined | string;
+  release_date: undefined | string;
+  original_language: undefined | string;
+  genres: undefined | Array<GenresType>;
+  runtime: undefined | number;
+  popularity: undefined | number;
+  overview: undefined | string;
+  credits: CreditsType | null;
+};
 
-
-
-const CardPoster = (props:PropsType) => {
-  
-  const usersScore = props.popularity?Math.ceil(props.popularity):'';
-  
-  const percent = +usersScore
-  console.log(usersScore)
-  
-console.log(props)
-console.log(props.credits)
-
+const CardPoster = (props: PropsType) => {
+  const usersScore = props.popularity ? Math.ceil(props.popularity) : "";
+  const percent = +usersScore;
+  const crew: any = [];
+  const crewStaff = (name: string) => {
+    props.credits?.crew.map((i) => {
+      if (i.job === name) {
+        crew.push(i);
+      }
+    });
+  };
+  crewStaff("Director");
+  crewStaff("Comic Book");
+  crewStaff("Producer");
+  console.log(props);
   return (
-    <div className="posterWrapp">
+    <div
+      className="posterWrapp"
+      style={{
+        background: `linear-gradient(to left, #7f7f7f9e, black), url(https://image.tmdb.org/t/p/w500/${props.poster_path}) no-repeat`,
+      }}
+    >
       <div className="posterWrapp__img">
-        <img src={`https://image.tmdb.org/t/p/w500/${props.poster_path}`} alt="poster" />
+        <img
+          src={`https://image.tmdb.org/t/p/w500/${props.poster_path}`}
+          alt="poster"
+        />
       </div>
       <div className="posterWrapp__info">
         <div className="posterWrapp__info-heading">
           <h2>
-            {props.original_title} <span>({props.release_date?.slice(0,4)})</span>{" "}
+            {props.original_title}{" "}
+            <span>({props.release_date?.slice(0, 4)})</span>{" "}
           </h2>
-  <p>{props.release_date?.replaceAll('-','/')} ({props.original_language?.toUpperCase()}) {props.genres?.map(g=><span key={g.id}>{g.name}</span>)} - {props.runtime? `${props.runtime/60} h`:''}</p>
+          <p>
+            {props.release_date?.replaceAll("-", "/")} (
+            {props.original_language?.toUpperCase()}){" "}
+            {props.genres?.map((g) => (
+              <span key={g.id}>{g.name}</span>
+            ))}{" "}
+            - {props.runtime ? `${Math.ceil(props.runtime / 60)} h` : ""}
+          </p>
         </div>
         <div className="posterWrapp__info-actions">
           <ul className="posterWrapp__info-actions-list">
@@ -61,7 +78,7 @@ console.log(props.credits)
                     styles={{
                       trail: { stroke: "#fff" },
                       text: { fill: "#fff", fontSize: "28px" },
-                      path: {stroke:`${percent < 30?'red':'#4aff5d'}`},
+                      path: { stroke: `${percent < 30 ? "red" : "#4aff5d"}` },
                     }}
                   />
                 </div>
@@ -121,42 +138,18 @@ console.log(props.credits)
           </ul>
         </div>
         <div className="posterWrapp__info-overview">
-          <p>
-           {props.overview}
-          </p>
+          <p>{props.overview}</p>
         </div>
         <div className="posterWrapp__info-cast">
           <ul className="posterWrapp__info-cast-list">
-            <li className="posterWrapp__info-cast-item">
-              <a href="#" className="posterWrapp__info-cast-link">
-                <p> Todd Phillips</p>
-                <p>Writer, Director</p>
-              </a>
-            </li>
-            <li className="posterWrapp__info-cast-item">
-              <a href="#" className="posterWrapp__info-cast-link">
-                <p> Todd Phillips</p>
-                <p>Writer, Director</p>
-              </a>
-            </li>
-            <li className="posterWrapp__info-cast-item">
-              <a href="#" className="posterWrapp__info-cast-link">
-                <p> Todd Phillips</p>
-                <p>Writer, Director</p>
-              </a>
-            </li>
-            <li className="posterWrapp__info-cast-item">
-              <a href="#" className="posterWrapp__info-cast-link">
-                <p> Todd Phillips</p>
-                <p>Writer, Director</p>
-              </a>
-            </li>
-            <li className="posterWrapp__info-cast-item">
-              <a href="#" className="posterWrapp__info-cast-link">
-                <p> Todd Phillips</p>
-                <p>Writer, Director</p>
-              </a>
-            </li>
+            {crew.map((c: any) => (
+              <li className="posterWrapp__info-cast-item" key={c.id}>
+                <a href="#" className="posterWrapp__info-cast-link">
+                  <p>{c.name}</p>
+                  <p>{c.job}</p>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
