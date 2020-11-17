@@ -140,7 +140,7 @@ const CardPoster = (props: PropsType) => {
         <div className="posterWrapp__info-cast">
           <ul className="posterWrapp__info-cast-list">
             {crew.map((c: any) => (
-              <li className="posterWrapp__info-cast-item" key={c.id}>
+              <li className="posterWrapp__info-cast-item" key={c.credit_id}>
                 <a href="#" className="posterWrapp__info-cast-link">
                   <p>{c.name}</p>
                   <p>{c.job}</p>

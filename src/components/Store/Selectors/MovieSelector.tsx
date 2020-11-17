@@ -23,3 +23,6 @@ export const detailsSelector=(state:AppStateType)=>{
 export const reviewsSelector=(state:AppStateType)=>{
     return state.movies.movieReviews;
 }
+export const viedoSelector=(state:AppStateType)=>{
+    return state.movies.movieVideos;
+}

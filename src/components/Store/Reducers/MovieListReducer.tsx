@@ -1,5 +1,5 @@
 import { getMoviesApi } from "../../../Api/Api";
-import { CreditsType, GenresType, MovieDetailsType, MovieListType, ResultsType, ReviewsType } from "../../../Types/Types";
+import { CreditsType, GenresType, MovieDetailsType, MovieListType, ResultsType, ReviewsType, VideoType } from "../../../Types/Types";
 
 const GET_MOVIES = "GET_MOVIES";
 const FETCHING_REQUEST = "FETCHING_REQUEST";
@@ -7,6 +7,7 @@ const GET_CREDITS ="GET_CREDITS";
 const GET_GENRES ="GET_GENRES";
 const GET_DETAILS ="GET_DETAILS";
 const GET_REVIEWS ='GET_REVIEWS';
+const GET_VIDEOS ='GET_VIDEOS';
 
 
 
@@ -18,6 +19,7 @@ const initialState = {
   isFetching: false,
   movieDetails: null as MovieDetailsType | null,
   movieReviews: [] as Array<ResultsType>,
+  movieVideos: [] as Array<VideoType>,
   errorMessage:''
 };
 
@@ -62,6 +64,12 @@ const movieListReducer = (
     return{
       ...state,
       movieReviews:action.movieReviews
+    }
+  }
+   case GET_VIDEOS:{
+    return{
+      ...state,
+      movieVideos:action.movieVideos
     }
   }
     default:
@@ -128,7 +136,15 @@ type GetMovieReviews={
 export const getReviwes=(movieReviews:ReviewsType):GetMovieReviews=>{
   return{type:GET_REVIEWS, movieReviews}
 }
+//Videos
 
+type GetVideosType={
+  type: typeof GET_VIDEOS
+  movieVideos: VideoType
+}
+export const getVideos=(movieVideos:VideoType):GetVideosType=>{
+  return{type:GET_VIDEOS,movieVideos}
+}
 
 // Thuck
 export const requestMovieList = () => async (dispatch: any) => {
@@ -159,7 +175,10 @@ export const requestDetails=(movieId:number)=>async(dispatch:any)=>{
 export const requestReviews=(movieId:number)=>async(dispatch:any)=>{
   const res = await getMoviesApi.getReviews(movieId);
   dispatch(getReviwes(res))
-
+}
+export const requestVideos=(movieId:number)=>async(dispatch:any)=>{
+  const res = await getMoviesApi.getVideos(movieId);
+  dispatch(getVideos(res))
 }
 
 export default movieListReducer;

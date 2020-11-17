@@ -74,5 +74,15 @@ export const getMoviesApi = {
         return error.response.data.status_message;
       }
     })
+  },
+  getVideos(movieId:number){
+    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`).then(res=>{
+      return res.data.results
+    }).catch(error =>{
+      if(error.response){
+        console.log(error.response)
+        return error.response.data.status_message;
+      }
+    })
   }
 };

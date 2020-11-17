@@ -2,9 +2,9 @@ import React from "react";
 import StarRateRoundedIcon from "@material-ui/icons/StarRateRounded";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-import { ResultsType, ReviewsType } from "../../../Types/Types";
+import { ResultsType } from "../../../Types/Types";
 
 type PropsType = {
   reviews: Array<ResultsType>;
@@ -28,12 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
 const CardMedia = ({ reviews }: PropsType) => {
   const classes = useStyles();
-
-  console.log(reviews);
-
   return (
     <div className="socialWrapp">
       <div className="socialWrapp__header">
@@ -41,7 +37,7 @@ const CardMedia = ({ reviews }: PropsType) => {
         <ul className="socialWrapp__header-list">
           <li className="socialWrapp__header-item">
             <Link
-              to='/allreview'
+              to="/allreview"
               className="socialWrapp__header-link socialWrapp__header-link--active"
             >
               Reviews <span>{reviews.length}</span>
@@ -55,11 +51,11 @@ const CardMedia = ({ reviews }: PropsType) => {
         </ul>
       </div>
       {reviews.slice(0, 1).map((review) => (
-        <div className="socialWrapp__reviews">
+        <div className="socialWrapp__reviews" key={review.id}>
           <div className="socialWrapp__reviews-header">
             <Avatar style={{ marginRight: "15px" }} className={classes.large} />
             <div>
-              <a href={review.url} target='_blank'>
+              <a href={review.url} target="_blank" rel="noreferrer">
                 <h3>
                   A review by {review.author}{" "}
                   <span>
@@ -74,12 +70,22 @@ const CardMedia = ({ reviews }: PropsType) => {
             </div>
           </div>
           <div className="socialWrapp__reviews-body">
-            <p>{review.content}</p>
+            <p>
+              {`${review.content.slice(0, 300)}...`}{" "}
+              <a
+                href={review.url}
+                target="_blank"
+                rel="noreferrer"
+                className="socialWrapp__reviews-link"
+              >
+                read the rest
+              </a>
+            </p>
           </div>
         </div>
       ))}
       <h4>
-        <Link to='/allreview'>Read All Reviews</Link>
+        <Link to="/allreview/">Read All Reviews</Link>
       </h4>
     </div>
   );

@@ -346,6 +346,10 @@
         margin-bottom: 25px;
       }
     }
+    &-link{
+      color: rgb(151, 15, 42);
+      text-decoration: underline;
+    }
   }
 }
 //Media
@@ -404,6 +408,10 @@
       & img {
         margin-right: 5px;
         object-fit: cover;
+        width: 100%;
+        display: block;
+        height: 300px;
+        object-position: top;
       }
       & a {
         color: black;

@@ -61,19 +61,21 @@ type MatchType = {
 };
 
 export type WithMoviePropsType = {
-  movieList: Array<MovieListType>;
-  isFetching: boolean;
-  match: MatchType;
-  movieId: number;
-  credits: CreditsType | null;
-  genres: Array<GenresType>;
-  details: MovieDetailsType | null;
+  movieList: Array<MovieListType>
+  isFetching: boolean
+  match: MatchType
+  movieId: number
+  credits: CreditsType | null
+  genres: Array<GenresType>
+  details: MovieDetailsType | null
   reviews: Array<ResultsType>
-  requestMovieList: () => void;
-  requestCredits: (movieId: number) => void;
-  requestGenres: () => void;
-  requestDetails: (movieId: number) => void;
-  requestReviews:(movieId:number)=>void;
+  videos: Array<VideoType>
+  requestMovieList: () => void
+  requestCredits: (movieId: number) => void
+  requestGenres: () => void
+  requestDetails: (movieId: number) => void
+  requestReviews: (movieId: number) => void
+  requestVideos:(movieId:number)=> void
 };
 
 //
@@ -134,17 +136,28 @@ export type MovieDetailsType = {
 
 // REVIEWS
 
-export type ResultsType={
-  author: string
-  content: string
-  id: string
-  url: string
-}
+export type ResultsType = {
+  author: string;
+  content: string;
+  id: string;
+  url: string;
+};
 
-export type ReviewsType={
-  id:number
-  page:number
-  resutlts:Array<ResultsType>
-}
+export type ReviewsType = {
+  id: number;
+  page: number;
+  resutlts: Array<ResultsType>;
+};
 
+//VIDEOS
 
+export type VideoType = {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  site: string;
+  size: null;
+  type: string;
+};
