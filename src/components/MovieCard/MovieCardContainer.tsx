@@ -6,6 +6,7 @@ import {
   creditsSelector,
   detailsSelector,
   genresSelector,
+  reviewsSelector,
 } from "../Store/Selectors/MovieSelector";
 import { AppStateType } from "../Store/store";
 import {
@@ -14,7 +15,9 @@ import {
   getGenres,
   requestGenres,
   getDeatails,
-  requestDetails
+  requestDetails,
+  requestReviews,
+  getReviwes
 } from "../Store/Reducers/MovieListReducer";
 
 //import MovieCrad from "./MovieCrad";
@@ -22,7 +25,7 @@ import MovieCardHeader from "./MovieCardHeader";
 import CradHeader from "./CardHeader";
 import CardPoster from "./CardPoster";
 import CardActors from "./CardActors";
-import  CardSocial  from "./CardSocial";
+import  CardSocial  from "./CardSocial/CardSocial";
 import CardMedia from "./CardMedia";
 import CardRecomand from './CardRecomand';
 import CardInfo from "./CardInfo";
@@ -32,11 +35,12 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
     this.props.requestCredits(movieId);
     this.props.requestGenres();
     this.props.requestDetails(movieId);
+    this.props.requestReviews(movieId);
 
   }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div className="cardWrapper">
         {/* <MovieCardHeader movieList={this.props.movieList} match={this.props.match}/> */}
@@ -57,13 +61,11 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
          popularity={this.props.details?.popularity}
          overview={this.props.details?.overview}
          credits={this.props.credits}
-         
-        
         />
         <div className='cardWrapper__body'>
         <div className='cardWrapper__body-left'>
-        <CardActors />
-        <CardSocial/>
+        <CardActors credits={this.props.credits}/>
+        <CardSocial reviews={this.props.reviews}/>
         <CardMedia/>
         <CardRecomand/>
         </div>
@@ -80,7 +82,8 @@ const mapStateToProps = (state: AppStateType) => {
   return {
     credits: creditsSelector(state),
     genres: genresSelector(state),
-    details: detailsSelector(state)
+    details: detailsSelector(state),
+    reviews: reviewsSelector(state)
   };
 };
 
@@ -90,5 +93,7 @@ export default connect(mapStateToProps, {
   requestGenres,
   getGenres,
   requestDetails,
-  getDeatails
+  getDeatails,
+  requestReviews,
+  getReviwes
 })(MovieCardContainer);

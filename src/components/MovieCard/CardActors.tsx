@@ -7,9 +7,15 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
+import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
 
-import testactor from "../../assets/testactor.jpg";
+import { Link } from "react-router-dom";
+
+import { CreditsType } from "../../Types/Types";
+
+type PropsType = {
+  credits: CreditsType | null;
+};
 
 const useStyles = makeStyles({
   root: {
@@ -17,229 +23,56 @@ const useStyles = makeStyles({
   },
 });
 
-const CardActors = () => {
+const CardActors = ({ credits }: PropsType) => {
   const classes = useStyles();
-
+  const actors = credits?.cast.slice(0, 8);
   return (
     <div className="actorsWrapp">
       <h3 className="actorsWrapp__heading">Top Billed Cast</h3>
       <div className="actorsWrapp__cardsWrapp">
-      <div className="actorsWrapp__cardsWrapp-cards">
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="150"
-              image={testactor}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                className="name1"
-              >
-                Joaquin Phoenix
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="name2"
-              >
-                Arthur Fleck / Joke
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions></CardActions>
-        </Card>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="150"
-              image={testactor}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                className="name1"
-              >
-                Joaquin Phoenix
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="name2"
-              >
-                Arthur Fleck / Joke
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions></CardActions>
-        </Card>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="150"
-              image={testactor}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                className="name1"
-              >
-                Joaquin Phoenix
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="name2"
-              >
-                Arthur Fleck / Joke
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions></CardActions>
-        </Card>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="150"
-              image={testactor}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                className="name1"
-              >
-                Joaquin Phoenix
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="name2"
-              >
-                Arthur Fleck / Joke
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions></CardActions>
-        </Card>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="150"
-              image={testactor}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                className="name1"
-              >
-                Joaquin Phoenix
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="name2"
-              >
-                Arthur Fleck / Joke
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions></CardActions>
-        </Card>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="150"
-              image={testactor}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                className="name1"
-              >
-                Joaquin Phoenix
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="name2"
-              >
-                Arthur Fleck / Joke
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions></CardActions>
-        </Card>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="150"
-              image={testactor}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                className="name1"
-              >
-                Joaquin Phoenix
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className="name2"
-              >
-                Arthur Fleck / Joke
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions></CardActions>
-        </Card>
-
-        <a href="#">View More <ArrowForwardRoundedIcon/></a>
+        <div className="actorsWrapp__cardsWrapp-cards">
+          {actors?.map((actor) => (
+            <Link to="/actorslist" className="actorslist" key={actor.id}>
+              <Card className={classes.root}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    alt="actor photo"
+                    height="150"
+                    image={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+                    //title="Contemplative Reptile"
+                  />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                      className="name1"
+                    >
+                      {actor.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      className="name2"
+                    >
+                      {actor.character.slice(0, actor.character.indexOf("/"))}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions></CardActions>
+              </Card>
+            </Link>
+          ))}
+          <Link to="/actorslist">
+            View More <ArrowForwardRoundedIcon />
+          </Link>
+        </div>
       </div>
-      </div>
-      <h4><a href='#'>Full Cast & Crew</a></h4>
+      <h4>
+        <Link to="/actorslist">Full Cast & Crew</Link>
+      </h4>
     </div>
   );
 };

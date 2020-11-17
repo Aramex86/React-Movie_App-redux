@@ -65,4 +65,14 @@ export const getMoviesApi = {
         }
       });
   },
+  getReviews(movieId:number){
+    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${api_key}&language=en-US&page=1`).then(res =>{
+      return res.data.results;
+    }).catch(error =>{
+      if(error.response){
+        console.log(error.response)
+        return error.response.data.status_message;
+      }
+    })
+  }
 };

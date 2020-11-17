@@ -1,21 +1,23 @@
 import { getMoviesApi } from "../../../Api/Api";
-import { CreditsType, GenresType, MovieDetailsType, MovieListType } from "../../../Types/Types";
+import { CreditsType, GenresType, MovieDetailsType, MovieListType, ResultsType, ReviewsType } from "../../../Types/Types";
 
 const GET_MOVIES = "GET_MOVIES";
 const FETCHING_REQUEST = "FETCHING_REQUEST";
 const GET_CREDITS ="GET_CREDITS";
 const GET_GENRES ="GET_GENRES";
 const GET_DETAILS ="GET_DETAILS";
+const GET_REVIEWS ='GET_REVIEWS';
 
 
 
 
 const initialState = {
   movieList: [] as Array<MovieListType>,
-  credits: null as CreditsType | null,
+  credits: null as CreditsType | null ,
   genres: [] as Array<GenresType>,
   isFetching: false,
   movieDetails: null as MovieDetailsType | null,
+  movieReviews: [] as Array<ResultsType>,
   errorMessage:''
 };
 
@@ -56,6 +58,12 @@ const movieListReducer = (
       movieDetails:action.movieDetails
     }
   }
+   case GET_REVIEWS:{
+    return{
+      ...state,
+      movieReviews:action.movieReviews
+    }
+  }
     default:
       return state;
   }
@@ -82,7 +90,6 @@ export const isFetchingReq = (isFetching: boolean): IsFetchingReqType => {
   return { type: FETCHING_REQUEST, isFetching };
 };
 //Credits
-
 type GetCreditsType={
   type:typeof GET_CREDITS
   credits: CreditsType
@@ -111,6 +118,17 @@ export const getDeatails=(movieDetails:MovieDetailsType):GetMovieDetailsType=>{
   return{type:GET_DETAILS,movieDetails}
 }
 
+//Reviews
+
+type GetMovieReviews={
+  type: typeof GET_REVIEWS
+  movieReviews: ReviewsType
+}
+
+export const getReviwes=(movieReviews:ReviewsType):GetMovieReviews=>{
+  return{type:GET_REVIEWS, movieReviews}
+}
+
 
 // Thuck
 export const requestMovieList = () => async (dispatch: any) => {
@@ -136,6 +154,12 @@ export const requestDetails=(movieId:number)=>async(dispatch:any)=>{
   const err = await getMoviesApi.getDetails(movieId);
   //console.log(err)
   dispatch(getDeatails(res))
+}
+
+export const requestReviews=(movieId:number)=>async(dispatch:any)=>{
+  const res = await getMoviesApi.getReviews(movieId);
+  dispatch(getReviwes(res))
+
 }
 
 export default movieListReducer;

@@ -8,6 +8,7 @@ import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { CreditsType, GenresType } from "../../Types/Types";
+import { crewStaff } from "../Helper/crewstaff";
 
 type PropsType = {
   poster_path: undefined | string;
@@ -25,17 +26,13 @@ const CardPoster = (props: PropsType) => {
   const usersScore = props.popularity ? Math.ceil(props.popularity) : "";
   const percent = +usersScore;
   const crew: any = [];
-  const crewStaff = (name: string) => {
-    props.credits?.crew.map((i) => {
-      if (i.job === name) {
-        crew.push(i);
-      }
-    });
-  };
-  crewStaff("Director");
-  crewStaff("Comic Book");
-  crewStaff("Producer");
-  console.log(props);
+
+  if (props.credits?.crew) {
+    crewStaff(props.credits?.crew, "Director", crew);
+    crewStaff(props.credits?.crew, "Comic Book", crew);
+    crewStaff(props.credits?.crew, "Producer", crew);
+  }
+
   return (
     <div
       className="posterWrapp"
