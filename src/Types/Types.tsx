@@ -70,12 +70,15 @@ export type WithMoviePropsType = {
   details: MovieDetailsType | null
   reviews: Array<ResultsType>
   videos: Array<VideoType>
+  recomand:Array<RecomandType>
   requestMovieList: () => void
   requestCredits: (movieId: number) => void
   requestGenres: () => void
   requestDetails: (movieId: number) => void
   requestReviews: (movieId: number) => void
   requestVideos:(movieId:number)=> void
+  requestRecomand:(movieId:number)=> void
+  requestKeywords:(movieId:number)=> void
 };
 
 //
@@ -161,3 +164,34 @@ export type VideoType = {
   size: null;
   type: string;
 };
+
+//Recomand
+export type RecomandType={
+  id: number
+  video: number
+  vote_count: number
+  vote_average: number
+  title: string
+  release_date: string
+  original_language: string
+  original_title: string
+  genre_ids: Array<GenresType>
+  backdrop_path: string
+  adult: boolean
+  overview: string
+  poster_path: string
+  popularity: number
+}
+  
+ //Keywords
+
+  type WordsType={
+    id:number
+    name:string
+  }
+
+  export type KeywordsType={
+    keywords:Array<WordsType>
+  } 
+  
+  

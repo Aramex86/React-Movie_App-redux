@@ -1,5 +1,6 @@
+import { type } from "os";
 import { getMoviesApi } from "../../../Api/Api";
-import { CreditsType, GenresType, MovieDetailsType, MovieListType, ResultsType, ReviewsType, VideoType } from "../../../Types/Types";
+import { CreditsType, GenresType, KeywordsType, MovieDetailsType, MovieListType, RecomandType, ResultsType, ReviewsType, VideoType } from "../../../Types/Types";
 
 const GET_MOVIES = "GET_MOVIES";
 const FETCHING_REQUEST = "FETCHING_REQUEST";
@@ -8,6 +9,9 @@ const GET_GENRES ="GET_GENRES";
 const GET_DETAILS ="GET_DETAILS";
 const GET_REVIEWS ='GET_REVIEWS';
 const GET_VIDEOS ='GET_VIDEOS';
+const GET_RECOMAND ='GET_RECOMAND';
+const GET_KEYWORDS ='GET_KEYWORDS';
+
 
 
 
@@ -20,6 +24,8 @@ const initialState = {
   movieDetails: null as MovieDetailsType | null,
   movieReviews: [] as Array<ResultsType>,
   movieVideos: [] as Array<VideoType>,
+  recomad:[] as Array<RecomandType>,
+  keywords: [] as Array<KeywordsType>,
   errorMessage:''
 };
 
@@ -70,6 +76,18 @@ const movieListReducer = (
     return{
       ...state,
       movieVideos:action.movieVideos
+    }
+  }
+  case GET_RECOMAND:{
+    return{
+      ...state,
+      recomad:action.recomad
+    }
+  }
+  case GET_KEYWORDS:{
+    return{
+      ...state,
+      keywords:action.keywords
     }
   }
     default:
@@ -146,6 +164,29 @@ export const getVideos=(movieVideos:VideoType):GetVideosType=>{
   return{type:GET_VIDEOS,movieVideos}
 }
 
+//Recomand
+
+type GetRecomandType={
+  type:typeof GET_RECOMAND
+  recomad: RecomandType
+}
+
+export const getRecomand=(recomad:RecomandType):GetRecomandType=>{
+  return{type:GET_RECOMAND,recomad}
+}
+
+//keywords
+
+type GetKeywordsType={
+  type: typeof GET_KEYWORDS
+  keywords: KeywordsType
+}
+
+
+export const getKeywords=(keywords:KeywordsType):GetKeywordsType=>{
+  return{type:GET_KEYWORDS,keywords}
+}
+
 // Thuck
 export const requestMovieList = () => async (dispatch: any) => {
   dispatch(isFetchingReq(true));
@@ -180,5 +221,16 @@ export const requestVideos=(movieId:number)=>async(dispatch:any)=>{
   const res = await getMoviesApi.getVideos(movieId);
   dispatch(getVideos(res))
 }
+
+export const requestRecomand=(movieId:number)=>async(dispatch:any)=>{
+  const res = await getMoviesApi.getRecomand(movieId)
+  dispatch(getRecomand(res))
+}
+export const requestKeywords=(movieId:number)=>async(dispatch:any)=>{
+  const res = await getMoviesApi.getKeywords(movieId)
+  dispatch(getKeywords(res))
+}
+
+
 
 export default movieListReducer;

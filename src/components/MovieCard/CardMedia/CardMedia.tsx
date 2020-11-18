@@ -59,11 +59,11 @@ const CardMedia = ({ details, videos }: PropsType) => {
       </div>
       <div className="mediaWrapp__wrapper">
         <div className="mediaWrapp__wrapper-media">
-          {addPrefix.reverse().map((item: string) => (
-            <img src={item} alt="poster" />
+          {addPrefix.reverse().map((item: string,index:number) => (
+            <img src={item} alt="poster" key={index}/>
           ))}
           {videos.slice(0, 2).map((video) => (
-            <div className="mediaWrapp__wrapper-videolink">
+            <div className="mediaWrapp__wrapper-videolink" key={video.id}>
               {" "}
               <a
                 className="mediaWrapp__wrapper-videolink-link"

@@ -84,5 +84,26 @@ export const getMoviesApi = {
         return error.response.data.status_message;
       }
     })
+  },
+  getRecomand(movieId:number){
+    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${api_key}&language=en-US&page=1`).then((res)=>{
+      return res.data.results
+    }).catch(error=>{
+      if(error.response){
+        console.log(error.response)
+        return error.response.data.status_message;
+      }
+    })
+  },
+  getKeywords(movieId:number){
+    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=${api_key}`).then((res)=>{
+      console.log(res);
+      return res.data.keywords
+    }).catch(error=>{
+      if(error.response){
+        console.log(error.response)
+        return error.response.data.status_message;
+      }
+    })
   }
 };

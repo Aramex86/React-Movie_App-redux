@@ -26,3 +26,9 @@ export const reviewsSelector=(state:AppStateType)=>{
 export const viedoSelector=(state:AppStateType)=>{
     return state.movies.movieVideos;
 }
+export const recomadSelector=(state:AppStateType)=>{
+    return state.movies.recomad;
+}
+export const keywordsSelector=(state:AppStateType)=>{
+    return state.movies.keywords;
+}

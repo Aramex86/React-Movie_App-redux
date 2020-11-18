@@ -6,6 +6,8 @@ import {
   creditsSelector,
   detailsSelector,
   genresSelector,
+  keywordsSelector,
+  recomadSelector,
   reviewsSelector,
   viedoSelector,
 } from "../Store/Selectors/MovieSelector";
@@ -21,6 +23,10 @@ import {
   getReviwes,
   requestVideos,
   getVideos,
+  requestRecomand,
+  getRecomand,
+  requestKeywords,
+  getKeywords
 } from "../Store/Reducers/MovieListReducer";
 
 //import MovieCrad from "./MovieCrad";
@@ -29,7 +35,7 @@ import CardPoster from "./CardPoster";
 import CardActors from "./CardActors";
 import CardSocial from "./CardSocial/CardSocial";
 import CardMedia from "./CardMedia/CardMedia";
-import CardRecomand from "./CardRecomand";
+import CardRecomand from "./Recomandations/CardRecomand";
 import CardInfo from "./CardInfo";
 class MovieCardContainer extends Component<WithMoviePropsType> {
   componentDidMount() {
@@ -39,10 +45,12 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
     this.props.requestDetails(movieId);
     this.props.requestReviews(movieId);
     this.props.requestVideos(movieId);
+    this.props.requestRecomand(movieId);
+    this.props.requestKeywords(movieId);
   }
 
   render() {
-    //console.log(this.props);
+    console.log(this.props);
     return (
       <div className="cardWrapper">
         <CradHeader />
@@ -65,10 +73,12 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
               details={this.props.details}
               videos={this.props.videos}
             />
-            <CardRecomand />
+            <CardRecomand 
+              recomand={this.props.recomand}
+            />
           </div>
           <div className="cardWrapper__body-right">
-            <CardInfo />
+            <CardInfo details={this.props.details}/>
           </div>
         </div>
       </div>
@@ -83,6 +93,8 @@ const mapStateToProps = (state: AppStateType) => {
     details: detailsSelector(state),
     reviews: reviewsSelector(state),
     videos: viedoSelector(state),
+    recomand: recomadSelector(state),
+    keywords: keywordsSelector(state)
   };
 };
 
@@ -97,4 +109,9 @@ export default connect(mapStateToProps, {
   getReviwes,
   requestVideos,
   getVideos,
+  requestRecomand,
+  getRecomand,
+  requestKeywords,
+  getKeywords
+
 })(MovieCardContainer);
