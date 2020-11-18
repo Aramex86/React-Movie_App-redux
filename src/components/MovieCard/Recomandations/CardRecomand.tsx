@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { RecomandType } from "../../../Types/Types";
 
 import TodayRoundedIcon from '@material-ui/icons/TodayRounded';
@@ -8,12 +8,7 @@ import TodayRoundedIcon from '@material-ui/icons/TodayRounded';
     recomand:Array<RecomandType>
   }
 
-
-
-
 const CardRecomand = ({recomand}:PropsType) => {
-
-  console.log(recomand)
   return (
     <div className="recomandWrapp">
       <h3 className="recomandWrapp__heading">Recommendations</h3>

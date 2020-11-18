@@ -71,6 +71,7 @@ export type WithMoviePropsType = {
   reviews: Array<ResultsType>
   videos: Array<VideoType>
   recomand:Array<RecomandType>
+  keywords:Array<KeywordsType>
   requestMovieList: () => void
   requestCredits: (movieId: number) => void
   requestGenres: () => void
@@ -185,13 +186,12 @@ export type RecomandType={
   
  //Keywords
 
-  type WordsType={
+  
+  
+  export type KeywordsType={
     id:number
     name:string
-  }
-
-  export type KeywordsType={
-    keywords:Array<WordsType>
+    
   } 
   
   

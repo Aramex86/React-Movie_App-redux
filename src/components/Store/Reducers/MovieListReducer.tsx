@@ -1,32 +1,37 @@
-import { type } from "os";
 import { getMoviesApi } from "../../../Api/Api";
-import { CreditsType, GenresType, KeywordsType, MovieDetailsType, MovieListType, RecomandType, ResultsType, ReviewsType, VideoType } from "../../../Types/Types";
+import {
+  CreditsType,
+  GenresType,
+  KeywordsType,
+  MovieDetailsType,
+  MovieListType,
+  RecomandType,
+  ResultsType,
+  ReviewsType,
+  VideoType,
+} from "../../../Types/Types";
 
 const GET_MOVIES = "GET_MOVIES";
 const FETCHING_REQUEST = "FETCHING_REQUEST";
-const GET_CREDITS ="GET_CREDITS";
-const GET_GENRES ="GET_GENRES";
-const GET_DETAILS ="GET_DETAILS";
-const GET_REVIEWS ='GET_REVIEWS';
-const GET_VIDEOS ='GET_VIDEOS';
-const GET_RECOMAND ='GET_RECOMAND';
-const GET_KEYWORDS ='GET_KEYWORDS';
-
-
-
-
+const GET_CREDITS = "GET_CREDITS";
+const GET_GENRES = "GET_GENRES";
+const GET_DETAILS = "GET_DETAILS";
+const GET_REVIEWS = "GET_REVIEWS";
+const GET_VIDEOS = "GET_VIDEOS";
+const GET_RECOMAND = "GET_RECOMAND";
+const GET_KEYWORDS = "GET_KEYWORDS";
 
 const initialState = {
   movieList: [] as Array<MovieListType>,
-  credits: null as CreditsType | null ,
+  credits: null as CreditsType | null,
   genres: [] as Array<GenresType>,
   isFetching: false,
   movieDetails: null as MovieDetailsType | null,
   movieReviews: [] as Array<ResultsType>,
   movieVideos: [] as Array<VideoType>,
-  recomad:[] as Array<RecomandType>,
+  recomad: [] as Array<RecomandType>,
   keywords: [] as Array<KeywordsType>,
-  errorMessage:''
+  errorMessage: "",
 };
 
 type initialStateType = typeof initialState;
@@ -48,48 +53,48 @@ const movieListReducer = (
         isFetching: action.isFetching,
       };
     }
-    case GET_CREDITS:{
-      return{
+    case GET_CREDITS: {
+      return {
         ...state,
-        credits: action.credits
-      }
-   }
-   case GET_GENRES:{
-    return{
-      ...state,
-      genres:action.genres
+        credits: action.credits,
+      };
     }
-  }
-   case GET_DETAILS:{
-    return{
-      ...state,
-      movieDetails:action.movieDetails
+    case GET_GENRES: {
+      return {
+        ...state,
+        genres: action.genres,
+      };
     }
-  }
-   case GET_REVIEWS:{
-    return{
-      ...state,
-      movieReviews:action.movieReviews
+    case GET_DETAILS: {
+      return {
+        ...state,
+        movieDetails: action.movieDetails,
+      };
     }
-  }
-   case GET_VIDEOS:{
-    return{
-      ...state,
-      movieVideos:action.movieVideos
+    case GET_REVIEWS: {
+      return {
+        ...state,
+        movieReviews: action.movieReviews,
+      };
     }
-  }
-  case GET_RECOMAND:{
-    return{
-      ...state,
-      recomad:action.recomad
+    case GET_VIDEOS: {
+      return {
+        ...state,
+        movieVideos: action.movieVideos,
+      };
     }
-  }
-  case GET_KEYWORDS:{
-    return{
-      ...state,
-      keywords:action.keywords
+    case GET_RECOMAND: {
+      return {
+        ...state,
+        recomad: action.recomad,
+      };
     }
-  }
+    case GET_KEYWORDS: {
+      return {
+        ...state,
+        keywords: action.keywords,
+      };
+    }
     default:
       return state;
   }
@@ -116,76 +121,77 @@ export const isFetchingReq = (isFetching: boolean): IsFetchingReqType => {
   return { type: FETCHING_REQUEST, isFetching };
 };
 //Credits
-type GetCreditsType={
-  type:typeof GET_CREDITS
-  credits: CreditsType
-}
+type GetCreditsType = {
+  type: typeof GET_CREDITS;
+  credits: CreditsType;
+};
 
-export const getCredits=(credits:CreditsType):GetCreditsType=>{
-  return{type: GET_CREDITS, credits}
-}
-// Genres 
-type GetGenresType={
-  type: typeof GET_GENRES
-  genres:Array<GenresType>
-}
+export const getCredits = (credits: CreditsType): GetCreditsType => {
+  return { type: GET_CREDITS, credits };
+};
+// Genres
+type GetGenresType = {
+  type: typeof GET_GENRES;
+  genres: Array<GenresType>;
+};
 
-export const getGenres=(genres:Array<GenresType>):GetGenresType=>{
-  return{type:GET_GENRES , genres}
-}
+export const getGenres = (genres: Array<GenresType>): GetGenresType => {
+  return { type: GET_GENRES, genres };
+};
 
 //Details
-type GetMovieDetailsType={
-  type: typeof GET_DETAILS
-  movieDetails: MovieDetailsType
-}
+type GetMovieDetailsType = {
+  type: typeof GET_DETAILS;
+  movieDetails: MovieDetailsType;
+};
 
-export const getDeatails=(movieDetails:MovieDetailsType):GetMovieDetailsType=>{
-  return{type:GET_DETAILS,movieDetails}
-}
+export const getDeatails = (
+  movieDetails: MovieDetailsType
+): GetMovieDetailsType => {
+  return { type: GET_DETAILS, movieDetails };
+};
 
 //Reviews
 
-type GetMovieReviews={
-  type: typeof GET_REVIEWS
-  movieReviews: ReviewsType
-}
+type GetMovieReviews = {
+  type: typeof GET_REVIEWS;
+  movieReviews: ReviewsType;
+};
 
-export const getReviwes=(movieReviews:ReviewsType):GetMovieReviews=>{
-  return{type:GET_REVIEWS, movieReviews}
-}
+export const getReviwes = (movieReviews: ReviewsType): GetMovieReviews => {
+  return { type: GET_REVIEWS, movieReviews };
+};
 //Videos
 
-type GetVideosType={
-  type: typeof GET_VIDEOS
-  movieVideos: VideoType
-}
-export const getVideos=(movieVideos:VideoType):GetVideosType=>{
-  return{type:GET_VIDEOS,movieVideos}
-}
+type GetVideosType = {
+  type: typeof GET_VIDEOS;
+  movieVideos: VideoType;
+};
+export const getVideos = (movieVideos: VideoType): GetVideosType => {
+  return { type: GET_VIDEOS, movieVideos };
+};
 
 //Recomand
 
-type GetRecomandType={
-  type:typeof GET_RECOMAND
-  recomad: RecomandType
-}
+type GetRecomandType = {
+  type: typeof GET_RECOMAND;
+  recomad: Array<RecomandType>;
+};
 
-export const getRecomand=(recomad:RecomandType):GetRecomandType=>{
-  return{type:GET_RECOMAND,recomad}
-}
+export const getRecomand = (recomad: Array<RecomandType>): GetRecomandType => {
+  return { type: GET_RECOMAND, recomad };
+};
 
 //keywords
 
-type GetKeywordsType={
-  type: typeof GET_KEYWORDS
-  keywords: KeywordsType
-}
+type GetKeywordsType = {
+  type: typeof GET_KEYWORDS;
+  keywords: Array<KeywordsType>;
+};
 
-
-export const getKeywords=(keywords:KeywordsType):GetKeywordsType=>{
-  return{type:GET_KEYWORDS,keywords}
-}
+export const getKeywords = (keywords: Array<KeywordsType>): GetKeywordsType => {
+  return { type: GET_KEYWORDS, keywords };
+};
 
 // Thuck
 export const requestMovieList = () => async (dispatch: any) => {
@@ -195,42 +201,39 @@ export const requestMovieList = () => async (dispatch: any) => {
   dispatch(isFetchingReq(false));
 };
 
-
-export const requestCredits=(movieId:number)=>async(dispatch:any)=>{
- const res = await getMoviesApi.getCast(movieId);
+export const requestCredits = (movieId: number) => async (dispatch: any) => {
+  const res = await getMoviesApi.getCast(movieId);
   dispatch(getCredits(res));
-}
+};
 
-export const requestGenres=()=>async(dispatch:any)=>{
+export const requestGenres = () => async (dispatch: any) => {
   const res = await getMoviesApi.getGenre();
-  dispatch(getGenres(res))
-}
+  dispatch(getGenres(res));
+};
 
-export const requestDetails=(movieId:number)=>async(dispatch:any)=>{
+export const requestDetails = (movieId: number) => async (dispatch: any) => {
   const res = await getMoviesApi.getDetails(movieId);
-  const err = await getMoviesApi.getDetails(movieId);
+  //const err = await getMoviesApi.getDetails(movieId);
   //console.log(err)
-  dispatch(getDeatails(res))
-}
+  dispatch(getDeatails(res));
+};
 
-export const requestReviews=(movieId:number)=>async(dispatch:any)=>{
+export const requestReviews = (movieId: number) => async (dispatch: any) => {
   const res = await getMoviesApi.getReviews(movieId);
-  dispatch(getReviwes(res))
-}
-export const requestVideos=(movieId:number)=>async(dispatch:any)=>{
+  dispatch(getReviwes(res));
+};
+export const requestVideos = (movieId: number) => async (dispatch: any) => {
   const res = await getMoviesApi.getVideos(movieId);
-  dispatch(getVideos(res))
-}
+  dispatch(getVideos(res));
+};
 
-export const requestRecomand=(movieId:number)=>async(dispatch:any)=>{
-  const res = await getMoviesApi.getRecomand(movieId)
-  dispatch(getRecomand(res))
-}
-export const requestKeywords=(movieId:number)=>async(dispatch:any)=>{
-  const res = await getMoviesApi.getKeywords(movieId)
-  dispatch(getKeywords(res))
-}
-
-
+export const requestRecomand = (movieId: number) => async (dispatch: any) => {
+  const res = await getMoviesApi.getRecomand(movieId);
+  dispatch(getRecomand(res));
+};
+export const requestKeywords = (movieId: number) => async (dispatch: any) => {
+  const res = await getMoviesApi.getKeywords(movieId);
+  dispatch(getKeywords(res));
+};
 
 export default movieListReducer;

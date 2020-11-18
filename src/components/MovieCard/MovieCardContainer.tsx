@@ -26,7 +26,7 @@ import {
   requestRecomand,
   getRecomand,
   requestKeywords,
-  getKeywords
+  getKeywords,
 } from "../Store/Reducers/MovieListReducer";
 
 //import MovieCrad from "./MovieCrad";
@@ -50,7 +50,7 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
   }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div className="cardWrapper">
         <CradHeader />
@@ -73,12 +73,13 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
               details={this.props.details}
               videos={this.props.videos}
             />
-            <CardRecomand 
-              recomand={this.props.recomand}
-            />
+            <CardRecomand recomand={this.props.recomand} />
           </div>
           <div className="cardWrapper__body-right">
-            <CardInfo details={this.props.details}/>
+            <CardInfo
+              keywords={this.props.keywords}
+              details={this.props.details}
+            />
           </div>
         </div>
       </div>
@@ -94,7 +95,7 @@ const mapStateToProps = (state: AppStateType) => {
     reviews: reviewsSelector(state),
     videos: viedoSelector(state),
     recomand: recomadSelector(state),
-    keywords: keywordsSelector(state)
+    keywords: keywordsSelector(state),
   };
 };
 
@@ -112,6 +113,5 @@ export default connect(mapStateToProps, {
   requestRecomand,
   getRecomand,
   requestKeywords,
-  getKeywords
-
+  getKeywords,
 })(MovieCardContainer);

@@ -1,15 +1,23 @@
 import React from "react";
-import { MovieDetailsType } from "../../Types/Types";
+import { KeywordsType, MovieDetailsType } from "../../Types/Types";
+
+
+
+
 
 type PropType={
   details: MovieDetailsType | null;
+  keywords:Array<KeywordsType>
 }
 
 
 
 
 
-const CardInfo = ({details}:PropType) => {
+const CardInfo = ({details,keywords}:PropType) => {
+
+console.log(keywords.map(i=>i.id))
+
   return (
     <div className="cardInfoWrapp">
       <ul className="cardInfoList">
@@ -37,16 +45,9 @@ const CardInfo = ({details}:PropType) => {
       <div className="keywordsWrapp">
           <h4>Keywords</h4>
               <ul className="keywordsWrapp__list">
-                  <li className="keywordsWrapp__item">
-                      <a href="#" className="keywordswrapp__link">clown</a></li>
-                  <li className="keywordsWrapp__item">
-                      <a href="#" className="keywordswrapp__link">some keyword</a></li>
-                  <li className="keywordsWrapp__item">
-                      <a href="#" className="keywordswrapp__link">keyword</a></li>
-                  <li className="keywordsWrapp__item">
-                      <a href="#" className="keywordswrapp__link">killer</a></li>
-                  <li className="keywordsWrapp__item">
-                      <a href="#" className="keywordswrapp__link">star</a></li>
+                {keywords.map(k=>  <li className="keywordsWrapp__item" key={k.id}>
+                      <a href="#" className="keywordsWrapp__link">{k.name}</a>
+                      </li>)}
               </ul>
           </div>
     </div>
