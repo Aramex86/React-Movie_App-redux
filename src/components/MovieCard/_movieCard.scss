@@ -217,7 +217,7 @@
     width: 61rem;
     overflow: auto;
     margin-bottom: 20px;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
 
     &-cards {
       display: inline-flex;
@@ -231,23 +231,23 @@
         color: black;
         margin-left: 25px;
         display: flex;
-        width:55rem;
+        width: 55rem;
         align-items: center;
         font-weight: 700;
       }
     }
-    .actorslist{
+    .actorslist {
       margin-left: 0;
       width: 100%;
     }
-    &-cards .MuiCardMedia-img{
+    &-cards .MuiCardMedia-img {
       height: auto;
     }
   }
 }
 
 .name1 {
-  font-size: .9rem !important;
+  font-size: 0.9rem !important;
   margin-top: 15px !important;
 }
 
@@ -313,9 +313,8 @@
       & h3 {
         display: flex;
         font-size: 1.3rem;
-       
       }
-      & h3:hover{
+      & h3:hover {
         color: #b20204;
       }
       & span:nth-child(1) {
@@ -346,7 +345,7 @@
         margin-bottom: 25px;
       }
     }
-    &-link{
+    &-link {
       color: rgb(151, 15, 42);
       text-decoration: underline;
     }
@@ -420,6 +419,31 @@
         width: 120px;
         align-items: center;
         font-weight: 700;
+      }
+    }
+    &-videolink {
+      background-image: url(../../assets/videobg.jpg);
+      background-size: cover;
+      padding: 8.8rem;
+      margin-right: 5px;
+      background-position: center -50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 19px;
+      &-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        & svg{
+          width: 5.5rem;
+          height: 5.5rem;
+          &:hover{
+            transform: scale(1.1);
+          }
+        }
       }
     }
   }

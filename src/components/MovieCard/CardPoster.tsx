@@ -7,11 +7,11 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { CreditsType, GenresType } from "../../Types/Types";
+import { CreditsType, GenresType, MovieDetailsType } from "../../Types/Types";
 import { crewStaff } from "../Helper/crewstaff";
 
 type PropsType = {
-  poster_path: undefined | string;
+  details: MovieDetailsType | null;
   original_title: undefined | string;
   release_date: undefined | string;
   original_language: undefined | string;
@@ -37,12 +37,12 @@ const CardPoster = (props: PropsType) => {
     <div
       className="posterWrapp"
       style={{
-        background: `linear-gradient(to left, #7f7f7f9e, black), url(https://image.tmdb.org/t/p/w500/${props.poster_path}) no-repeat`,
+        background: `linear-gradient(to left, #7f7f7f9e, black), url(https://image.tmdb.org/t/p/w500/${props.details?.poster_path}) no-repeat`,
       }}
     >
       <div className="posterWrapp__img">
         <img
-          src={`https://image.tmdb.org/t/p/w500/${props.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w500/${props.details?.poster_path}`}
           alt="poster"
         />
       </div>

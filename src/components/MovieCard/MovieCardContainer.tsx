@@ -47,7 +47,7 @@ class MovieCardContainer extends Component<WithMoviePropsType> {
       <div className="cardWrapper">
         <CradHeader />
         <CardPoster
-          poster_path={this.props.details?.poster_path}
+          details={this.props.details}
           original_title={this.props.details?.original_title}
           release_date={this.props.details?.release_date}
           original_language={this.props.details?.original_language}
