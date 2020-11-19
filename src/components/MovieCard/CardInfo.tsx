@@ -1,23 +1,12 @@
 import React from "react";
 import { KeywordsType, MovieDetailsType } from "../../Types/Types";
 
-
-
-
-
-type PropType={
+type PropType = {
   details: MovieDetailsType | null;
-  keywords:Array<KeywordsType>
-}
+  keywords: Array<KeywordsType>;
+};
 
-
-
-
-
-const CardInfo = ({details,keywords}:PropType) => {
-
-console.log(keywords.map(i=>i.id))
-
+const CardInfo = ({ details, keywords }: PropType) => {
   return (
     <div className="cardInfoWrapp">
       <ul className="cardInfoList">
@@ -29,7 +18,9 @@ console.log(keywords.map(i=>i.id))
         <li className="cardInfoList__item">
           <span className="cardInfoList__item__header">Original Language</span>
           <br />
-          <span className="cardInfoList__item__info">{details?.spoken_languages.map(l=>l.name)}</span>
+          <span className="cardInfoList__item__info">
+            {details?.spoken_languages.map((l) => l.name)}
+          </span>
         </li>
         <li className="cardInfoList__item">
           <span className="cardInfoList__item__header">Budget</span>
@@ -43,13 +34,17 @@ console.log(keywords.map(i=>i.id))
         </li>
       </ul>
       <div className="keywordsWrapp">
-          <h4>Keywords</h4>
-              <ul className="keywordsWrapp__list">
-                {keywords.map(k=>  <li className="keywordsWrapp__item" key={k.id}>
-                      <a href="#" className="keywordsWrapp__link">{k.name}</a>
-                      </li>)}
-              </ul>
-          </div>
+        <h4>Keywords</h4>
+        <ul className="keywordsWrapp__list">
+          {keywords.map((k) => (
+            <li className="keywordsWrapp__item" key={k.id}>
+              <a href="#" className="keywordsWrapp__link">
+                {k.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type MovieListType = {
   poster_path: string;
   popularity: number;
@@ -80,7 +82,9 @@ export type WithMoviePropsType = {
   requestVideos:(movieId:number)=> void
   requestRecomand:(movieId:number)=> void
   requestKeywords:(movieId:number)=> void
+  handaleplay:()=>void
 };
+
 
 //
 export type GenresType = {

@@ -6,7 +6,8 @@ import withMovies from "./Hoc/withmovies";
 import WithHeaderFooter from "./Hoc/withHeaderFooter";
 import FullList from "./components/FullActorsList/FullList";
 import CardSocialAll from "./components/MovieCard/CardSocial/CardSocialAll";
-import CardMediaAll from "./components/MovieCard/CardMediaAll";
+import CardMediaAll from "./components/MovieCard/CardMedia/CardMediaAll";
+import PosterStaffPage from "./components/MovieCard/Poster/PosterStaffPage";
 
 function App() {
   return (
@@ -31,6 +32,11 @@ function App() {
             exact
             path="/allmedia/"
             component={withMovies(CardMediaAll)}
+          />
+          <Route
+            exact
+            path="/posterstaff/"
+            component={withMovies(PosterStaffPage)}
           />
         </Switch>
       </WithHeaderFooter>

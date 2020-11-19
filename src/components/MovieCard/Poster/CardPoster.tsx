@@ -7,8 +7,9 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { CreditsType, GenresType, MovieDetailsType } from "../../Types/Types";
-import { crewStaff } from "../Helper/crewstaff";
+import { CreditsType, GenresType, MovieDetailsType } from "../../../Types/Types";
+import { crewStaff } from "../../Helper/crewstaff";
+import { Link } from "react-router-dom";
 
 type PropsType = {
   details: MovieDetailsType | null;
@@ -20,6 +21,7 @@ type PropsType = {
   popularity: undefined | number;
   overview: undefined | string;
   credits: CreditsType | null;
+  handaleplay:()=>void
 };
 
 const CardPoster = (props: PropsType) => {
@@ -27,11 +29,14 @@ const CardPoster = (props: PropsType) => {
   const percent = +usersScore;
   const crew: any = [];
 
+
   if (props.credits?.crew) {
     crewStaff(props.credits?.crew, "Director", crew);
     crewStaff(props.credits?.crew, "Comic Book", crew);
     crewStaff(props.credits?.crew, "Producer", crew);
   }
+
+  //console.log(crew)
 
   return (
     <div
@@ -125,12 +130,12 @@ const CardPoster = (props: PropsType) => {
               <p className="movieCrad__tolltip">Login to rate this movie</p>
             </li>
             <li className="posterWrapp__info-actions-item">
-              <a
-                href="#"
-                className="posterWrapp__info-actions-link posterWrapp__info-actions-link--video"
+              <button 
+                className="btn btn--postertrailer"
+                onClick={props.handaleplay}
               >
                 <PlayArrowRoundedIcon /> Play Trailer
-              </a>
+              </button>
             </li>
           </ul>
         </div>
@@ -141,10 +146,10 @@ const CardPoster = (props: PropsType) => {
           <ul className="posterWrapp__info-cast-list">
             {crew.map((c: any) => (
               <li className="posterWrapp__info-cast-item" key={c.credit_id}>
-                <a href="#" className="posterWrapp__info-cast-link">
+                <Link to="/posterstaff" className="posterWrapp__info-cast-link">
                   <p>{c.name}</p>
                   <p>{c.job}</p>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

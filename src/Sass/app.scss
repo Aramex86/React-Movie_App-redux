@@ -1,9 +1,10 @@
-@import "../components/MovieList/movielist";
-@import "../components/NaigationBar/navbar";
-@import "../components/MovieCard/movieCard";
-@import "../components/Common/loader";
-@import "../components/Common/tolltip";
-@import '../components/Footer/footer';
+@import "../Sass/movielist";
+@import "../Sass/navbar";
+@import "../Sass/movieCard";
+@import "../Sass/Common/btn";
+@import "../Sass/Common/loader";
+@import "../Sass/Common/tolltip";
+@import '../Sass/footer';
 
 *,
 *::before,
@@ -22,7 +23,9 @@ html{
 
 }
 
-// body{
-//   font-size: 1.6rem;
-// }
+body{
+  //font-size: 1.6rem;
+  //font-family: 'Source Sans Pro', sans-serif;
+
+}
 

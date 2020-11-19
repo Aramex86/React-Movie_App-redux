@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     //align-items: center;
+    position: relative;
     &-left {
       display: flex;
       flex-direction: column;
@@ -14,6 +15,31 @@
     }
   }
 }
+//Popup
+.popuptrailer{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  font-size: 2rem;
+  background:#000000a6;
+  z-index: 2;
+  display: none;
+  &__videobox{
+    width: 80%;
+    min-height: auto;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%,-50%);
+    color: #ffffffbd;
+    font-weight: bold;
+  }
+  &--show{
+display: block;  }
+
+}
+
+
 //Header
 .cardheader__wrap {
   display: flex;
@@ -422,7 +448,7 @@
       }
     }
     &-videolink {
-      background-image: url(../../assets/videobg.jpg);
+      background-image: url(../assets/videobg.jpg);
       background-size: cover;
       padding: 8.8rem;
       margin-right: 5px;
@@ -529,7 +555,7 @@
 .cardInfoList {
   list-style: none;
   &__item {
-    padding: 1rem 0;
+    padding: .6rem 0;
     &__header {
       font-weight: bold;
     }
