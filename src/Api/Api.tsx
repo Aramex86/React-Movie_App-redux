@@ -97,7 +97,6 @@ export const getMoviesApi = {
   },
   getKeywords(movieId:number){
     return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=${api_key}`).then((res)=>{
-    console.log(res)  
     return res.data.keywords
     }).catch(error=>{
       if(error.response){

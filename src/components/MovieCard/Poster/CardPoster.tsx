@@ -36,7 +36,7 @@ const CardPoster = (props: PropsType) => {
     crewStaff(props.credits?.crew, "Producer", crew);
   }
 
-  //console.log(crew)
+  console.log(crew)
 
   return (
     <div
@@ -146,7 +146,7 @@ const CardPoster = (props: PropsType) => {
           <ul className="posterWrapp__info-cast-list">
             {crew.map((c: any) => (
               <li className="posterWrapp__info-cast-item" key={c.credit_id}>
-                <Link to="/posterstaff" className="posterWrapp__info-cast-link">
+                <Link to={`/posterstaff/${c.id}`} className="posterWrapp__info-cast-link">
                   <p>{c.name}</p>
                   <p>{c.job}</p>
                 </Link>

@@ -32,7 +32,7 @@ type CastType = {
   popularity: number;
   profile_path: string;
 };
-type CrewType = {
+ type CrewType = {
   adult: boolean;
   credit_id: string;
   department: string;

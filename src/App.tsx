@@ -34,9 +34,9 @@ function App() {
             component={withMovies(CardMediaAll)}
           />
           <Route
-            exact
-            path="/posterstaff/"
-            component={withMovies(PosterStaffPage)}
+            
+            path="/posterstaff/:id"
+            component={PosterStaffPage}
           />
         </Switch>
       </WithHeaderFooter>
