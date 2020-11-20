@@ -1,65 +1,42 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { creditsSelector } from "../../Store/Selectors/MovieSelector";
 import { AppStateType } from "../../Store/store";
-import { CreditsType} from "../../../Types/Types";
+import { DetailType} from "../../../Types/Types";
+import {
+  requestDetail,
+  getPeopleDetail
+} from "../../Store/Reducers/PeopleReducer";
+import { useParams } from "react-router";
+import { detailSelector } from "../../Store/Selectors/PeopleSelector";
 
-type PropsType = {
-  credits: CreditsType |null;
-};
+
 
 type ParamsType = {
   id: string;
 };
 
-type PersonType = {
-  adult: boolean;
-  credit_id: string;
-  department: string;
-  gender: number;
-  id: number;
-  job: string;
-  known_for_department: string;
-  name: string;
-  original_name: string;
-  popularity: number;
-  profile_path: string;
-};
 
 
-const PosterStaffPage = ({ credits }: PropsType) => {
-  const stafId = useParams<ParamsType>();
-  const[person,setPerson]=useState<PersonType>()
-  const[credit,setCredit]=useState<CreditsType|null>(credits)
+const PosterStaffPage:React.FC<DetailType> = ({ detail,requestDetail }) => {
+  const personId:ParamsType = useParams()
 
-  //let person:Array<PersonType> = [];
+  useEffect(()=>{
+    requestDetail(+personId.id)
+  },[])
 
- 
-
-  useEffect(() => {
-    credit?.crew.map((item:any) => {
-        if (item.id === +stafId.id) {
-            setPerson(item)
-        }
-      });
-    
-  }, [person,credit]);
-
-  //console.log(credits?.crew);
-  //console.log(stafId.id);
-  console.log(person);
-  console.log(credit);
-
+  console.log(detail)
   return <div>
-      {person?person.name:''}
+      <h1>{detail?detail.name:''}</h1>
+    
   </div>;
 };
 
+
 const mapStateToProps = (state: AppStateType) => {
   return {
-    credits: creditsSelector(state),
+    detail:detailSelector(state)
   };
 };
 
-export default connect(mapStateToProps, {})(PosterStaffPage);
+export default connect(mapStateToProps,{requestDetail,getPeopleDetail})(PosterStaffPage);
+

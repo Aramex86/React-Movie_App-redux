@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export type MovieListType = {
   poster_path: string;
   popularity: number;
@@ -32,7 +30,7 @@ type CastType = {
   popularity: number;
   profile_path: string;
 };
- type CrewType = {
+type CrewType = {
   adult: boolean;
   credit_id: string;
   department: string;
@@ -63,28 +61,27 @@ type MatchType = {
 };
 
 export type WithMoviePropsType = {
-  movieList: Array<MovieListType>
-  isFetching: boolean
-  match: MatchType
-  movieId: number
-  credits: CreditsType | null
-  genres: Array<GenresType>
-  details: MovieDetailsType | null
-  reviews: Array<ResultsType>
-  videos: Array<VideoType>
-  recomand:Array<RecomandType>
-  keywords:Array<KeywordsType>
-  requestMovieList: () => void
-  requestCredits: (movieId: number) => void
-  requestGenres: () => void
-  requestDetails: (movieId: number) => void
-  requestReviews: (movieId: number) => void
-  requestVideos:(movieId:number)=> void
-  requestRecomand:(movieId:number)=> void
-  requestKeywords:(movieId:number)=> void
-  handaleplay:()=>void
+  movieList: Array<MovieListType>;
+  isFetching: boolean;
+  match: MatchType;
+  movieId: number;
+  credits: CreditsType | null;
+  genres: Array<GenresType>;
+  details: MovieDetailsType | null;
+  reviews: Array<ResultsType>;
+  videos: Array<VideoType>;
+  recomand: Array<RecomandType>;
+  keywords: Array<KeywordsType>;
+  requestMovieList: () => void;
+  requestCredits: (movieId: number) => void;
+  requestGenres: () => void;
+  requestDetails: (movieId: number) => void;
+  requestReviews: (movieId: number) => void;
+  requestVideos: (movieId: number) => void;
+  requestRecomand: (movieId: number) => void;
+  requestKeywords: (movieId: number) => void;
+  handaleplay: () => void;
 };
-
 
 //
 export type GenresType = {
@@ -171,31 +168,50 @@ export type VideoType = {
 };
 
 //Recomand
-export type RecomandType={
-  id: number
-  video: number
-  vote_count: number
-  vote_average: number
-  title: string
-  release_date: string
-  original_language: string
-  original_title: string
-  genre_ids: Array<GenresType>
-  backdrop_path: string
-  adult: boolean
-  overview: string
-  poster_path: string
-  popularity: number
-}
-  
- //Keywords
+export type RecomandType = {
+  id: number;
+  video: number;
+  vote_count: number;
+  vote_average: number;
+  title: string;
+  release_date: string;
+  original_language: string;
+  original_title: string;
+  genre_ids: Array<GenresType>;
+  backdrop_path: string;
+  adult: boolean;
+  overview: string;
+  poster_path: string;
+  popularity: number;
+};
 
-  
-  
-  export type KeywordsType={
-    id:number
-    name:string
-    
-  } 
-  
-  
+//Keywords
+export type KeywordsType = {
+  id: number;
+  name: string;
+};
+
+//People Types
+
+type NamesType = {
+  names: string;
+};
+
+export type DetailType = {
+  adult: boolean;
+  also_known_as: Array<NamesType>;
+  biography: string;
+  birthday: string;
+  deathday: string;
+  gender: number;
+  homepage: string;
+  id: number;
+  imdb_id: string;
+  known_for_department: string;
+  name: string;
+  place_of_birth: string;
+  popularity: number;
+  profile_path: string;
+  detail:DetailType
+  requestDetail:(personId:number)=>void
+};

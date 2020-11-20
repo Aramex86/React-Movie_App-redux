@@ -2,12 +2,14 @@ import { createStore, combineReducers,compose, applyMiddleware } from "redux";
 import movieListReducer from "./Reducers/MovieListReducer";
 
 import thunkMidlleWare from "redux-thunk";
+import peopleReducer from "./Reducers/PeopleReducer";
 
 
 
 
 let rootReducers = combineReducers({
-    movies:movieListReducer
+    movies:movieListReducer,
+    people:peopleReducer
 });
 
 

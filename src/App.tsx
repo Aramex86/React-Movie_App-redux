@@ -19,6 +19,11 @@ function App() {
             path="/movie-card/:id"
             component={withMovies(MovieCardContainer)}
           />
+           <Route
+          exact
+            path="/posterstaff/:id"
+            component={PosterStaffPage}
+          />
           <Route
             path="/actorslist/"
             component={withMovies(FullList)}
@@ -32,11 +37,6 @@ function App() {
             exact
             path="/allmedia/"
             component={withMovies(CardMediaAll)}
-          />
-          <Route
-            
-            path="/posterstaff/:id"
-            component={PosterStaffPage}
           />
         </Switch>
       </WithHeaderFooter>

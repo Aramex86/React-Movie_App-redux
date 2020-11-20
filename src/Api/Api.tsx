@@ -38,8 +38,6 @@ export const getMoviesApi = {
       )
       .then((res) => {
         return res.data.genres;
-
-       
       });
   },
   getSearch(movieSearch: string) {
@@ -65,44 +63,79 @@ export const getMoviesApi = {
         }
       });
   },
-  getReviews(movieId:number){
-    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${api_key}&language=en-US&page=1`).then(res =>{
-      return res.data.results;
-    }).catch(error =>{
-      if(error.response){
-        console.log(error.response)
-        return error.response.data.status_message;
+  getReviews(movieId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${api_key}&language=en-US&page=1`
+      )
+      .then((res) => {
+        return res.data.results;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          return error.response.data.status_message;
+        }
+      });
+  },
+  getVideos(movieId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data.results;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          return error.response.data.status_message;
+        }
+      });
+  },
+  getRecomand(movieId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${api_key}&language=en-US&page=1`
+      )
+      .then((res) => {
+        return res.data.results;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          return error.response.data.status_message;
+        }
+      });
+  },
+  getKeywords(movieId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=${api_key}`
+      )
+      .then((res) => {
+        return res.data.keywords;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          return error.response.data.status_message;
+        }
+      });
+  },
+};
+
+// People
+export const getPeopleApi = {
+  getDetails(personId:number) {
+    return axios.get(
+      `https://api.themoviedb.org/3/person/${personId}?api_key=${api_key}&language=en-US`
+    ).then((res)=>{
+      return res.data
+    }).catch(err=>{
+      if (err.response) {
+        return err.response.data.status_message;
       }
     })
   },
-  getVideos(movieId:number){
-    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`).then(res=>{
-      return res.data.results
-    }).catch(error =>{
-      if(error.response){
-        console.log(error.response)
-        return error.response.data.status_message;
-      }
-    })
-  },
-  getRecomand(movieId:number){
-    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${api_key}&language=en-US&page=1`).then((res)=>{
-      return res.data.results
-    }).catch(error=>{
-      if(error.response){
-        console.log(error.response)
-        return error.response.data.status_message;
-      }
-    })
-  },
-  getKeywords(movieId:number){
-    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=${api_key}`).then((res)=>{
-    return res.data.keywords
-    }).catch(error=>{
-      if(error.response){
-        console.log(error.response)
-        return error.response.data.status_message;
-      }
-    })
-  }
 };

@@ -52,9 +52,6 @@ class MovieCardContainer extends Component<WithMoviePropsType,IState> {
   state={
     playTrailer:false
   }
-
-
-
   componentDidMount() {
     const movieId = this.props.match.params.id;
     this.props.requestCredits(movieId);

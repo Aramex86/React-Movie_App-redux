@@ -215,7 +215,9 @@ export const requestDetails = (movieId: number) => async (dispatch: any) => {
   const res = await getMoviesApi.getDetails(movieId);
   //const err = await getMoviesApi.getDetails(movieId);
   //console.log(err)
+  dispatch(isFetchingReq(true));
   dispatch(getDeatails(res));
+  dispatch(isFetchingReq(false));
 };
 
 export const requestReviews = (movieId: number) => async (dispatch: any) => {
