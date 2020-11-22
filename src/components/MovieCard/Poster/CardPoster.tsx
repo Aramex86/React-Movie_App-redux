@@ -37,7 +37,6 @@ const CardPoster = (props: PropsType) => {
   }
 
   console.log(crew)
-
   return (
     <div
       className="posterWrapp"

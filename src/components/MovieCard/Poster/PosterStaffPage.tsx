@@ -26,7 +26,7 @@ const PosterStaffPage:React.FC<DetailType> = ({ detail,requestDetail }) => {
 
   console.log(detail)
   return <div>
-      <h1>{detail?detail.name:''}</h1>
+      <h1>{detail?detail.id:''}</h1>
     
   </div>;
 };

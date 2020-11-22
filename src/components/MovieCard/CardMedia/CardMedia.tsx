@@ -12,21 +12,22 @@ type PropsType = {
 };
 
 const CardMedia = ({ details, videos }: PropsType) => {
-  const allImg: any = [];
+  const allImg: Array<string>= [];
   allMedia(
-    details?.belongs_to_collection.poster_path,
+    details?.belongs_to_collection===null?'':details?.belongs_to_collection.poster_path,
     details?.poster_path,
     allImg
   );
   allMedia(
-    details?.belongs_to_collection.backdrop_path,
+    details?.belongs_to_collection === null?'':details?.belongs_to_collection.backdrop_path,
     details?.backdrop_path,
     allImg
   );
 
-  const addPrefix = allImg.map(
-    (item: string) => `https://image.tmdb.org/t/p/w500${item}`
-  );
+
+  console.log(details)
+  console.log(allImg)
+  const addPrefix = allImg.map((item: string) => `https://image.tmdb.org/t/p/w500${item}`)
   return (
     <div className="mediaWrapp">
       <div className="mediaWrapp__header">

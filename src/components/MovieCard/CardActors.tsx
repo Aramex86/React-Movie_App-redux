@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
+import NoPhoto from '../../assets/noImage.png';
 
 import { Link } from "react-router-dom";
 
@@ -26,6 +27,7 @@ const useStyles = makeStyles({
 const CardActors = ({ credits }: PropsType) => {
   const classes = useStyles();
   const actors = credits?.cast.slice(0, 8);
+  console.log(actors?.map(a => a.profile_path))
   return (
     <div className="actorsWrapp">
       <h3 className="actorsWrapp__heading">Top Billed Cast</h3>
@@ -39,7 +41,7 @@ const CardActors = ({ credits }: PropsType) => {
                     component="img"
                     alt="actor photo"
                     height="150"
-                    image={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+                    image={actor.profile_path===null?`${NoPhoto}`:`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
                     //title="Contemplative Reptile"
                   />
                   <CardContent>
