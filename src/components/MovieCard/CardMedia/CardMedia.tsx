@@ -1,33 +1,39 @@
-import React from "react";
-import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
-import PlayCircleFilledWhiteRoundedIcon from "@material-ui/icons/PlayCircleFilledWhiteRounded";
-import { Link } from "react-router-dom";
+import React from 'react';
+import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
+import PlayCircleFilledWhiteRoundedIcon from '@material-ui/icons/PlayCircleFilledWhiteRounded';
+import {Link} from 'react-router-dom';
 
-import { MovieDetailsType, VideoType } from "../../../Types/Types";
-import { allMedia } from "../../Helper/allMedia";
+import {MovieDetailsType, VideoType} from '../../../Types/Types';
+import {allMedia} from '../../Helper/allMedia';
 
 type PropsType = {
   details: MovieDetailsType | null;
   videos: Array<VideoType>;
 };
 
-const CardMedia = ({ details, videos }: PropsType) => {
-  const allImg: Array<string>= [];
+const CardMedia = ({details, videos}: PropsType) => {
+  const allImg: Array<string> = [];
   allMedia(
-    details?.belongs_to_collection===null?'':details?.belongs_to_collection.poster_path,
+    details?.belongs_to_collection === null
+      ? ''
+      : details?.belongs_to_collection.poster_path,
     details?.poster_path,
     allImg
   );
   allMedia(
-    details?.belongs_to_collection === null?'':details?.belongs_to_collection.backdrop_path,
+    details?.belongs_to_collection === null
+      ? ''
+      : details?.belongs_to_collection.backdrop_path,
     details?.backdrop_path,
     allImg
   );
+  const addPrefix = allImg.map(
+    (item: string) => `https://image.tmdb.org/t/p/w500${item}`
+  );
+  const noImg = addPrefix.filter((i) => {
+    if (i.includes('.jpg')) return i;
+  });
 
-
-  console.log(details)
-  console.log(allImg)
-  const addPrefix = allImg.map((item: string) => `https://image.tmdb.org/t/p/w500${item}`)
   return (
     <div className="mediaWrapp">
       <div className="mediaWrapp__header">
@@ -60,12 +66,12 @@ const CardMedia = ({ details, videos }: PropsType) => {
       </div>
       <div className="mediaWrapp__wrapper">
         <div className="mediaWrapp__wrapper-media">
-          {addPrefix.reverse().map((item: string,index:number) => (
-            <img src={item} alt="poster" key={index}/>
+          {noImg.reverse().map((item: string, index: number) => (
+            <img src={item} alt="poster" key={index} />
           ))}
           {videos.slice(0, 2).map((video) => (
             <div className="mediaWrapp__wrapper-videolink" key={video.id}>
-              {" "}
+              {' '}
               <a
                 className="mediaWrapp__wrapper-videolink-link"
                 href={`https://www.youtube.com/watch?v=${video.key}`}
