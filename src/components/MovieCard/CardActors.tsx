@@ -27,7 +27,6 @@ const useStyles = makeStyles({
 const CardActors = ({ credits }: PropsType) => {
   const classes = useStyles();
   const actors = credits?.cast.slice(0, 8);
-  console.log(actors?.map(a => a.profile_path))
   return (
     <div className="actorsWrapp">
       <h3 className="actorsWrapp__heading">Top Billed Cast</h3>

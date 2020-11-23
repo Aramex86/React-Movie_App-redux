@@ -1,14 +1,15 @@
-import { connect } from "react-redux";
-import React, { useEffect, useState } from "react";
+import {useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import { AppStateType } from "../../Store/store";
-import { DetailType} from "../../../Types/Types";
+import { CombinedCreditsType, DetailType} from "../../../Types/Types";
 import {
+  requestCombine,
   requestDetail,
-  getPeopleDetail
 } from "../../Store/Reducers/PeopleReducer";
 import { useParams } from "react-router";
-import { detailSelector } from "../../Store/Selectors/PeopleSelector";
-
+import { combineSelector, detailSelector } from "../../Store/Selectors/PeopleSelector";
+import StaffCard from './StaffCard';
+import StaffHeader from './StaffHeader';
 
 
 type ParamsType = {
@@ -17,26 +18,31 @@ type ParamsType = {
 
 
 
-const PosterStaffPage:React.FC<DetailType> = ({ detail,requestDetail }) => {
+const PosterStaffPage:React.FC<DetailType> = () => {
+  const detail:DetailType|null = useSelector((state:AppStateType) => detailSelector(state));
+  const combine:Array<CombinedCreditsType> = useSelector((state:AppStateType)=> combineSelector(state))
+  const dispatch = useDispatch()
   const personId:ParamsType = useParams()
 
-  useEffect(()=>{
-    requestDetail(+personId.id)
-  },[])
+  
+// console.log(personId);
+// console.log(detail)
+// console.log(combine)
 
-  console.log(detail)
+  useEffect(()=>{
+  dispatch(requestDetail(+personId.id))
+  dispatch(requestCombine(+personId.id))  
+  },[dispatch,personId.id])
+
   return <div>
-      <h1>{detail?detail.id:''}</h1>
+      <StaffHeader/>
+      <StaffCard cardDetails={detail} combine={combine}/>
     
   </div>;
 };
 
 
-const mapStateToProps = (state: AppStateType) => {
-  return {
-    detail:detailSelector(state)
-  };
-};
 
-export default connect(mapStateToProps,{requestDetail,getPeopleDetail})(PosterStaffPage);
+
+export default PosterStaffPage;
 

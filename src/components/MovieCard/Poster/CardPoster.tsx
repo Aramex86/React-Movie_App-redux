@@ -36,7 +36,6 @@ const CardPoster = (props: PropsType) => {
     crewStaff(props.credits?.crew, "Producer", crew);
   }
 
-  console.log(crew)
   return (
     <div
       className="posterWrapp"

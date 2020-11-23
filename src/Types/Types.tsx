@@ -212,6 +212,26 @@ export type DetailType = {
   place_of_birth: string;
   popularity: number;
   profile_path: string;
-  detail:DetailType
-  requestDetail:(personId:number)=>void
+};
+
+export type CombinedCreditsType = {
+  id: number;
+  video: boolean;
+  vote_count: number;
+  vote_average: number;
+  title: string;
+  release_date: string;
+  original_language: string;
+  original_title: string;
+  genre_ids: Array<number>;
+  backdrop_path: string;
+  adult: boolean;
+  overview: string;
+  poster_path: string;
+  popularity: number;
+  character: string;
+  credit_id: string;
+  order: number;
+  media_type: string;
+  name:string
 };

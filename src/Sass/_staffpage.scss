@@ -1,0 +1,85 @@
+.staffheader__wrap {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.466);
+}
+
+.staffpagewrapp {
+  width: 90rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+.leftwrapp {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__img {
+    width: 70%;
+    & img {
+      width: 100%;
+      border-radius: 10px;
+    }
+  }
+}
+.leftwrapp .infolist {
+  list-style: none;
+  width: 70%;
+  &__item:not(:first-child) {
+    padding: 0.8rem 0;
+  }
+  &__social {
+  }
+}
+
+.rigthwrapp {
+  width: 70%;
+  & h3{
+      margin-bottom: 10px;
+  }
+  &__name {
+    margin-bottom: 25px;
+  }
+  &__biography {
+    margin-bottom: 10px;
+    &__text {
+      margin-bottom: 25px;
+    }
+  }
+  &__movielist {
+    display: flex;
+    overflow-y: auto;
+  }
+}
+
+.cardswrapp {
+  display: inline-flex;
+  padding: 1rem 0;
+}
+
+.cardswrapp .MuiCardContent-root{
+    padding: 0;
+    margin-top: 10px;
+}
+
+.rigthwrapp__movielist .movies {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  width: 10rem;
+  margin-right: 10px;
+
+  &__img {
+    width: 90%;
+  }
+  &__title {
+    font-size: 0.9rem;
+  }
+}
+.rigthwrapp__movielist .movies__hide {
+  display: none;
+}
