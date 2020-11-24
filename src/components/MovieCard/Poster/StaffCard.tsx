@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CombineCreditsCrewType, CombinedCreditsCastType, DetailType } from "../../../Types/Types";
 import StaffCardMovielist from "./StaffCardMovielist";
+import StaffKnowFor from './StaffKnowFor'
 import NoPhoto from '../../../assets/noImage.png';
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 
@@ -16,7 +17,6 @@ const [text,setText] = useState(false)
 //   console.log(cardDetails);
 //   console.log("MOVIES", combine);
 
-console.log(combineCrew.filter(a=> a));
 
   const howOld = () => {
     const date = new Date();
@@ -94,13 +94,12 @@ console.log(combineCrew.filter(a=> a));
         <div>
         <button onClick={()=>setText(true)} className={text === true?'btn btn--hide':'btn btn--readmore'}>read more <ArrowForwardIosRoundedIcon /></button>
         </div>
-        
         </div>
-
         <h3>Known For</h3>
         <div className="rigthwrapp__movielist">
           <StaffCardMovielist combineCast={combineCast} />
         </div>
+        <StaffKnowFor combineCrew={combineCrew} combineCast={combineCast}/>
       </div>
     </div>
   );

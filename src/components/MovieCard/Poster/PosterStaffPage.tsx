@@ -27,7 +27,7 @@ const PosterStaffPage:React.FC<DetailType> = () => {
   const personId:ParamsType = useParams()
 
   
-//console.log(personId);
+console.log(personId);
 // console.log(detail)
 //  console.log(combineCast)
 //  console.log(combineCrew)

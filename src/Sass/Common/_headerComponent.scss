@@ -1,0 +1,56 @@
+.menuWrapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__list {
+    // display: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 15px 0;
+    &--carier {
+      justify-content: flex-end;
+    }
+  }
+  &__item {
+    padding: 0 40px;
+    cursor: pointer;
+    &--carier {
+      padding: 0 15px;
+    }
+    & span {
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__item:hover &__drop {
+    opacity: 5;
+    visibility: visible;
+    transition: all 0.5s ease;
+  }
+  &__drop {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    background: #fff;
+    width: 12rem;
+    border: 1px solid #bfbebe2b;
+    border-radius: 5px;
+    padding: 5px 0;
+    &-link {
+      color: rgb(78, 78, 78);
+      padding: 5px 18px;
+      text-transform: capitalize;
+      font-size: 0.9rem;
+    }
+    &-link:hover {
+      background: #bfbebe2b;
+    }
+  }
+}

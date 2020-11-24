@@ -19,7 +19,7 @@ const StaffCardMovielist: React.FC<PropsTypes> = ({ combineCast }) => {
             <CardMedia
               component="img"
               alt="Contemplative Reptile"
-              height="200"
+              height="250"
               image={`https://image.tmdb.org/t/p/w500${c.poster_path}`}
               title="Contemplative Reptile"
             />
