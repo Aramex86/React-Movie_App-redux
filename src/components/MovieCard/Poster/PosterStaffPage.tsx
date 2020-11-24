@@ -1,13 +1,14 @@
 import {useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { AppStateType } from "../../Store/store";
-import { CombinedCreditsType, DetailType} from "../../../Types/Types";
+import { CombineCreditsCrewType, CombinedCreditsCastType, DetailType} from "../../../Types/Types";
 import {
-  requestCombine,
+  requestCombineCast,
+  requestCombineCrew,
   requestDetail,
 } from "../../Store/Reducers/PeopleReducer";
 import { useParams } from "react-router";
-import { combineSelector, detailSelector } from "../../Store/Selectors/PeopleSelector";
+import { combineCastSelector, combineCrewSelector, detailSelector } from "../../Store/Selectors/PeopleSelector";
 import StaffCard from './StaffCard';
 import StaffHeader from './StaffHeader';
 
@@ -20,24 +21,27 @@ type ParamsType = {
 
 const PosterStaffPage:React.FC<DetailType> = () => {
   const detail:DetailType|null = useSelector((state:AppStateType) => detailSelector(state));
-  const combine:Array<CombinedCreditsType> = useSelector((state:AppStateType)=> combineSelector(state))
+  const combineCast:Array<CombinedCreditsCastType> = useSelector((state:AppStateType)=> combineCastSelector(state))
+  const combineCrew: Array<CombineCreditsCrewType> = useSelector((state:AppStateType)=> combineCrewSelector(state))
   const dispatch = useDispatch()
   const personId:ParamsType = useParams()
 
   
-// console.log(personId);
+//console.log(personId);
 // console.log(detail)
-// console.log(combine)
+//  console.log(combineCast)
+//  console.log(combineCrew)
 
   useEffect(()=>{
   dispatch(requestDetail(+personId.id))
-  dispatch(requestCombine(+personId.id))  
+  dispatch(requestCombineCast(+personId.id))  
+  dispatch(requestCombineCrew(+personId.id))  
   },[dispatch,personId.id])
 
   return <div>
       <StaffHeader/>
-      <StaffCard cardDetails={detail} combine={combine}/>
-    
+      <StaffCard cardDetails={detail} combineCast={combineCast} combineCrew={combineCrew}/>
+      
   </div>;
 };
 

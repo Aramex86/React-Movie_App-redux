@@ -138,9 +138,18 @@ export const getPeopleApi = {
       }
     })
   },
-  getCombinedCredits(personId:number){
+  getCombinedCreditsCast(personId:number){
     return axios.get(`https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${api_key}&language=en-US`).then((res)=>{
     return res.data.cast
+    }).catch(err=>{
+      if(err.response){
+        return err.response.data.status_message;
+      }
+    })
+  },
+  getCombinedCreditsCrew(personId:number){
+    return axios.get(`https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${api_key}&language=en-US`).then((res)=>{
+    return res.data.crew
     }).catch(err=>{
       if(err.response){
         return err.response.data.status_message;

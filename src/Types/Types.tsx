@@ -214,7 +214,9 @@ export type DetailType = {
   profile_path: string;
 };
 
-export type CombinedCreditsType = {
+
+
+export type CombinedCreditsCastType={
   id: number;
   video: boolean;
   vote_count: number;
@@ -234,4 +236,27 @@ export type CombinedCreditsType = {
   order: number;
   media_type: string;
   name:string
-};
+}
+
+export type CombineCreditsCrewType={
+  adult: boolean
+backdrop_path: string
+credit_id: string
+department: string
+genre_ids:Array<number>
+id: number
+job: string
+media_type:string
+original_language: string
+original_title: string
+overview:string
+popularity:number
+poster_path: string
+release_date: string
+title:string
+video: boolean
+vote_average: number
+vote_count: number
+}
+
+

@@ -1,12 +1,14 @@
 import { getPeopleApi } from "../../../Api/Api";
-import {CombinedCreditsType, DetailType } from "../../../Types/Types";
+import { CombineCreditsCrewType, CombinedCreditsCastType, DetailType } from "../../../Types/Types";
 
 const GET_DETAIL = "GET_DETAIL";
-const GET__COMBINE_CREDITS ='GET__COMBINE_CREDITS';
+const GET__COMBINE_CREDITS_CAST ='GET__COMBINE_CREDITS_CAST';
+const GET__COMBINE_CREDITS_CREW ='GET__COMBINE_CREDITS_CREW';
 
 const initialState = {
   detail: null as DetailType | null,
-  combinedCredits: [] as Array<CombinedCreditsType>
+  combinedCreditsCast: [] as Array<CombinedCreditsCastType>,
+  combinedCreditsCrew: [] as Array<CombineCreditsCrewType>
 };
 
 type initialStateType = typeof initialState;
@@ -19,10 +21,16 @@ const peopleReducer = (state = initialState, action: any):initialStateType => {
         detail: action.detail,
       };
     }
-    case GET__COMBINE_CREDITS: {
+    case GET__COMBINE_CREDITS_CAST: {
       return {
         ...state,
-        combinedCredits: action.combinedCredits,
+        combinedCreditsCast: action.combinedCreditsCast,
+      };
+    }
+    case GET__COMBINE_CREDITS_CREW: {
+      return {
+        ...state,
+        combinedCreditsCrew: action.combinedCreditsCrew,
       };
     }
     default:
@@ -40,14 +48,23 @@ export const getPeopleDetail = (detail: DetailType): GetPeopleDetailType => {
   return { type: GET_DETAIL, detail };
 };
 
-//CombineCredits
-type GetCombine ={
-  type:typeof GET__COMBINE_CREDITS
-  combinedCredits: CombinedCreditsType
+//CombineCreditsCast
+type GetCombineCast ={
+  type:typeof GET__COMBINE_CREDITS_CAST
+  combinedCreditsCast: CombinedCreditsCastType
 }
 
-export const getCombineCredits=(combinedCredits:CombinedCreditsType):GetCombine=>{
-  return {type:GET__COMBINE_CREDITS,combinedCredits}
+export const getCombineCreditsCast=(combinedCreditsCast:CombinedCreditsCastType):GetCombineCast=>{
+  return {type:GET__COMBINE_CREDITS_CAST,combinedCreditsCast}
+}
+//CombineCreditsCrew
+type GetCombineCrew ={
+  type:typeof GET__COMBINE_CREDITS_CREW
+  combinedCreditsCrew: CombineCreditsCrewType
+}
+
+export const getCombineCreditsCrew=(combinedCreditsCrew:CombineCreditsCrewType):GetCombineCrew=>{
+  return {type:GET__COMBINE_CREDITS_CREW,combinedCreditsCrew}
 }
 
 //Thunk
@@ -56,9 +73,13 @@ export const requestDetail=(personId:number)=>async(dispatch:any)=>{
     dispatch(getPeopleDetail(res))
 }
 
-export const requestCombine=(personId:number)=>async(dispatch:any)=>{
-  const res = await getPeopleApi.getCombinedCredits(personId)
-  dispatch(getCombineCredits(res))
+export const requestCombineCast=(personId:number)=>async(dispatch:any)=>{
+  const res = await getPeopleApi.getCombinedCreditsCast(personId)
+  dispatch(getCombineCreditsCast(res))
+}
+export const requestCombineCrew=(personId:number)=>async(dispatch:any)=>{
+  const res = await getPeopleApi.getCombinedCreditsCrew(personId)
+  dispatch(getCombineCreditsCrew(res))
 }
 
 

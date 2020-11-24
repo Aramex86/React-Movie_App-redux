@@ -4,16 +4,16 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import { CombinedCreditsType } from "../../../Types/Types";
+import { CombinedCreditsCastType } from "../../../Types/Types";
 
 type PropsTypes = {
-  combine: Array<CombinedCreditsType>;
+  combineCast: Array<CombinedCreditsCastType>;
 };
 
-const StaffCardMovielist: React.FC<PropsTypes> = ({ combine }) => {
+const StaffCardMovielist: React.FC<PropsTypes> = ({ combineCast }) => {
   return (
     <div className="cardswrapp">
-      {combine.map((c) => (
+      {combineCast.map((c) => (
         <Card className={c.poster_path == null ? "movies__hide" : "movies"} key={c.credit_id}>
           <CardActionArea>
             <CardMedia

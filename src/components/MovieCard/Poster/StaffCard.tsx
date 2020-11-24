@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { CombinedCreditsType, DetailType } from "../../../Types/Types";
+import { CombineCreditsCrewType, CombinedCreditsCastType, DetailType } from "../../../Types/Types";
 import StaffCardMovielist from "./StaffCardMovielist";
 import NoPhoto from '../../../assets/noImage.png';
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 
 type PropsType = {
-  cardDetails: DetailType | null;
-  combine: Array<CombinedCreditsType>;
+  cardDetails: DetailType | null
+  combineCast: Array<CombinedCreditsCastType>
+  combineCrew:Array<CombineCreditsCrewType>
 };
 
-const StaffCard: React.FC<PropsType> = ({ cardDetails, combine }) => {
+const StaffCard: React.FC<PropsType> = ({ cardDetails, combineCast,combineCrew }) => {
 const [text,setText] = useState(false)
 
 //   console.log(cardDetails);
 //   console.log("MOVIES", combine);
+
+console.log(combineCrew.filter(a=> a));
 
   const howOld = () => {
     const date = new Date();
@@ -29,7 +32,6 @@ const [text,setText] = useState(false)
     }
   }
   hideBiography()
-  console.log(text)
   return (
     <div className="staffpagewrapp">
       <div className="leftwrapp">
@@ -59,7 +61,7 @@ const [text,setText] = useState(false)
           </li>
           <li className="infolist__item">
             <h4>Known Credits</h4>
-            <span>{combine.length}</span>
+            <span>{combineCast.length}</span>
           </li>
           <li className="infolist__item">
             <h4>Gender</h4>
@@ -97,7 +99,7 @@ const [text,setText] = useState(false)
 
         <h3>Known For</h3>
         <div className="rigthwrapp__movielist">
-          <StaffCardMovielist combine={combine} />
+          <StaffCardMovielist combineCast={combineCast} />
         </div>
       </div>
     </div>
