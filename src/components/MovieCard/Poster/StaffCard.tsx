@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { CombinedCreditsType, DetailType } from "../../../Types/Types";
 import StaffCardMovielist from "./StaffCardMovielist";
+import NoPhoto from '../../../assets/noImage.png';
+import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 
 type PropsType = {
   cardDetails: DetailType | null;
@@ -8,6 +10,8 @@ type PropsType = {
 };
 
 const StaffCard: React.FC<PropsType> = ({ cardDetails, combine }) => {
+const [text,setText] = useState(false)
+
 //   console.log(cardDetails);
 //   console.log("MOVIES", combine);
 
@@ -19,14 +23,24 @@ const StaffCard: React.FC<PropsType> = ({ cardDetails, combine }) => {
     return years;
   };
 
+  const hideBiography=()=>{
+    if(cardDetails?cardDetails.biography.length>539:''){
+      cardDetails?.biography.slice(0,540)
+    }
+  }
+  hideBiography()
+  console.log(text)
   return (
     <div className="staffpagewrapp">
       <div className="leftwrapp">
         <div className="leftwrapp__img">
-          <img
+          {cardDetails?.profile_path === null?<img
+            src={NoPhoto}
+            alt="photo"
+          />:<img
             src={`https://image.tmdb.org/t/p/w500/${cardDetails?.profile_path}`}
-            alt=""
-          />
+            alt="photo"
+          />}
         </div>
         <ul className="infolist">
           <li className="infolist__item">
@@ -49,7 +63,7 @@ const StaffCard: React.FC<PropsType> = ({ cardDetails, combine }) => {
           </li>
           <li className="infolist__item">
             <h4>Gender</h4>
-            <span>{cardDetails?.gender === 2 ? "Male" : "Female"}</span>
+            <span>{cardDetails?.gender === 0 ? 'Unknown' :cardDetails?.gender === 2?"Male":"Female" }</span>
           </li>
           <li className="infolist__item">
             <h4>Birthday</h4>
@@ -74,7 +88,12 @@ const StaffCard: React.FC<PropsType> = ({ cardDetails, combine }) => {
       <div className="rigthwrapp">
         <h1 className="rigthwrapp__name">{cardDetails?.name}</h1>
         <h3 className="rigthwrapp__biography">Biography</h3>
-        <p className="rigthwrapp__biography__text">{cardDetails?.biography}</p>
+        <div className={text === true?'rigthwrapp__biography__text rigthwrapp__biography__text--hide': "rigthwrapp__biography__text"}>{text?cardDetails?.biography:cardDetails?.biography.slice(0,540)}
+        <div>
+        <button onClick={()=>setText(true)} className={text === true?'btn btn--hide':'btn btn--readmore'}>read more <ArrowForwardIosRoundedIcon /></button>
+        </div>
+        
+        </div>
 
         <h3>Known For</h3>
         <div className="rigthwrapp__movielist">

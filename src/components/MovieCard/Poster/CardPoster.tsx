@@ -32,7 +32,7 @@ const CardPoster = (props: PropsType) => {
 
   if (props.credits?.crew) {
     crewStaff(props.credits?.crew, "Director", crew);
-    crewStaff(props.credits?.crew, "Comic Book", crew);
+    crewStaff(props.credits?.crew, "Writing", crew);
     crewStaff(props.credits?.crew, "Producer", crew);
   }
 
