@@ -97,7 +97,7 @@ const [text,setText] = useState(false)
         </div>
         <h3>Known For</h3>
         <div className="rigthwrapp__movielist">
-          <StaffCardMovielist combineCast={combineCast} />
+          <StaffCardMovielist combineCast={combineCast} combineCrew={combineCrew}/>
         </div>
         <StaffKnowFor combineCrew={combineCrew} combineCast={combineCast}/>
       </div>
