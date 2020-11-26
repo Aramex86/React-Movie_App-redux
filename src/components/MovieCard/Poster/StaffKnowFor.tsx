@@ -1,10 +1,11 @@
-import React from "react";
-import { filterData,filterDepartament} from "../../Helper/filterData";
+import React, { useState } from "react";
+import { filterData, filterDepartament } from "../../Helper/filterData";
 import ArrowDropDownRoundedIcon from "@material-ui/icons/ArrowDropDownRounded";
 import {
   CombineCreditsCrewType,
   CombinedCreditsCastType,
 } from "../../../Types/Types";
+import MovieInfoToolTip from '../../Common/movieInfoToolTip';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -13,43 +14,40 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-type PropsTypes = {
+ type PropsTypes = {
   combineCrew: Array<CombineCreditsCrewType>;
   combineCast: Array<CombinedCreditsCastType>;
 };
 
 const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
-  const movies = [] as Array<CombinedCreditsCastType>;
+  const[showTip,setshowTip]=useState(false);
+  const acting = [] as Array<CombinedCreditsCastType>;
+  const moviesCrew = [] as Array<CombinedCreditsCastType>;
+
   const tvShow = [] as Array<CombinedCreditsCastType>;
-  const directing = [] as Array<CombineCreditsCrewType>
-  const production = [] as Array<CombineCreditsCrewType>
-  const directing1 = [] as Array<CombineCreditsCrewType>
-  
-  filterData(combineCast, movies, "movie");
-  filterData(combineCrew, movies, "movie");
+  const directing = [] as Array<CombineCreditsCrewType>;
+  const production = [] as Array<CombineCreditsCrewType>;
+  const writing = [] as Array<CombineCreditsCrewType>;
+
+  filterData(combineCast, acting, "movie");
+  filterData(combineCrew, moviesCrew, "movie");
   filterData(combineCast, tvShow, "tv");
   filterData(combineCrew, tvShow, "tv");
-  
-  const media = [...combineCast,...combineCrew]
-  const dataArr:any = media.map(item=> {
-    return[item.id,item]
-  })
-  const mapArr:any = new Map(dataArr)
-  const result = [...mapArr.values()]
 
-  console.log(media);
-  console.log(result);
+  filterDepartament(combineCrew, directing, "Directing");
+  filterDepartament(combineCrew, production, "Production");
+  filterDepartament(combineCrew, writing, "Writing");
 
-   console.log(movies.map(i=> i.id));
-  // console.log(tvShow);
+  const showToolTip=(event:any)=>{
+    setshowTip(event.target)
+  }
 
+  console.log("D", directing);
+  console.log("P", production);
+  console.log("A", acting);
+  console.log("W", writing);
 
-  //  console.log(directing);
-  // console.log(production);
-  //  console.log(combineCrew.map(c => c.department ));
-  //  console.log(combineCast.map(c => c ));
-  //  console.log(combineCast);
-  // console.log(combineCrew);
+  console.log(showTip);
   return (
     <div className="carierwrapp">
       <div className="carierwrapp__header">
@@ -60,13 +58,17 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             </span>
             <div className="menuWrapp__drop">
               <a href="#" className="menuWrapp__drop-link">
-                {media.slice(0, 1).map((m) => (
-                  <span key={m.credit_id}>{m.media_type} {movies.length}</span>
+                {directing.slice(0, 1).map((m) => (
+                  <span key={m.credit_id}>
+                    {m.media_type} {combineCrew.length}
+                  </span>
                 ))}
               </a>
               <a href="#" className="menuWrapp__drop-link">
-                {media.slice(0, 1).map((m) => (
-                  <span key={m.credit_id}>{`${m.media_type} Show`} {tvShow.length}</span>
+                {tvShow.slice(0, 1).map((m) => (
+                  <span key={m.credit_id}>
+                    {`${m.media_type} Show`} {tvShow.length}
+                  </span>
                 ))}
               </a>
             </div>
@@ -77,15 +79,22 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             </span>
             <div className="menuWrapp__drop">
               <a href="#" className="menuWrapp__drop-link">
-               {/*    {directing.slice(0,1).map(d => d.department)} {directing.length} */}
+                {directing.slice(0, 1).map((d) => d.department)}{" "}
+                {directing.length}
               </a>
               <a href="#" className="menuWrapp__drop-link">
-               {/*  {production.slice(0,1).map(p=> p.department)} {production.length} */}
-               
+                {production.slice(0, 1).map((p) => p.department)}{" "}
+                {production.length}
               </a>
-             {/*  <a href="#" className="menuWrapp__drop-link">
-                Directing
-              </a> */}
+              <a href="#" className="menuWrapp__drop-link">
+                {writing.slice(0, 1).map((p) => p.department)} {writing.length}
+              </a>
+              <a href="#" className="menuWrapp__drop-link">
+                {acting
+                  .slice(0, 1)
+                  .map((p) => (p.character === "Himself" ? "Acting" : ""))}{" "}
+                {acting.length === 0 ? "" : acting.length}
+              </a>
             </div>
           </li>
         </ul>
@@ -95,14 +104,13 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
           <Table size="medium" aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell style={{background:'#ff0a0a8a'}}>
-
-               Movie
+                <TableCell className="tableheadcell">
+                  <h3>Writing</h3>
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {media.map((movie) => (
+              {writing.map((movie) => (
                 <TableRow key={movie.credit_id}>
                   <TableCell
                     component="th"
@@ -111,7 +119,13 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                       movie.title ? { display: "block" } : { display: "none" }
                     }
                   >
-                    {movie.title}
+                     <div className="movieinfo">
+                      <span className={movie.release_date===undefined?'movieinfo__releasedate':movie.release_date===''?'movieinfo__releasedate':""}>{movie.release_date === undefined
+                        ? "---": movie.release_date === ""?
+                         '---':movie.release_date.slice(0, 4)}</span> {" "}
+                      <span className='movieinfo__dot' onClick={showToolTip}></span> {movie.title}
+                     <MovieInfoToolTip movie={movie.poster_path} desc={movie.overview} title={movie.title} showTip={showTip}/>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -120,23 +134,85 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
           <Table size="medium" aria-label="a dense table">
             <TableHead>
               <TableRow>
-               <TableCell style={{background:'#ff0a0a8a'}}>
-
-               TV SHOW
-               </TableCell>
+                <TableCell className="tableheadcell">
+                  <h3>Directing</h3>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {media.map((movie) => (
+              {directing.map((movie) => (
                 <TableRow key={movie.credit_id}>
                   <TableCell
                     component="th"
                     scope="row"
                     style={
-                      movie.name ? { display: "block" } : { display: "none" }
+                      movie.title ? { display: "block" } : { display: "none" }
                     }
                   >
-                    {movie.name}
+                   <div className="movieinfo">
+                      <span className={movie.release_date===undefined?'movieinfo__releasedate':movie.release_date===''?'movieinfo__releasedate':""}>{movie.release_date === undefined
+                        ? "---": movie.release_date === ""?
+                         '---':movie.release_date.slice(0, 4)}</span> {" "}
+                      <span className='movieinfo__dot'></span> {movie.title}
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Table size="medium" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <TableCell className="tableheadcell">
+                  <h3>Production</h3>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {production.map((movie) => (
+                <TableRow key={movie.credit_id}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    style={
+                      movie.title ? { display: "block" } : { display: "none" }
+                    }
+                  >
+                    <div className="movieinfo">
+                      <span className={movie.release_date===undefined?'movieinfo__releasedate':movie.release_date===''?'movieinfo__releasedate':""}>{movie.release_date === undefined
+                        ? "---": movie.release_date === ""?
+                         '---':movie.release_date.slice(0, 4)}</span> {" "}
+                      <span className='movieinfo__dot'></span> {movie.title}
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Table size="medium" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <TableCell className="tableheadcell">
+                  <h3>Acting</h3>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {acting.map((movie) => (
+                <TableRow key={movie.credit_id}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    style={
+                      movie.title ? { display: "block" } : { display: "none" }
+                    }
+                  >
+                    <div className="movieinfo">
+                      <span className={movie.release_date===undefined?'movieinfo__releasedate':movie.release_date===''?'movieinfo__releasedate':""}>{movie.release_date === undefined
+                        ? "---": movie.release_date === ""?
+                         '---':movie.release_date.slice(0, 4)}</span> {" "}
+                      <span className='movieinfo__dot'></span> {movie.title}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

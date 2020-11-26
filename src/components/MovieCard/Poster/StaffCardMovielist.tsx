@@ -27,7 +27,7 @@ const StaffCardMovielist: React.FC<PropsTypes> = ({
  const mapArr:any = new Map(dataArr)
  const result = [...mapArr.values()]
 
- console.log(result)
+ //console.log(result)
 
   return (
     <div className="cardswrapp">

@@ -61,7 +61,7 @@ const [text,setText] = useState(false)
           </li>
           <li className="infolist__item">
             <h4>Known Credits</h4>
-            <span>{combineCast.length}</span>
+            <span>{combineCrew.length}</span>
           </li>
           <li className="infolist__item">
             <h4>Gender</h4>

@@ -1,0 +1,37 @@
+.tooltipwrap{
+    position: absolute;
+    left: 26%;
+    width: 400px;
+    min-height: 200px;
+    top: -24px;
+    padding: .5rem;
+    background: #032541;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    display: none;
+    &__img{
+        width: 70%;
+        margin-right: 10px;
+        & img{
+        width: 100%;
+        object-fit: cover;
+        }
+    }
+    &__desc{
+        flex-grow: 1;
+        font-size: .8rem;
+        padding: .5rem;
+        &__title{
+            margin-bottom: 15px;
+        }
+        &__about{
+
+        }
+    }
+    &--show{
+        display: flex;
+    }
+}

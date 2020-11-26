@@ -113,3 +113,45 @@
   display: none;
 }
 // carierwrapp
+.tableheadcell{
+  background: #b5b5b521;
+    font-family: 'Source Sans Pro';
+    font-size: 1.2rem;
+}
+
+.movieinfo{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  &__releasedate{
+    margin-right: 18px;
+  }
+  &__dot{
+    display: block;
+    width: 10px;
+    height: 10px;
+    border:2px solid black;
+    border-radius: 50px;
+    margin: 0 10px 0 10px;
+    position: relative;
+    cursor: pointer;
+    &::after{
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: black;
+      transform: translate(-50%,-50%);
+      left: 50%;
+      top:50%;
+      border-radius: 50px;
+      display: none;
+    }
+    &:hover::after {
+      content: '';
+      position: absolute;
+      display: block;
+    }
+  }
+}
