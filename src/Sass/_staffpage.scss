@@ -93,6 +93,11 @@
   margin-top: 10px;
 }
 
+.cardswrapp .MuiTableContainer-root{
+  overflow-x: hidden;
+}
+
+
 .rigthwrapp__movielist .movies {
   display: flex;
   flex-direction: column;
@@ -124,9 +129,12 @@
   align-items: center;
   justify-content: flex-start;
   position: relative;
+
+ 
   &__releasedate{
     margin-right: 18px;
   }
+ 
   &__dot{
     display: block;
     width: 10px;
@@ -154,4 +162,6 @@
       display: block;
     }
   }
+  
 }
+
