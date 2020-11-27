@@ -14,6 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+
 type PropsTypes = {
   combineCrew: Array<CombineCreditsCrewType>;
   combineCast: Array<CombinedCreditsCastType>;
@@ -21,13 +22,12 @@ type PropsTypes = {
 
 const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const [showTip, setShowTip] = useState("0");
-  const acting = [] as Array<CombinedCreditsCastType>;
   const moviesCrew = [] as Array<CombinedCreditsCastType>;
-
   const tvShow = [] as Array<CombinedCreditsCastType>;
   const directing = [] as Array<CombineCreditsCrewType>;
   const production = [] as Array<CombineCreditsCrewType>;
   const writing = [] as Array<CombineCreditsCrewType>;
+  const acting = [] as Array<CombinedCreditsCastType>;
 
   filterData(combineCast, acting, "movie");
   filterData(combineCrew, moviesCrew, "movie");
@@ -51,7 +51,6 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   console.log("A", acting);
   console.log("W", writing);
 
-  console.log(showTip);
 
   return (
     <div className="carierwrapp">
@@ -92,7 +91,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                 {production.length}
               </a>
               <a href="#" className="menuWrapp__drop-link">
-                {writing.slice(0, 1).map((p) => p.department)} {writing.length}
+                {writing.length===0?'Writing':writing.slice(0, 1).map((p) =>p.department)} {writing.length}
               </a>
               <a href="#" className="menuWrapp__drop-link">
                 {acting

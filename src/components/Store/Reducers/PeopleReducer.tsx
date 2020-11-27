@@ -8,9 +8,8 @@ const GET__COMBINE_CREDITS_CREW ='GET__COMBINE_CREDITS_CREW';
 const initialState = {
   detail: null as DetailType | null,
   combinedCreditsCast: [] as Array<CombinedCreditsCastType>,
-  combinedCreditsCrew: [] as Array<CombineCreditsCrewType>
+  combinedCreditsCrew: [] as Array<CombineCreditsCrewType>,
 };
-
 type initialStateType = typeof initialState;
 
 const peopleReducer = (state = initialState, action: any):initialStateType => {
@@ -21,6 +20,7 @@ const peopleReducer = (state = initialState, action: any):initialStateType => {
         detail: action.detail,
       };
     }
+  
     case GET__COMBINE_CREDITS_CAST: {
       return {
         ...state,
@@ -38,6 +38,10 @@ const peopleReducer = (state = initialState, action: any):initialStateType => {
   }
 };
 //Actions
+
+
+
+
 //Detail
 type GetPeopleDetailType = {
   type: typeof GET_DETAIL;
@@ -47,6 +51,7 @@ type GetPeopleDetailType = {
 export const getPeopleDetail = (detail: DetailType): GetPeopleDetailType => {
   return { type: GET_DETAIL, detail };
 };
+
 
 //CombineCreditsCast
 type GetCombineCast ={
