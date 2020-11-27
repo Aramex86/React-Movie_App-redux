@@ -5,7 +5,7 @@ import {
   CombineCreditsCrewType,
   CombinedCreditsCastType,
 } from "../../../Types/Types";
-import MovieInfoToolTip from '../../Common/movieInfoToolTip';
+import MovieInfoToolTip from "../../Common/movieInfoToolTip";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -14,13 +14,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
- type PropsTypes = {
+type PropsTypes = {
   combineCrew: Array<CombineCreditsCrewType>;
   combineCast: Array<CombinedCreditsCastType>;
 };
 
 const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
-  const[showTip,setShowTip]=useState(0);
+  const [showTip, setShowTip] = useState("0");
   const acting = [] as Array<CombinedCreditsCastType>;
   const moviesCrew = [] as Array<CombinedCreditsCastType>;
 
@@ -38,13 +38,13 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   filterDepartament(combineCrew, production, "Production");
   filterDepartament(combineCrew, writing, "Writing");
 
-  const showToolTip=(id:number)=>{
-    setShowTip(id)
-  }
+  const showToolTip = (id: string) => {
+    setShowTip(id);
+  };
 
-  const hideToolTip=(id:number)=>{
-    setShowTip(id = 0)
-  }
+  const hideToolTip = (id: string) => {
+    setShowTip((id = ""));
+  };
 
   console.log("D", directing);
   console.log("P", production);
@@ -52,7 +52,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   console.log("W", writing);
 
   console.log(showTip);
-  
+
   return (
     <div className="carierwrapp">
       <div className="carierwrapp__header">
@@ -124,12 +124,37 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                       movie.title ? { display: "block" } : { display: "none" }
                     }
                   >
-                     <div className="movieinfo">
-                      <span className={movie.release_date===undefined?'movieinfo__releasedate':movie.release_date===''?'movieinfo__releasedate':""}>{movie.release_date === undefined
-                        ? "---": movie.release_date === ""?
-                         '---':movie.release_date.slice(0, 4)}</span> {" "}
-                      <span className='movieinfo__dot' onClick={()=>showToolTip(movie.id)} id={`${movie.id}`}></span> {movie.title}
-                     <MovieInfoToolTip movie={movie.poster_path} desc={movie.overview} title={movie.title} showTip={showTip} id={movie.id} hideTooltip={()=>hideToolTip(movie.id)}/>
+                    <div className="movieinfo">
+                      <span
+                        className={
+                          movie.release_date === undefined
+                            ? "movieinfo__releasedate"
+                            : movie.release_date === ""
+                            ? "movieinfo__releasedate"
+                            : ""
+                        }
+                      >
+                        {movie.release_date === undefined
+                          ? "---"
+                          : movie.release_date === ""
+                          ? "---"
+                          : movie.release_date.slice(0, 4)}
+                      </span>{" "}
+                      <span
+                        className="movieinfo__dot"
+                        onClick={() => showToolTip(movie.credit_id)}
+                        id={`${movie.id}`}
+                      ></span>{" "}
+                      {movie.title}
+                      <MovieInfoToolTip
+                        poster={movie.poster_path}
+                        poster1={movie.backdrop_path}
+                        desc={movie.overview}
+                        title={movie.title}
+                        showTip={showTip}
+                        id={movie.credit_id}
+                        hideTooltip={() => hideToolTip(movie.credit_id)}
+                      />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -154,12 +179,37 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                       movie.title ? { display: "block" } : { display: "none" }
                     }
                   >
-                   <div className="movieinfo">
-                      <span className={movie.release_date===undefined?'movieinfo__releasedate':movie.release_date===''?'movieinfo__releasedate':""}>{movie.release_date === undefined
-                        ? "---": movie.release_date === ""?
-                         '---':movie.release_date.slice(0, 4)}</span> {" "}
-                      <span className='movieinfo__dot' onClick={()=>showToolTip(movie.id)} id={`${movie.id}`}></span> {movie.title}
-                     <MovieInfoToolTip movie={movie.poster_path} desc={movie.overview} title={movie.title} showTip={showTip} id={movie.id} hideTooltip={()=>hideToolTip(movie.id)}/>
+                    <div className="movieinfo">
+                      <span
+                        className={
+                          movie.release_date === undefined
+                            ? "movieinfo__releasedate"
+                            : movie.release_date === ""
+                            ? "movieinfo__releasedate"
+                            : ""
+                        }
+                      >
+                        {movie.release_date === undefined
+                          ? "---"
+                          : movie.release_date === ""
+                          ? "---"
+                          : movie.release_date.slice(0, 4)}
+                      </span>{" "}
+                      <span
+                        className="movieinfo__dot"
+                        onClick={() => showToolTip(movie.credit_id)}
+                        id={`${movie.id}`}
+                      ></span>{" "}
+                      {movie.title}
+                      <MovieInfoToolTip
+                        poster={movie.poster_path}
+                        poster1={movie.backdrop_path}
+                        desc={movie.overview}
+                        title={movie.title}
+                        showTip={showTip}
+                        id={movie.credit_id}
+                        hideTooltip={() => hideToolTip(movie.credit_id)}
+                      />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -185,11 +235,36 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                     }
                   >
                     <div className="movieinfo">
-                      <span className={movie.release_date===undefined?'movieinfo__releasedate':movie.release_date===''?'movieinfo__releasedate':""}>{movie.release_date === undefined
-                        ? "---": movie.release_date === ""?
-                         '---':movie.release_date.slice(0, 4)}</span> {" "}
-                      <span className='movieinfo__dot' onClick={()=>showToolTip(movie.id)} id={`${movie.id}`}></span> {movie.title}
-                     <MovieInfoToolTip movie={movie.poster_path} desc={movie.overview} title={movie.title} showTip={showTip} id={movie.id} hideTooltip={()=>hideToolTip(movie.id)}/>
+                      <span
+                        className={
+                          movie.release_date === undefined
+                            ? "movieinfo__releasedate"
+                            : movie.release_date === ""
+                            ? "movieinfo__releasedate"
+                            : ""
+                        }
+                      >
+                        {movie.release_date === undefined
+                          ? "---"
+                          : movie.release_date === ""
+                          ? "---"
+                          : movie.release_date.slice(0, 4)}
+                      </span>{" "}
+                      <span
+                        className="movieinfo__dot"
+                        onClick={() => showToolTip(movie.credit_id)}
+                        id={`${movie.id}`}
+                      ></span>{" "}
+                      {movie.title}
+                      <MovieInfoToolTip
+                        poster={movie.poster_path}
+                        poster1={movie.backdrop_path}
+                        desc={movie.overview}
+                        title={movie.title}
+                        showTip={showTip}
+                        id={movie.credit_id}
+                        hideTooltip={() => hideToolTip(movie.credit_id)}
+                      />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -215,11 +290,36 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                     }
                   >
                     <div className="movieinfo">
-                      <span className={movie.release_date===undefined?'movieinfo__releasedate':movie.release_date===''?'movieinfo__releasedate':""}>{movie.release_date === undefined
-                        ? "---": movie.release_date === ""?
-                         '---':movie.release_date.slice(0, 4)}</span> {" "}
-                      <span className='movieinfo__dot' onClick={()=>showToolTip(movie.id)} id={`${movie.id}`}></span> {movie.title}
-                     <MovieInfoToolTip movie={movie.poster_path} desc={movie.overview} title={movie.title} showTip={showTip} id={movie.id} hideTooltip={()=>hideToolTip(movie.id)}/>
+                      <span
+                        className={
+                          movie.release_date === undefined
+                            ? "movieinfo__releasedate"
+                            : movie.release_date === ""
+                            ? "movieinfo__releasedate"
+                            : ""
+                        }
+                      >
+                        {movie.release_date === undefined
+                          ? "---"
+                          : movie.release_date === ""
+                          ? "---"
+                          : movie.release_date.slice(0, 4)}
+                      </span>{" "}
+                      <span
+                        className="movieinfo__dot"
+                        onClick={() => showToolTip(movie.credit_id)}
+                        id={`${movie.id}`}
+                      ></span>{" "}
+                      {movie.title}
+                      <MovieInfoToolTip
+                        poster={movie.poster_path}
+                        poster1={movie.backdrop_path}
+                        desc={movie.overview}
+                        title={movie.title}
+                        showTip={showTip}
+                        id={movie.credit_id}
+                        hideTooltip={() => hideToolTip(movie.credit_id)}
+                      />
                     </div>
                   </TableCell>
                 </TableRow>

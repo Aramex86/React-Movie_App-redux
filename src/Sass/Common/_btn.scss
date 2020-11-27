@@ -41,4 +41,12 @@
     &--hide{
         display: none;
     }
+
+    &--tooltipclose{
+        position: absolute;
+        top: 6px;
+        right: 7px;
+       
+    }
+
 }
