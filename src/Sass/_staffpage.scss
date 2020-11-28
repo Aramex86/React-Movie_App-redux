@@ -133,6 +133,10 @@
     margin-right: 18px;
   }
  
+  &__job{
+    color: rgb(177, 177, 177);
+    font-style: italic;
+  }
   &__dot{
     display: block;
     width: 10px;
@@ -160,6 +164,7 @@
       display: block;
     }
   }
-  
 }
+
+
 

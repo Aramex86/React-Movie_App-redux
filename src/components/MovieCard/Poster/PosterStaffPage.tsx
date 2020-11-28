@@ -16,11 +16,9 @@ import {
   combineCastSelector,
   combineCrewSelector,
   detailSelector,
-  isFetchingSelector,
 } from "../../Store/Selectors/PeopleSelector";
 import StaffCard from "./StaffCard";
 import StaffHeader from "./StaffHeader";
-import Loader from '../../Common/Loader';
 
 type ParamsType = {
   id: string;

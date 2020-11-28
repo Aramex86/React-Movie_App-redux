@@ -9,7 +9,3 @@ export const combineCastSelector=(state:AppStateType)=>{
 export const combineCrewSelector=(state:AppStateType)=>{
     return state.people.combinedCreditsCrew
 }
-
-export const isFetchingSelector=(state:AppStateType)=>{ 
-    return state.people.isFetching
-}

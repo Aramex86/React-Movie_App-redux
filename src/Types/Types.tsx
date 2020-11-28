@@ -234,6 +234,7 @@ export type CombinedCreditsCastType = {
   order: number;
   media_type: string;
   name: string;
+  first_air_date: string
 };
 
 export type CombineCreditsCrewType = {
@@ -241,6 +242,7 @@ export type CombineCreditsCrewType = {
   backdrop_path: string;
   credit_id: string;
   department: string;
+  first_air_date: string
   genre_ids: Array<number>;
   id: number;
   job: string;
