@@ -13,11 +13,15 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import ShowMovieTv from './ShowMovieTv';
 
 type PropsTypes = {
   combineCrew: Array<CombineCreditsCrewType>;
   combineCast: Array<CombinedCreditsCastType>;
 };
+
+
+
 
 const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const [showTip, setShowTip] = useState("0");
@@ -26,6 +30,9 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const [selectActing, setSelectActing] = useState(false);
   const [selectDirecting, setSelectDirecting] = useState(false);
   const [clearAll, setClearAll] = useState(false);
+  const[movies,setMovies]=useState<any>([])
+  const[tv,setTv]=useState<any>([])
+
 
   const moviesCrew = [] as Array<CombinedCreditsCastType>;
   const tvShow = [] as Array<CombinedCreditsCastType>;
@@ -33,15 +40,23 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const production = [] as Array<CombineCreditsCrewType>;
   const writing = [] as Array<CombineCreditsCrewType>;
   const acting = [] as Array<CombinedCreditsCastType>;
-
+  
+  
   filterData(combineCast, acting, "movie");
   filterData(combineCrew, moviesCrew, "movie");
   filterData(combineCast, tvShow, "tv");
   filterData(combineCrew, tvShow, "tv");
-
+  
+  
   filterDepartament(combineCrew, directing, "Directing");
   filterDepartament(combineCrew, production, "Production");
   filterDepartament(combineCrew, writing, "Writing");
+  
+  const all:any =[...writing,...directing,...production,...acting] ;
+
+
+  const nrOfMovies = all.filter((item:any)=> item.media_type === 'movie')
+  const nrOfTv = all.filter((item:any)=> item.media_type === 'tv')
 
   const showToolTip = (id: string) => {
     setShowTip(id);
@@ -92,24 +107,37 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setClearAll(false);
   };
 
-  const allMovies = [...directing, ...production, ...writing, ...acting];
-
-  const filterMovies = (e: any) => {
+ 
+  
+ 
+  const showMovies=(e:any)=>{
     e.preventDefault();
-    allMovies.filter((movie) => {
-      if (movie.media_type === "movie") {
+    setMovies(all.filter((movie:any)=>{
+      if(movie.media_type === "movie"){
         return movie
       }
-    });
-  };
+    }))
+  }
 
-  console.log("D", directing);
-  console.log("P", production);
-  console.log("A", acting);
-  console.log("W", writing);
-  console.log(allMovies.map((i) => i.media_type));
-  console.log(tvShow.map((i) => i.media_type));
+  const showTvShows=(e:any)=>{
+    e.preventDefault();
+    setTv(all.filter((tv:any)=>{
+      if(tv.media_type === 'tv'){
+        return tv
+      }
+    }))
+  }
+  
+ 
+  
+  console.log('Movies',movies);
+  console.log('Tv',tv);
 
+  // console.log(all);
+  //  console.log("D", directing);
+  // console.log("P", production);
+  //  console.log("A", acting);
+  //  console.log("W", writing);
   return (
     <div className="carierwrapp">
       <div className="carierwrapp__header">
@@ -131,18 +159,20 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
               <a
                 href="#"
                 className="menuWrapp__drop-link"
-                onClick={filterMovies}
+               onClick={showMovies}
               >
-                {directing.slice(0, 1).map((m) => (
+                {all.slice(0, 1).map((m:any) => (
                   <span key={m.credit_id}>
-                    {m.media_type} {combineCrew.length}
+                    {`${m.media_type}s`} {nrOfMovies.length}
                   </span>
                 ))}
               </a>
-              <a href="#" className="menuWrapp__drop-link">
+              <a href="#" className="menuWrapp__drop-link"
+                onClick={showTvShows}
+              >
                 {tvShow.slice(0, 1).map((m) => (
                   <span key={m.credit_id}>
-                    {`${m.media_type} Show`} {tvShow.length}
+                    {`${m.media_type} Shows`} {nrOfTv.length}
                   </span>
                 ))}
               </a>
@@ -178,7 +208,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
               <a href="#" className="menuWrapp__drop-link" onClick={showActing}>
                 {acting
                   .slice(0, 1)
-                  .map((p) => (p.character === "Himself" ? "Acting" : ""))}{" "}
+                  .map((p) => (p.character === "Himself" ? "Acting" : "Acting"))}{" "}
                 {acting.length === 0 ? "" : acting.length}
               </a>
             </div>
@@ -412,6 +442,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             </TableBody>
           </Table>
         </TableContainer>
+        <ShowMovieTv/>
       </div>
     </div>
   );
