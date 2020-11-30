@@ -261,3 +261,28 @@ export type CombineCreditsCrewType = {
   character: string;
   order: number;
 };
+
+export type AllMediaType={
+  id: number;
+  video: boolean;
+  vote_count: number;
+  vote_average: number;
+  title: string;
+  release_date: string;
+  original_language: string;
+  original_title: string;
+  genre_ids: Array<number>;
+  backdrop_path: string;
+  adult: boolean;
+  overview: string;
+  poster_path: string;
+  popularity: number;
+  character: string;
+  name: string;
+  credit_id: string;
+  department: string;
+  first_air_date: string
+  job: string;
+  media_type: string;
+  order: number;
+}

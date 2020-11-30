@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { filterData, filterDepartament } from "../../Helper/filterData";
 import ArrowDropDownRoundedIcon from "@material-ui/icons/ArrowDropDownRounded";
 import {
+  AllMediaType,
   CombineCreditsCrewType,
   CombinedCreditsCastType,
 } from "../../../Types/Types";
@@ -13,15 +14,11 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import ShowMovieTv from './ShowMovieTv';
 
 type PropsTypes = {
   combineCrew: Array<CombineCreditsCrewType>;
   combineCast: Array<CombinedCreditsCastType>;
 };
-
-
-
 
 const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const [showTip, setShowTip] = useState("0");
@@ -30,9 +27,10 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const [selectActing, setSelectActing] = useState(false);
   const [selectDirecting, setSelectDirecting] = useState(false);
   const [clearAll, setClearAll] = useState(false);
-  const[movies,setMovies]=useState<any>([])
-  const[tv,setTv]=useState<any>([])
-
+  const [movies, setMovies] = useState<any>([]);
+  const [tv, setTv] = useState<any>([]);
+  const [showMovieTv, setShowMovieTv] = useState(false);
+  const [showAll,setShowAll]=useState(true)
 
   const moviesCrew = [] as Array<CombinedCreditsCastType>;
   const tvShow = [] as Array<CombinedCreditsCastType>;
@@ -40,23 +38,27 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const production = [] as Array<CombineCreditsCrewType>;
   const writing = [] as Array<CombineCreditsCrewType>;
   const acting = [] as Array<CombinedCreditsCastType>;
-  
-  
+
   filterData(combineCast, acting, "movie");
   filterData(combineCrew, moviesCrew, "movie");
   filterData(combineCast, tvShow, "tv");
   filterData(combineCrew, tvShow, "tv");
-  
-  
+
   filterDepartament(combineCrew, directing, "Directing");
   filterDepartament(combineCrew, production, "Production");
   filterDepartament(combineCrew, writing, "Writing");
-  
-  const all:any =[...writing,...directing,...production,...acting] ;
 
+  const allMedia = [
+    ...writing,
+    ...directing,
+    ...production,
+    ...acting,
+  ] as Array<AllMediaType>;
 
-  const nrOfMovies = all.filter((item:any)=> item.media_type === 'movie')
-  const nrOfTv = all.filter((item:any)=> item.media_type === 'tv')
+  const nrOfMovies = allMedia.filter(
+    (item: any) => item.media_type === "movie"
+  );
+  const nrOfTv = allMedia.filter((item: any) => item.media_type === "tv");
 
   const showToolTip = (id: string) => {
     setShowTip(id);
@@ -73,6 +75,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(true);
     setSelectDirecting(true);
     setClearAll(true);
+    setShowAll(true);
   };
   const showProd = (e: any) => {
     e.preventDefault();
@@ -81,6 +84,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(true);
     setSelectDirecting(true);
     setClearAll(true);
+    setShowAll(true);
   };
   const showActing = (e: any) => {
     e.preventDefault();
@@ -89,6 +93,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(false);
     setSelectDirecting(true);
     setClearAll(true);
+    setShowAll(true);
   };
   const showDirecting = (e: any) => {
     e.preventDefault();
@@ -97,6 +102,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(true);
     setSelectDirecting(false);
     setClearAll(true);
+    setShowAll(true);
   };
 
   const clearAllFilter = () => {
@@ -105,35 +111,43 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(false);
     setSelectDirecting(false);
     setClearAll(false);
+    setShowAll(true);
+    setMovies(false)
   };
 
- 
-  
- 
-  const showMovies=(e:any)=>{
+  const showMovies = (e: any) => {
     e.preventDefault();
-    setMovies(all.filter((movie:any)=>{
-      if(movie.media_type === "movie"){
-        return movie
-      }
-    }))
-  }
+    setShowMovieTv(true);
+    setShowAll(false)
+    setMovies(
+      allMedia.filter((movie: any) => {
+        if (movie.media_type === "movie") {
+          return movie;
+        }
+      })
+    );
+  };
 
-  const showTvShows=(e:any)=>{
+  const showTvShows = (e: any) => {
     e.preventDefault();
-    setTv(all.filter((tv:any)=>{
-      if(tv.media_type === 'tv'){
-        return tv
-      }
-    }))
-  }
-  
- 
-  
-  console.log('Movies',movies);
-  console.log('Tv',tv);
+    setShowMovieTv(false);
+    setShowAll(false)
+    setTv(
+      allMedia.filter((tv: any) => {
+        if (tv.media_type === "tv") {
+          return tv;
+        }
+      })
+    );
+  };
 
-  // console.log(all);
+  console.log(showMovieTv);
+  console.log(showAll);
+
+  console.log("Movies", movies);
+  console.log("Tv", tv);
+
+  console.log(allMedia);
   //  console.log("D", directing);
   // console.log("P", production);
   //  console.log("A", acting);
@@ -156,18 +170,17 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
               All <ArrowDropDownRoundedIcon />
             </span>
             <div className="menuWrapp__drop">
-              <a
-                href="#"
-                className="menuWrapp__drop-link"
-               onClick={showMovies}
-              >
-                {all.slice(0, 1).map((m:any) => (
+              <a href="#" className="menuWrapp__drop-link" onClick={showMovies}>
+                {allMedia.slice(0, 1).map((m: any) => (
                   <span key={m.credit_id}>
-                    {`${m.media_type}s`} {nrOfMovies.length}
+                    {m.media_type === "movie" ? "Movies" : "Movies"}{" "}
+                    {nrOfMovies.length}
                   </span>
                 ))}
               </a>
-              <a href="#" className="menuWrapp__drop-link"
+              <a
+                href="#"
+                className="menuWrapp__drop-link"
                 onClick={showTvShows}
               >
                 {tvShow.slice(0, 1).map((m) => (
@@ -208,7 +221,9 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
               <a href="#" className="menuWrapp__drop-link" onClick={showActing}>
                 {acting
                   .slice(0, 1)
-                  .map((p) => (p.character === "Himself" ? "Acting" : "Acting"))}{" "}
+                  .map((p) =>
+                    p.character === "Himself" ? "Acting" : "Acting"
+                  )}{" "}
                 {acting.length === 0 ? "" : acting.length}
               </a>
             </div>
@@ -216,8 +231,408 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
         </ul>
       </div>
       <div className="carierwrapp__body">
+        {showMovieTv ? (
+          <TableContainer component={Paper}>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectWriting ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Directing</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {movies
+                  .filter((item: any) => item.department === "Directing")
+                  .map((movie: any) => (
+                    <TableRow key={movie.credit_id}>
+                      <TableCell component="th" scope="row">
+                        <div className="movieinfo">
+                          <span>
+                            {movie.release_date === undefined
+                              ? ""
+                              : movie.release_date.slice(0, 4)}
+                            {movie.first_air_date
+                              ? movie.first_air_date.slice(0, 4)
+                              : ""}
+                          </span>{" "}
+                          <span
+                            className="movieinfo__dot"
+                            onClick={() => showToolTip(movie.credit_id)}
+                            id={`${movie.id}`}
+                          ></span>{" "}
+                          {movie.title ? movie.title : movie.name}
+                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <MovieInfoToolTip
+                            poster={movie.poster_path}
+                            desc={movie.overview}
+                            title={movie.title}
+                            name={movie.name}
+                            showTip={showTip}
+                            id={movie.credit_id}
+                            hideTooltip={() => hideToolTip(movie.credit_id)}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectWriting ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Writing</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {movies
+                  .filter((item: any) => item.department === "Writing")
+                  .map((movie: any) => (
+                    <TableRow key={movie.credit_id}>
+                      <TableCell component="th" scope="row">
+                        <div className="movieinfo">
+                          <span>
+                            {movie.release_date === undefined
+                              ? ""
+                              : movie.release_date.slice(0, 4)}
+                            {movie.first_air_date
+                              ? movie.first_air_date.slice(0, 4)
+                              : ""}
+                          </span>{" "}
+                          <span
+                            className="movieinfo__dot"
+                            onClick={() => showToolTip(movie.credit_id)}
+                            id={`${movie.id}`}
+                          ></span>{" "}
+                          {movie.title ? movie.title : movie.name}
+                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <MovieInfoToolTip
+                            poster={movie.poster_path}
+                            desc={movie.overview}
+                            title={movie.title}
+                            name={movie.name}
+                            showTip={showTip}
+                            id={movie.credit_id}
+                            hideTooltip={() => hideToolTip(movie.credit_id)}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectWriting ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Production</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {movies
+                  .filter((item: any) => item.department === "Production")
+                  .map((movie: any) => (
+                    <TableRow key={movie.credit_id}>
+                      <TableCell component="th" scope="row">
+                        <div className="movieinfo">
+                          <span>
+                            {movie.release_date === undefined
+                              ? ""
+                              : movie.release_date.slice(0, 4)}
+                            {movie.first_air_date
+                              ? movie.first_air_date.slice(0, 4)
+                              : ""}
+                          </span>{" "}
+                          <span
+                            className="movieinfo__dot"
+                            onClick={() => showToolTip(movie.credit_id)}
+                            id={`${movie.id}`}
+                          ></span>{" "}
+                          {movie.title ? movie.title : movie.name}
+                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <MovieInfoToolTip
+                            poster={movie.poster_path}
+                            desc={movie.overview}
+                            title={movie.title}
+                            name={movie.name}
+                            showTip={showTip}
+                            id={movie.credit_id}
+                            hideTooltip={() => hideToolTip(movie.credit_id)}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectWriting ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Acting</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {movies
+                  .filter((item: any) => item.department === "Production")
+                  .map((movie: any) => (
+                    <TableRow key={movie.credit_id}>
+                      <TableCell component="th" scope="row">
+                        <div className="movieinfo">
+                          <span>
+                            {movie.release_date === undefined
+                              ? ""
+                              : movie.release_date.slice(0, 4)}
+                            {movie.first_air_date
+                              ? movie.first_air_date.slice(0, 4)
+                              : ""}
+                          </span>{" "}
+                          <span
+                            className="movieinfo__dot"
+                            onClick={() => showToolTip(movie.credit_id)}
+                            id={`${movie.id}`}
+                          ></span>{" "}
+                          {movie.title ? movie.title : movie.name}
+                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <MovieInfoToolTip
+                            poster={movie.poster_path}
+                            desc={movie.overview}
+                            title={movie.title}
+                            name={movie.name}
+                            showTip={showTip}
+                            id={movie.credit_id}
+                            hideTooltip={() => hideToolTip(movie.credit_id)}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : (
+          <TableContainer component={Paper}>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectWriting ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Directing</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {tv
+                  .filter((item: any) => item.department === "Directing")
+                  .map((movie: any) => (
+                    <TableRow key={movie.credit_id}>
+                      <TableCell component="th" scope="row">
+                        <div className="movieinfo">
+                          <span>
+                            {movie.release_date === undefined
+                              ? ""
+                              : movie.release_date.slice(0, 4)}
+                            {movie.first_air_date
+                              ? movie.first_air_date.slice(0, 4)
+                              : ""}
+                          </span>{" "}
+                          <span
+                            className="movieinfo__dot"
+                            onClick={() => showToolTip(movie.credit_id)}
+                            id={`${movie.id}`}
+                          ></span>{" "}
+                          {movie.title ? movie.title : movie.name}
+                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <MovieInfoToolTip
+                            poster={movie.poster_path}
+                            desc={movie.overview}
+                            title={movie.title}
+                            name={movie.name}
+                            showTip={showTip}
+                            id={movie.credit_id}
+                            hideTooltip={() => hideToolTip(movie.credit_id)}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectWriting ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Writing</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {tv
+                  .filter((item: any) => item.department === "Writing")
+                  .map((movie: any) => (
+                    <TableRow key={movie.credit_id}>
+                      <TableCell component="th" scope="row">
+                        <div className="movieinfo">
+                          <span>
+                            {movie.release_date === undefined
+                              ? ""
+                              : movie.release_date.slice(0, 4)}
+                            {movie.first_air_date
+                              ? movie.first_air_date.slice(0, 4)
+                              : ""}
+                          </span>{" "}
+                          <span
+                            className="movieinfo__dot"
+                            onClick={() => showToolTip(movie.credit_id)}
+                            id={`${movie.id}`}
+                          ></span>{" "}
+                          {movie.title ? movie.title : movie.name}
+                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <MovieInfoToolTip
+                            poster={movie.poster_path}
+                            desc={movie.overview}
+                            title={movie.title}
+                            name={movie.name}
+                            showTip={showTip}
+                            id={movie.credit_id}
+                            hideTooltip={() => hideToolTip(movie.credit_id)}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectWriting ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Production</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {tv
+                  .filter((item: any) => item.department === "Production")
+                  .map((movie: any) => (
+                    <TableRow key={movie.credit_id}>
+                      <TableCell component="th" scope="row">
+                        <div className="movieinfo">
+                          <span>
+                            {movie.release_date === undefined
+                              ? ""
+                              : movie.release_date.slice(0, 4)}
+                            {movie.first_air_date
+                              ? movie.first_air_date.slice(0, 4)
+                              : ""}
+                          </span>{" "}
+                          <span
+                            className="movieinfo__dot"
+                            onClick={() => showToolTip(movie.credit_id)}
+                            id={`${movie.id}`}
+                          ></span>{" "}
+                          {movie.title ? movie.title : movie.name}
+                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <MovieInfoToolTip
+                            poster={movie.poster_path}
+                            desc={movie.overview}
+                            title={movie.title}
+                            name={movie.name}
+                            showTip={showTip}
+                            id={movie.credit_id}
+                            hideTooltip={() => hideToolTip(movie.credit_id)}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectWriting ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Acting</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {tv
+                  .filter((item: any) => item.department === "Production")
+                  .map((movie: any) => (
+                    <TableRow key={movie.credit_id}>
+                      <TableCell component="th" scope="row">
+                        <div className="movieinfo">
+                          <span>
+                            {movie.release_date === undefined
+                              ? ""
+                              : movie.release_date.slice(0, 4)}
+                            {movie.first_air_date
+                              ? movie.first_air_date.slice(0, 4)
+                              : ""}
+                          </span>{" "}
+                          <span
+                            className="movieinfo__dot"
+                            onClick={() => showToolTip(movie.credit_id)}
+                            id={`${movie.id}`}
+                          ></span>{" "}
+                          {movie.title ? movie.title : movie.name}
+                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <MovieInfoToolTip
+                            poster={movie.poster_path}
+                            desc={movie.overview}
+                            title={movie.title}
+                            name={movie.name}
+                            showTip={showTip}
+                            id={movie.credit_id}
+                            hideTooltip={() => hideToolTip(movie.credit_id)}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+        {showAll?
         <TableContainer component={Paper}>
-          <Table
+         <Table
             size="medium"
             aria-label="a dense table"
             style={selectWriting ? { display: "none" } : { display: "table" }}
@@ -234,15 +649,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                 <TableRow key={movie.credit_id}>
                   <TableCell component="th" scope="row">
                     <div className="movieinfo">
-                      <span
-                      /* className={
-                          movie.release_date === undefined
-                            ? "movieinfo__releasedate"
-                            : movie.release_date === ""
-                            ? "movieinfo__releasedate"
-                            : ""
-                        } */
-                      >
+                      <span>
                         {movie.release_date === undefined
                           ? ""
                           : movie.release_date.slice(0, 4)}
@@ -289,15 +696,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                 <TableRow key={movie.credit_id}>
                   <TableCell component="th" scope="row">
                     <div className="movieinfo">
-                      <span
-                      /* className={
-                          movie.release_date === undefined
-                            ? "movieinfo__releasedate"
-                            : movie.release_date === ""
-                            ? "movieinfo__releasedate"
-                            : ""
-                        } */
-                      >
+                      <span>
                         {movie.release_date === undefined
                           ? ""
                           : movie.release_date.slice(0, 4)}
@@ -344,15 +743,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                 <TableRow key={movie.credit_id}>
                   <TableCell component="th" scope="row">
                     <div className="movieinfo">
-                      <span
-                      /* className={
-                          movie.release_date === undefined
-                            ? "movieinfo__releasedate"
-                            : movie.release_date === ""
-                            ? "movieinfo__releasedate"
-                            : ""
-                        } */
-                      >
+                      <span>
                         {movie.release_date === undefined
                           ? movie.release_date
                           : "---"
@@ -401,15 +792,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                 <TableRow key={movie.credit_id}>
                   <TableCell component="th" scope="row">
                     <div className="movieinfo">
-                      <span
-                      /* className={
-                          movie.release_date === undefined
-                            ? "movieinfo__releasedate"
-                            : movie.release_date === ""
-                            ? "movieinfo__releasedate"
-                            : ""
-                        } */
-                      >
+                      <span>
                         {movie.release_date === undefined
                           ? "---"
                           : movie.release_date.slice(0, 4)}
@@ -441,8 +824,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
-        <ShowMovieTv/>
+        </TableContainer>:''}
       </div>
     </div>
   );
