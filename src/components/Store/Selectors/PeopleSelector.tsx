@@ -9,3 +9,6 @@ export const combineCastSelector=(state:AppStateType)=>{
 export const combineCrewSelector=(state:AppStateType)=>{
     return state.people.combinedCreditsCrew
 }
+export const socialSelector=(state:AppStateType)=>{
+    return state.people.social
+}

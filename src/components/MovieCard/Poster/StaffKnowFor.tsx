@@ -145,13 +145,6 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
       })
     );
   };
-
-  // console.log(showMovieTv);
-
-  console.log("Movies", movies.filter((i:any)=> i.department ==="Directing"));
-  console.log("Tv", tv);
-
-  // console.log(allMedia);
   //  console.log("D", directing);
   // console.log("P", production);
   //  console.log("A", acting);

@@ -12,6 +12,7 @@ import axios from "axios";
 //https://api.themoviedb.org/4/list/1?page=1&api_key=647b39ccfb59105c511c2df9019bc7ec&sort_by=title.asc";
 const api_key = "647b39ccfb59105c511c2df9019bc7ec";
 
+
 export const getMoviesApi = {
   getMovies() {
     return axios
@@ -127,7 +128,7 @@ export const getMoviesApi = {
 
 // People
 export const getPeopleApi = {
-  getDetails(personId:number) {
+  getDetails(personId:string) {
     return axios.get(
       `https://api.themoviedb.org/3/person/${personId}?api_key=${api_key}&language=en-US`
     ).then((res)=>{
@@ -138,7 +139,7 @@ export const getPeopleApi = {
       }
     })
   },
-  getCombinedCreditsCast(personId:number){
+  getCombinedCreditsCast(personId:string){
     return axios.get(`https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${api_key}&language=en-US`).then((res)=>{
     return res.data.cast
     }).catch(err=>{
@@ -147,13 +148,20 @@ export const getPeopleApi = {
       }
     })
   },
-  getCombinedCreditsCrew(personId:number){
+  getCombinedCreditsCrew(personId:string){
     return axios.get(`https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${api_key}&language=en-US`).then((res)=>{
     return res.data.crew
     }).catch(err=>{
       if(err.response){
         return err.response.data.status_message;
       }
+    })
+  },
+  getExternalId(personId:string){
+    return axios.get(`https://api.themoviedb.org/3/person/${personId}/external_ids?api_key=${api_key}&language=en-US`).then(res =>{
+      return res.data
+    }).catch(err=>{
+      return err.err.response.data.status_message;
     })
   }
 };

@@ -5,17 +5,20 @@ import {
   CombineCreditsCrewType,
   CombinedCreditsCastType,
   DetailType,
+  ExternalIdsType,
 } from "../../../Types/Types";
 import {
   requestCombineCast,
   requestCombineCrew,
   requestDetail,
+  requestSocial,
 } from "../../Store/Reducers/PeopleReducer";
 import { useParams } from "react-router";
 import {
   combineCastSelector,
   combineCrewSelector,
   detailSelector,
+  socialSelector,
 } from "../../Store/Selectors/PeopleSelector";
 import StaffCard from "./StaffCard";
 import StaffHeader from "./StaffHeader";
@@ -34,6 +37,9 @@ const PosterStaffPage: React.FC<DetailType> = () => {
   const combineCrew: Array<CombineCreditsCrewType> = useSelector(
     (state: AppStateType) => combineCrewSelector(state)
   );
+  const social: ExternalIdsType | null = useSelector((state: AppStateType) =>
+    socialSelector(state)
+  );
   const dispatch = useDispatch();
   const personId: ParamsType = useParams();
 
@@ -43,11 +49,11 @@ const PosterStaffPage: React.FC<DetailType> = () => {
   //  console.log(combineCrew)
 
   useEffect(() => {
-    dispatch(requestDetail(+personId.id));
-    dispatch(requestCombineCast(+personId.id));
-    dispatch(requestCombineCrew(+personId.id));
+    dispatch(requestDetail(personId.id));
+    dispatch(requestCombineCast(personId.id));
+    dispatch(requestCombineCrew(personId.id));
+    dispatch(requestSocial(personId.id));
   }, [dispatch, personId.id]);
-
 
   return (
     <>
@@ -56,6 +62,7 @@ const PosterStaffPage: React.FC<DetailType> = () => {
         cardDetails={detail}
         combineCast={combineCast}
         combineCrew={combineCrew}
+        social={social}
       />
     </>
   );

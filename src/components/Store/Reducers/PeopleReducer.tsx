@@ -1,14 +1,16 @@
 import { getPeopleApi } from "../../../Api/Api";
-import { CombineCreditsCrewType, CombinedCreditsCastType, DetailType } from "../../../Types/Types";
+import { CombineCreditsCrewType, CombinedCreditsCastType, DetailType, ExternalIdsType } from "../../../Types/Types";
 
 const GET_DETAIL = "GET_DETAIL";
-const GET__COMBINE_CREDITS_CAST ='GET__COMBINE_CREDITS_CAST';
-const GET__COMBINE_CREDITS_CREW ='GET__COMBINE_CREDITS_CREW';
+const GET_COMBINE_CREDITS_CAST ='GET__COMBINE_CREDITS_CAST';
+const GET_COMBINE_CREDITS_CREW ='GET__COMBINE_CREDITS_CREW';
+const GET_EXTERNAL_ID ='GET_EXTERNAL_ID';
 
 const initialState = {
   detail: null as DetailType | null,
   combinedCreditsCast: [] as Array<CombinedCreditsCastType>,
   combinedCreditsCrew: [] as Array<CombineCreditsCrewType>,
+  social: null as ExternalIdsType | null,
 };
 type initialStateType = typeof initialState;
 
@@ -21,16 +23,22 @@ const peopleReducer = (state = initialState, action: any):initialStateType => {
       };
     }
   
-    case GET__COMBINE_CREDITS_CAST: {
+    case GET_COMBINE_CREDITS_CAST: {
       return {
         ...state,
         combinedCreditsCast: action.combinedCreditsCast,
       };
     }
-    case GET__COMBINE_CREDITS_CREW: {
+    case GET_COMBINE_CREDITS_CREW: {
       return {
         ...state,
         combinedCreditsCrew: action.combinedCreditsCrew,
+      };
+    }
+    case GET_EXTERNAL_ID: {
+      return {
+        ...state,
+        social: action.social,
       };
     }
     default:
@@ -55,36 +63,50 @@ export const getPeopleDetail = (detail: DetailType): GetPeopleDetailType => {
 
 //CombineCreditsCast
 type GetCombineCast ={
-  type:typeof GET__COMBINE_CREDITS_CAST
+  type:typeof GET_COMBINE_CREDITS_CAST
   combinedCreditsCast: CombinedCreditsCastType
 }
 
 export const getCombineCreditsCast=(combinedCreditsCast:CombinedCreditsCastType):GetCombineCast=>{
-  return {type:GET__COMBINE_CREDITS_CAST,combinedCreditsCast}
+  return {type:GET_COMBINE_CREDITS_CAST,combinedCreditsCast}
 }
 //CombineCreditsCrew
 type GetCombineCrew ={
-  type:typeof GET__COMBINE_CREDITS_CREW
+  type:typeof GET_COMBINE_CREDITS_CREW
   combinedCreditsCrew: CombineCreditsCrewType
 }
 
 export const getCombineCreditsCrew=(combinedCreditsCrew:CombineCreditsCrewType):GetCombineCrew=>{
-  return {type:GET__COMBINE_CREDITS_CREW,combinedCreditsCrew}
+  return {type:GET_COMBINE_CREDITS_CREW,combinedCreditsCrew}
 }
 
+// Social
+type GetSocialType ={
+  type:typeof GET_EXTERNAL_ID
+  social: ExternalIdsType
+}
+export const getSocial=(social:ExternalIdsType):GetSocialType=>{
+  return {type:GET_EXTERNAL_ID,social}
+}
+
+
 //Thunk
-export const requestDetail=(personId:number)=>async(dispatch:any)=>{
+export const requestDetail=(personId:string)=>async(dispatch:any)=>{
     const res = await getPeopleApi.getDetails(personId)
     dispatch(getPeopleDetail(res))
 }
 
-export const requestCombineCast=(personId:number)=>async(dispatch:any)=>{
+export const requestCombineCast=(personId:string)=>async(dispatch:any)=>{
   const res = await getPeopleApi.getCombinedCreditsCast(personId)
   dispatch(getCombineCreditsCast(res))
 }
-export const requestCombineCrew=(personId:number)=>async(dispatch:any)=>{
+export const requestCombineCrew=(personId:string)=>async(dispatch:any)=>{
   const res = await getPeopleApi.getCombinedCreditsCrew(personId)
   dispatch(getCombineCreditsCrew(res))
+}
+export const requestSocial=(personId:string)=>async(dispatch:any)=>{
+  const res = await getPeopleApi.getExternalId(personId)
+  dispatch(getSocial(res))
 }
 
 

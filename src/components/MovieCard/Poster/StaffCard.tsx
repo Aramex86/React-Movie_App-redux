@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import { CombineCreditsCrewType, CombinedCreditsCastType, DetailType } from "../../../Types/Types";
+import { CombineCreditsCrewType, CombinedCreditsCastType, DetailType, ExternalIdsType } from "../../../Types/Types";
 import StaffCardMovielist from "./StaffCardMovielist";
 import StaffKnowFor from './StaffKnowFor'
 import NoPhoto from '../../../assets/noImage.png';
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 
+import SocialComp from '../../Common/SocialComp'
+
 type PropsType = {
   cardDetails: DetailType | null
   combineCast: Array<CombinedCreditsCastType>
   combineCrew:Array<CombineCreditsCrewType>
+  social: ExternalIdsType | null
 };
 
-const StaffCard: React.FC<PropsType> = ({ cardDetails, combineCast,combineCrew }) => {
+const StaffCard: React.FC<PropsType> = ({ cardDetails, combineCast,combineCrew,social }) => {
 const [text,setText] = useState(false)
 
 //   console.log(cardDetails);
 //   console.log("MOVIES", combine);
+
 
 
   const howOld = () => {
@@ -38,18 +42,16 @@ const [text,setText] = useState(false)
         <div className="leftwrapp__img">
           {cardDetails?.profile_path === null?<img
             src={NoPhoto}
-            alt="photo"
+            alt="profile pic"
           />:<img
             src={`https://image.tmdb.org/t/p/w500/${cardDetails?.profile_path}`}
-            alt="photo"
+            alt="profile pic"
           />}
         </div>
         <ul className="infolist">
           <li className="infolist__item">
             <div className="infolist__social">
-              <a href="#">facebook</a>
-              <a href="#">twitter</a>
-              <a href="#">instagram</a>
+                <SocialComp social={social}/>
             </div>
           </li>
           <li className="infolist__item">
