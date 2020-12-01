@@ -16,29 +16,34 @@
   }
 }
 //Popup
-.popuptrailer{
+.popuptrailer {
   width: 100%;
   height: 100vh;
   position: fixed;
   font-size: 2rem;
-  background:#000000a6;
+  background: #000000a6;
   z-index: 2;
   display: none;
-  &__videobox{
+  &__header {
+    min-height: 58px;
+    width: 80%;
+    margin: 0 auto;
+    background: #000;
+  }
+  &__videobox {
     width: 80%;
     min-height: auto;
     position: absolute;
     left: 50%;
-    top: 40%;
-    transform: translate(-50%,-50%);
+    top: 45%;
+    transform: translate(-50%, -50%);
     color: #ffffffbd;
     font-weight: bold;
   }
-  &--show{
-display: block;  }
-
+  &--show {
+    display: block;
+  }
 }
-
 
 //Header
 .cardheader__wrap {
@@ -46,7 +51,6 @@ display: block;  }
   align-items: center;
   justify-content: space-around;
 }
-
 
 //Poster
 .posterWrapp {
@@ -451,7 +455,7 @@ display: block;  }
         width: 100%;
       }
     }
-    &-card:hover &-release{
+    &-card:hover &-release {
       transform: translate(-50%, -50%);
       opacity: 5;
       visibility: visible;
@@ -475,7 +479,7 @@ display: block;  }
       background: #ffffffbd;
       width: 101%;
       height: 47px;
-      transition: all .2s ease-in;
+      transition: all 0.2s ease-in;
       & span {
         margin-left: 15px;
         display: flex;
@@ -488,7 +492,6 @@ display: block;  }
       }
     }
   }
-
 }
 //CardInfo
 
@@ -506,7 +509,7 @@ display: block;  }
 .cardInfoList {
   list-style: none;
   &__item {
-    padding: .6rem 0;
+    padding: 0.6rem 0;
     &__header {
       font-weight: bold;
     }
@@ -531,6 +534,6 @@ display: block;  }
     margin: 5px;
   }
   &__link {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }

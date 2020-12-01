@@ -1,58 +1,55 @@
-.btn{
+.btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    color: rgb(212, 212, 212);
+  }
+  &--close {
+    position: absolute;
+    right: 11%;
+    top: 1%;
+  }
+  &--readmore {
     background: transparent;
-    border: none;
+    color: #00d0ff;
+    text-transform: capitalize;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: bold;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1rem;
-    outline: none;
-    cursor: pointer;
-    &:hover{
-        color: rgb(212, 212, 212);
+    z-index: 2;
+    &:hover {
+      color: #1495a2d1;
     }
-    &--close{
-        position: absolute;
-        right:7%;
+    & svg {
+      width: 0.9rem;
+      height: 0.9rem;
+      position: absolute;
+      top: 5px;
+      left: 71px;
+      font-size: 1.5rem;
+    }
+  }
+  &--hide {
+    display: none;
+  }
 
+  &--tooltipclose {
+    position: absolute;
+    top: 6px;
+    right: 7px;
+  }
+  &--clearall {
+    color: #00d0ff;
+    &:hover {
+      color: #00d0ff;
     }
-    &--readmore{
-        background: transparent;
-        color: #00d0ff;
-        text-transform: capitalize;
-        display: flex;
-        align-items: center;
-        z-index: 2;
-        &:hover{
-            color: #1495a2d1;
-        }
-        & svg{
-            width: .9rem;
-            height: .9rem;
-            position: absolute;
-            top: 5px;
-            left: 71px;
-            font-size: 1.5rem;
-        }
-
-    }
-    &--hide{
-        display: none;
-    }
-
-    &--tooltipclose{
-        position: absolute;
-        top: 6px;
-        right: 7px;
-       
-    }
-    &--clearall{
-        color: #00d0ff;
-        &:hover{
-            color: #00d0ff;
-        }
-    }
-
+  }
 }
