@@ -285,4 +285,5 @@ export type AllMediaType={
   job: string;
   media_type: string;
   order: number;
+  episode_count:number
 }

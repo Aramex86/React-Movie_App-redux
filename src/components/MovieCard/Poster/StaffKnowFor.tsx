@@ -30,14 +30,15 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const [movies, setMovies] = useState<any>([]);
   const [tv, setTv] = useState<any>([]);
   const [showMovieTv, setShowMovieTv] = useState(false);
-  const [showAll,setShowAll]=useState(true)
+  const [showDep,setShowDep]=useState(true);
+  const [showMovTv,setShowMovTv]=useState(false);
 
-  const moviesCrew = [] as Array<CombinedCreditsCastType>;
-  const tvShow = [] as Array<CombinedCreditsCastType>;
-  const directing = [] as Array<CombineCreditsCrewType>;
-  const production = [] as Array<CombineCreditsCrewType>;
-  const writing = [] as Array<CombineCreditsCrewType>;
-  const acting = [] as Array<CombinedCreditsCastType>;
+  const moviesCrew = [] as Array<AllMediaType>;
+  const tvShow = [] as Array<AllMediaType>;
+  const directing = [] as Array<AllMediaType>;
+  const production = [] as Array<AllMediaType>;
+  const writing = [] as Array<AllMediaType>;
+  const acting = [] as Array<AllMediaType>;
 
   filterData(combineCast, acting, "movie");
   filterData(combineCrew, moviesCrew, "movie");
@@ -75,7 +76,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(true);
     setSelectDirecting(true);
     setClearAll(true);
-    setShowAll(true);
+    setShowDep(true);
   };
   const showProd = (e: any) => {
     e.preventDefault();
@@ -84,7 +85,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(true);
     setSelectDirecting(true);
     setClearAll(true);
-    setShowAll(true);
+    setShowDep(true);
   };
   const showActing = (e: any) => {
     e.preventDefault();
@@ -93,7 +94,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(false);
     setSelectDirecting(true);
     setClearAll(true);
-    setShowAll(true);
+    setShowDep(true);
   };
   const showDirecting = (e: any) => {
     e.preventDefault();
@@ -102,7 +103,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(true);
     setSelectDirecting(false);
     setClearAll(true);
-    setShowAll(true);
+    setShowDep(true);
   };
 
   const clearAllFilter = () => {
@@ -111,14 +112,16 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectActing(false);
     setSelectDirecting(false);
     setClearAll(false);
-    setShowAll(true);
-    setMovies(false)
+    setShowDep(true);
+    setShowMovTv(false)
   };
 
   const showMovies = (e: any) => {
     e.preventDefault();
     setShowMovieTv(true);
-    setShowAll(false)
+    setShowDep(false);
+    setShowMovTv(true);
+    setClearAll(true);
     setMovies(
       allMedia.filter((movie: any) => {
         if (movie.media_type === "movie") {
@@ -131,7 +134,9 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const showTvShows = (e: any) => {
     e.preventDefault();
     setShowMovieTv(false);
-    setShowAll(false)
+    setShowDep(false);
+    setShowMovTv(true);
+    setClearAll(true);
     setTv(
       allMedia.filter((tv: any) => {
         if (tv.media_type === "tv") {
@@ -141,13 +146,12 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     );
   };
 
-  console.log(showMovieTv);
-  console.log(showAll);
+  // console.log(showMovieTv);
 
-  console.log("Movies", movies);
+  console.log("Movies", movies.filter((i:any)=> i.department ==="Directing"));
   console.log("Tv", tv);
 
-  console.log(allMedia);
+  // console.log(allMedia);
   //  console.log("D", directing);
   // console.log("P", production);
   //  console.log("A", acting);
@@ -231,12 +235,12 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
         </ul>
       </div>
       <div className="carierwrapp__body">
+       <div style={showMovTv?{display:'table',width:'100%'}:{display:'none'}}>
         {showMovieTv ? (
           <TableContainer component={Paper}>
             <Table
               size="medium"
               aria-label="a dense table"
-              style={selectWriting ? { display: "none" } : { display: "table" }}
             >
               <TableHead>
                 <TableRow>
@@ -285,7 +289,6 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             <Table
               size="medium"
               aria-label="a dense table"
-              style={selectWriting ? { display: "none" } : { display: "table" }}
             >
               <TableHead>
                 <TableRow>
@@ -334,7 +337,6 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             <Table
               size="medium"
               aria-label="a dense table"
-              style={selectWriting ? { display: "none" } : { display: "table" }}
             >
               <TableHead>
                 <TableRow>
@@ -383,7 +385,6 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             <Table
               size="medium"
               aria-label="a dense table"
-              style={selectWriting ? { display: "none" } : { display: "table" }}
             >
               <TableHead>
                 <TableRow>
@@ -435,7 +436,6 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             <Table
               size="medium"
               aria-label="a dense table"
-              style={selectWriting ? { display: "none" } : { display: "table" }}
             >
               <TableHead>
                 <TableRow>
@@ -465,7 +465,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                             id={`${movie.id}`}
                           ></span>{" "}
                           {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <span className="movieinfo__job">{movie.episode_count>1?`(${movie.episode_count} episodes)`:`(${movie.episode_count} episode)`}{`... as ${movie.job}`}</span>
                           <MovieInfoToolTip
                             poster={movie.poster_path}
                             desc={movie.overview}
@@ -484,7 +484,6 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             <Table
               size="medium"
               aria-label="a dense table"
-              style={selectWriting ? { display: "none" } : { display: "table" }}
             >
               <TableHead>
                 <TableRow>
@@ -514,7 +513,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                             id={`${movie.id}`}
                           ></span>{" "}
                           {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <span className="movieinfo__job">{movie.episode_count>1?`(${movie.episode_count} episodes)`:`(${movie.episode_count} episode)`}{`... as ${movie.job}`}</span>
                           <MovieInfoToolTip
                             poster={movie.poster_path}
                             desc={movie.overview}
@@ -533,7 +532,6 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             <Table
               size="medium"
               aria-label="a dense table"
-              style={selectWriting ? { display: "none" } : { display: "table" }}
             >
               <TableHead>
                 <TableRow>
@@ -563,7 +561,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                             id={`${movie.id}`}
                           ></span>{" "}
                           {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                            <span className="movieinfo__job">{movie.episode_count>1?`(${movie.episode_count} episodes)`:`(${movie.episode_count} episode)`}{`... as ${movie.job}`}</span>
                           <MovieInfoToolTip
                             poster={movie.poster_path}
                             desc={movie.overview}
@@ -612,7 +610,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                             id={`${movie.id}`}
                           ></span>{" "}
                           {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                          <span className="movieinfo__job">{movie.episode_count>1?`(${movie.episode_count} episodes)`:`(${movie.episode_count} episode)`}{`... as ${movie.job}`}</span>
                           <MovieInfoToolTip
                             poster={movie.poster_path}
                             desc={movie.overview}
@@ -630,7 +628,8 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             </Table>
           </TableContainer>
         )}
-        {showAll?
+        </div>
+        {showDep?
         <TableContainer component={Paper}>
          <Table
             size="medium"
@@ -779,7 +778,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
             size="medium"
             aria-label="a dense table"
             style={selectActing ? { display: "none" } : { display: "table" }}
-          >
+          >{}
             <TableHead>
               <TableRow>
                 <TableCell className="tableheadcell">
