@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { VideoType } from "../../Types/Types";
 
 type StateType = {
@@ -14,7 +14,7 @@ type PropsType = {
 const PopupTrailer = ({ videos, playState, closePlay }: PropsType) => {
   const trailer = videos.filter((v) => v.type === "Trailer");
   const key = trailer.find((t) => {
-    if (t.name.includes("Trailer")) {
+   if (t.name.includes("Trailer")) {
       return t.key;
     }
   });
@@ -41,6 +41,7 @@ const PopupTrailer = ({ videos, playState, closePlay }: PropsType) => {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            title='movie trailer'
           ></iframe>
         </div>
       </div>

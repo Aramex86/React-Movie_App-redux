@@ -1,237 +1,104 @@
-import React from 'react';
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import {Link} from 'react-router-dom';
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    grow: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
-    },
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-      },
-    },
-    searchIcon: {
-      padding: theme.spacing(0, 2),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    inputRoot: {
-      color: 'inherit',
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: '20ch',
-      },
-    },
-    sectionDesktop: {
-      display: 'none',
-      [theme.breakpoints.up('md')]: {
-        display: 'flex',
-      },
-    },
-    sectionMobile: {
-      display: 'flex',
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
-    },
-  }),
-);
-
-export default function PrimarySearchAppBar() {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
-
+const NavBar = () => {
   return (
-    <div className={classes.grow}>
-      <AppBar position="static" className="bck">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Link to='/' style={{color:'#fff'}}>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Movie-App
-          </Typography>
-          </Link>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+    <div className='navbarwrapp'>
+      <div className='navbarwrapp__container'>
+          <div className='navbarwrapp__left'>
+            <div className="navbarwrapp__left__logo">
+              <Link to='/'>
+             MOVIE-APP
+              </Link>
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <nav className="navbarwrapp__left__navbar">
+              <ul className="navbarwrapp__left__list">
+                <li className="navbarwrapp__left__list__item">
+                  <a href="//#endregion" className="navbarwrapp__left__list__link">movies</a>
+                  <ul className='dropdown-navbar'>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>popular</a>
+                      </li>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>now playing</a>
+                      </li>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>upcoming</a>
+                      </li>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>top rated</a>
+                      </li>
+                  </ul>
+                </li>
+                <li className="navbarwrapp__left__list__item">
+                  <a href="//#endregion" className="navbarwrapp__left__list__link">tv shows</a>
+                  <ul className='dropdown-navbar'>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>popular</a>
+                      </li>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>airing today</a>
+                      </li>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>on tv</a>
+                      </li>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>top rated</a>
+                      </li>
+                  </ul>
+                </li>
+                <li className="navbarwrapp__left__list__item">
+                  <a href="//#endregion" className="navbarwrapp__left__list__link">people</a>
+                  <ul className='dropdown-navbar'>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>popular people</a>
+                      </li>
+                  </ul>
+                </li>
+                <li className="navbarwrapp__left__list__item">
+                  <a href="//#endregion" className="navbarwrapp__left__list__link">more</a>
+                  <ul className='dropdown-navbar'>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>discutions</a>
+                      </li>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>leaderboard</a>
+                      </li>
+                      <li className='dropdown-navbar__item'>
+                        <a href="//#endregion" className='dropdown-navbar__link'>suport</a>
+                      </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
           </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+          <div className='navbarwrapp__right'>
+            <ul className='navbarwrapp__right__list'>
+              <li className='navbarwrapp__right__list__item'>
+                <a href="#" className='navbarwrapp__right__list__link'>
+                <AddOutlinedIcon style={{color:'#fff'}}/>
+                </a>
+              </li>
+              <li className='navbarwrapp__right__list__item'>
+                <button className='btn btn--navbar'>EN</button>
+              </li>
+              <li className='navbarwrapp__right__list__item'>
+              <a href="#" className='navbarwrapp__right__list__link'>
+                <span>Login</span>
+                </a>
+              </li>
+              <li className='navbarwrapp__right__list__item'>
+              <button className='btn btn--navbarsearch'>
+                <SearchOutlinedIcon style={{color:'#1acee0',fontWeight:'bold'}}/>
+                </button>
+              </li>
+            </ul>
           </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      </div>
     </div>
-  );
+  )
 }
+
+export default NavBar

@@ -1,9 +1,112 @@
-
-a{
-    text-decoration: none;
-    color: #fff;
+a {
+  text-decoration: none;
+  color: #fff;
 }
 
-.bck{
-    background-image:linear-gradient(#031f35,#04233f )!important;
+.navbarwrapp {
+  background-image: linear-gradient(#031f35, #04233f);
+  min-height: 50px;
+  color: #fff;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  
+  &__container{
+      width: 70%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+  }
+
+  &__left {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: flex-start;
+    &__logo {
+      font-family: "Source Sans Pro", sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-right: 15px;
+
+      & a {
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        color: transparent;
+        background-clip: text;
+        background-image: linear-gradient(to right, #69c6b3, #10b6de);
+      }
+      & img {
+        width: 100%;
+      }
+    }
+    &__navbar {
+    }
+    &__list {
+      list-style: none;
+      display: flex;
+      &__item {
+        padding: 0 1rem;
+        position: relative;
+        &:hover .dropdown-navbar{
+            display: block;
+        }
+      }
+      &__link {
+        color: #fff;
+        text-transform: capitalize;
+        font-family: "Source Sans Pro", sans-serif;
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+    }
+  }
+  &__right{
+      width: 50%;
+      display: flex;
+      justify-content: flex-end;
+
+      &__list{
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &__item{
+            padding: 0 1rem;
+          }
+          &__link{
+            color: #fff;
+            text-transform: capitalize;
+            font-family: "Source Sans Pro", sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            display: flex;
+
+          }
+      }
+  }
+}
+
+.dropdown-navbar{
+    background: #fff;
+    list-style: none;
+    font-family: "Source Sans Pro", sans-serif;
+    position: absolute;
+    z-index: 999;
+    width: 160px;
+    border-radius: 5px;
+    display: none;
+    left: -1px;
+    &__item{
+        padding: 0.5rem 1rem;
+        margin: 5px 0 5px 0;
+        &:hover{
+            background: rgba(218, 218, 218, 0.404);
+        }
+    }
+    &__link{
+        text-transform: capitalize;
+
+    }
 }

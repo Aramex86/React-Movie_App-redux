@@ -52,4 +52,27 @@
       color: #00d0ff;
     }
   }
+  &--navbar{
+    width: 20px;
+    height: 20px;
+    outline: 1px solid #fff;
+    font-size: .9rem;
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+      background: #fff;
+      color:black;
+    }
+  }
+  &--navbarsearch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & svg{
+      width: 1.1em;
+      height: 1.1em;
+    }
+  }
 }
