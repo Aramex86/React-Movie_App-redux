@@ -1,5 +1,5 @@
 import React from "react";
-import MovielistContainer from "./components/MovieList/MovielistContainer";
+import MovielistContainer from "./components/Home/MovielistContainer";
 import { Switch, Route } from "react-router-dom";
 import MovieCardContainer from "./components/MovieCard/MovieCardContainer";
 import withMovies from "./Hoc/withmovies";

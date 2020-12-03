@@ -109,4 +109,4 @@ const [text,setText] = useState(false)
 
 export default StaffCard;
 
-//https://image.tmdb.org/t/p/w500/
+

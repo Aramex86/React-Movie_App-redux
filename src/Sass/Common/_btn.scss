@@ -75,4 +75,17 @@
       height: 1.1em;
     }
   }
+  &--hero{
+    position: absolute;
+    top: 0px;
+    right: 32px;
+    color: #fff;
+    background: linear-gradient(to right, #69c6b3, #10b6de);
+    height: 100%;
+    width: 122px;
+    border-radius: 30px;
+    &:hover{
+      color: #000;
+    }
+  }
 }

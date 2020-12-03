@@ -161,7 +161,20 @@ export const getPeopleApi = {
     return axios.get(`https://api.themoviedb.org/3/person/${personId}/external_ids?api_key=${api_key}&language=en-US`).then(res =>{
       return res.data
     }).catch(err=>{
-      return err.err.response.data.status_message;
+      return err.response.data.status_message;
     })
   }
 };
+
+//Home Page
+
+export const getHomePgeApi={
+  getPopular(){
+    return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=1`).then(res=>{
+      console.log(res)
+      return res.data
+    }).catch(err=>{
+      return err.response.data.status_message;
+    })
+  }
+}

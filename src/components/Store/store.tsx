@@ -3,13 +3,15 @@ import movieListReducer from "./Reducers/MovieListReducer";
 
 import thunkMidlleWare from "redux-thunk";
 import peopleReducer from "./Reducers/PeopleReducer";
+import homePageReducer from "./Reducers/HomePageReducer";
 
 
 
 
 let rootReducers = combineReducers({
     movies:movieListReducer,
-    people:peopleReducer
+    people:peopleReducer,
+    homePage:homePageReducer
 });
 
 
