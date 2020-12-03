@@ -7,7 +7,7 @@ a {
   background-image: linear-gradient(#031f35, #04233f);
   min-height: 50px;
   color: #fff;
-  padding: 0.5rem 0;
+  padding: 1.5rem 0;
   display: flex;
   align-items: center;
 
@@ -37,11 +37,13 @@ a {
     &__logo {
       font-family: "Source Sans Pro", sans-serif;
       font-weight: 900;
-      font-size: 1.5rem;
+      font-size: 2.5rem;
       margin-right: 15px;
+      width: 140px;
       @include respond(tab-land) {
-        width: 162px;
+        //width: 91px;
         font-size: 2rem;
+        margin-right: 0;
       }
       & a {
         font-family: "Roboto", sans-serif;
@@ -55,12 +57,20 @@ a {
       }
     }
     &__navbar {
+
+      @include respond(phone){
+        display:none;
+      }
       &--mobile {
+        @include respond(phone){
+          display:flex;
+        }
       }
     }
     &__list {
       list-style: none;
       display: flex;
+      width: 100%;
       &--mobile {
         flex-direction: column;
         position: absolute;
@@ -78,8 +88,8 @@ a {
           display: block;
         }
         @include respond(tab-land) {
-          padding: 2rem 2rem;
-          font-size: 2rem;
+          padding: 2rem 1rem;
+    font-size: 1.5rem;
         }
       }
       &__link {
@@ -121,11 +131,16 @@ a {
       position: absolute;
       height: 49px;
       z-index: 99;
-      left: 48%;
-      top: 262%;
+      left: 47%;
+      top: 358%;
       transform: translate(-50%, -50%);
       padding: 0.5rem;
       border-radius: 5px;
+      @include respond(phone) {
+        width: 170px;
+        left: 35%;
+        top: 390%;
+      }
       &::before {
         content: "";
         background: #fff;
@@ -143,6 +158,10 @@ a {
         & h3 {
           margin-bottom: 15px;
         }
+        @include respond(phone) {
+          top: 74px;
+          height: 74px;
+        }
       }
     }
   }
@@ -158,7 +177,7 @@ a {
   border-radius: 5px;
   display: none;
   left: -1px;
-  top: 45px;
+  top: 36px;
   @include respond(phone) {
     left: 94px;
     top: 19px;

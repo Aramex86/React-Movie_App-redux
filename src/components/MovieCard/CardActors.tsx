@@ -57,6 +57,7 @@ const CardActors = ({ credits }: PropsType) => {
                       color="textSecondary"
                       component="p"
                       className="name2"
+                      style={{fontSize:'1.5rem'}}
                     >
                       {actor.character.slice(0, actor.character.indexOf("/"))}
                     </Typography>

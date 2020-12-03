@@ -19,6 +19,8 @@ const PopupTrailer = ({ videos, playState, closePlay }: PropsType) => {
     }
   });
 
+  const width = window.innerWidth;
+
   return (
     <>
       <div
@@ -36,7 +38,7 @@ const PopupTrailer = ({ videos, playState, closePlay }: PropsType) => {
         <div className="popuptrailer__videobox ">
           <iframe
             width="100%"
-            height="700"
+            height={width<=900?'500':''}
             src={`https://www.youtube.com/embed/${key?.key}`}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

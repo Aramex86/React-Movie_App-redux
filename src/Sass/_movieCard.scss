@@ -4,14 +4,31 @@
     justify-content: center;
     //align-items: center;
     position: relative;
+    //width: 80%;
+    margin: 0 auto;
+    @include respond(big-desktop) {
+      justify-content: space-between;
+    }
+    @include respond(small-phone) {
+      flex-direction: column-reverse;
+    }
     &-left {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      width: 100%;
+      width: 90%;
+      @include respond(big-desktop) {
+        width: 60%;
+      }
     }
     &-right {
       width: 35%;
+      @include respond(big-desktop) {
+        width: 40%;
+      }
+      @include respond(small-phone) {
+        width: 100%;
+      }
     }
   }
 }
@@ -74,6 +91,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    @include respond(tab-port) {
+      width: 30%;
+    }
+    @include respond(phone) {
+      width: 46%;
+    }
+    @include respond(small-phone) {
+      width: 76%;
+    }
     & img {
       width: 100%;
     }
@@ -84,6 +110,17 @@
     color: #fff;
     flex-direction: column;
     padding: 80px 40px;
+    @include respond(tab-port) {
+      padding: 80px 10px;
+    }
+    @include respond(phone) {
+      padding: 15px 10px;
+    }
+    @include respond(small-phone) {
+      text-align: center;
+      //width: 100%;
+      flex: 0 1 auto;
+    }
     &-heading {
       margin-bottom: 25px;
       & h2 {
@@ -102,10 +139,22 @@
         display: flex;
         list-style: none;
         align-items: center;
+        @include respond(small-phone) {
+          flex-wrap: wrap;
+          justify-content: center;
+          width: 56%;
+          margin: 0 auto;
+        }
       }
       &-item {
         padding: 0 20px;
         position: relative;
+        @include respond(tab-port) {
+          padding: 0 10px;
+        }
+        @include respond(small-phone) {
+          padding: 22px 10px;
+        }
       }
 
       &-item:hover .movieCrad__tolltip {
@@ -132,13 +181,13 @@
           border-radius: 50%;
           background: #032541;
           & svg {
-            font-size: 1rem;
+            font-size: 1.5rem;
           }
         }
         &--score {
           display: flex;
           align-items: center;
-          font-size: 1rem;
+          font-size: 1.5rem;
           & div {
             width: 65px;
             margin-right: 10px;
@@ -159,19 +208,28 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: start;
+        @include respond(small-phone){
+          justify-content: center;
+        }
       }
       &-item {
         width: 20%;
         padding: 1rem 0;
         padding-right: 4rem;
+        @include respond(phone) {
+          width: 25%;
+        }
+        @include respond(phone) {
+          width: 30%;
+        }
       }
       &-link {
         & p:nth-child(1) {
-          font-size: 1rem;
+          font-size: 1.5rem;
           font-weight: bold;
         }
         & p:nth-child(2) {
-          font-size: 0.8rem;
+          font-size: 1.5rem;
           font-weight: normal;
         }
       }
@@ -185,34 +243,44 @@
   justify-content: center;
   padding: 20px 0;
   flex-direction: column;
-  max-width: 61rem;
-  //margin: 0 auto;
   border-bottom: 1px solid #d7d7d7;
   margin-bottom: 25px;
 
   &__heading {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     margin-bottom: 20px;
   }
   &__cardsWrapp {
-    width: 61rem;
+    width: 90rem;
     overflow: auto;
     margin-bottom: 20px;
     padding: 0.5rem 0;
+    @include respond(tab-land) {
+      width: 70rem;
+    }
+    @include respond(phone) {
+      width: 47rem;
+    }
+    @include respond(small-phone) {
+      width: 36rem;
+    }
 
     &-cards {
       display: inline-flex;
-      width: 98rem;
+      width: 134rem;
       align-items: center;
       & div {
         margin: 0 5px 0 5px;
         padding: 6px 0;
+        @include respond(phone) {
+          margin: 0 2px 0 5px;
+        }
       }
       & a {
         color: black;
         margin-left: 25px;
         display: flex;
-        width: 55rem;
+        width: 80rem;
         align-items: center;
         font-weight: 700;
       }
@@ -228,24 +296,33 @@
 }
 
 .name1 {
-  font-size: 0.9rem !important;
+  font-size: 1.5rem !important;
   margin-top: 15px !important;
 }
 
 //Social
 .socialWrapp {
-  width: 61rem;
+  width: 90rem;
   //margin: 0 auto;
   border-bottom: 1px solid #d7d7d7;
   padding: 20px 0;
   margin-bottom: 25px;
+  @include respond(tab-land) {
+    width: 70rem;
+  }
+  @include respond(phone) {
+    width: 47rem;
+  }
+  @include respond(small-phone) {
+    width: 36rem;
+  }
 
   &__header {
     display: flex;
     align-items: baseline;
     margin-bottom: 25px;
     &-heading {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
     }
     &-list {
       list-style: none;
@@ -293,13 +370,13 @@
       // }
       & h3 {
         display: flex;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
       }
       & h3:hover {
         color: #b20204;
       }
       & span:nth-child(1) {
-        font-size: 0.8rem;
+        font-size: 1.5rem;
         display: flex;
         align-items: center;
         width: 50px;
@@ -311,7 +388,7 @@
         margin-left: 10px;
       }
       & span:nth-child(2) {
-        font-size: 0.9rem;
+        font-size: 1.5rem;
         font-weight: 100;
         color: #5d5d5dd1;
         & b {
@@ -334,26 +411,41 @@
 }
 //Media
 .mediaWrapp {
-  width: 61rem;
+  width: 90rem;
   //margin: 0 auto;
   border-bottom: 1px solid #d7d7d7;
   padding: 20px 0;
   margin-bottom: 25px;
+  @include respond(tab-land) {
+    width: 70rem;
+  }
+  @include respond(phone) {
+    width: 47rem;
+  }
+  @include respond(small-phone) {
+    width: 36rem;
+  }
 
   &__header {
     display: flex;
     align-items: baseline;
     margin-bottom: 25px;
     &-heading {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
     }
     &-list {
       list-style: none;
       display: flex;
       margin-left: 4rem;
+      @include respond(small-phone){
+        margin-left:0;
+      }
     }
     &-item {
       padding: 0 2rem;
+      @include respond(phone) {
+        padding: 0 1rem;
+      }
     }
     &-link {
       &--active {
@@ -374,7 +466,6 @@
     }
   }
   &__wrapper {
-    width: 61rem;
     box-shadow: 0px 0px 2px 3px #f7f5f5;
     border-radius: 7px;
     overflow: auto;
@@ -392,6 +483,12 @@
         display: block;
         height: 300px;
         object-position: top;
+        @include respond(phone) {
+          object-fit: cover;
+          width: 51%;
+          height: 215px;
+          object-position: top;
+        }
       }
       & a {
         color: black;
@@ -412,6 +509,9 @@
       justify-content: center;
       align-items: center;
       height: 19px;
+      @include respond(phone){
+        padding: 13rem;
+      }
       &-link {
         display: flex;
         align-items: center;
@@ -430,20 +530,29 @@
   }
 }
 .recomandWrapp {
-  width: 61rem;
+  width: 90rem;
   //margin: 0 auto;
   border-bottom: 1px solid #d7d7d7;
   padding: 20px 0;
   margin-bottom: 25px;
   overflow: auto;
+  @include respond(tab-land) {
+    width: 70rem;
+  }
+  @include respond(phone) {
+    width: 47rem;
+  }
+  @include respond(small-phone) {
+    width: 36rem;
+  }
   &__heading {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
   &__cards {
     display: flex;
     padding: 0.5rem 0.5rem;
     border-radius: 10px;
-    width: 120rem;
+    width: 200rem;
     &-card {
       margin-right: 15px;
       position: relative;
@@ -504,12 +613,24 @@
   flex-direction: column;
   border-bottom: 1px solid #d7d7d7;
   width: 60%;
+  @include respond(small-phone){
+    margin:0;
+    padding: 0 1rem;
+    width: 100%;
+  }
 }
 
 .cardInfoList {
   list-style: none;
+  @include respond(small-phone){
+    display:flex;
+  }
   &__item {
     padding: 0.6rem 0;
+    @include respond(small-phone){
+      padding: 0.6rem 11px;
+      margin-bottom: 10px;
+    }
     &__header {
       font-weight: bold;
     }
@@ -534,6 +655,6 @@
     margin: 5px;
   }
   &__link {
-    font-size: 0.8rem;
+    font-size: 1.5rem;
   }
 }

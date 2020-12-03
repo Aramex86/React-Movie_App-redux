@@ -25,7 +25,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
       }}
     >
       <div className="hero_heading">
-        <h1 className="hero_heading__big">Welcome</h1>
+        <h1 className="hero_heading__big">Welcome.</h1>
         <h3 className="hero_heading__subheading">
           Millions of movies, TV shows and people to discover. Explore now.
         </h3>
