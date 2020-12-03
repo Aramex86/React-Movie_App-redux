@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
 
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
+  const [showMenu,setShowMenu] =useState(false);
   const [state, setState] = React.useState<{
     age: string | number;
     name: string;
@@ -39,118 +37,131 @@ const NavBar = () => {
     setShowlang(!showlang);
   };
 
+  const showHideNav=()=>{
+    setShowMenu(!showMenu);
+  }
+
+  const screenWidth = window.innerWidth;
+
+  console.log(screenWidth);
+  console.log(showMenu);
+
   return (
     <div className="navbarwrapp">
       <div className="navbarwrapp__container">
         <div className="navbarwrapp__left">
+          <button onClick={showHideNav} className='btn btn--mobile'><span></span></button>
           <div className="navbarwrapp__left__logo">
             <Link to="/">MOVIE-APP</Link>
           </div>
-          <nav className="navbarwrapp__left__navbar">
-            <ul className="navbarwrapp__left__list">
-              <li className="navbarwrapp__left__list__item">
-                <a
-                  href="//#endregion"
-                  className="navbarwrapp__left__list__link"
-                >
-                  movies
-                </a>
-                <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      popular
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      now playing
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      upcoming
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      top rated
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="navbarwrapp__left__list__item">
-                <a
-                  href="//#endregion"
-                  className="navbarwrapp__left__list__link"
-                >
-                  tv shows
-                </a>
-                <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      popular
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      airing today
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      on tv
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      top rated
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="navbarwrapp__left__list__item">
-                <a
-                  href="//#endregion"
-                  className="navbarwrapp__left__list__link"
-                >
-                  people
-                </a>
-                <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      popular people
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="navbarwrapp__left__list__item">
-                <a
-                  href="//#endregion"
-                  className="navbarwrapp__left__list__link"
-                >
-                  more
-                </a>
-                <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      discutions
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      leaderboard
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="//#endregion" className="dropdown-navbar__link">
-                      suport
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </div>
+          {screenWidth < 665 && showMenu?
+          <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
+          <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
+            <li className="navbarwrapp__left__list__item">
+              <a
+                href="#"
+                className="navbarwrapp__left__list__link"
+              >
+                movies
+              </a>
+              <ul className="dropdown-navbar">
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    popular
+                  </a>
+                </li>
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    now playing
+                  </a>
+                </li>
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    upcoming
+                  </a>
+                </li>
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    top rated
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="navbarwrapp__left__list__item">
+              <a
+                href="#"
+                className="navbarwrapp__left__list__link"
+              >
+                tv shows
+              </a>
+              <ul className="dropdown-navbar">
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    popular
+                  </a>
+                </li>
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    airing today
+                  </a>
+                </li>
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    on tv
+                  </a>
+                </li>
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    top rated
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="navbarwrapp__left__list__item">
+              <a
+                href="#"
+                className="navbarwrapp__left__list__link"
+              >
+                people
+              </a>
+              <ul className="dropdown-navbar">
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    popular people
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="navbarwrapp__left__list__item">
+              <a
+                href="#"
+                className="navbarwrapp__left__list__link"
+              >
+                more
+              </a>
+              <ul className="dropdown-navbar">
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    discutions
+                  </a>
+                </li>
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    leaderboard
+                  </a>
+                </li>
+                <li className="dropdown-navbar__item">
+                  <a href="#" className="dropdown-navbar__link">
+                    suport
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      :  ''
+        }
+     </div>   
         <div className="navbarwrapp__right">
           <ul className="navbarwrapp__right__list">
             <li className="navbarwrapp__right__list__item">

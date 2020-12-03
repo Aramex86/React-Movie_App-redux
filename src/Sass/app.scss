@@ -1,36 +1,51 @@
+@import "../Sass/MediaManager/mediamanager";
 @import "../Sass/movielist";
 @import "../Sass/navbar";
 @import "../Sass/movieCard";
 @import "../Sass/Common/btn";
 @import "../Sass/Common/loader";
 @import "../Sass/Common/tolltip";
-@import '../Sass/Common/headerComponent';
-@import '../Sass/Common/movieTollTip';
-@import '../Sass/footer';
-@import '../Sass/staffpage';
-@import '../Sass/Home/hero';
+@import "../Sass/Common/headerComponent";
+@import "../Sass/Common/movieTollTip";
+@import "../Sass/footer";
+@import "../Sass/staffpage";
+@import "../Sass/Home/hero";
 
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
+  box-sizing: inherit;
 }
-* a{
+* a {
   color: #000;
 }
 
-html{
-  //font-size: 62.5%;
+body {
+  font-size: 1.5rem;
   box-sizing: border-box;
-  font-family: 'Source Sans Pro', sans-serif;
-
+  font-family: "Source Sans Pro", sans-serif;
 }
+html {
+  font-size: 62.5%; //1rem = 10px; 10px/16px = 62.5%
+  @include respond(small-phone) {
+    font-size: 25%; //width < 400
+  }
 
-body{
-  //font-size: 1.6rem;
-  font-family: 'Source Sans Pro', sans-serif;
+  @include respond(phone) {
+    font-size: 37.5%; //width < 600 ? 1rem = 6px ; 6/16 = 35.5%
+  }
 
+  @include respond(tab-land) {
+    //width < 1200 ?
+    font-size: 56.25%; // 1rem = 9px ;9/16 = 56.25%
+  }
+  @include respond(tab-port) {
+    //width < 900 ?
+    font-size: 50%; // 1rem = 8px ;8/16 = 50%
+  }
+  @include respond(big-desktop) {
+    font-size: 75%; // 1rem = 12px ;12/16 = 75%
+  }
 }
-
-
