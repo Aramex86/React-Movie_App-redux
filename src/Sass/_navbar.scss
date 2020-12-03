@@ -27,10 +27,12 @@ a {
     width: 50%;
     align-items: center;
     justify-content: flex-start;
-
     @include respond(tab-land) {
       width: 85%;
       position: relative;
+    }
+    @include respond(phone) {
+      width: 50%;
     }
     &__logo {
       font-family: "Source Sans Pro", sans-serif;

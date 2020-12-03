@@ -6,38 +6,38 @@
   color: #fff;
   display: flex;
   flex-direction: column;
-  @include respond(phone){
+  @include respond(phone) {
     width: 95%;
     min-height: 233px;
   }
 }
 
-.hero_heading{
-    padding: 0 3rem;
-    margin-top: 55px;
-    &__big{
-        font-size: 3rem;
-    }
-    &__subheading{
-        font-size: 2rem;
-    }
+.hero_heading {
+  padding: 0 3rem;
+  margin-top: 55px;
+  &__big {
+    font-size: 3rem;
+  }
+  &__subheading {
+    font-size: 2rem;
+  }
 }
 
-.searchinput{
-    margin-top:25px;
-    padding: 0 2rem;
-    position: relative;
-    & input{
-        width: 95%;
-        margin:0 auto;
-        padding: 1rem 1.5rem;
-        border-radius: 30px;
-        border:transparent;
-        outline: transparent;
-        font-size: 1rem;
-      
-        &:focus{
-            color: rgba(44, 44, 44, 0.616);
-        }
+.searchinput {
+  margin-top: 25px;
+  padding: 0 2rem;
+  position: relative;
+  & input {
+    width: 95%;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    border-radius: 30px;
+    border: transparent;
+    outline: transparent;
+    font-size: 1rem;
+
+    &:focus {
+      color: rgba(44, 44, 44, 0.616);
     }
+  }
 }

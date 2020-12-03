@@ -6,16 +6,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
-  const [showMenu,setShowMenu] =useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [state, setState] = React.useState<{
     age: string | number;
     name: string;
-  }>
-  ({
+  }>({
     age: "",
     name: "hai",
   });
@@ -37,9 +35,9 @@ const NavBar = () => {
     setShowlang(!showlang);
   };
 
-  const showHideNav=()=>{
+  const showHideNav = () => {
     setShowMenu(!showMenu);
-  }
+  };
 
   const screenWidth = window.innerWidth;
 
@@ -50,118 +48,109 @@ const NavBar = () => {
     <div className="navbarwrapp">
       <div className="navbarwrapp__container">
         <div className="navbarwrapp__left">
-          <button onClick={showHideNav} className='btn btn--mobile'><span></span></button>
+          <button onClick={showHideNav} className="btn btn--mobile">
+            <span></span>
+          </button>
           <div className="navbarwrapp__left__logo">
             <Link to="/">MOVIE-APP</Link>
           </div>
-          {screenWidth < 665 && showMenu?
-          <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
-          <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
-            <li className="navbarwrapp__left__list__item">
-              <a
-                href="#"
-                className="navbarwrapp__left__list__link"
-              >
-                movies
-              </a>
-              <ul className="dropdown-navbar">
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    popular
+          {screenWidth < 665 && showMenu ? (
+            <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
+              <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
+                <li className="navbarwrapp__left__list__item">
+                  <a href="#" className="navbarwrapp__left__list__link">
+                    movies
                   </a>
+                  <ul className="dropdown-navbar">
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        popular
+                      </a>
+                    </li>
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        now playing
+                      </a>
+                    </li>
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        upcoming
+                      </a>
+                    </li>
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        top rated
+                      </a>
+                    </li>
+                  </ul>
                 </li>
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    now playing
+                <li className="navbarwrapp__left__list__item">
+                  <a href="#" className="navbarwrapp__left__list__link">
+                    tv shows
                   </a>
+                  <ul className="dropdown-navbar">
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        popular
+                      </a>
+                    </li>
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        airing today
+                      </a>
+                    </li>
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        on tv
+                      </a>
+                    </li>
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        top rated
+                      </a>
+                    </li>
+                  </ul>
                 </li>
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    upcoming
+                <li className="navbarwrapp__left__list__item">
+                  <a href="#" className="navbarwrapp__left__list__link">
+                    people
                   </a>
+                  <ul className="dropdown-navbar">
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        popular people
+                      </a>
+                    </li>
+                  </ul>
                 </li>
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    top rated
+                <li className="navbarwrapp__left__list__item">
+                  <a href="#" className="navbarwrapp__left__list__link">
+                    more
                   </a>
-                </li>
-              </ul>
-            </li>
-            <li className="navbarwrapp__left__list__item">
-              <a
-                href="#"
-                className="navbarwrapp__left__list__link"
-              >
-                tv shows
-              </a>
-              <ul className="dropdown-navbar">
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    popular
-                  </a>
-                </li>
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    airing today
-                  </a>
-                </li>
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    on tv
-                  </a>
-                </li>
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    top rated
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="navbarwrapp__left__list__item">
-              <a
-                href="#"
-                className="navbarwrapp__left__list__link"
-              >
-                people
-              </a>
-              <ul className="dropdown-navbar">
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    popular people
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="navbarwrapp__left__list__item">
-              <a
-                href="#"
-                className="navbarwrapp__left__list__link"
-              >
-                more
-              </a>
-              <ul className="dropdown-navbar">
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    discutions
-                  </a>
-                </li>
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    leaderboard
-                  </a>
-                </li>
-                <li className="dropdown-navbar__item">
-                  <a href="#" className="dropdown-navbar__link">
-                    suport
-                  </a>
+                  <ul className="dropdown-navbar">
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        discutions
+                      </a>
+                    </li>
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        leaderboard
+                      </a>
+                    </li>
+                    <li className="dropdown-navbar__item">
+                      <a href="#" className="dropdown-navbar__link">
+                        suport
+                      </a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
-            </li>
-          </ul>
-        </nav>
-      :  ''
-        }
-     </div>   
+            </nav>
+          ) : (
+            ""
+          )}
+        </div>
         <div className="navbarwrapp__right">
           <ul className="navbarwrapp__right__list">
             <li className="navbarwrapp__right__list__item">
@@ -194,9 +183,9 @@ const NavBar = () => {
               {showlang ? (
                 <div className="navbarwrapp__right__tooltip navbarwrapp__right__tooltip--lang">
                   <h3>Language Preferences</h3>
-                  <FormControl variant="filled" className='languageform'>
+                  <FormControl variant="filled" className="languageform">
                     <InputLabel htmlFor="filled-age-native-simple">
-                     Language
+                      Language
                     </InputLabel>
                     <Select
                       native

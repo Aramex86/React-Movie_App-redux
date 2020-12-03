@@ -27,21 +27,21 @@ const homePageReducer = (
 };
 
 //Popular Movies
-type GetPopularType={
-    type:typeof GET_POPULAR_MOVIES
-    popularMovies:Array<PopularType>
-}
+type GetPopularType = {
+  type: typeof GET_POPULAR_MOVIES;
+  popularMovies: Array<PopularType>;
+};
 
-export const getPopular=(popularMovies:Array<PopularType>):GetPopularType=>{
-    return {type: GET_POPULAR_MOVIES,popularMovies}
-}
+export const getPopular = (
+  popularMovies: Array<PopularType>
+): GetPopularType => {
+  return { type: GET_POPULAR_MOVIES, popularMovies };
+};
 
 //Thunk
-export const requestPopular=()=>async(dispatch:any)=>{
-    const res = await getHomePgeApi.getPopular()
-    dispatch(getPopular(res.results));
-}
-
-
+export const requestPopular = () => async (dispatch: any) => {
+  const res = await getHomePgeApi.getPopular();
+  dispatch(getPopular(res.results));
+};
 
 export default homePageReducer;
