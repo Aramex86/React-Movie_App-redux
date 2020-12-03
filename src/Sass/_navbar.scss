@@ -57,13 +57,12 @@ a {
       }
     }
     &__navbar {
-
-      @include respond(phone){
-        display:none;
+      @include respond(phone) {
+        display: none;
       }
       &--mobile {
-        @include respond(phone){
-          display:flex;
+        @include respond(phone) {
+          display: flex;
         }
       }
     }
@@ -88,9 +87,10 @@ a {
           display: block;
         }
         @include respond(tab-land) {
-          padding: 2rem 1rem;
-    font-size: 1.5rem;
+          padding: 2rem 3rem;
+          font-size: 1.5rem;
         }
+        
       }
       &__link {
         color: #fff;
