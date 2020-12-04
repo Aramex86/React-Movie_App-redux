@@ -32,16 +32,16 @@ type GetPopularType = {
   popularMovies: Array<PopularType>;
 };
 
-export const getPopular = (
+export const getPopularMovies = (
   popularMovies: Array<PopularType>
 ): GetPopularType => {
   return { type: GET_POPULAR_MOVIES, popularMovies };
 };
 
 //Thunk
-export const requestPopular = () => async (dispatch: any) => {
+export const requestPopularMovies = () => async (dispatch: any) => {
   const res = await getHomePgeApi.getPopular();
-  dispatch(getPopular(res.results));
+  dispatch(getPopularMovies(res.results));
 };
 
 export default homePageReducer;

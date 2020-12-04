@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import { MovieListType, PopularType } from "../../Types/Types";
 import {
-  getMoviesList,
   requestMovieList,
 } from "../Store/Reducers/MovieListReducer";
 
@@ -14,8 +13,9 @@ import {
 import { AppStateType } from "../Store/store";
 import MovieList from "./Movielist";
 import HeroSection from "./Hero";
+import Popular from './Popular';
 import { popularSelector } from "../Store/Selectors/HomePageSelector";
-import { requestPopular } from "../Store/Reducers/HomePageReducer";
+import { requestPopularMovies } from "../Store/Reducers/HomePageReducer";
 
 type MapStateToPropsType = {
   movieList: Array<MovieListType>;
@@ -25,9 +25,8 @@ type MapStateToPropsType = {
 };
 
 type MapDispatchPropsType = {
-  getMoviesList: (movieList: Array<MovieListType>) => void;
   requestMovieList: () => void;
-  requestPopular: () => void;
+  requestPopularMovies: () => void;
 };
 
 type OwnPropsType = {};
@@ -40,7 +39,7 @@ type PropsType = MapStateToPropsType &
 class MovielistContainer extends Component<PropsType> {
   componentDidMount() {
     this.props.requestMovieList();
-    this.props.requestPopular();
+    this.props.requestPopularMovies();
   }
 
   render() {
@@ -48,6 +47,7 @@ class MovielistContainer extends Component<PropsType> {
     return (
       <>
         <HeroSection bgPopular={this.props.popularMovies} />
+        <Popular/>
         <MovieList
           movieList={this.props.movieList}
           isFetching={this.props.isFetching}
@@ -70,6 +70,6 @@ export default connect<
   MapDispatchPropsType,
   OwnPropsType,
   AppStateType
->(mapStateToProps, { requestMovieList, getMoviesList, requestPopular })(
+>(mapStateToProps, { requestMovieList, requestPopularMovies })(
   MovielistContainer
 );

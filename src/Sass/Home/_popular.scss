@@ -1,0 +1,34 @@
+.popularwrapp {
+  width: 85%;
+  margin: 0 auto;
+
+  //test
+  min-height: 500px;
+  @include respond(small-phone) {
+    width: 100%;
+  }
+}
+
+.popular__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  @include respond(small-phone) {
+    flex-direction: column;
+  }
+  &__heading {
+    @include respond(small-phone) {
+      width: 100%;
+      padding: 0 1.5rem;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.popular__body{
+    @include respond(small-phone) {
+        width: 100%;
+        padding: 0 1.5rem;
+        margin-bottom: 15px;
+      }
+}
