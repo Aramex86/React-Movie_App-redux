@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import HeroNav from "../Common/HeroNav";
 import Streaming from "./Popular/Streaming";
 import OnTv from "./Popular/OnTv";
 import ForRent from "./Popular/ForRent";
 import InTheater from "./Popular/InTheater";
+import { PopularType } from "../../Types/Types";
 
-const Popular = () => {
-  const [showStreaming, setShowStreaming] = useState<boolean>(true);
-  const [showOnTv, setShowOnTv] = useState(false);
-  const [showInTheater, setShowInTheater] = useState(false);
-  const [showForRent, setShowForRent] = useState(false);
+export type PropsPopularMoviesType={
+  popularMovies:Array<PopularType>
+}
+
+
+
+
+const Popular:FC<PropsPopularMoviesType> = ({popularMovies}) => {
+
+  const [show,setShow]=useState('stream')
+
+  const showValue=(value:string)=>{
+    setShow(value)
+  }
 
   return (
     <div className="popularwrapp">
@@ -18,17 +28,15 @@ const Popular = () => {
           <h2>What's Popular</h2>
         </div>
         <HeroNav
-          stream={[showStreaming, setShowStreaming]}
-          tv={[showOnTv, setShowOnTv]}
-          theater={[showInTheater, setShowInTheater]}
-          rent={[showForRent, setShowForRent]}
+          show={show}
+          showValue={showValue}
         />
       </div>
       <div className="popular__body">
-        {showStreaming ? <Streaming /> : ""}
-        {showOnTv ? <OnTv /> : ""}
-        {showForRent ? <ForRent /> : ""}
-        {showInTheater ? <InTheater /> : ""}
+        {show === 'stream' ? <Streaming  popularMovies={popularMovies}/> : ""}
+        {show === 'onTv' ? <OnTv /> : ""}
+        {show==='rent' ? <ForRent /> : ""}
+        {show ==='theater' ? <InTheater /> : ""}
       </div>
     </div>
   );

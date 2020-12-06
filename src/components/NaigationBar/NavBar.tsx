@@ -42,8 +42,8 @@ const NavBar = () => {
 
   const screenWidth = window.innerWidth;
 
-  console.log(screenWidth);
-  console.log(showMenu);
+  // console.log(screenWidth);
+  // console.log(showMenu);
 
   return (
     <div className="navbarwrapp">

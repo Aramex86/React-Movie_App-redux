@@ -6,56 +6,19 @@ type StreamType = {
 };
 
 type PropsType = {
-  stream: Array<any>;
-  tv: Array<any>;
-  rent: Array<any>;
-  theater: Array<any>;
+ show:string
+  showValue:(value:string)=>void;
 };
 
-const HeroNav: React.FC<PropsType> = ({ stream, tv, theater, rent }) => {
-  const [showStreaming, setShowStreaming] = stream;
-  const [showOnTv, setShowOnTv] = tv;
-  const [showInTheater, setShowInTheater] = theater;
-  const [showForRent, setShowForRent] = rent;
-
- const showStream=()=>{
-   setShowStreaming(true)
-   setShowOnTv(false)
-   setShowInTheater(false)
-   setShowForRent(false)
- }
- const showTv=()=>{
-   setShowStreaming(false)
-   setShowOnTv(true)
-   setShowInTheater(false)
-   setShowForRent(false)
- }
- const showTheater=()=>{
-   setShowStreaming(false)
-   setShowOnTv(false)
-   setShowInTheater(true)
-   setShowForRent(false)
- }
- const showRent=()=>{
-   setShowStreaming(false)
-   setShowOnTv(false)
-   setShowInTheater(false)
-   setShowForRent(true)
- }
-  
-
-  console.log('steam',showStreaming);
-  console.log('tv',showOnTv);
-  console.log('theater',showInTheater);
-  console.log('rent',showForRent);
+const HeroNav: React.FC<PropsType> = ({show,showValue }) => {
 
   return (
     <ul className="herowrapnav">
       <li className="herowrapnav__item">
         <button
-          onClick={() => setShowStreaming(showStream)}
+          onClick={()=>showValue('stream')}
           className={`btn btn--heronav ${
-            showStreaming ? "btn--heroactive" : ""
+            show === 'stream' ? "btn--heroactive" : ""
           }`}
         >
           <span>streming</span>
@@ -63,25 +26,25 @@ const HeroNav: React.FC<PropsType> = ({ stream, tv, theater, rent }) => {
       </li>
       <li className="herowrapnav__item">
         <button
-          onClick={() => setShowOnTv(showTv)}
-          className={`btn btn--heronav ${showOnTv ? "btn--heroactive" : ""}`}
+          onClick={() => showValue('onTv')}
+          className={`btn btn--heronav ${show === 'onTv' ? "btn--heroactive" : ""}`}
         >
           <span>on tv</span>
         </button>
       </li>
       <li className="herowrapnav__item">
         <button
-          onClick={() => setShowForRent(showRent)}
-          className={`btn btn--heronav ${showForRent ? "btn--heroactive" : ""}`}
+          onClick={() => showValue('rent')}
+          className={`btn btn--heronav ${show ==='rent' ? "btn--heroactive" : ""}`}
         >
           <span>for ret</span>
         </button>
       </li>
       <li className="herowrapnav__item">
         <button
-          onClick={() => setShowInTheater(showTheater)}
+          onClick={() => showValue('theater')}
           className={`btn btn--heronav ${
-            showInTheater ? "btn--heroactive" : ""
+            show==='theater' ? "btn--heroactive" : ""
           }`}
         >
           <span>in theaters</span>

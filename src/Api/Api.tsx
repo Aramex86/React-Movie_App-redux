@@ -11,7 +11,7 @@ import axios from "axios";
 //https://cors-anywhere.herokuapp.com/ ->corsanywhere
 //https://api.themoviedb.org/4/list/1?page=1&api_key=647b39ccfb59105c511c2df9019bc7ec&sort_by=title.asc";
 const api_key = "647b39ccfb59105c511c2df9019bc7ec";
-
+//https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
 
 export const getMoviesApi = {
   getMovies() {
@@ -169,8 +169,8 @@ export const getPeopleApi = {
 //Home Page
 
 export const getHomePgeApi={
-  getPopular(){
-    return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=1`).then(res=>{
+  getPopular(pagenr:number){
+    return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${pagenr}`).then(res=>{
       console.log(res)
       return res.data
     }).catch(err=>{

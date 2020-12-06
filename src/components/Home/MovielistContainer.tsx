@@ -43,11 +43,11 @@ class MovielistContainer extends Component<PropsType> {
   }
 
   render() {
-    console.log(this.props);
+   // console.log(this.props);
     return (
       <>
         <HeroSection bgPopular={this.props.popularMovies} />
-        <Popular/>
+        <Popular popularMovies={this.props.popularMovies}/>
         <MovieList
           movieList={this.props.movieList}
           isFetching={this.props.isFetching}

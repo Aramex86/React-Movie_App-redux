@@ -38,9 +38,12 @@ export const getPopularMovies = (
   return { type: GET_POPULAR_MOVIES, popularMovies };
 };
 
+
+
+
 //Thunk
 export const requestPopularMovies = () => async (dispatch: any) => {
-  const res = await getHomePgeApi.getPopular();
+  const res = await getHomePgeApi.getPopular(1);
   dispatch(getPopularMovies(res.results));
 };
 

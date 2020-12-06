@@ -14,8 +14,8 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
 
   const randomImg = bgImages[Math.floor(Math.random() * bgImages.length)];
 
-  console.log(bgImages);
-  console.log(randomImg);
+  // console.log(bgImages);
+  // console.log(randomImg);
 
   return (
     <div
@@ -39,4 +39,4 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
 };
 
 export default Hero;
-//https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
+

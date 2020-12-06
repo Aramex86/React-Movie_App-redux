@@ -29,7 +29,7 @@ const CardPoster = (props: PropsType) => {
   const percent = +usersScore;
   const crew: any = [];
 
-
+console.log(props.popularity)
   if (props.credits?.crew) {
     crewStaff(props.credits?.crew, "Director", crew);
     crewStaff(props.credits?.crew, "Writing", crew);
