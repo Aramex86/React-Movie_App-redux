@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+import { CircularProgressbar,buildStyles  } from "react-circular-progressbar";
 
 type PropsType={
     poster:string
@@ -12,7 +11,14 @@ type PropsType={
 
 const HomePageCard:FC<PropsType> = ({poster,title,realese,popularity}) => {
 
-    const percent = Math.round( popularity);
+
+    const popular = popularity *10 /100
+
+    const percent =Math.round(popular)  
+
+
+   
+
     return (
         <div className='card'>
             <div className="card__img">
@@ -21,12 +27,15 @@ const HomePageCard:FC<PropsType> = ({poster,title,realese,popularity}) => {
             <div className="card__popular">
             <CircularProgressbar
                     value={percent}
-                    text={`${percent}%`}
-                    styles={{
-                      trail: { stroke: "#fff" },
-                      text: { fill: "#000", fontSize: "28px" },
-                      path: { stroke: `${percent < 30 ? "red" : "#4aff5d"}` },
-                    }}
+                    text={percent> 100?`100%`:`${percent}%`}
+                    styles={buildStyles({
+                      //trail: { stroke: "#fff" },
+                      textColor: "#fff",
+                      textSize: '3rem',
+                      backgroundColor:'blue',
+                      trailColor:'gray',
+                      pathColor: `${percent < 70 ? "yellow" : "#4aff5d"}` ,
+                    })}
                   />
             </div>
             <div className="card__info">
