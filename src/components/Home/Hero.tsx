@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PopularType } from "../../Types/Types";
 
 type PropsType = {
@@ -13,9 +13,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
   );
 
   const randomImg = bgImages[Math.floor(Math.random() * bgImages.length)];
-
   // console.log(bgImages);
-  // console.log(randomImg);
 
   return (
     <div
@@ -31,12 +29,14 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
         </h3>
       </div>
       <div className="searchinput">
-          <input type="text" placeholder='Search for a movie, tv show, person......'/>
-          <button className='btn btn--hero'>Search</button>
+        <input
+          type="text"
+          placeholder="Search for a movie, tv show, person......"
+        />
+        <button className="btn btn--hero">Search</button>
       </div>
     </div>
   );
 };
 
 export default Hero;
-
