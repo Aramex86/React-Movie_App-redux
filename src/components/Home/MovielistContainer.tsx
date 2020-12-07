@@ -16,6 +16,7 @@ import HeroSection from "./Hero";
 import Popular from './Popular';
 import { popularSelector } from "../Store/Selectors/HomePageSelector";
 import { requestPopularMovies } from "../Store/Reducers/HomePageReducer";
+import FreeToWatch from "./FreeToWatch";
 
 
 
@@ -53,6 +54,7 @@ class MovielistContainer extends Component<PropsType> {
       <>
         <HeroSection bgPopular={this.props.popularMovies} />
         <Popular popularMovies={this.props.popularMovies} />
+        <FreeToWatch/>
         <MovieList
           movieList={this.props.movieList}
           isFetching={this.props.isFetching}

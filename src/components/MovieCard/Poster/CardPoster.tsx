@@ -5,7 +5,7 @@ import BookmarkRoundedIcon from "@material-ui/icons/BookmarkRounded";
 import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
-import { CircularProgressbar } from "react-circular-progressbar";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { CreditsType, GenresType, MovieDetailsType } from "../../../Types/Types";
 import { crewStaff } from "../../Helper/crewstaff";
@@ -30,6 +30,18 @@ const CardPoster = (props: PropsType) => {
   const crew: any = [];
 
 console.log(props.popularity)
+console.log(usersScore)
+
+const popularityPercent=()=>{
+ 
+  let percents =(+usersScore * 100) /100;
+  if(percents > 100){
+    percents = 100 
+  }
+
+  return percents
+}
+console.log(popularityPercent())
   if (props.credits?.crew) {
     crewStaff(props.credits?.crew, "Director", crew);
     crewStaff(props.credits?.crew, "Writing", crew);
@@ -74,13 +86,16 @@ console.log(props.popularity)
               >
                 <div>
                   <CircularProgressbar
-                    value={percent}
-                    text={`${percent}%`}
-                    styles={{
-                      trail: { stroke: "#fff" },
-                      text: { fill: "#fff", fontSize: "28px" },
-                      path: { stroke: `${percent < 30 ? "red" : "#4aff5d"}` },
-                    }}
+                    value={popularityPercent()}
+                    text={`${popularityPercent()}%`}
+                    styles={buildStyles({
+                      //trail: { stroke: "#fff" },
+                      textColor: "#fff",
+                      textSize: "3rem",
+                      backgroundColor: "#000",
+                      trailColor: `${percent < 70 ? "yellow" : "#3d543fba"}`,
+                      pathColor: `${percent < 70 ? "yellow" : "#4aff5d"}`,
+                    })}
                   />
                 </div>
                 User Score

@@ -1,9 +1,10 @@
 .popularwrapp {
   width: 85%;
   margin: 0 auto;
+  margin-bottom: 40px;
 
   //test
-  min-height: 500px;
+ //min-height: 500px;
   @include respond(small-phone) {
     width: 100%;
   }
