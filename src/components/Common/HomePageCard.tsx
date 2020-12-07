@@ -28,12 +28,13 @@ const HomePageCard:FC<PropsType> = ({poster,title,realese,popularity}) => {
             <CircularProgressbar
                     value={percent}
                     text={percent> 100?`100%`:`${percent}%`}
+                    background
                     styles={buildStyles({
                       //trail: { stroke: "#fff" },
                       textColor: "#fff",
                       textSize: '3rem',
-                      backgroundColor:'blue',
-                      trailColor:'gray',
+                      backgroundColor:'#000',
+                      trailColor:`${percent < 70 ? "yellow" : "#3d543fba"}`,
                       pathColor: `${percent < 70 ? "yellow" : "#4aff5d"}` ,
                     })}
                   />

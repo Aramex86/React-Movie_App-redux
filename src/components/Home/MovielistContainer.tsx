@@ -17,6 +17,8 @@ import Popular from './Popular';
 import { popularSelector } from "../Store/Selectors/HomePageSelector";
 import { requestPopularMovies } from "../Store/Reducers/HomePageReducer";
 
+
+
 type MapStateToPropsType = {
   movieList: Array<MovieListType>;
   isFetching: boolean;
@@ -26,7 +28,7 @@ type MapStateToPropsType = {
 
 type MapDispatchPropsType = {
   requestMovieList: () => void;
-  requestPopularMovies: () => void;
+  requestPopularMovies: (pagenr:any) => void;
 };
 
 type OwnPropsType = {};
@@ -37,17 +39,20 @@ type PropsType = MapStateToPropsType &
   AppStateType;
 
 class MovielistContainer extends Component<PropsType> {
+
+  
+
   componentDidMount() {
     this.props.requestMovieList();
-    this.props.requestPopularMovies();
+    this.props.requestPopularMovies(1);
   }
 
   render() {
-   // console.log(this.props);
+    console.log(this.props);
     return (
       <>
         <HeroSection bgPopular={this.props.popularMovies} />
-        <Popular popularMovies={this.props.popularMovies}/>
+        <Popular popularMovies={this.props.popularMovies} />
         <MovieList
           movieList={this.props.movieList}
           isFetching={this.props.isFetching}

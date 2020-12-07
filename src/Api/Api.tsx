@@ -169,8 +169,8 @@ export const getPeopleApi = {
 //Home Page
 
 export const getHomePgeApi={
-  getPopular(pagenr:number){
-    return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${pagenr}`).then(res=>{
+  getPopular(currentPage:number){
+    return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${currentPage}`).then(res=>{
       console.log(res)
       return res.data
     }).catch(err=>{

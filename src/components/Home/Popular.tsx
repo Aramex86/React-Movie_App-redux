@@ -6,10 +6,14 @@ import ForRent from "./Popular/ForRent";
 import InTheater from "./Popular/InTheater";
 import { PopularType } from "../../Types/Types";
 
-export type PropsPopularMoviesType={
+ type PropsPopularMoviesType={
   popularMovies:Array<PopularType>
 }
 
+export type PropsMovieComponentstype={
+  popularMovies:Array<PopularType>
+  
+}
 
 
 
@@ -33,10 +37,10 @@ const Popular:FC<PropsPopularMoviesType> = ({popularMovies}) => {
         />
       </div>
       <div className="popular__body">
-        {show === 'stream' ? <Streaming  popularMovies={popularMovies}/> : ""}
-        {show === 'onTv' ? <OnTv /> : ""}
-        {show==='rent' ? <ForRent /> : ""}
-        {show ==='theater' ? <InTheater /> : ""}
+        {show === 'stream' ? <Streaming  popularMovies={popularMovies} />: ""}
+        {show === 'onTv' ? <OnTv popularMovies={popularMovies} /> : ""}
+        {show==='rent' ? <ForRent popularMovies={popularMovies}/> : ""}
+        {show ==='theater' ?<InTheater popularMovies={popularMovies}/> : ""}
       </div>
     </div>
   );
