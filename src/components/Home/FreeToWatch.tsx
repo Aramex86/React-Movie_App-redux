@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FreeToWatchNav from "./FreeToWatch/FreetToWatchNav";
-import Movies from './FreeToWatch/Movies'
-import Tv from './FreeToWatch/Tv'
+import Movies from "./FreeToWatch/Movies";
+import Tv from "./FreeToWatch/Tv";
 
 const FreeToWatch = () => {
   const [freeToWaTch, setFreeToWaTch] = useState("movies");
@@ -9,7 +9,6 @@ const FreeToWatch = () => {
   const showValue = (value: string) => {
     setFreeToWaTch(value);
   };
-
   return (
     <div className="freetowatchwrapp">
       <div className="freetowatchwrapp__header">
@@ -19,8 +18,8 @@ const FreeToWatch = () => {
         <FreeToWatchNav freeToWaTch={freeToWaTch} showValue={showValue} />
       </div>
       <div className="freetowatchwrapp__body">
-        {freeToWaTch === 'movies' ? <Movies/>: ""}
-        {freeToWaTch === 'Tv' ? <Tv/> : ""}
+        {freeToWaTch === "movies" ? <Movies /> : ""}
+        {freeToWaTch === "Tv" ? <Tv /> : ""}
       </div>
     </div>
   );

@@ -26,7 +26,9 @@
             }
         }
     }
-    &__info{}
+    &__info{
+        margin-bottom: 30px;
+    }
 }
 
 .CircularProgressbar-background {

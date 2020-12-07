@@ -176,5 +176,13 @@ export const getHomePgeApi={
     }).catch(err=>{
       return err.response.data.status_message;
     })
+  },
+  getNowPlaying(currentPage:number){
+    return axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=en-US&page=${currentPage}`).then(res=>{
+      console.log(res)
+      return res.data
+    }).catch(err=>{
+      return err.response.data.status_message;
+    })
   }
 }

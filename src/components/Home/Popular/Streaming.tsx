@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
   //https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
 
-  console.log(popularMovies);
+  //console.log(popularMovies);
   return (
     <div className="cardwrapp">
       {popularMovies.map((movie) => (

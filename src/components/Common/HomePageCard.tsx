@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 type PropsType = {
   poster: string;
   title: string;
-  realese: number;
+  realese: number | string;
   popularity: number;
 };
 

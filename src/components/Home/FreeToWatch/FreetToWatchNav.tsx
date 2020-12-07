@@ -1,18 +1,22 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { requestPopularMovies } from "../../Store/Reducers/HomePageReducer";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { requestNowPlaying } from "../../Store/Reducers/HomePageReducer";
+import { nowPlayingSelector } from "../../Store/Selectors/HomePageSelector";
+import { AppStateType } from "../../Store/store";
 
 type PropsType = {
   freeToWaTch: string;
   showValue: (value: string) => void;
 };
 
-const HeroNav: React.FC<PropsType> = ({ freeToWaTch, showValue }) => {
-  //const currentPages = useSelector((state:AppStateType) =>curentPageSelector(state))
+const FreeToWatchNav: React.FC<PropsType> = ({ freeToWaTch, showValue }) => {
+  const nowPlaying = useSelector((state: AppStateType) =>
+    nowPlayingSelector(state)
+  );
   const dispatch = useDispatch();
 
   const selectPageOne = () => {
-    dispatch(requestPopularMovies(Math.floor(Math.random() * 20) + 1));
+    dispatch(requestNowPlaying(Math.floor(Math.random() * 20) + 1));
   };
 
   return (
@@ -47,4 +51,4 @@ const HeroNav: React.FC<PropsType> = ({ freeToWaTch, showValue }) => {
   );
 };
 
-export default HeroNav;
+export default FreeToWatchNav;

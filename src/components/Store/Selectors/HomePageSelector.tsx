@@ -7,3 +7,7 @@ export const popularSelector = (state: AppStateType) => {
 export const curentPageSelector=(state:AppStateType)=>{
   return state.homePage.currentPage;
 }
+
+export const nowPlayingSelector=(state:AppStateType)=>{
+  return state.homePage.nowPlaying;
+}
