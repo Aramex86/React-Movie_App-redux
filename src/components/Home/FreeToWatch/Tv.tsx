@@ -20,14 +20,14 @@ const Tv = () => {
   return (
     <div className="cardwrapp">
       {nowTvPlaying.map((movie:any)=> (
-        <Link to={`movie-card/${movie.id}`} key={movie.id}>
+      /*   <Link to={`movie-card/${movie.id}`} key={movie.id}> */
           <Card
             poster={movie.poster_path}
             title={movie.name}
             realese={movie.first_air_date}
             voteAverage={movie.vote_average}
           />
-        </Link>
+        /* </Link> */
       ))}
     </div>
   );

@@ -128,67 +128,111 @@ export const getMoviesApi = {
 
 // People
 export const getPeopleApi = {
-  getDetails(personId:string) {
-    return axios.get(
-      `https://api.themoviedb.org/3/person/${personId}?api_key=${api_key}&language=en-US`
-    ).then((res)=>{
-      return res.data
-    }).catch(err=>{
-      if (err.response) {
-        return err.response.data.status_message;
-      }
-    })
+  getDetails(personId: string) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/person/${personId}?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        if (err.response) {
+          return err.response.data.status_message;
+        }
+      });
   },
-  getCombinedCreditsCast(personId:string){
-    return axios.get(`https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${api_key}&language=en-US`).then((res)=>{
-    return res.data.cast
-    }).catch(err=>{
-      if(err.response){
-        return err.response.data.status_message;
-      }
-    })
+  getCombinedCreditsCast(personId: string) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data.cast;
+      })
+      .catch((err) => {
+        if (err.response) {
+          return err.response.data.status_message;
+        }
+      });
   },
-  getCombinedCreditsCrew(personId:string){
-    return axios.get(`https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${api_key}&language=en-US`).then((res)=>{
-    return res.data.crew
-    }).catch(err=>{
-      if(err.response){
-        return err.response.data.status_message;
-      }
-    })
+  getCombinedCreditsCrew(personId: string) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data.crew;
+      })
+      .catch((err) => {
+        if (err.response) {
+          return err.response.data.status_message;
+        }
+      });
   },
-  getExternalId(personId:string){
-    return axios.get(`https://api.themoviedb.org/3/person/${personId}/external_ids?api_key=${api_key}&language=en-US`).then(res =>{
-      return res.data
-    }).catch(err=>{
-      return err.response.data.status_message;
-    })
-  }
+  getExternalId(personId: string) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/person/${personId}/external_ids?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+  },
 };
 
 //Home Page
 
-export const getHomePgeApi={
-  getPopular(currentPage:number){
-    return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${currentPage}`).then(res=>{
-      return res.data
-    }).catch(err=>{
-      return err.response.data.status_message;
-    })
+export const getHomePgeApi = {
+  getPopular(currentPage: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${currentPage}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
   },
-  getNowPlaying(currentPage:number){
-    return axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=en-US&page=${currentPage}`).then(res=>{
-      return res.data
-    }).catch(err=>{
-      return err.response.data.status_message;
-    })
+  getNowPlaying(currentPage: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=en-US&page=${currentPage}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
   },
-  getNowTvPlaying(currentPage:number){
-    return axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${api_key}&language=en-US&page=${currentPage}`).then(res=>{
-      console.log(res)
-      return res.data
-    }).catch(err=>{
-      return err.response.data.status_message;
-    })
+  getNowTvPlaying(currentPage: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/tv/popular?api_key=${api_key}&language=en-US&page=${currentPage}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
   },
-}
+};
+
+export const getSearchApi = {
+  getmovies() {
+    return axios.get(
+      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=Fatman&page=1&include_adult=false`
+    ).then((res)=>{
+      return res.data;
+    }).catch((err)=>{
+      return err.response.data.status_message;
+    });
+  },
+};
