@@ -5,3 +5,9 @@
 [1122/133910.796:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1127/081804.064:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
 [1207/083437.674:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
+[1208/193948.230:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1208/205117.658:ERROR:process_info.cc(359)] UncheckedAllocate
+[1208/205117.658:ERROR:process_info.cc(359)] UncheckedAllocate
+[1208/205117.658:ERROR:process_info.cc(359)] UncheckedAllocate
+[1208/205125.429:ERROR:process_info.cc(359)] UncheckedAllocate
+[1208/205136.330:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Aramex PC\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\34ffc9f5-c16b-41cd-890a-f190ab1aac4f: The system cannot find the path specified. (0x3)

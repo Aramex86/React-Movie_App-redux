@@ -1,11 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { PopularType } from "../../Types/Types";
+import { requestSearchMovie } from "../Store/Reducers/HomePageReducer";
+import { searchMoviesSelector } from "../Store/Selectors/HomePageSelector";
+import { AppStateType } from "../Store/store";
 
 type PropsType = {
   bgPopular: Array<PopularType>;
 };
 
 const Hero: React.FC<PropsType> = ({ bgPopular }) => {
+const movieSearch = useSelector((state:AppStateType) =>searchMoviesSelector(state)  )
+const dispatch = useDispatch()
+
+
+const[searchMovie,setSearchMovie]=useState('')
+
+useEffect(() => {
+ dispatch(requestSearchMovie(searchMovie))
+}, []);
+
+const handldleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+  setSearchMovie(e.target.value)
+  
+}
+
+console.log(searchMovie)
+
+
   const baseUrl = "https://image.tmdb.org/t/p/w500";
 
   const bgImages: Array<string> = bgPopular.map(
@@ -32,8 +54,10 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
         <input
           type="text"
           placeholder="Search for a movie, tv show, person......"
+          value={searchMovie}
+          onChange={handldleChange}
         />
-        <button className="btn btn--hero">Search</button>
+        <button className="btn btn--hero" onClick={()=>dispatch(requestSearchMovie(searchMovie))}>Search</button>
       </div>
     </div>
   );
