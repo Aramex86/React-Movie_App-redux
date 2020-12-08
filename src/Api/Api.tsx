@@ -171,7 +171,6 @@ export const getPeopleApi = {
 export const getHomePgeApi={
   getPopular(currentPage:number){
     return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${currentPage}`).then(res=>{
-      console.log(res)
       return res.data
     }).catch(err=>{
       return err.response.data.status_message;
@@ -179,10 +178,17 @@ export const getHomePgeApi={
   },
   getNowPlaying(currentPage:number){
     return axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=en-US&page=${currentPage}`).then(res=>{
+      return res.data
+    }).catch(err=>{
+      return err.response.data.status_message;
+    })
+  },
+  getNowTvPlaying(currentPage:number){
+    return axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${api_key}&language=en-US&page=${currentPage}`).then(res=>{
       console.log(res)
       return res.data
     }).catch(err=>{
       return err.response.data.status_message;
     })
-  }
+  },
 }

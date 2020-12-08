@@ -98,6 +98,7 @@ class MovieCardContainer extends Component<WithMoviePropsType,IState> {
           overview={this.props.details?.overview}
           credits={this.props.credits}
           handaleplay={this.handaleplay}
+          
         />
         <div className="cardWrapper__body">
           <div className="cardWrapper__body-left">

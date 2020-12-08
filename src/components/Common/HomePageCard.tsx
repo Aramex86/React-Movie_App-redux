@@ -2,22 +2,35 @@ import React, { FC } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 type PropsType = {
-  poster: string;
+  poster: string | null;
   title: string;
   realese: number | string;
-  popularity: number;
+  voteAverage: number;
 };
 
 const HomePageCard: FC<PropsType> = ({
   poster,
   title,
   realese,
-  popularity,
+  voteAverage,
 }) => {
-  const popular = (popularity * 100) / 100;
+  let votes = voteAverage.toLocaleString().replace(".", "");
+  if (votes.length < 2) {
+    votes = votes + "0";
+  }
+  const voteNumber = parseInt(votes);
 
-  const percent = Math.round(popular);
-
+  const trailColorLine=(value:number)=>{
+    if(value < 30){
+      return '#fd1818'
+    }else if(value > 30 && value < 70){
+      return '#ffff5d'
+    }else{
+      return '#50ff50de'
+    }
+  }
+  
+  //`${voteNumber < 70 ? "yellow" : "#4aff5d"}`,
   return (
     <div className="card">
       <div className="card__img">
@@ -25,16 +38,16 @@ const HomePageCard: FC<PropsType> = ({
       </div>
       <div className="card__popular">
         <CircularProgressbar
-          value={percent}
-          text={percent > 100 ? `100%` : `${percent}%`}
+          value={voteNumber}
+          text={`${voteNumber}%`}
           background
           styles={buildStyles({
-            //trail: { stroke: "#fff" },
             textColor: "#fff",
             textSize: "3rem",
+            strokeLinecap: "red",
             backgroundColor: "#000",
-            trailColor: `${percent < 70 ? "yellow" : "#3d543fba"}`,
-            pathColor: `${percent < 70 ? "yellow" : "#4aff5d"}`,
+            trailColor: "#3d543fba",
+            pathColor: trailColorLine(voteNumber)
           })}
         />
       </div>

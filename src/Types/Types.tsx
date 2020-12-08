@@ -72,6 +72,7 @@ export type WithMoviePropsType = {
   videos: Array<VideoType>;
   recomand: Array<RecomandType>;
   keywords: Array<KeywordsType>;
+  vote_average: number;
   requestMovieList: () => void;
   requestCredits: (movieId: number) => void;
   requestGenres: () => void;
@@ -317,19 +318,35 @@ export type PopularType = {
   vote_count: number;
 };
 // NOw Playing
-export type NowPlayngType={
-    adult: boolean,
-    backdrop_path: string
-    genre_ids: Array<number>
-    id: number
-    original_language:string
-    original_title: string
-    overview: string
-    popularity: number
-    poster_path: string
-    release_date: string
-    title: string
-    video: boolean,
-    vote_average: number
-    vote_count: number
-}
+export type NowPlayngType = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: Array<number>;
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+
+export type TVPopularType = {
+  backdrop_path: string | null;
+  first_air_date: string;
+  genre_ids: Array<number>;
+  id: number;
+  name: string;
+  origin_country: Array<string>;
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string | null;
+  vote_average: number;
+  vote_count: number;
+};

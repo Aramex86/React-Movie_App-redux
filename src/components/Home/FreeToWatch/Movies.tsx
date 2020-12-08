@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { requestNowPlaying } from "../../Store/Reducers/HomePageReducer";
 import { nowPlayingSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
-import Card from '../../Common/HomePageCard'
-
+import Card from "../../Common/HomePageCard";
 
 const Movies = () => {
   const nowPlayingMovies = useSelector((state: AppStateType) =>
@@ -13,9 +12,8 @@ const Movies = () => {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(requestNowPlaying(2));
+    dispatch(requestNowPlaying(Math.floor(Math.random() * 20) + 1));
   }, []);
-
   return (
     <div className="cardwrapp">
       {nowPlayingMovies.map((movie) => (
@@ -23,8 +21,8 @@ const Movies = () => {
           <Card
             poster={movie.poster_path}
             title={movie.title}
-             realese={movie.release_date}
-            popularity={movie.popularity}
+            realese={movie.release_date}
+            voteAverage={movie.vote_average}
           />
         </Link>
       ))}

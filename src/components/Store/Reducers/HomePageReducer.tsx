@@ -1,14 +1,20 @@
 import { getHomePgeApi } from "../../../Api/Api";
-import { NowPlayngType, PopularType } from "../../../Types/Types";
+import {
+  NowPlayngType,
+  PopularType,
+  TVPopularType,
+} from "../../../Types/Types";
 
 const GET_POPULAR_MOVIES = "GET_POPULAR_MOVIES";
 const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
 const GET_NOW_PLAYING = "GET_NOW_PLAYING";
+const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
 
 const initialState = {
   popularMovies: [] as Array<PopularType>,
   currentPage: 1,
   nowPlaying: [] as Array<NowPlayngType>,
+  nowTvPlaying: [] as Array<TVPopularType>,
 };
 
 type initialStateType = typeof initialState;
@@ -34,6 +40,12 @@ const homePageReducer = (
       return {
         ...state,
         nowPlaying: action.nowPlaying,
+      };
+    }
+    case GET_NOW_TVPLAYING: {
+      return {
+        ...state,
+        nowTvPlaying: action.nowTvPlaying,
       };
     }
 
@@ -74,6 +86,17 @@ export const getNowPlaying = (
 ): GetNowPlayingtype => {
   return { type: GET_NOW_PLAYING, nowPlaying };
 };
+// TV
+type GetNowTvPlaing = {
+  type: typeof GET_NOW_TVPLAYING;
+  nowTvPlaying: Array<TVPopularType>;
+};
+
+export const getNowTvPlaying = (
+  nowTvPlaying: Array<TVPopularType>
+): GetNowTvPlaing => {
+  return { type: GET_NOW_TVPLAYING, nowTvPlaying };
+};
 
 //Thunk
 export const requestPopularMovies = (currentPage: number) => async (
@@ -88,8 +111,13 @@ export const requestNowPlaying = (currentPage: number) => async (
 ) => {
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getNowPlaying(currentPage);
-  console.log(res)
   dispatch(getNowPlaying(res.results));
+};
+
+export const requestNowTvPlaying = (currentPage:number) => async (dispatch: any) => {
+  const res = await getHomePgeApi.getNowTvPlaying(currentPage);
+  console.log(res);
+  dispatch(getNowTvPlaying(res.results));
 };
 
 export default homePageReducer;

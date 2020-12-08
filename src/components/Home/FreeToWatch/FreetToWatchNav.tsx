@@ -10,10 +10,7 @@ type PropsType = {
 };
 
 const FreeToWatchNav: React.FC<PropsType> = ({ freeToWaTch, showValue }) => {
-  const nowPlaying = useSelector((state: AppStateType) =>
-    nowPlayingSelector(state)
-  );
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
   const selectPageOne = () => {
     dispatch(requestNowPlaying(Math.floor(Math.random() * 20) + 1));

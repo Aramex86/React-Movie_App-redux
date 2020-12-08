@@ -15,7 +15,7 @@ const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
             poster={movie.poster_path}
             title={movie.title}
             realese={movie.release_date}
-            popularity={movie.popularity}
+            voteAverage={movie.vote_average}
           />
         </Link>
       ))}

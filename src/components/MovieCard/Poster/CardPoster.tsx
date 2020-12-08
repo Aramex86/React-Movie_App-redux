@@ -25,23 +25,29 @@ type PropsType = {
 };
 
 const CardPoster = (props: PropsType) => {
-  const usersScore = props.popularity ? Math.ceil(props.popularity) : "";
-  const percent = +usersScore;
   const crew: any = [];
 
-console.log(props.popularity)
-console.log(usersScore)
+ const voteAvarage = props.details?.vote_average?props.details.vote_average:'';
 
-const popularityPercent=()=>{
- 
-  let percents =(+usersScore * 100) /100;
-  if(percents > 100){
-    percents = 100 
+
+  let votes = voteAvarage.toLocaleString().replace(".", "");
+  if (votes.length < 2) {
+    votes = votes + "0";
+  }
+  const voteNumber = parseInt(votes);
+
+  const trailColorLine=(value:number)=>{
+    if(value < 30){
+      return '#fd1818'
+    }else if(value > 30 && value < 70){
+      return '#ffff5d'
+    }else{
+      return '#50ff50de'
+    }
   }
 
-  return percents
-}
-console.log(popularityPercent())
+const percent = 60
+
   if (props.credits?.crew) {
     crewStaff(props.credits?.crew, "Director", crew);
     crewStaff(props.credits?.crew, "Writing", crew);
@@ -86,15 +92,15 @@ console.log(popularityPercent())
               >
                 <div>
                   <CircularProgressbar
-                    value={popularityPercent()}
-                    text={`${popularityPercent()}%`}
+                    value={voteNumber}
+                    text={`${voteNumber}%`}
                     styles={buildStyles({
                       //trail: { stroke: "#fff" },
                       textColor: "#fff",
                       textSize: "3rem",
                       backgroundColor: "#000",
-                      trailColor: `${percent < 70 ? "yellow" : "#3d543fba"}`,
-                      pathColor: `${percent < 70 ? "yellow" : "#4aff5d"}`,
+                      trailColor: "#3d543fba",
+                      pathColor: trailColorLine(voteNumber)
                     })}
                   />
                 </div>

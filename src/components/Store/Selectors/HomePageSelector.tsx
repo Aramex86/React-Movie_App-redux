@@ -11,3 +11,7 @@ export const curentPageSelector=(state:AppStateType)=>{
 export const nowPlayingSelector=(state:AppStateType)=>{
   return state.homePage.nowPlaying;
 }
+export const nowTvPlayingSelector=(state:AppStateType)=>{
+  return state.homePage.nowTvPlaying;
+}
+
