@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { PropsMovieComponentstype } from "../Popular";
+import { PropsMovieComponentstype } from "./Popular";
 import Card from "../../Common/HomePageCard";
 import { Link } from "react-router-dom";
 

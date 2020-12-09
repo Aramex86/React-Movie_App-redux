@@ -112,7 +112,7 @@ type GetSearchMovies={
   searchMovies:string
 }
 
-export const getSearchMovies=(searchMovies:string)=>{
+export const getSearchMovies=(searchMovies:string):GetSearchMovies=>{
   return{type:GET_SEARCH_MOVIES,searchMovies}
 }
 
@@ -142,8 +142,6 @@ export const requestNowTvPlaying = (currentPage:number) => async (dispatch: any)
 export const requestSearchMovie=(query:string)=>async(dispatch:any)=>{
   const res = await getSearchApi.getmovies(query)
   console.log(res)
-  
-
   dispatch(getSearchMovies(res));
 }
 

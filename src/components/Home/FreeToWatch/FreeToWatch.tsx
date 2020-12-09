@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import FreeToWatchNav from "./FreeToWatch/FreetToWatchNav";
-import Movies from "./FreeToWatch/Movies";
-import Tv from "./FreeToWatch/Tv";
+import FreeToWatchNav from "./FreetToWatchNav";
+import Movies from "./Movies";
+import Tv from "./Tv";
 
 const FreeToWatch = () => {
   const [freeToWaTch, setFreeToWaTch] = useState("movies");

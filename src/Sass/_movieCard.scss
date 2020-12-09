@@ -43,7 +43,7 @@
   display: none;
   &__header {
     min-height: 58px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     background: #000;
     @include respond(small-phone){
@@ -51,16 +51,20 @@
     }
   }
   &__videobox {
-    width: 80%;
+    width: 90%;
     //min-height: auto;
     position: absolute;
     left: 50%;
-    top: 45%;
+    top: 46%;
     transform: translate(-50%, -50%);
     color: #ffffffbd;
     font-weight: bold;
+    @include respond(tab-port){
+      top: 40%;
+      width: 90%;
+    }
     @include respond(small-phone){
-      top: 63%;
+      top: 38%;
       width: 90%;
     }
   }

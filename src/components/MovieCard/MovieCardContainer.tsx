@@ -39,19 +39,14 @@ import CardRecomand from "./Recomandations/CardRecomand";
 import CardInfo from "./CardInfo";
 import PopupTrailer from "./PopupTrailer";
 
-type IState={
-  playTrailer:boolean
-}
+type IState = {
+  playTrailer: boolean;
+};
 
-
-
-
-
-class MovieCardContainer extends Component<WithMoviePropsType,IState> {
-
-  state={
-    playTrailer:false
-  }
+class MovieCardContainer extends Component<WithMoviePropsType, IState> {
+  state = {
+    playTrailer: false,
+  };
   componentDidMount() {
     const movieId = this.props.match.params.id;
     this.props.requestCredits(movieId);
@@ -63,28 +58,26 @@ class MovieCardContainer extends Component<WithMoviePropsType,IState> {
     this.props.requestKeywords(movieId);
   }
 
-
-  handaleplay=()=>{
-   this.setState({
-     playTrailer:true
-   })
-  }
-
-  closePlay=()=>{
+  handaleplay = () => {
     this.setState({
-      playTrailer:false
-    })
-  }
+      playTrailer: true,
+    });
+  };
 
+  closePlay = () => {
+    this.setState({
+      playTrailer: false,
+    });
+  };
 
   render() {
     console.log(this.props);
     return (
       <div className="cardWrapper">
-        <PopupTrailer 
-        videos={this.props.videos}
-        playState={this.state}
-        closePlay={this.closePlay}
+        <PopupTrailer
+          videos={this.props.videos}
+          playState={this.state}
+          closePlay={this.closePlay}
         />
         <CradHeader />
         <CardPoster
@@ -98,7 +91,6 @@ class MovieCardContainer extends Component<WithMoviePropsType,IState> {
           overview={this.props.details?.overview}
           credits={this.props.credits}
           handaleplay={this.handaleplay}
-          
         />
         <div className="cardWrapper__body">
           <div className="cardWrapper__body-left">
