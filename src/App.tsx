@@ -8,6 +8,7 @@ import FullList from "./components/FullActorsList/FullList";
 import CardSocialAll from "./components/MovieCard/CardSocial/CardSocialAll";
 import CardMediaAll from "./components/MovieCard/CardMedia/CardMediaAll";
 import PosterStaffPage from "./components/MovieCard/Poster/PosterStaffPage";
+import ResultsPage from "./components/SearchResultsPage/ResultsPage";
 
 function App() {
   return (
@@ -37,6 +38,11 @@ function App() {
             exact
             path="/allmedia/"
             component={withMovies(CardMediaAll)}
+          />
+          <Route
+            exact
+            path="/sreachresults/"
+            component={ResultsPage}
           />
         </Switch>
       </WithHeaderFooter>

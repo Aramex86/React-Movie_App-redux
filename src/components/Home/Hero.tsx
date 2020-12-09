@@ -10,23 +10,23 @@ type PropsType = {
 };
 
 const Hero: React.FC<PropsType> = ({ bgPopular }) => {
-const movieSearch = useSelector((state:AppStateType) =>searchMoviesSelector(state)  )
-const dispatch = useDispatch()
+  const movieSearch = useSelector((state: AppStateType) =>
+    searchMoviesSelector(state)
+  );
+  const dispatch = useDispatch();
 
+  const [searchMovie, setSearchMovie] = useState("");
 
-const[searchMovie,setSearchMovie]=useState('')
+  useEffect(() => {
+    dispatch(requestSearchMovie(searchMovie));
+  }, []);
 
-useEffect(() => {
- dispatch(requestSearchMovie(searchMovie))
-}, []);
+  const handldleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchMovie(e.target.value);
+  };
 
-const handldleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-  setSearchMovie(e.target.value)
-  
-}
-
-console.log(searchMovie)
-
+  console.log(searchMovie);
+  console.log(movieSearch);
 
   const baseUrl = "https://image.tmdb.org/t/p/w500";
 
@@ -35,7 +35,6 @@ console.log(searchMovie)
   );
 
   const randomImg = bgImages[Math.floor(Math.random() * bgImages.length)];
-  // console.log(bgImages);
 
   return (
     <div
@@ -57,7 +56,12 @@ console.log(searchMovie)
           value={searchMovie}
           onChange={handldleChange}
         />
-        <button className="btn btn--hero" onClick={()=>dispatch(requestSearchMovie(searchMovie))}>Search</button>
+        <button
+          className="btn btn--hero"
+          onClick={() => dispatch(requestSearchMovie(searchMovie))}
+        >
+          Search
+        </button>
       </div>
     </div>
   );
