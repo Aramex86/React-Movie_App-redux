@@ -226,9 +226,9 @@ export const getHomePgeApi = {
 };
 
 export const getSearchApi = {
-  getmovies() {
+  getmovies(query:string) {
     return axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=Fatman&page=1&include_adult=false`
+      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
     ).then((res)=>{
       return res.data;
     }).catch((err)=>{

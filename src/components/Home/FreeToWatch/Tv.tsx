@@ -21,7 +21,7 @@ const Tv = () => {
     <div className="cardwrapp">
       {nowTvPlaying.map((movie:any)=> (
       /*   <Link to={`movie-card/${movie.id}`} key={movie.id}> */
-          <Card
+          <Card key={movie.id}
             poster={movie.poster_path}
             title={movie.name}
             realese={movie.first_air_date}

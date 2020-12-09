@@ -49,7 +49,7 @@ class MovielistContainer extends Component<PropsType> {
   }
 
   render() {
-    console.log(this.props);
+   // console.log(this.props);
     return (
       <>
         <HeroSection bgPopular={this.props.popularMovies} />
