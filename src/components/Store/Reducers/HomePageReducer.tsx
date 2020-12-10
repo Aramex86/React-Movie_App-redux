@@ -168,7 +168,9 @@ export const requestSearchMovie = (query: string) => async (dispatch: any) => {
 
 export const requestHomeMovies = (movieId: number) => async (dispatch: any) => {
   const res = await getMoviesApi.getVideos(movieId);
-  dispatch(getHomeMovies(res));
+  console.log(res) 
+    dispatch(getHomeMovies(res));
+
 };
 
 export default homePageReducer;
