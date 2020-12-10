@@ -19,3 +19,7 @@ export const nowTvPlayingSelector = (state: AppStateType) => {
 export const searchMoviesSelector = (state: AppStateType) => {
   return state.homePage.searchMovies;
 };
+
+export const homeVideosSelector = (state:AppStateType)=>{
+  return state.homePage.homeVideo;
+}

@@ -161,7 +161,7 @@ export type VideoType = {
   id: string;
   iso_639_1: string;
   iso_3166_1: string;
-  key: string;
+  key: string | null;
   name: string;
   site: string;
   size: null;

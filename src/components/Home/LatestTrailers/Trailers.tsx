@@ -1,47 +1,33 @@
-import { render } from "@testing-library/react";
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { requestVideos } from "../../Store/Reducers/MovieListReducer";
-import { popularSelector } from "../../Store/Selectors/HomePageSelector";
-import { viedoSelector } from "../../Store/Selectors/MovieSelector";
+import { PopularType, VideoType } from "../../../Types/Types";
+import { requestHomeMovies } from "../../Store/Reducers/HomePageReducer";
+import { homeVideosSelector, popularSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
 
-type TraylersType = {
-  id: string;
-  iso_639_1: string;
-  iso_3166_1: string;
-  key: string;
-  name: string;
-  site: string;
-  size: number;
-  type: string;
+type PropsType= {
+  popularMovies:Array<PopularType>
+  trailers:Array<VideoType>
 };
 
-const Trailers = () => {
-  const popular = useSelector((state: AppStateType) => popularSelector(state));
-  const video = useSelector((state: AppStateType) => viedoSelector(state));
-  const dispatch = useDispatch();
-
-  const popularId = [...popular.map((item) => item.id)];
-
-  const trailes = [];
-
-  trailes.push(video)
-
-  useEffect(() => {
-      dispatch(requestVideos(popularId[0]));
-        console.log("video1");
-  }, []);
+const Trailers:FC<PropsType> = ({popularMovies,trailers}) => {
   
-
-  //console.log(popularId)
-  console.log(video);
-  console.log(trailes)
+  //console.log(popularMovies)
+  
+  
+  const dispatch = useDispatch()
+  
+ 
+  //602211,671583,741067
+  
+  console.log(trailers)
 
   return (
     <div className="trailerswrapp">
       <h1>Trailer</h1>
-      <div className="container"></div>
+      <div className="container">
+{trailers.map(item=><div>{item.id}</div>)}
+      </div> 
     </div>
   );
 };

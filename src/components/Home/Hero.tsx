@@ -25,8 +25,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
     setSearchMovie(e.target.value);
   };
 
-  console.log(searchMovie);
-  console.log(movieSearch);
+ 
 
   const baseUrl = "https://image.tmdb.org/t/p/w500";
 
