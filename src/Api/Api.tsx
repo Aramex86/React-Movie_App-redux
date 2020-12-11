@@ -10,7 +10,7 @@ import axios from "axios";
 //api_key TMDb = 647b39ccfb59105c511c2df9019bc7ec; -> apikey
 //https://cors-anywhere.herokuapp.com/ ->corsanywhere
 //https://api.themoviedb.org/4/list/1?page=1&api_key=647b39ccfb59105c511c2df9019bc7ec&sort_by=title.asc";
-const api_key = "647b39ccfb59105c511c2df9019bc7ec";
+export const api_key = "647b39ccfb59105c511c2df9019bc7ec";
 //https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
 
 export const getMoviesApi = {

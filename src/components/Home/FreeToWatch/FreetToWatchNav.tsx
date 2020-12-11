@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch} from "react-redux";
 import { requestNowPlaying } from "../../Store/Reducers/HomePageReducer";
-import { nowPlayingSelector } from "../../Store/Selectors/HomePageSelector";
-import { AppStateType } from "../../Store/store";
 
 type PropsType = {
   freeToWaTch: string;
@@ -17,7 +15,7 @@ const FreeToWatchNav: React.FC<PropsType> = ({ freeToWaTch, showValue }) => {
   };
 
   return (
-    <ul className="herowrapnav">
+    <ul className="herowrapnav herowrapnav--freetowatch">
       <li className="herowrapnav__item">
         <button
           onClick={() => {

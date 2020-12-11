@@ -143,6 +143,7 @@ export const requestPopularMovies = (currentPage: number) => async (
 ) => {
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getPopular(currentPage);
+  console.log(res)
   dispatch(getPopularMovies(res.results));
 };
 export const requestNowPlaying = (currentPage: number) => async (
@@ -168,7 +169,6 @@ export const requestSearchMovie = (query: string) => async (dispatch: any) => {
 
 export const requestHomeMovies = (movieId: number) => async (dispatch: any) => {
   const res = await getMoviesApi.getVideos(movieId);
-  console.log(res) 
     dispatch(getHomeMovies(res));
 
 };

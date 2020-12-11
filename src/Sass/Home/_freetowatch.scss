@@ -6,5 +6,15 @@
     &__header{
         display: flex;
         margin-bottom: 30px;
+        @include respond(phone){
+            flex-direction: column;
+            
+            
+        }
+        &__heading{
+            @include respond(phone){
+                margin-bottom: 15px;
+            }
+        }
     }
 }
