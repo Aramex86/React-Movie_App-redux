@@ -35,7 +35,6 @@ type MapStateToPropsType = {
 type MapDispatchPropsType = {
   requestMovieList: () => void;
   requestPopularMovies: (pagenr: any) => void;
- // requestHomeMovies: (movieId: number) => void;
 };
 
 type OwnPropsType = {};
@@ -49,7 +48,6 @@ class MovielistContainer extends Component<PropsType> {
   componentDidMount() {
     this.props.requestMovieList();
     this.props.requestPopularMovies(Math.floor(Math.random() * 20) + 1);
-    //this.props.requestHomeMovies(590706);
   }
 
   render() {
@@ -59,9 +57,9 @@ class MovielistContainer extends Component<PropsType> {
         <HeroSection bgPopular={this.props.popularMovies} />
         <Popular popularMovies={this.props.popularMovies} />
         <FreeToWatch />
-       
+
         <Trailers />
-        <Tranding/>
+        <Tranding />
 
         <MovieList
           movieList={this.props.movieList}
@@ -77,7 +75,6 @@ export let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     movieList: moviesSelector(state),
     isFetching: isFetchingSelector(state),
     popularMovies: popularSelector(state),
-    //homeVideo: homeVideosSelector(state),
   };
 };
 

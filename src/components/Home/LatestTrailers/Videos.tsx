@@ -16,13 +16,20 @@ const Videos:FC<PropsType> = ({id,title}) => {
     const someArray = [] as Array<VideoType>
   
     useEffect(() => {
+      let mounted =true;
       const fetchdata = async () => {
+        if(mounted){
         const res = await axios(
           `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${api_key}&language=en-US`
         );
         setData(res.data.results);
+        }
       };
       fetchdata();
+      return ()=>{
+        mounted= false;
+      }
+
     }, []);
   
    for(let i=0;i<data.length;i++){
@@ -31,26 +38,26 @@ const Videos:FC<PropsType> = ({id,title}) => {
 
     
     return (
-        <div className='videowrapp'>
-       
-        {someArray.slice(0,1).map(video => 
+   <>
+        {someArray.slice(0,1).map(video =>  <div className='videowrapp' key={video.id}>
             <div className='videowrapp__title' key={video.id}>
                 <span>{title}</span><br/>
                 <span>{video.name}</span>
             </div>
-
-            //   <iframe
-            //   width="100%"
-            //   height={900?'700':'500'}
-            //   src={`https://www.youtube.com/embed/${i.key?.slice(0,11)}`}
-            //   frameBorder="0"
-            //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            //   allowFullScreen
-            //   title='movie trailer'
-            // ></iframe>
-           )}
+             <div className='videowrapp__modal'>
+             <iframe
+              width="100%"
+              height={900?'700':'500'}
+              src={`https://www.youtube.com/embed/${video.key?.slice(0,11)}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title='movie trailer'
+            ></iframe>
+            </div>
         </div>
-    )
+           )}
+    </>)
 }
 
 export default Videos
