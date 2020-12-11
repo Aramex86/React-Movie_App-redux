@@ -13,12 +13,12 @@ import MovieList from './Movielist';
 import HeroSection from './Hero';
 import Popular from './Popular/Popular';
 import {
-  homeVideosSelector,
+  //homeVideosSelector,
   popularSelector,
 } from '../Store/Selectors/HomePageSelector';
 import {
   requestPopularMovies,
-  requestHomeMovies,
+  //requestHomeMovies,
 } from '../Store/Reducers/HomePageReducer';
 import FreeToWatch from './FreeToWatch/FreeToWatch';
 import Trailers from './LatestTrailers/Trailers';
@@ -29,13 +29,13 @@ type MapStateToPropsType = {
   isFetching: boolean;
   movies?: any;
   popularMovies: Array<PopularType>;
-  homeVideo: Array<VideoType>;
+  //homeVideo: Array<VideoType>;
 };
 
 type MapDispatchPropsType = {
   requestMovieList: () => void;
   requestPopularMovies: (pagenr: any) => void;
-  requestHomeMovies: (movieId: number) => void;
+ // requestHomeMovies: (movieId: number) => void;
 };
 
 type OwnPropsType = {};
@@ -77,7 +77,7 @@ export let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     movieList: moviesSelector(state),
     isFetching: isFetchingSelector(state),
     popularMovies: popularSelector(state),
-    homeVideo: homeVideosSelector(state),
+    //homeVideo: homeVideosSelector(state),
   };
 };
 
@@ -86,6 +86,6 @@ export default connect<
   MapDispatchPropsType,
   OwnPropsType,
   AppStateType
->(mapStateToProps, {requestMovieList, requestPopularMovies, requestHomeMovies})(
+>(mapStateToProps, {requestMovieList, requestPopularMovies})(
   MovielistContainer
 );

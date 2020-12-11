@@ -29,13 +29,12 @@ const Videos:FC<PropsType> = ({id,title}) => {
        someArray.push(data[i])
    }
 
-console.log(someArray)
     
     return (
         <div className='videowrapp'>
        
         {someArray.slice(0,1).map(video => 
-            <div className='videowrapp__title'>
+            <div className='videowrapp__title' key={video.id}>
                 <span>{title}</span><br/>
                 <span>{video.name}</span>
             </div>

@@ -29,7 +29,6 @@ const Trailers = () => {
       <div className="trailerswrapp__substrate">
       <h2  className="trailerswrapp__substrate__heading">Latest Trailers</h2>
         {popular.map((item) => (
-          <>
             <div
               className="container"
               key={item.id}
@@ -48,7 +47,6 @@ const Trailers = () => {
                 <Video id={item.id} title={item.title} />
               </div>
             </div>
-          </>
         ))}
       </div>
     </div>

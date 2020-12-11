@@ -1,20 +1,16 @@
-.freetowatchwrapp{
-    width: 85%;
-    margin: 0 auto;
-
-    min-height: 600px;
-    &__header{
-        display: flex;
-        margin-bottom: 30px;
-        @include respond(phone){
-            flex-direction: column;
-            
-            
-        }
-        &__heading{
-            @include respond(phone){
-                margin-bottom: 15px;
-            }
-        }
+.freetowatchwrapp {
+  width: 85%;
+  margin: 0 auto;
+  &__header {
+    display: flex;
+    margin-bottom: 30px;
+    @include respond(phone) {
+      flex-direction: column;
     }
+    &__heading {
+      @include respond(phone) {
+        margin-bottom: 15px;
+      }
+    }
+  }
 }
