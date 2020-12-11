@@ -1,6 +1,7 @@
 import React from "react";
 import { VideoType } from "../../Types/Types";
-
+import {CgClose} from 'react-icons/cg'
+ 
 type StateType = {
   playTrailer: boolean;
 };
@@ -21,12 +22,7 @@ const PopupTrailer = ({ videos, playState, closePlay }: PropsType) => {
 
   const width = window.innerWidth;
 
-  const videMediaSize=()=>{
-    if(width>900){
-      return 700;
-    }
-  }
-
+  
 
   return (
     <>
@@ -37,12 +33,13 @@ const PopupTrailer = ({ videos, playState, closePlay }: PropsType) => {
             : "popuptrailer"
         }
       >
+        
+        <div className="popuptrailer__videobox ">
         <div className="popuptrailer__header">
           <button onClick={closePlay} className="btn btn--close">
-            close
+            <CgClose/>
           </button>
         </div>
-        <div className="popuptrailer__videobox ">
           <iframe
             width="100%"
             height={width>900?'700':'500'}
