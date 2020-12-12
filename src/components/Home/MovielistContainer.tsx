@@ -48,10 +48,11 @@ class MovielistContainer extends Component<PropsType> {
   componentDidMount() {
     this.props.requestMovieList();
     this.props.requestPopularMovies(Math.floor(Math.random() * 20) + 1);
+    
   }
 
   render() {
-    //console.log(this.props);
+    console.log(this.props);
     return (
       <>
         <HeroSection bgPopular={this.props.popularMovies} />

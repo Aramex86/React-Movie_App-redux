@@ -7,6 +7,7 @@
   margin-bottom: 30px;
   background-size: cover;
   transition: all 0.5s ease-in;
+  scroll-snap-align: center;
   @include respond(small-phone) {
     width: 100%;
   }
@@ -93,6 +94,9 @@
     }
   }
   &__modal {
-   
+   position: absolute;
+   z-index: 999;
+   top: 0;
+   width: 100%;
   }
 }

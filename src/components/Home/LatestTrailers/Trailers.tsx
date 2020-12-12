@@ -1,15 +1,20 @@
-import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
-import {popularSelector} from '../../Store/Selectors/HomePageSelector';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {homeVideosSelector, popularSelector} from '../../Store/Selectors/HomePageSelector';
 import {AppStateType} from '../../Store/store';
 import Video from './Videos';
 import {FaPlay} from 'react-icons/fa';
 import {PopularType} from '../../../Types/Types';
+import { requestTrailers } from '../../Store/Reducers/HomePageReducer';
 
 const Trailers = () => {
   const [bg, setBg] = useState<PopularType>();
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<number>(0);
   const popular = useSelector((state: AppStateType) => popularSelector(state));
+  const trailers = useSelector((state:AppStateType)=> homeVideosSelector(state))
+const dispatch = useDispatch()
+
+  
 
   const checkIds = (valueId: number) => {
     popular.find((item) => {
@@ -19,7 +24,8 @@ const Trailers = () => {
     });
   };
 
-  console.log(openModal);
+  //console.log(openModal);
+  console.log(trailers)
 
   return (
     <div
@@ -28,6 +34,9 @@ const Trailers = () => {
         backgroundImage: `url(https://image.tmdb.org/t/p/w500${bg?.backdrop_path})`,
       }}
     >
+      <div className="videos">
+        <Video trailers={trailers} />
+      </div>
       <div className="trailerswrapp__substrate">
         <h2 className="trailerswrapp__substrate__heading">Latest Trailers</h2>
         <div className="videowrap">
@@ -42,15 +51,12 @@ const Trailers = () => {
                   src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
                   alt="poster"
                 />
-                <div
+                <button
                   className="btn btn--play"
-                  onClick={() => setOpenModal(!openModal)}
+                  onClick={() => dispatch(requestTrailers(item.id))}
                 >
                   <FaPlay />
-                </div>
-              </div>
-              <div className="videos">
-                {openModal? <Video id={item.id} title={item.title}/> : ''}
+                </button>
               </div>
             </div>
           ))}

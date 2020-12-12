@@ -1,8 +1,9 @@
-import { getHomePgeApi, getSearchApi } from "../../../Api/Api";
+import { getHomePgeApi, getMoviesApi, getSearchApi } from "../../../Api/Api";
 import {
   NowPlayngType,
   PopularType,
   TVPopularType,
+  VideoType,
 } from "../../../Types/Types";
 
 const GET_POPULAR_MOVIES = "GET_POPULAR_MOVIES";
@@ -10,6 +11,7 @@ const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
 const GET_NOW_PLAYING = "GET_NOW_PLAYING";
 const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
 const GET_SEARCH_MOVIES = "GET_SEARCH_MOVIES";
+const GET_TRAILERS = "GET_TRAILERS";
 
 const initialState = {
   popularMovies: [] as Array<PopularType>,
@@ -17,6 +19,7 @@ const initialState = {
   nowPlaying: [] as Array<NowPlayngType>,
   nowTvPlaying: [] as Array<TVPopularType>,
   searchMovies: "",
+  trailers:[] as Array<VideoType>
 };
 
 type initialStateType = typeof initialState;
@@ -54,6 +57,12 @@ const homePageReducer = (
       return {
         ...state,
         searchMovies: action.searchMovies,
+      };
+    }
+    case GET_TRAILERS: {
+      return {
+        ...state,
+        trailers: action.trailers,
       };
     }
     
@@ -106,6 +115,18 @@ export const getNowTvPlaying = (
 ): GetNowTvPlaing => {
   return { type: GET_NOW_TVPLAYING, nowTvPlaying };
 };
+//Trailers
+type GetTrailersType = {
+  type: typeof GET_TRAILERS;
+  trailers: Array<VideoType>;
+};
+
+export const getTrailers = (
+  trailers: Array<VideoType>
+): GetTrailersType => {
+  return { type: GET_TRAILERS, trailers };
+};
+
 
 //Search
 type GetSearchMovies = {
@@ -125,7 +146,7 @@ export const requestPopularMovies = (currentPage: number) => async (
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getPopular(currentPage);
   //console.log(res)
-  dispatch(getPopularMovies(res.results));
+ dispatch(getPopularMovies(res.results));
 };
 export const requestNowPlaying = (currentPage: number) => async (
   dispatch: any
@@ -144,10 +165,14 @@ export const requestNowTvPlaying = (currentPage: number) => async (
 
 export const requestSearchMovie = (query: string) => async (dispatch: any) => {
   const res = await getSearchApi.getmovies(query);
-  console.log(res);
+  //console.log(res);
   dispatch(getSearchMovies(res));
 };
 
+export const requestTrailers = (movieId:number)=>async(dispatch:any)=>{
+  const res = await getMoviesApi.getVideos(movieId);
+  dispatch(getTrailers(res))
+}
 
 
 export default homePageReducer;
