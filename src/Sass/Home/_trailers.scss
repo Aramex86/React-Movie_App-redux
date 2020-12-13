@@ -46,6 +46,7 @@
   flex-direction: column;
   margin-right: 30px;
   cursor: pointer;
+  text-align: center;
 
   &:hover &__img {
     transition: all 0.2s ease-in;
@@ -80,9 +81,13 @@
       min-height: 150px;
     }
   }
+  &__title{
+    color: #fff;
+  }
 }
 
 .videowrapp {
+
   &__title {
     color: #fff;
     text-align: center;
@@ -96,7 +101,9 @@
   &__modal {
    position: absolute;
    z-index: 999;
-   top: 0;
-   width: 100%;
+   top: 50%;
+   left:50%;
+   width: 90%;
+   transform: translate(-50%,-50%);
   }
 }

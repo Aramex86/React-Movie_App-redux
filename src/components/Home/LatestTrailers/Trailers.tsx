@@ -1,20 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {homeVideosSelector, popularSelector} from '../../Store/Selectors/HomePageSelector';
+import {
+  homeVideosSelector,
+  popularSelector,
+} from '../../Store/Selectors/HomePageSelector';
 import {AppStateType} from '../../Store/store';
 import Video from './Videos';
 import {FaPlay} from 'react-icons/fa';
 import {PopularType} from '../../../Types/Types';
-import { requestTrailers } from '../../Store/Reducers/HomePageReducer';
+import {requestTrailers} from '../../Store/Reducers/HomePageReducer';
 
 const Trailers = () => {
   const [bg, setBg] = useState<PopularType>();
-  const [openModal, setOpenModal] = useState<number>(0);
+  const [openModal, setOpenModal] = useState(false);
   const popular = useSelector((state: AppStateType) => popularSelector(state));
-  const trailers = useSelector((state:AppStateType)=> homeVideosSelector(state))
-const dispatch = useDispatch()
-
-  
+  const trailers = useSelector((state: AppStateType) =>
+    homeVideosSelector(state)
+  );
+  const dispatch = useDispatch();
 
   const checkIds = (valueId: number) => {
     popular.find((item) => {
@@ -24,8 +27,13 @@ const dispatch = useDispatch()
     });
   };
 
-  //console.log(openModal);
-  console.log(trailers)
+
+  const trailerName = trailers.map(name=>name.name);
+
+
+
+  console.log(trailerName);
+  // console.log(trailers)
 
   return (
     <div
@@ -35,7 +43,7 @@ const dispatch = useDispatch()
       }}
     >
       <div className="videos">
-        <Video trailers={trailers} />
+        <Video trailers={trailers} openModal={openModal} />
       </div>
       <div className="trailerswrapp__substrate">
         <h2 className="trailerswrapp__substrate__heading">Latest Trailers</h2>
@@ -53,11 +61,17 @@ const dispatch = useDispatch()
                 />
                 <button
                   className="btn btn--play"
-                  onClick={() => dispatch(requestTrailers(item.id))}
+                  onClick={() => {
+                    dispatch(requestTrailers(item.id));
+                    setOpenModal(true);
+                  }}
                 >
                   <FaPlay />
                 </button>
               </div>
+              <div className="container__title">
+                  <span>{item.title}</span>
+                </div>
             </div>
           ))}
         </div>
