@@ -1,22 +1,28 @@
 import React, {FC} from 'react';
 import {VideoType} from '../../../Types/Types';
+import {CgClose} from 'react-icons/cg'
 
 type PropsType = {
   trailers: Array<VideoType>;
   openModal: boolean;
+  closeModal:()=> void;
 };
 
-const Videos: FC<PropsType> = ({trailers, openModal}) => {
-  console.log(openModal);
-  console.log(trailers);
+const width = window.innerWidth;
+
+const Videos: FC<PropsType> = ({trailers, openModal,closeModal}) => {
 
   return (
     <>
       <div className="videowrapp">
+          {openModal?
         <div className="videowrapp__modal">
+          <div className="videowrapp__modal__header">
+            <button className="btn btn--close" onClick={closeModal}><CgClose/></button>
+          </div>
           <iframe
-            width="100%"
-            height={900 ? '700' : '500'}
+            width="85%"
+            height={width === 900 ? '700' : '400'}
             src={
               openModal
                 ? `https://www.youtube.com/embed/${trailers
@@ -30,7 +36,7 @@ const Videos: FC<PropsType> = ({trailers, openModal}) => {
             title="movie trailer"
           ></iframe>
         </div>
-        
+        :''}
       </div>
     </>
   );

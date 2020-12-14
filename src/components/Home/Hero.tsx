@@ -34,6 +34,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
   );
 
   const randomImg = bgImages[Math.floor(Math.random() * bgImages.length)];
+  
 
   return (
     <div

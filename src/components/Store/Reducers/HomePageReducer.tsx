@@ -165,7 +165,7 @@ export const requestNowTvPlaying = (currentPage: number) => async (
 
 export const requestSearchMovie = (query: string) => async (dispatch: any) => {
   const res = await getSearchApi.getmovies(query);
-  //console.log(res);
+  console.log(res);
   dispatch(getSearchMovies(res));
 };
 

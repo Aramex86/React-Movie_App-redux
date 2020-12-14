@@ -47,7 +47,7 @@ type PropsType = MapStateToPropsType &
 class MovielistContainer extends Component<PropsType> {
   componentDidMount() {
     this.props.requestMovieList();
-    this.props.requestPopularMovies(Math.floor(Math.random() * 20) + 1);
+    this.props.requestPopularMovies(Math.floor(Math.random() * 10) + 1);
     
   }
 

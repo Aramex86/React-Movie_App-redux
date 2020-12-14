@@ -27,13 +27,12 @@ const Trailers = () => {
     });
   };
 
+  const closeModal=()=>{
+    setOpenModal(false);
+  }
 
-  const trailerName = trailers.map(name=>name.name);
 
-
-
-  console.log(trailerName);
-  // console.log(trailers)
+ 
 
   return (
     <div
@@ -43,7 +42,7 @@ const Trailers = () => {
       }}
     >
       <div className="videos">
-        <Video trailers={trailers} openModal={openModal} />
+        <Video trailers={trailers} openModal={openModal} closeModal={closeModal}/>
       </div>
       <div className="trailerswrapp__substrate">
         <h2 className="trailerswrapp__substrate__heading">Latest Trailers</h2>
