@@ -84,6 +84,9 @@
   }
   &__title{
     color: #fff;
+    & span:nth-child(1){
+      font-size: 2rem;
+    }
   }
 }
 

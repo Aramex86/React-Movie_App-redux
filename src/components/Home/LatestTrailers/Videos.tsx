@@ -22,7 +22,7 @@ const Videos: FC<PropsType> = ({trailers, openModal,closeModal}) => {
           </div>
           <iframe
             width="85%"
-            height={width === 900 ? '700' : '400'}
+            height={width < 900 ? '400' : '700'}
             src={
               openModal
                 ? `https://www.youtube.com/embed/${trailers

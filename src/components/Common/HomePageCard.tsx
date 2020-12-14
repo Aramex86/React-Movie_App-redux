@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import NoPoster from '../../assets/comingSoon.jpg';
 
 type PropsType = {
   poster: string | null;
@@ -34,7 +35,7 @@ const HomePageCard: FC<PropsType> = ({
   return (
     <div className="card">
       <div className="card__img">
-        <img src={`https://image.tmdb.org/t/p/w500${poster}`} alt="pic" />
+      {poster===null?<img src={NoPoster} alt="pic" />:<img src={`https://image.tmdb.org/t/p/w500${poster}`} alt="pic" />} 
       </div>
       <div className="card__popular">
         <CircularProgressbar

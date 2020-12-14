@@ -2,7 +2,7 @@ import React from 'react'
 
 const Tranding = () => {
     return (
-        <div>
+        <div className='trandingwrapp'>
             <h2>Trending</h2>
         </div>
     )
