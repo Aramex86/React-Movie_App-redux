@@ -1,0 +1,20 @@
+.skeletoncard {
+  & div {
+    width: 18rem;
+    height: 270px;
+    border-radius: 11px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    animation: bg 1s infinite;
+    transition: all 3s;
+  }
+}
+
+@keyframes bg {
+  0% {
+    background: #d8d8d854;
+  }
+  100% {
+    background: #c9c9c983;
+  }
+}

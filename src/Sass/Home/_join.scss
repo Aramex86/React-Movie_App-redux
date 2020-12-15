@@ -3,46 +3,47 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(#67068dc7, #420563d1),url(../../assets/joinToday.jpg)center center / cover;
+  background: linear-gradient(#67068dc7, #420563d1),
+    url(../../assets/joinToday.jpg) center center / cover;
   margin-bottom: 30px;
   color: #fff;
   font-size: 2rem;
-  padding:  3rem 3rem;
+  padding: 3rem 3rem;
   justify-content: center;
-  &__header{
-      margin-bottom: 20px;
+  &__header {
+    margin-bottom: 20px;
   }
   &__body {
     display: flex;
     justify-content: space-between;
-    @include respond(phone){
-        flex-direction: column-reverse;
+    @include respond(phone) {
+      flex-direction: column-reverse;
     }
     &__desc {
       width: 60%;
-      @include respond(phone){
-       width: 100%;
-    }
-      & p{
-          width: 100%;
-          & i{
-              color: rgb(169, 169, 169);
-          }
-          margin-bottom: 20px;
+      @include respond(phone) {
+        width: 100%;
+      }
+      & p {
+        width: 100%;
+        & i {
+          color: rgb(169, 169, 169);
+        }
+        margin-bottom: 20px;
+        line-height: 30px;
       }
     }
     &__list {
       width: 35%;
       font-size: 1.5rem;
       color: #dddddd;
-      @include respond(phone){
+      @include respond(phone) {
         width: 100%;
         margin-bottom: 25px;
-    }
-      &__item{
-            padding: .5rem 0;
-
-        }
+      }
+      &__item {
+        padding: 0.5rem 0;
+      }
     }
   }
 }

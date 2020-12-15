@@ -16,6 +16,7 @@ const GET_SEARCH_MOVIES = "GET_SEARCH_MOVIES";
 const GET_TRAILERS = "GET_TRAILERS";
 const GET_TREDINGS = "GET_TREDINGS";
 const GET_UPCOMING = "GET_UPCOMING";
+const FETCHING = "FETCHING";
 
 const initialState = {
   popularMovies: [] as Array<PopularType>,
@@ -25,7 +26,8 @@ const initialState = {
   searchMovies: "",
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
-  upComing: [] as Array<UpComingType>
+  upComing: [] as Array<UpComingType>,
+  fetching:true
 };
 
 type initialStateType = typeof initialState;
@@ -81,6 +83,12 @@ const homePageReducer = (
       return {
         ...state,
         upComing: action.upComing,
+      };
+    }
+    case FETCHING: {
+      return {
+        ...state,
+        fetching: action.fetching,
       };
     }
 
@@ -160,6 +168,15 @@ type GetUpComingType={
 export const getUpComing=(upComing:Array<UpComingType>):GetUpComingType=>{
 return{ type: GET_UPCOMING,upComing}
 }
+type FetchingType={
+  type :typeof FETCHING
+  fetching:boolean
+}
+export const getFetching=(fetching:boolean):FetchingType=>{
+  return {type:FETCHING,fetching}
+}
+
+
 
 //Search
 type GetSearchMovies = {
@@ -175,14 +192,17 @@ export const getSearchMovies = (searchMovies: string): GetSearchMovies => {
 export const requestPopularMovies = (currentPage: number) => async (
   dispatch: any
 ) => {
+  dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getPopular(currentPage);
   //console.log(res)
   dispatch(getPopularMovies(res.results));
+  dispatch(getFetching(false));
 };
 export const requestNowPlaying = (currentPage: number) => async (
   dispatch: any
 ) => {
+  
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getNowPlaying(currentPage);
   dispatch(getNowPlaying(res.results));

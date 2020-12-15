@@ -2,14 +2,20 @@ import React, { FC } from "react";
 import { PropsMovieComponentstype } from "./Popular";
 import Card from "../../Common/HomePageCard";
 import { Link } from "react-router-dom";
+import Skeleton from '../../Common/Skeleton';
+import { useSelector } from "react-redux";
+import { fetchingSelector } from "../../Store/Selectors/HomePageSelector";
+import { AppStateType } from "../../Store/store";
+
 
 const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
-  //https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
-
-  //console.log(popularMovies);
+  const fetching = useSelector((state: AppStateType) =>
+  fetchingSelector(state)
+);
   return (
     <div className="cardwrapp">
-      {popularMovies.map((movie) => (
+      {popularMovies.map((movie) => 
+      fetching?<Skeleton/>:
         <Link to={`movie-card/${movie.id}`} key={movie.id}>
           <Card
             poster={movie.poster_path}
@@ -20,7 +26,7 @@ const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
             firstAirDate={movie.first_air_date}
           />
         </Link>
-      ))}
+      )}
     </div>
   );
 };
