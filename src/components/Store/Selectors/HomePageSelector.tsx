@@ -23,3 +23,6 @@ export const searchMoviesSelector = (state: AppStateType) => {
 export const homeVideosSelector = (state:AppStateType)=>{
   return state.homePage.trailers;
 }
+export const traidingsSelector = (state:AppStateType)=>{
+  return state.homePage.traidings;
+}

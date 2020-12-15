@@ -350,3 +350,23 @@ export type TVPopularType = {
   vote_average: number;
   vote_count: number;
 };
+
+//Traidings
+
+export type TraidingsType = {
+  vote_average: number;
+  overview: string;
+  release_date: number;
+  adult: boolean;
+  backdrop_path: string;
+  vote_count: number;
+  genre_ids: Array<number>;
+  id: number;
+  original_language: string;
+  original_title: string;
+  poster_path: string;
+  title: string;
+  video: boolean;
+  popularity: number;
+  media_type: string;
+};

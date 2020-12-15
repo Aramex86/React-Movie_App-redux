@@ -1,6 +1,21 @@
-.trandingwrapp{
-    width: 85%;
-    margin: 0 auto;
+.traidingwrapp {
+  width: 85%;
+  margin: 0 auto;
 
-    min-height: 500px;
+  min-height: 500px;
+  background-image: url(../../assets/traiding-bg.png);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  &__header {
+    display: flex;
+    margin-bottom: 30px;
+    @include respond(phone) {
+      flex-direction: column;
+    }
+    &__heading {
+      @include respond(phone) {
+        margin-bottom: 15px;
+      }
+    }
+  }
 }

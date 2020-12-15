@@ -224,6 +224,13 @@ export const getHomePgeApi = {
         return err.response.data.status_message;
       });
   },
+  getTraidings(value:string){
+    return axios.get(`https://api.themoviedb.org/3/trending/all/${value}?api_key=${api_key}`).then((res)=>{
+      return res.data.results
+    }).catch((err)=>{
+      return err.response.data.status_message;
+    })
+  }
 };
 
 export const getSearchApi = {
