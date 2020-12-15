@@ -316,6 +316,8 @@ export type PopularType = {
   video: string;
   vote_average: number;
   vote_count: number;
+  name:string
+  first_air_date:string
 };
 // NOw Playing
 export type NowPlayngType = {
@@ -333,6 +335,8 @@ export type NowPlayngType = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  name: string;
+  first_air_date: string;
 };
 
 export type TVPopularType = {
@@ -369,4 +373,6 @@ export type TraidingsType = {
   video: boolean;
   popularity: number;
   media_type: string;
+  name: string;
+  first_air_date: string;
 };

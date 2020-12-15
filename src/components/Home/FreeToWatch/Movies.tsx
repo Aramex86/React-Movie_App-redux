@@ -23,6 +23,8 @@ const Movies = () => {
             title={movie.title}
             realese={movie.release_date}
             voteAverage={movie.vote_average}
+            name={movie.name}
+            firstAirDate={movie.first_air_date}
           />
         </Link>
       ))}

@@ -15,6 +15,7 @@ const Today = () => {
     dispatch(requestTraidings("day"));
   }, []);
 
+  console.log(traidings)
   return (
     <div className="cardwrapp">
       {traidings.map((movie) => (
@@ -22,6 +23,8 @@ const Today = () => {
           <Card
             poster={movie.poster_path}
             title={movie.title}
+            name={movie.name}
+            firstAirDate={movie.first_air_date}
             realese={movie.release_date}
             voteAverage={movie.vote_average}
           />

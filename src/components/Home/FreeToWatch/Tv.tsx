@@ -26,6 +26,8 @@ const Tv = () => {
             title={movie.name}
             realese={movie.first_air_date}
             voteAverage={movie.vote_average}
+            name={movie.name}
+            firstAirDate={movie.first_air_date}
           />
         /* </Link> */
       ))}

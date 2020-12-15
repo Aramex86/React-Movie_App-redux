@@ -7,6 +7,8 @@ type PropsType = {
   title: string;
   realese: number | string;
   voteAverage: number;
+  name:string
+  firstAirDate:string
 };
 
 const HomePageCard: FC<PropsType> = ({
@@ -14,6 +16,8 @@ const HomePageCard: FC<PropsType> = ({
   title,
   realese,
   voteAverage,
+  name,
+  firstAirDate
 }) => {
   let votes = voteAverage.toLocaleString().replace(".", "");
   if (votes.length < 2) {
@@ -53,8 +57,8 @@ const HomePageCard: FC<PropsType> = ({
         />
       </div>
       <div className="card__info">
-        <h3 className="card__info__title">{title}</h3>
-        <span className="card__info__realease">{realese}</span>
+        <h3 className="card__info__title">{title?title:name}</h3>
+        <span className="card__info__realease">{realese?realese:firstAirDate}</span>
       </div>
     </div>
   );

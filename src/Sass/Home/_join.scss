@@ -1,4 +1,48 @@
-.joinwrapp{
-    width: 85%;
-    margin: 0 auto;
+.joinwrapp {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(#67068dc7, #420563d1),url(../../assets/joinToday.jpg)center center / cover;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 2rem;
+  padding:  3rem 3rem;
+  justify-content: center;
+  &__header{
+      margin-bottom: 20px;
+  }
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    @include respond(phone){
+        flex-direction: column-reverse;
+    }
+    &__desc {
+      width: 60%;
+      @include respond(phone){
+       width: 100%;
+    }
+      & p{
+          width: 100%;
+          & i{
+              color: rgb(169, 169, 169);
+          }
+          margin-bottom: 20px;
+      }
+    }
+    &__list {
+      width: 35%;
+      font-size: 1.5rem;
+      color: #dddddd;
+      @include respond(phone){
+        width: 100%;
+        margin-bottom: 25px;
+    }
+      &__item{
+            padding: .5rem 0;
+
+        }
+    }
+  }
 }
