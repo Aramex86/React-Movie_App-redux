@@ -23,6 +23,7 @@ import {
 import FreeToWatch from './FreeToWatch/FreeToWatch';
 import Trailers from './LatestTrailers/Trailers';
 import Tranding from './Tranding/Tranding';
+import JoinToday from './JoinToday/JoinToday';
 
 type MapStateToPropsType = {
   movieList: Array<MovieListType>;
@@ -61,11 +62,12 @@ class MovielistContainer extends Component<PropsType> {
 
         <Trailers />
         <Tranding />
+        <JoinToday/>
 
-        <MovieList
+        {/* <MovieList
           movieList={this.props.movieList}
           isFetching={this.props.isFetching}
-        />
+        /> */}
       </>
     );
   }
