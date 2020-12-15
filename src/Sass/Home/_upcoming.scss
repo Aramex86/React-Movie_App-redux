@@ -1,0 +1,12 @@
+.upcomingwrapp{
+   width: 85%;
+   margin: 0 auto;
+   & h2{
+    margin-bottom: 20px;
+    background-image: linear-gradient(to right, #39d4b4, #104c22);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 4rem;
+   }
+}

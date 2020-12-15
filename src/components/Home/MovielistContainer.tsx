@@ -1,29 +1,30 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import {MovieListType, PopularType, VideoType} from '../../Types/Types';
-import {requestMovieList} from '../Store/Reducers/MovieListReducer';
+import { MovieListType, PopularType, VideoType } from "../../Types/Types";
+import { requestMovieList } from "../Store/Reducers/MovieListReducer";
 
 import {
   isFetchingSelector,
   moviesSelector,
-} from '../Store/Selectors/MovieSelector';
-import {AppStateType} from '../Store/store';
-import MovieList from './Movielist';
-import HeroSection from './Hero';
-import Popular from './Popular/Popular';
+} from "../Store/Selectors/MovieSelector";
+import { AppStateType } from "../Store/store";
+import MovieList from "./Movielist";
+import HeroSection from "./Hero";
+import Popular from "./Popular/Popular";
 import {
   //homeVideosSelector,
   popularSelector,
-} from '../Store/Selectors/HomePageSelector';
+} from "../Store/Selectors/HomePageSelector";
 import {
   requestPopularMovies,
   //requestHomeMovies,
-} from '../Store/Reducers/HomePageReducer';
-import FreeToWatch from './FreeToWatch/FreeToWatch';
-import Trailers from './LatestTrailers/Trailers';
-import Tranding from './Tranding/Tranding';
-import JoinToday from './JoinToday/JoinToday';
+} from "../Store/Reducers/HomePageReducer";
+import FreeToWatch from "./FreeToWatch/FreeToWatch";
+import Trailers from "./LatestTrailers/Trailers";
+import Tranding from "./Tranding/Tranding";
+import JoinToday from "./JoinToday/JoinToday";
+import Upcoming from "./Upcoming/Upcoming";
 
 type MapStateToPropsType = {
   movieList: Array<MovieListType>;
@@ -49,7 +50,6 @@ class MovielistContainer extends Component<PropsType> {
   componentDidMount() {
     this.props.requestMovieList();
     this.props.requestPopularMovies(Math.floor(Math.random() * 10) + 1);
-    
   }
 
   render() {
@@ -59,10 +59,10 @@ class MovielistContainer extends Component<PropsType> {
         <HeroSection bgPopular={this.props.popularMovies} />
         <Popular popularMovies={this.props.popularMovies} />
         <FreeToWatch />
-
         <Trailers />
         <Tranding />
-        <JoinToday/>
+        <JoinToday />
+        <Upcoming />
 
         {/* <MovieList
           movieList={this.props.movieList}
@@ -86,6 +86,6 @@ export default connect<
   MapDispatchPropsType,
   OwnPropsType,
   AppStateType
->(mapStateToProps, {requestMovieList, requestPopularMovies})(
+>(mapStateToProps, { requestMovieList, requestPopularMovies })(
   MovielistContainer
 );

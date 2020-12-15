@@ -85,7 +85,7 @@ export const getMoviesApi = {
         `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`
       )
       .then((res) => {
-        console.log(res.data.results)
+        console.log(res.data.results);
         return res.data.results;
       })
       .catch((error) => {
@@ -224,23 +224,44 @@ export const getHomePgeApi = {
         return err.response.data.status_message;
       });
   },
-  getTraidings(value:string){
-    return axios.get(`https://api.themoviedb.org/3/trending/all/${value}?api_key=${api_key}`).then((res)=>{
-      return res.data.results
-    }).catch((err)=>{
-      return err.response.data.status_message;
-    })
-  }
+  getTraidings(value: string) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/trending/all/${value}?api_key=${api_key}`
+      )
+      .then((res) => {
+        return res.data.results;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+  },
+  getUpcomming(randomPage:number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}&language=en-US&page=${randomPage}`
+      )
+      .then((res) => {
+        return res.data.results;
+      })
+      .catch((err) => {
+        console.log(err.response.data.status_message);
+        return err.response.data.status_message;
+      });
+  },
 };
 
 export const getSearchApi = {
-  getmovies(query:string) {
-    return axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
-    ).then((res)=>{
-      return res.data.results;
-    }).catch((err)=>{
-      return err.response.data.status_message;
-    });
+  getmovies(query: string) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
+      )
+      .then((res) => {
+        return res.data.results;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
   },
 };

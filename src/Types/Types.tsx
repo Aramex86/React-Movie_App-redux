@@ -376,3 +376,25 @@ export type TraidingsType = {
   name: string;
   first_air_date: string;
 };
+
+//Upcoming
+
+export type UpComingType={
+  vote_average: number;
+  overview: string;
+  release_date: number;
+  adult: boolean;
+  backdrop_path: string;
+  vote_count: number;
+  genre_ids: Array<number>;
+  id: number;
+  original_language: string;
+  original_title: string;
+  poster_path: string;
+  title: string;
+  video: boolean;
+  popularity: number;
+  media_type: string;
+  name: string;
+  first_air_date: string;
+}

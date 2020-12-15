@@ -26,3 +26,6 @@ export const homeVideosSelector = (state:AppStateType)=>{
 export const traidingsSelector = (state:AppStateType)=>{
   return state.homePage.traidings;
 }
+export const upComingSelector = (state:AppStateType)=>{
+  return state.homePage.upComing;
+}

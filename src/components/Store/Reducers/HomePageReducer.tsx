@@ -4,6 +4,7 @@ import {
   PopularType,
   TraidingsType,
   TVPopularType,
+  UpComingType,
   VideoType,
 } from "../../../Types/Types";
 
@@ -14,6 +15,7 @@ const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
 const GET_SEARCH_MOVIES = "GET_SEARCH_MOVIES";
 const GET_TRAILERS = "GET_TRAILERS";
 const GET_TREDINGS = "GET_TREDINGS";
+const GET_UPCOMING = "GET_UPCOMING";
 
 const initialState = {
   popularMovies: [] as Array<PopularType>,
@@ -23,6 +25,7 @@ const initialState = {
   searchMovies: "",
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
+  upComing: [] as Array<UpComingType>
 };
 
 type initialStateType = typeof initialState;
@@ -72,6 +75,12 @@ const homePageReducer = (
       return {
         ...state,
         traidings: action.traidings,
+      };
+    }
+    case GET_UPCOMING: {
+      return {
+        ...state,
+        upComing: action.upComing,
       };
     }
 
@@ -143,6 +152,15 @@ export const getTraidings = (
   return { type: GET_TREDINGS, traidings };
 };
 
+type GetUpComingType={
+  type: typeof GET_UPCOMING
+  upComing:Array<UpComingType>
+}
+
+export const getUpComing=(upComing:Array<UpComingType>):GetUpComingType=>{
+return{ type: GET_UPCOMING,upComing}
+}
+
 //Search
 type GetSearchMovies = {
   type: typeof GET_SEARCH_MOVIES;
@@ -191,6 +209,10 @@ export const requestTrailers = (movieId: number) => async (dispatch: any) => {
 export const requestTraidings = (value: string) => async (dispatch: any) => {
   const res = await getHomePgeApi.getTraidings(value);
   dispatch(getTraidings(res));
+};
+export const requestUpComing = (randomPage:number) => async (dispatch: any) => {
+  const res = await getHomePgeApi.getUpcomming(randomPage);
+  dispatch(getUpComing(res));
 };
 
 export default homePageReducer;
