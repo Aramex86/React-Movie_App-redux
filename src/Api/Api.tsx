@@ -85,7 +85,7 @@ export const getMoviesApi = {
         `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`
       )
       .then((res) => {
-        console.log(res.data.results);
+        //console.log(res.data.results);
         return res.data.results;
       })
       .catch((error) => {

@@ -29,7 +29,7 @@ const Popular: FC<PropsPopularMoviesType> = ({ popularMovies }) => {
         </div>
         <HeroNav show={show} showValue={showValue} />
       </div>
-      <div className="popular__body">
+      <div className="popular__body is__faiding">
         {show === "stream" ? <Streaming popularMovies={popularMovies} /> : ""}
         {show === "onTv" ? <OnTv popularMovies={popularMovies} /> : ""}
         {show === "rent" ? <ForRent popularMovies={popularMovies} /> : ""}
