@@ -5,6 +5,7 @@ const Footer = () => {
     return (
         <footer className='footer'>
             <div className='footerwrapp'>
+           
                 <div className='footerwrapp__movies'>
                     <h3>Movies</h3>
                     <ul className='list'>
@@ -62,7 +63,7 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-           <Link to="/" className='logo'>MOVIE-APP</Link> 
+            <Link to="/" className='logo'>MOVIE-APP</Link> 
         </footer>
     )
 }
