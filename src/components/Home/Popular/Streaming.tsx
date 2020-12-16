@@ -8,6 +8,7 @@ import { fetchingSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
 
 
+
 const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
   const fetching = useSelector((state: AppStateType) =>
   fetchingSelector(state)
@@ -15,9 +16,9 @@ const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
   return (
     <div className="cardwrapp">
       {popularMovies.map((movie) => 
-      fetching?<Skeleton/>:
+      fetching?<Skeleton key={movie.id}/>:
         <Link to={`movie-card/${movie.id}`} key={movie.id}>
-          <Card
+          <Card  
             poster={movie.poster_path}
             title={movie.title}
             realese={movie.release_date}

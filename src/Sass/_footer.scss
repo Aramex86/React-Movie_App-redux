@@ -1,12 +1,135 @@
-.footer{
-    min-height: 215px;
-    background-image: radial-gradient(#031f35,#04233f );
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+.footer {
+  background-image: radial-gradient(#031f35, #04233f);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 0;
+  
 }
+
+.footer .footerwrapp {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  @include respond(phone){
+    width: 100%;
+    padding: 0 .5rem;
+}
+
+  &__movies {
+    width: 13%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @include respond(phone){
+        width: 50%;
+    }
+    
+    & h3 {
+      width: 55%;
+      background-image: linear-gradient(to right, #39d4b4, #0fab3e);
+      background-clip: text;
+      color: transparent;
+      font-size: 2.2rem;
+      @include respond(phone){
+          width: 75%;
+          font-size: 2rem;
+      }
+    }
+  }
+  &__tv {
+    width: 13%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @include respond(phone){
+        width: 50%;
+    }
+    & h3 {
+      width: 55%;
+      background-image: linear-gradient(to right, #39d4b4, #0fab3e);
+      background-clip: text;
+      color: transparent;
+      font-size: 2.2rem;
+      @include respond(phone){
+          width: 75%;
+          font-size: 2rem;
+      }
+    }
+  }
+  &__people {
+    width: 13%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @include respond(phone){
+        width: 50%;
+    }
+    & h3 {
+      width: 55%;
+      background-image: linear-gradient(to right, #39d4b4, #0fab3e);
+      background-clip: text;
+      color: transparent;
+      font-size: 2.2rem;
+      @include respond(phone){
+          width: 75%;
+          font-size: 2rem;
+      }
+    }
+  }
+  &__more {
+    width: 13%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @include respond(phone){
+        width: 50%;
+    }
+    & h3 {
+      width: 55%;
+      background-image: linear-gradient(to right, #39d4b4, #0fab3e);
+      background-clip: text;
+      color: transparent;
+      font-size: 2.2rem;
+      @include respond(phone){
+          width: 75%;
+          font-size: 2rem;
+      }
+    }
+  }
+}
+
+.list {
+  list-style: none;
+  &__item {
+    padding: 0.5rem 0rem;
+  }
+  &__link {
+    color: #fff;
+    font-size: 1.6rem;
+    &:hover {
+      width: 55%;
+      background-image: linear-gradient(to right, #39d4b4, #03d442);
+      background-clip: text;
+      color: transparent;
+    }
+  }
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(to right, #69c6b3, #10b6de);
+}
+
 /* 
 #04233f 
 #02243f

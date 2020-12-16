@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { requestPopularMovies } from "../Store/Reducers/HomePageReducer";
 
@@ -7,7 +7,7 @@ type PropsType = {
   showValue: (value: string) => void;
 };
 
-const HeroNav: React.FC<PropsType> = ({ show, showValue }) => {
+const HeroNav: React.FC<PropsType> = ({ show, showValue}) => {
   //const currentPages = useSelector((state:AppStateType) =>curentPageSelector(state))
   const dispatch = useDispatch();
 

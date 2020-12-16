@@ -13,13 +13,12 @@ const ForRent: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
     fetchingSelector(state)
   );
 
-  console.log(fetching);
 
   return (
     <>
       <div className="cardwrapp">
         {popularMovies.map((movie) =>
-          fetching ? (<Skeleton/>
+          fetching ? (<Skeleton key={movie.id}/>
           ) : (
             <Link to={`movie-card/${movie.id}`} key={movie.id}>
               <Card

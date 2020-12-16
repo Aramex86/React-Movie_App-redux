@@ -27,7 +27,7 @@ const initialState = {
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
   upComing: [] as Array<UpComingType>,
-  fetching:true
+  fetching: true,
 };
 
 type initialStateType = typeof initialState;
@@ -160,23 +160,21 @@ export const getTraidings = (
   return { type: GET_TREDINGS, traidings };
 };
 
-type GetUpComingType={
-  type: typeof GET_UPCOMING
-  upComing:Array<UpComingType>
-}
+type GetUpComingType = {
+  type: typeof GET_UPCOMING;
+  upComing: Array<UpComingType>;
+};
 
-export const getUpComing=(upComing:Array<UpComingType>):GetUpComingType=>{
-return{ type: GET_UPCOMING,upComing}
-}
-type FetchingType={
-  type :typeof FETCHING
-  fetching:boolean
-}
-export const getFetching=(fetching:boolean):FetchingType=>{
-  return {type:FETCHING,fetching}
-}
-
-
+export const getUpComing = (upComing: Array<UpComingType>): GetUpComingType => {
+  return { type: GET_UPCOMING, upComing };
+};
+type FetchingType = {
+  type: typeof FETCHING;
+  fetching: boolean;
+};
+export const getFetching = (fetching: boolean): FetchingType => {
+  return { type: FETCHING, fetching };
+};
 
 //Search
 type GetSearchMovies = {
@@ -202,17 +200,20 @@ export const requestPopularMovies = (currentPage: number) => async (
 export const requestNowPlaying = (currentPage: number) => async (
   dispatch: any
 ) => {
-  
+  dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getNowPlaying(currentPage);
   dispatch(getNowPlaying(res.results));
+  dispatch(getFetching(false));
 };
 
 export const requestNowTvPlaying = (currentPage: number) => async (
   dispatch: any
 ) => {
+  dispatch(getFetching(true));
   const res = await getHomePgeApi.getNowTvPlaying(currentPage);
   dispatch(getNowTvPlaying(res.results));
+  dispatch(getFetching(false));
 };
 
 export const requestSearchMovie = (query: string) => async (dispatch: any) => {
@@ -227,12 +228,18 @@ export const requestTrailers = (movieId: number) => async (dispatch: any) => {
 };
 
 export const requestTraidings = (value: string) => async (dispatch: any) => {
+  dispatch(getFetching(true));
   const res = await getHomePgeApi.getTraidings(value);
   dispatch(getTraidings(res));
+  dispatch(getFetching(false));
 };
-export const requestUpComing = (randomPage:number) => async (dispatch: any) => {
+export const requestUpComing = (randomPage: number) => async (
+  dispatch: any
+) => {
+  dispatch(getFetching(true));
   const res = await getHomePgeApi.getUpcomming(randomPage);
   dispatch(getUpComing(res));
+  dispatch(getFetching(false));
 };
 
 export default homePageReducer;

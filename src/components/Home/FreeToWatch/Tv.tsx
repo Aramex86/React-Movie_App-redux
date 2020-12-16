@@ -3,11 +3,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Card from "../../Common/HomePageCard";
+import Skeleton from "../../Common/Skeleton";
 import { requestNowTvPlaying } from "../../Store/Reducers/HomePageReducer";
-import { nowTvPlayingSelector } from "../../Store/Selectors/HomePageSelector";
+import { fetchingSelector, nowTvPlayingSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
 
 const Tv = () => {
+  const fetching = useSelector((state: AppStateType) =>
+    fetchingSelector(state)
+  );
   const nowTvPlaying = useSelector((state: AppStateType) =>
     nowTvPlayingSelector(state)
   );
@@ -19,7 +23,8 @@ const Tv = () => {
 
   return (
     <div className="cardwrapp">
-      {nowTvPlaying.map((movie:any)=> (
+      {nowTvPlaying.map((movie:any)=> 
+      fetching?<Skeleton key={movie.id}/>:
       /*   <Link to={`movie-card/${movie.id}`} key={movie.id}> */
           <Card key={movie.id}
             poster={movie.poster_path}
@@ -30,7 +35,7 @@ const Tv = () => {
             firstAirDate={movie.first_air_date}
           />
         /* </Link> */
-      ))}
+      )}
     </div>
   );
 };

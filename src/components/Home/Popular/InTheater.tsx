@@ -15,7 +15,7 @@ const InTheater: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
     <div className="cardwrapp">
       {popularMovies.map((movie) =>
         fetching ? (
-          <Skeleton />
+          <Skeleton key={movie.id}/>
         ) : (
           <Link to={`movie-card/${movie.id}`} key={movie.id}>
             <Card
