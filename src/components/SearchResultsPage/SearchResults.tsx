@@ -1,27 +1,12 @@
 import React, { FC, useState } from "react";
-import { MovieListType, SearchType } from "../../Types/Types";
+// import { MovieListType, SearchType } from "../../Types/Types";
 
 type PropsType = {
-  results: Array<SearchType> | undefined;
+  totalResults: number |undefined;
 };
 
-const SearchResults: FC<PropsType> = ({ results = [] }) => {
-  const movies: any = [];
-  const tv: any = [];
-
-  console.log(results);
-
-  const mediaType = (arr: Array<SearchType>) => {
-    return arr.filter((item) => {
-      if (item.media_type === "movie") {
-        movies.push(item);
-      } else if (item.media_type === "tv") tv.push(item);
-    });
-  };
-
-  mediaType(results);
-  console.log(movies);
-  console.log(tv);
+const SearchResults:FC<PropsType> = ({totalResults}) => {
+  
 
   return (
     <div className="resultswrapp">
@@ -32,11 +17,11 @@ const SearchResults: FC<PropsType> = ({ results = [] }) => {
         <ul className="menulist">
           <li className="menulist__item menulist__item--active">
             <span className="menulist__name">movies</span>{" "}
-            <span className="menulist__number">{movies.length}</span>
+            <span className="menulist__number">{totalResults}</span>
           </li>
           <li className="menulist__item">
             <span className="menulist__name">tv shows</span>{" "}
-            <span className="menulist__number">{tv.length}</span>
+            <span className="menulist__number">30</span>
           </li>
           <li className="menulist__item">
             <span className="menulist__name">people</span>{" "}

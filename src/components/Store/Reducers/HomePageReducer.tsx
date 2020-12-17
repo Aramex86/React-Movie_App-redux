@@ -1,30 +1,28 @@
-import { getHomePgeApi, getMoviesApi, getSearchApi } from "../../../Api/Api";
+import {getHomePgeApi, getMoviesApi, getSearchApi} from '../../../Api/Api';
 import {
   NowPlayngType,
   PopularType,
-  SearchType,
   TraidingsType,
   TVPopularType,
   UpComingType,
   VideoType,
-} from "../../../Types/Types";
+} from '../../../Types/Types';
 
-const GET_POPULAR_MOVIES = "GET_POPULAR_MOVIES";
-const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
-const GET_NOW_PLAYING = "GET_NOW_PLAYING";
-const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
-const GET_SEARCH_MOVIES = "GET_SEARCH_MOVIES";
-const GET_TRAILERS = "GET_TRAILERS";
-const GET_TREDINGS = "GET_TREDINGS";
-const GET_UPCOMING = "GET_UPCOMING";
-const FETCHING = "FETCHING";
+const GET_POPULAR_MOVIES = 'GET_POPULAR_MOVIES';
+const GET_CURRENT_PAGE = 'GET_CURRENT_PAGE';
+const GET_NOW_PLAYING = 'GET_NOW_PLAYING';
+const GET_NOW_TVPLAYING = 'GET_NOW_TVPLAYING';
+const GET_SEARCH_MOVIES = 'GET_SEARCH_MOVIES';
+const GET_TRAILERS = 'GET_TRAILERS';
+const GET_TREDINGS = 'GET_TREDINGS';
+const GET_UPCOMING = 'GET_UPCOMING';
+const FETCHING = 'FETCHING';
 
 const initialState = {
   popularMovies: [] as Array<PopularType>,
   currentPage: 1,
   nowPlaying: [] as Array<NowPlayngType>,
   nowTvPlaying: [] as Array<TVPopularType>,
-  searchMovies: null as SearchType | null,
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
   upComing: [] as Array<UpComingType>,
@@ -62,12 +60,7 @@ const homePageReducer = (
         nowTvPlaying: action.nowTvPlaying,
       };
     }
-    case GET_SEARCH_MOVIES: {
-      return {
-        ...state,
-        searchMovies: action.searchMovies,
-      };
-    }
+
     case GET_TRAILERS: {
       return {
         ...state,
@@ -107,7 +100,7 @@ type GetPopularType = {
 export const getPopularMovies = (
   popularMovies: Array<PopularType>
 ): GetPopularType => {
-  return { type: GET_POPULAR_MOVIES, popularMovies };
+  return {type: GET_POPULAR_MOVIES, popularMovies};
 };
 //
 type GetCurrentPage = {
@@ -116,7 +109,7 @@ type GetCurrentPage = {
 };
 
 export const getCurrentPage = (currentPage: number): GetCurrentPage => {
-  return { type: GET_CURRENT_PAGE, currentPage };
+  return {type: GET_CURRENT_PAGE, currentPage};
 };
 
 //
@@ -128,7 +121,7 @@ type GetNowPlayingtype = {
 export const getNowPlaying = (
   nowPlaying: Array<NowPlayngType>
 ): GetNowPlayingtype => {
-  return { type: GET_NOW_PLAYING, nowPlaying };
+  return {type: GET_NOW_PLAYING, nowPlaying};
 };
 // TV
 type GetNowTvPlaing = {
@@ -139,7 +132,7 @@ type GetNowTvPlaing = {
 export const getNowTvPlaying = (
   nowTvPlaying: Array<TVPopularType>
 ): GetNowTvPlaing => {
-  return { type: GET_NOW_TVPLAYING, nowTvPlaying };
+  return {type: GET_NOW_TVPLAYING, nowTvPlaying};
 };
 //Trailers
 type GetTrailersType = {
@@ -148,7 +141,7 @@ type GetTrailersType = {
 };
 
 export const getTrailers = (trailers: Array<VideoType>): GetTrailersType => {
-  return { type: GET_TRAILERS, trailers };
+  return {type: GET_TRAILERS, trailers};
 };
 //Traidings
 type GetTraidingsType = {
@@ -158,7 +151,7 @@ type GetTraidingsType = {
 export const getTraidings = (
   traidings: Array<TraidingsType>
 ): GetTraidingsType => {
-  return { type: GET_TREDINGS, traidings };
+  return {type: GET_TREDINGS, traidings};
 };
 
 type GetUpComingType = {
@@ -167,24 +160,14 @@ type GetUpComingType = {
 };
 
 export const getUpComing = (upComing: Array<UpComingType>): GetUpComingType => {
-  return { type: GET_UPCOMING, upComing };
+  return {type: GET_UPCOMING, upComing};
 };
 type FetchingType = {
   type: typeof FETCHING;
   fetching: boolean;
 };
 export const getFetching = (fetching: boolean): FetchingType => {
-  return { type: FETCHING, fetching };
-};
-
-//Search
-type GetSearchMovies = {
-  type: typeof GET_SEARCH_MOVIES;
-  searchMovies: SearchType;
-};
-
-export const getSearchMovies = (searchMovies: SearchType): GetSearchMovies => {
-  return { type: GET_SEARCH_MOVIES, searchMovies };
+  return {type: FETCHING, fetching};
 };
 
 //Thunk
@@ -215,12 +198,6 @@ export const requestNowTvPlaying = (currentPage: number) => async (
   const res = await getHomePgeApi.getNowTvPlaying(currentPage);
   dispatch(getNowTvPlaying(res.results));
   dispatch(getFetching(false));
-};
-
-export const requestSearchMovie = (query: string) => async (dispatch: any) => {
-  const res = await getSearchApi.getMulti(query);
-  console.log(res);
-  dispatch(getSearchMovies(res));
 };
 
 export const requestTrailers = (movieId: number) => async (dispatch: any) => {

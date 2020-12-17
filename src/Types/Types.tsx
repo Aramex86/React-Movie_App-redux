@@ -418,9 +418,13 @@ export type SearchType={
   media_type: string;
   name: string;
   first_air_date: string;
+}
+
+
+export type SearchObjectType={
   page:number
   total_pages:number
   total_results:number
   results:Array<SearchType>
-
 }
+

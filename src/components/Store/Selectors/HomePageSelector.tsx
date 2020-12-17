@@ -15,20 +15,15 @@ export const nowTvPlayingSelector = (state: AppStateType) => {
   return state.homePage.nowTvPlaying;
 };
 
-//Search
-export const searchMoviesSelector = (state: AppStateType) => {
-  return state.homePage.searchMovies;
-};
-
-export const homeVideosSelector = (state:AppStateType)=>{
+export const homeVideosSelector = (state: AppStateType) => {
   return state.homePage.trailers;
-}
-export const traidingsSelector = (state:AppStateType)=>{
+};
+export const traidingsSelector = (state: AppStateType) => {
   return state.homePage.traidings;
-}
-export const upComingSelector = (state:AppStateType)=>{
+};
+export const upComingSelector = (state: AppStateType) => {
   return state.homePage.upComing;
-}
-export const fetchingSelector = (state:AppStateType)=>{
+};
+export const fetchingSelector = (state: AppStateType) => {
   return state.homePage.fetching;
-}
+};

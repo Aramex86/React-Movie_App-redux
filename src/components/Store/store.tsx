@@ -4,6 +4,7 @@ import movieListReducer from "./Reducers/MovieListReducer";
 import thunkMidlleWare from "redux-thunk";
 import peopleReducer from "./Reducers/PeopleReducer";
 import homePageReducer from "./Reducers/HomePageReducer";
+import searchReducer from "./Reducers/SearchReducer";
 
 
 
@@ -11,7 +12,8 @@ import homePageReducer from "./Reducers/HomePageReducer";
 let rootReducers = combineReducers({
     movies:movieListReducer,
     people:peopleReducer,
-    homePage:homePageReducer
+    homePage:homePageReducer,
+    search:searchReducer
 });
 
 

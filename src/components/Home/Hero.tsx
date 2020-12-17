@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { PopularType } from "../../Types/Types";
-import { requestSearchMovie } from "../Store/Reducers/HomePageReducer";
-import { searchMoviesSelector } from "../Store/Selectors/HomePageSelector";
+import { requestSearchMovie } from "../Store/Reducers/SearchReducer";
+import { searchMoviesSelector } from "../Store/Selectors/SearchSelector";
 import { AppStateType } from "../Store/store";
 
 type PropsType = {
