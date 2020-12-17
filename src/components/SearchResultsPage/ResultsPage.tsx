@@ -3,8 +3,17 @@ import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import SearchResults from "./SearchResults";
 import SearchResultsItems from "./SearchResultsItems";
 import Paginator from "../Common/Paginator";
+import { useSelector } from "react-redux";
+import { AppStateType } from "../Store/store";
+import { searchMoviesSelector } from "../Store/Selectors/HomePageSelector";
 
 const ResultsPage = () => {
+
+  const results = useSelector((state:AppStateType)=> searchMoviesSelector(state))
+
+//console.log('result',results?.results)
+
+
   return (
     <>
       <div className="search__header">
@@ -17,7 +26,7 @@ const ResultsPage = () => {
       <div className="resultspagewrapp">
         <div className="resultspagewrapp__body">
           <div className="resultspagewrapp__body__left">
-            <SearchResults />
+            <SearchResults results={results?.results}/>
           </div>
           <div className="resultspagewrapp__body__right">
             <SearchResultsItems />

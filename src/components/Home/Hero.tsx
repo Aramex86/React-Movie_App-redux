@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import { PopularType } from "../../Types/Types";
 import { requestSearchMovie } from "../Store/Reducers/HomePageReducer";
 import { searchMoviesSelector } from "../Store/Selectors/HomePageSelector";
@@ -15,7 +17,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
   );
   const dispatch = useDispatch();
 
-  const [searchMovie, setSearchMovie] = useState("");
+  const [searchMovie, setSearchMovie] = useState("spider");
 
   useEffect(() => {
     dispatch(requestSearchMovie(searchMovie));
@@ -23,9 +25,8 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
 
   const handldleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchMovie(e.target.value);
+    <Redirect to="/sreachresults" />;
   };
-
- 
 
   const baseUrl = "https://image.tmdb.org/t/p/w500";
 
@@ -34,7 +35,6 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
   );
 
   const randomImg = bgImages[Math.floor(Math.random() * bgImages.length)];
-  
 
   return (
     <div
@@ -56,12 +56,13 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
           value={searchMovie}
           onChange={handldleChange}
         />
-        <button
+        <Link
+          to="/sreachresults"
           className="btn btn--hero"
           onClick={() => dispatch(requestSearchMovie(searchMovie))}
         >
           Search
-        </button>
+        </Link>
       </div>
     </div>
   );

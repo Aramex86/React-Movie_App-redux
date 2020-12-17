@@ -2,6 +2,7 @@ import { getHomePgeApi, getMoviesApi, getSearchApi } from "../../../Api/Api";
 import {
   NowPlayngType,
   PopularType,
+  SearchType,
   TraidingsType,
   TVPopularType,
   UpComingType,
@@ -23,7 +24,7 @@ const initialState = {
   currentPage: 1,
   nowPlaying: [] as Array<NowPlayngType>,
   nowTvPlaying: [] as Array<TVPopularType>,
-  searchMovies: "",
+  searchMovies: null as SearchType | null,
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
   upComing: [] as Array<UpComingType>,
@@ -179,10 +180,10 @@ export const getFetching = (fetching: boolean): FetchingType => {
 //Search
 type GetSearchMovies = {
   type: typeof GET_SEARCH_MOVIES;
-  searchMovies: string;
+  searchMovies: SearchType;
 };
 
-export const getSearchMovies = (searchMovies: string): GetSearchMovies => {
+export const getSearchMovies = (searchMovies: SearchType): GetSearchMovies => {
   return { type: GET_SEARCH_MOVIES, searchMovies };
 };
 
@@ -217,7 +218,7 @@ export const requestNowTvPlaying = (currentPage: number) => async (
 };
 
 export const requestSearchMovie = (query: string) => async (dispatch: any) => {
-  const res = await getSearchApi.getmovies(query);
+  const res = await getSearchApi.getMulti(query);
   console.log(res);
   dispatch(getSearchMovies(res));
 };

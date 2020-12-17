@@ -41,15 +41,6 @@ export const getMoviesApi = {
         return res.data.genres;
       });
   },
-  getSearch(movieSearch: string) {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${movieSearch}&page=1&include_adult=false`
-      )
-      .then((res) => {
-        return res.data.results;
-      });
-  },
   getDetails(movieId: number) {
     return axios
       .get(
@@ -252,16 +243,17 @@ export const getHomePgeApi = {
 };
 
 export const getSearchApi = {
-  getmovies(query: string) {
+  getMulti(query: string) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
+        `https://api.themoviedb.org/3/search/multi?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
       )
       .then((res) => {
-        return res.data.results;
+        return res.data;
       })
       .catch((err) => {
         return err.response.data.status_message;
       });
   },
+  
 };
