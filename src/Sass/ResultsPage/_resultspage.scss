@@ -134,9 +134,18 @@
   overflow: hidden;
   display: flex;
   margin-bottom: 15px;
+  &--person{
+    width: 30%;
+    border: none;
+    box-shadow: none;
+     }
   &__img {
     width: 10%;
     margin-left: 10px;
+    padding: 10px 0;
+    &--person{
+      width: 100%;
+    }
     @include respond(tab-port) {
       width: 40%;
       margin-left: 10px;
@@ -145,6 +154,7 @@
       width: 100%;
       height: 150px;
       object-fit: cover;
+      border-radius: 7px;
     }
   }
   &__desc {

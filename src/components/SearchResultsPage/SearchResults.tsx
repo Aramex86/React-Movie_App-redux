@@ -1,12 +1,32 @@
 import React, { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { requestSearchMovie, requestSearchPeople, requestSearchTv } from "../Store/Reducers/SearchReducer";
+import { searchMoviesSelector, searchTvSelector } from "../Store/Selectors/SearchSelector";
+import { AppStateType } from "../Store/store";
 // import { MovieListType, SearchType } from "../../Types/Types";
 
 type PropsType = {
-  totalResults: number |undefined;
+  movies:number|undefined
+  tv:number|undefined
+  person: number |undefined
+  query:string
+  showSearchtype:(value:string)=>void
 };
 
-const SearchResults:FC<PropsType> = ({totalResults}) => {
+const SearchResults:FC<PropsType> = ({query,movies,tv,person,showSearchtype}) => {
   
+  const dispatch = useDispatch()
+
+  const showMovie=()=>{
+    dispatch(requestSearchMovie(query))
+  }
+  const showTv=()=>{
+    dispatch(requestSearchTv(query))
+  }
+  const showPerson=()=>{
+    dispatch(requestSearchPeople(query))
+  }
+
 
   return (
     <div className="resultswrapp">
@@ -15,17 +35,17 @@ const SearchResults:FC<PropsType> = ({totalResults}) => {
       </div>
       <div className="resultswrapp__body">
         <ul className="menulist">
-          <li className="menulist__item menulist__item--active">
+          <li className="menulist__item menulist__item--active" onClick={()=>{showMovie();showSearchtype('movie')}}>
             <span className="menulist__name">movies</span>{" "}
-            <span className="menulist__number">{totalResults}</span>
+            <span className="menulist__number">{movies}</span>
           </li>
-          <li className="menulist__item">
+          <li className="menulist__item" onClick={()=>{showTv();showSearchtype('tv')}}>
             <span className="menulist__name">tv shows</span>{" "}
-            <span className="menulist__number">30</span>
+            <span className="menulist__number">{tv}</span>
           </li>
-          <li className="menulist__item">
+          <li className="menulist__item" onClick={()=>{showPerson();showSearchtype('person')}}>
             <span className="menulist__name">people</span>{" "}
-            <span className="menulist__number">30</span>
+            <span className="menulist__number">{person}</span>
           </li>
           <li className="menulist__item">
             <span className="menulist__name">companies</span>{" "}

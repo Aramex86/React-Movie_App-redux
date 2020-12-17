@@ -3,31 +3,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { PopularType } from "../../Types/Types";
-import { requestSearchMovie } from "../Store/Reducers/SearchReducer";
-import { searchMoviesSelector } from "../Store/Selectors/SearchSelector";
-import { AppStateType } from "../Store/store";
+import {
+  requestSearchMovie,
+  requestSearchQuery,
+} from "../Store/Reducers/SearchReducer";
 
 type PropsType = {
   bgPopular: Array<PopularType>;
 };
 
 const Hero: React.FC<PropsType> = ({ bgPopular }) => {
-  const movieSearch = useSelector((state: AppStateType) =>
-    searchMoviesSelector(state)
-  );
   const dispatch = useDispatch();
 
-  const [searchMovie, setSearchMovie] = useState("spider");
+  const [searchMovie, setSearchMovie] = useState("");
 
   useEffect(() => {
     dispatch(requestSearchMovie(searchMovie));
+    
   }, []);
 
   const handldleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchMovie(e.target.value);
+    dispatch(requestSearchQuery(e.target.value));
     <Redirect to="/sreachresults" />;
   };
 
+  console.log(searchMovie)
   const baseUrl = "https://image.tmdb.org/t/p/w500";
 
   const bgImages: Array<string> = bgPopular.map(

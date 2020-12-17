@@ -418,6 +418,8 @@ export type SearchType={
   media_type: string;
   name: string;
   first_air_date: string;
+  profile_path:string
+  known_for_department:string
 }
 
 
