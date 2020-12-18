@@ -7,6 +7,8 @@ import {
   requestSearchMovie,
   requestSearchQuery,
 } from "../Store/Reducers/SearchReducer";
+import { currentPagesSelector } from "../Store/Selectors/SearchSelector";
+import { AppStateType } from "../Store/store";
 
 type PropsType = {
   bgPopular: Array<PopularType>;
@@ -16,9 +18,10 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
   const dispatch = useDispatch();
 
   const [searchMovie, setSearchMovie] = useState("");
+  const currentPage = useSelector((state:AppStateType)=>currentPagesSelector(state))
 
   useEffect(() => {
-    dispatch(requestSearchMovie(searchMovie));
+    dispatch(requestSearchMovie(searchMovie,currentPage));
     
   }, []);
 
@@ -61,7 +64,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
         <Link
           to="/sreachresults"
           className="btn btn--hero"
-          onClick={() => dispatch(requestSearchMovie(searchMovie))}
+          onClick={() => dispatch(requestSearchMovie(searchMovie,currentPage))}
         >
           Search
         </Link>

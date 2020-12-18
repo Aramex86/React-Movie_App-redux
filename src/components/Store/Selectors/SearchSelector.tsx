@@ -16,3 +16,9 @@ export const searchPeopleSelector = (state: AppStateType) => {
 export const searchCollectionsSelector = (state: AppStateType) => {
     return state.search.searchCollection;
   };
+export const totalPagesSelector = (state: AppStateType) => {
+    return state.search.totalPages;
+  };
+export const currentPagesSelector = (state: AppStateType) => {
+    return state.search.currentPage;
+  };

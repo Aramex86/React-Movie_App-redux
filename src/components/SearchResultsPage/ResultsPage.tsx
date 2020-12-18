@@ -6,6 +6,7 @@ import Paginator from "../Common/Paginator";
 import { useDispatch, useSelector } from "react-redux";
 import { AppStateType } from "../Store/store";
 import {
+  currentPagesSelector,
   searchCollectionsSelector,
   searchMoviesQuerySelector,
   searchMoviesSelector,
@@ -37,6 +38,7 @@ const ResultsPage = () => {
   const collection = useSelector((state: AppStateType) =>
   searchCollectionsSelector(state)
   );
+  const currentPage = useSelector((state:AppStateType)=>currentPagesSelector(state))
   const dispatch = useDispatch();
 
   const showSearchtype = (value: string) => {
@@ -49,7 +51,7 @@ const ResultsPage = () => {
   }
 const  handleKeyDown=(e:React.KeyboardEvent<HTMLInputElement>)=> {
     if(e.key === 'Enter') { 
-      dispatch(requestSearchMovie(searchQuery));
+      dispatch(requestSearchMovie(searchQuery,currentPage));
       dispatch(requestSearchTv(searchQuery));
       dispatch(requestSearchPeople(searchQuery));
       dispatch(requestSearchCollections(searchQuery))
@@ -57,13 +59,13 @@ const  handleKeyDown=(e:React.KeyboardEvent<HTMLInputElement>)=> {
 }
 
   useEffect(() => {
-    dispatch(requestSearchMovie(searchQuery));
+    dispatch(requestSearchMovie(searchQuery,currentPage));
     dispatch(requestSearchTv(searchQuery));
     dispatch(requestSearchPeople(searchQuery));
     dispatch(requestSearchCollections(searchQuery))
   }, [newValue]);
 
-  console.log(newValue);
+  //console.log(newValue);
 
   return (
     <>

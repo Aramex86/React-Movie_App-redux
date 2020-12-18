@@ -29,6 +29,8 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
   searchCollectionsSelector(state)
   );
 
+  // console.log(tv)
+  // console.log(collections)
 
   return (
     <>

@@ -11,9 +11,12 @@ const GET__TV = "GET__TV";
 const GET__PEOPLE = "GET__PEOPLE";
 const GET__SEARCH__QUERY = "GET__SEARCH__QUERY";
 const GET__COLLECTIONS = "GET_COLLECTIONS";
+const TOTAL__PAGES = 'TOTAL__PAGES';
+const CURRENT__PAGE = 'CURRENT__PAGE';
+
 //const GET__KEYWORDS ='GET__KEYWORDS'
 // const GET__COMPANIES ='GET__COMPANIES'
-// const GET__MULTI = 'GET__MULTI'
+//const GET__MULTI = 'GET__MULTI'
 
 const initialState = {
   searchMovies: null as SearchObjectType | null,
@@ -21,6 +24,9 @@ const initialState = {
   searchPeople: null as SearchObjectType | null,
   searchCollection: null as CollectionObjectType | null,
   searchQuery: "",
+  totalPages: 0,
+  currentPage:1
+
   // searchMovies = [] as Array<NowPlayngType>
 };
 
@@ -56,6 +62,18 @@ const searchReducer = (state = initialState, action: any): initialStateType => {
       return {
         ...state,
         searchCollection: action.searchCollection,
+      };
+    }
+    case TOTAL__PAGES: {
+      return {
+        ...state,
+        totalPages: action.totalPages,
+      };
+    }
+    case CURRENT__PAGE: {
+      return {
+        ...state,
+        currentPage: action.currentPage,
       };
     }
 
@@ -101,7 +119,7 @@ export const getCollections = (
 ): GetCollectionsType => {
   return { type: GET__COLLECTIONS, searchCollection };
 };
-
+//Query String
 type GetSearchQuery = {
   type: typeof GET__SEARCH__QUERY;
   searchQuery: string;
@@ -110,22 +128,49 @@ type GetSearchQuery = {
 export const getSerachQuery = (searchQuery: string): GetSearchQuery => {
   return { type: GET__SEARCH__QUERY, searchQuery };
 };
+//Total Pages
+type TotalPagesType={
+  type:typeof TOTAL__PAGES
+  totalPages:number
+}
+export const getTotalPages = (totalPages: number): TotalPagesType => {
+  return { type: TOTAL__PAGES, totalPages };
+};
+//Current Page
 
-export const requestSearchMovie = (query: string) => async (dispatch: any) => {
-  const res = await getSearchApi.getMovies(query);
-  //console.log('Movies',res);
+type CurrentPagesType={
+  type:typeof CURRENT__PAGE
+  currentPage:number
+}
+export const getCurrentPage = (currentPage: number): CurrentPagesType => {
+  return { type: CURRENT__PAGE, currentPage };
+};
+
+
+
+export const requestSearchMovie = (query: string,currentPage:number) => async (dispatch: any) => {
+  const res = await getSearchApi.getMovies(query,currentPage);
+  console.log('Movies',res);
   dispatch(getMovies(res));
+  dispatch(getTotalPages(res?.total_pages));
+  dispatch(getCurrentPage(currentPage));
 };
 
 export const requestSearchTv = (query: string) => async (dispatch: any) => {
   const res = await getSearchApi.getTv(query);
   //console.log('TV',res);
   dispatch(getTv(res));
+ // dispatch(getCurrentPages(currentPage));
+  dispatch(getTotalPages(res?.total_pages));
+  
 };
 export const requestSearchPeople = (query: string) => async (dispatch: any) => {
   const res = await getSearchApi.getPeople(query);
   //console.log('people',res);
   dispatch(getPeople(res));
+  dispatch(getTotalPages(res?.total_pages));
+  //dispatch(getCurrentPages(currentPage));
+  
 };
 export const requestSearchCollections = (query: string) => async (
   dispatch: any
@@ -133,10 +178,22 @@ export const requestSearchCollections = (query: string) => async (
   const res = await getSearchApi.getCollection(query);
   //console.log('collections',res);
   dispatch(getCollections(res));
+  dispatch(getTotalPages(res?.total_pages));
+  //dispatch(getCurrentPages(currentPage));
+  
 };
 
 export const requestSearchQuery = (query: string) => async (dispatch: any) => {
-  dispatch(dispatch(getSerachQuery(query)));
+  dispatch(getSerachQuery(query));
 };
+
+export const requestTotalPages = (totalPages: number) => async (dispatch: any) => {
+  dispatch(getTotalPages(totalPages));
+};
+export const requestCurrentPage = (currentPage: number) => async (dispatch: any) => {
+  dispatch(getCurrentPage(currentPage));
+};
+
+
 
 export default searchReducer;
