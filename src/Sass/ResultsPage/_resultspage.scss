@@ -1,19 +1,19 @@
 .resultspagewrapp {
   width: 85%;
   margin: 0 auto;
-  @include respond(phone){
-    width: 100%;         
-}
+  @include respond(phone) {
+    width: 100%;
+  }
   &__body {
     display: flex;
     justify-content: space-around;
-    @include respond(phone){
-        flex-direction: column;
+    @include respond(phone) {
+      flex-direction: column;
     }
     &__left {
       width: 25%;
-      @include  respond(phone){
-          width: 100%;
+      @include respond(phone) {
+        width: 100%;
       }
     }
     &__right {
@@ -26,7 +26,6 @@
         margin-top: 30px;
         padding: 0 10px;
       }
-     
     }
   }
 }
@@ -134,18 +133,16 @@
   overflow: hidden;
   display: flex;
   margin-bottom: 15px;
-  &--person{
-    width: 30%;
-    border: none;
+  &--person {
+    border-radius: 7px;
     box-shadow: none;
-     }
+    border: none;
+  }
   &__img {
-    width: 10%;
+    width: 15%;
     margin-left: 10px;
     padding: 10px 0;
-    &--person{
-      width: 100%;
-    }
+
     @include respond(tab-port) {
       width: 40%;
       margin-left: 10px;
@@ -160,6 +157,9 @@
   &__desc {
     padding: 20px 20px;
     width: 100%;
+    & h4 {
+      width: 100px;
+    }
   }
 }
 

@@ -13,3 +13,6 @@ export const searchTvSelector = (state: AppStateType) => {
 export const searchPeopleSelector = (state: AppStateType) => {
     return state.search.searchPeople;
   };
+export const searchCollectionsSelector = (state: AppStateType) => {
+    return state.search.searchCollection;
+  };

@@ -9,11 +9,12 @@ type PropsType = {
   movies:number|undefined
   tv:number|undefined
   person: number |undefined
+  collections:number | undefined
   query:string
   showSearchtype:(value:string)=>void
 };
 
-const SearchResults:FC<PropsType> = ({query,movies,tv,person,showSearchtype}) => {
+const SearchResults:FC<PropsType> = ({query,movies,tv,person,collections,showSearchtype}) => {
   
   const dispatch = useDispatch()
 
@@ -24,6 +25,9 @@ const SearchResults:FC<PropsType> = ({query,movies,tv,person,showSearchtype}) =>
     dispatch(requestSearchTv(query))
   }
   const showPerson=()=>{
+    dispatch(requestSearchPeople(query))
+  }
+  const showCollections=()=>{
     dispatch(requestSearchPeople(query))
   }
 
@@ -37,32 +41,32 @@ const SearchResults:FC<PropsType> = ({query,movies,tv,person,showSearchtype}) =>
         <ul className="menulist">
           <li className="menulist__item menulist__item--active" onClick={()=>{showMovie();showSearchtype('movie')}}>
             <span className="menulist__name">movies</span>{" "}
-            <span className="menulist__number">{movies}</span>
+            <span className="menulist__number">{movies?movies:0}</span>
           </li>
           <li className="menulist__item" onClick={()=>{showTv();showSearchtype('tv')}}>
             <span className="menulist__name">tv shows</span>{" "}
-            <span className="menulist__number">{tv}</span>
+            <span className="menulist__number">{tv?tv:0}</span>
           </li>
           <li className="menulist__item" onClick={()=>{showPerson();showSearchtype('person')}}>
             <span className="menulist__name">people</span>{" "}
-            <span className="menulist__number">{person}</span>
+            <span className="menulist__number">{person?person:0}</span>
           </li>
-          <li className="menulist__item">
+          {/* <li className="menulist__item">
             <span className="menulist__name">companies</span>{" "}
             <span className="menulist__number">30</span>
           </li>
           <li className="menulist__item">
             <span className="menulist__name">keywords</span>{" "}
             <span className="menulist__number">30</span>
-          </li>
-          <li className="menulist__item">
+          </li> */}
+          <li className="menulist__item"  onClick={()=>{showCollections();showSearchtype('collections')}}>
             <span className="menulist__name">collections</span>{" "}
-            <span className="menulist__number">30</span>
+            <span className="menulist__number">{collections}</span>
           </li>
-          <li className="menulist__item">
+          {/* <li className="menulist__item">
             <span className="menulist__name">networks</span>{" "}
             <span className="menulist__number">30</span>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

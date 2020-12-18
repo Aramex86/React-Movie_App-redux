@@ -316,8 +316,8 @@ export type PopularType = {
   video: string;
   vote_average: number;
   vote_count: number;
-  name:string
-  first_air_date:string
+  name: string;
+  first_air_date: string;
 };
 // NOw Playing
 export type NowPlayngType = {
@@ -379,7 +379,7 @@ export type TraidingsType = {
 
 //Upcoming
 
-export type UpComingType={
+export type UpComingType = {
   vote_average: number;
   overview: string;
   release_date: number;
@@ -397,10 +397,10 @@ export type UpComingType={
   media_type: string;
   name: string;
   first_air_date: string;
-}
+};
 
 //Search
-export type SearchType={
+export type SearchType = {
   vote_average: number;
   overview: string;
   release_date: number;
@@ -418,15 +418,33 @@ export type SearchType={
   media_type: string;
   name: string;
   first_air_date: string;
-  profile_path:string
-  known_for_department:string
-}
+  profile_path: string;
+  known_for_department: string;
+};
 
+export type SearchObjectType = {
+  page: number;
+  total_pages: number;
+  total_results: number;
+  results: Array<SearchType>;
+};
 
-export type SearchObjectType={
+//Collections
+type CollectionType = {
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  name: string;
+  original_language: string;
+  original_name: string;
+  overview: string;
+  poster_path: string;
+ 
+};
+
+export type CollectionObjectType={
+  results:Array<CollectionType>
+  total_pages: number
+  total_results: number
   page:number
-  total_pages:number
-  total_results:number
-  results:Array<SearchType>
 }
-

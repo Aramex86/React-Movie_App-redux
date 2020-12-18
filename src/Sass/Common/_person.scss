@@ -1,0 +1,17 @@
+.person{
+    width: 11rem;
+    height: 11rem;
+    border-radius: 17px;
+    background: #80808047;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & svg{
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+  
+  .person__img{
+    width: 100%;
+  }
