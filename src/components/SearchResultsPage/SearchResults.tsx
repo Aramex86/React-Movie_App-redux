@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  requestSearchCollections,
   requestSearchMovie,
   requestSearchPeople,
   requestSearchTv,
@@ -43,7 +44,7 @@ const SearchResults: FC<PropsType> = ({
     dispatch(requestSearchPeople(query));
   };
   const showCollections = () => {
-    dispatch(requestSearchPeople(query));
+    dispatch(requestSearchCollections(query));
   };
 
   return (

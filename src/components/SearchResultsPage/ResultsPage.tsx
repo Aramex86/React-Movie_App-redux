@@ -12,8 +12,10 @@ import {
   searchMoviesSelector,
   searchPeopleSelector,
   searchTvSelector,
+  totalPagesSelector,
 } from "../Store/Selectors/SearchSelector";
 import {
+  requestCurrentPage,
   requestSearchCollections,
   requestSearchMovie,
   requestSearchPeople,
@@ -23,7 +25,10 @@ import {
 
 const ResultsPage = () => {
   const [show, setShow] = useState<string>("movie");
-  const [newValue,setNewValue]=useState<string>('')
+  const [newValue, setNewValue] = useState<string>("");
+  // const [page, setPage] = useState(1);
+
+  
 
   const searchQuery = useSelector((state: AppStateType) =>
     searchMoviesQuerySelector(state)
@@ -36,36 +41,44 @@ const ResultsPage = () => {
     searchPeopleSelector(state)
   );
   const collection = useSelector((state: AppStateType) =>
-  searchCollectionsSelector(state)
+    searchCollectionsSelector(state)
   );
-  const currentPage = useSelector((state:AppStateType)=>currentPagesSelector(state))
+  const currentPage = useSelector((state: AppStateType) =>
+    currentPagesSelector(state)
+  );
   const dispatch = useDispatch();
 
+//  dispatch(requestCurrentPage(page))
   const showSearchtype = (value: string) => {
     setShow(value);
   };
-  
-  const newSearch=(e: React.ChangeEvent<HTMLInputElement>)=>{
+
+  const newSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(requestSearchQuery(e.target.value));
     setNewValue(e.target.value);
-  }
-const  handleKeyDown=(e:React.KeyboardEvent<HTMLInputElement>)=> {
-    if(e.key === 'Enter') { 
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
       dispatch(requestSearchMovie(searchQuery,currentPage));
       dispatch(requestSearchTv(searchQuery));
       dispatch(requestSearchPeople(searchQuery));
-      dispatch(requestSearchCollections(searchQuery))
-  }
-}
+      dispatch(requestSearchCollections(searchQuery));
+    }
+  };
 
   useEffect(() => {
     dispatch(requestSearchMovie(searchQuery,currentPage));
     dispatch(requestSearchTv(searchQuery));
     dispatch(requestSearchPeople(searchQuery));
-    dispatch(requestSearchCollections(searchQuery))
+    dispatch(requestSearchCollections(searchQuery));
   }, [newValue]);
 
-  //console.log(newValue);
+ 
+  // const handalePageChange=(e:any,value:number)=>{
+  //   setPage(value)
+  //   dispatch(requestSearchMovie(searchQuery,currentPage))
+  // }
+  //console.log(page);
 
   return (
     <>
@@ -96,7 +109,7 @@ const  handleKeyDown=(e:React.KeyboardEvent<HTMLInputElement>)=> {
           </div>
         </div>
         <div className="paginator">
-          <Paginator />
+          
         </div>
       </div>
     </>

@@ -255,12 +255,13 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
-  getMovies(query: string,currentPage:number) {
+  getMovies(query: string,page:number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
+        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=${page}&include_adult=false`
       )
       .then((res) => {
+        console.log(res.data)
         return res.data;
       })
       .catch((err) => {

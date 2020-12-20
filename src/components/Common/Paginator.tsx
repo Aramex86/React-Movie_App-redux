@@ -1,43 +1,26 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  searchMoviesQuerySelector,
-  totalPagesSelector,
-} from "../Store/Selectors/SearchSelector";
-import { AppStateType } from "../Store/store";
+import React, { FC, useEffect } from "react";
 import Pagination from "@material-ui/lab/Pagination";
-import { useState } from "react";
-import { requestCurrentPage, requestSearchMovie } from "../Store/Reducers/SearchReducer";
 
-const Paginator = () => {
-  const [page, setPage] = useState(1);
-  const dispatch = useDispatch();
-  const totalPages = useSelector((state: AppStateType) =>
-    totalPagesSelector(state)
-  );
-  const searchQuery = useSelector((state: AppStateType) =>
-    searchMoviesQuerySelector(state)
-  );
+
+type PropsType={
+  handalePageChange:(e:any,value:number)=> void
+  totalPages:number
+}
+
+const Paginator:FC<PropsType> = ({handalePageChange,totalPages}) => {
+
 
   
-    dispatch(requestCurrentPage(page));
-  
-
-  const handleChange = (e: any, value: number) => {
-    setPage(value);
-  };
-
-  console.log(totalPages);
-  console.log(page);
 
   return (
     <div>
       <Pagination
-        count={totalPages}
-        size="large"
-        page={page}
-        onChange={handleChange}
+      onChange={handalePageChange}
+      count={totalPages}
+      //defaultPage={1}
+
       />
+         
     </div>
   );
 };

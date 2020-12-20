@@ -1,15 +1,20 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  currentPagesSelector,
   searchCollectionsSelector,
+  searchMoviesQuerySelector,
   searchMoviesSelector,
   searchPeopleSelector,
   searchTvSelector,
+  totalPagesSelector,
 } from "../Store/Selectors/SearchSelector";
 import { AppStateType } from "../Store/store";
 import Person from '../Common/Pesrson';
 import NoPoster from '../../assets/comingSoon.jpg';
 import { Link } from "react-router-dom";
+import Paginator from "../Common/Paginator";
+import { requestCurrentPage, requestSearchMovie } from "../Store/Reducers/SearchReducer";
 
 
 type PropsType = {
@@ -18,6 +23,9 @@ type PropsType = {
 };
 
 const SearchResultsItems: FC<PropsType> = ({ show }) => {
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  dispatch(requestCurrentPage(page))
   const movies = useSelector((state: AppStateType) =>
     searchMoviesSelector(state)
   );
@@ -28,6 +36,25 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
   const collections = useSelector((state: AppStateType) =>
   searchCollectionsSelector(state)
   );
+  const searchQuery = useSelector((state: AppStateType) =>
+    searchMoviesQuerySelector(state)
+  );
+  const currentPage = useSelector((state: AppStateType) =>
+    currentPagesSelector(state)
+  );
+  const totalPages = useSelector((state: AppStateType) =>
+    totalPagesSelector(state)
+  );
+
+  useEffect(() => {
+   
+    const handalePageChange=(e:any,value:number)=>{
+      setPage(value)
+      dispatch(requestSearchMovie(searchQuery,currentPage))
+    }
+
+    
+  }, []);
 
   // console.log(tv)
   // console.log(collections)
@@ -37,8 +64,8 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
       {show === "movie" ? (
         <>
           {movies?.results.map((movie) => (
-            <Link to={`/movie-card/${movie.id}`}>
-            <div className="searchresultitems" key={movie.id}>
+            <Link to={`/movie-card/${movie.id}`}  key={movie.id}>
+            <div className="searchresultitems">
               <div className="searchresultitems__img">
               {movie.poster_path===null? <img
                   src={NoPoster}
@@ -136,6 +163,10 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
       ) : (
         ""
       )}
+      <Paginator
+            handalePageChange={handalePageChange}
+            totalPages={totalPages}
+          />
     </>
   );
 };

@@ -20,14 +20,12 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
   const [searchMovie, setSearchMovie] = useState("");
   const currentPage = useSelector((state:AppStateType)=>currentPagesSelector(state))
 
-  useEffect(() => {
-    dispatch(requestSearchMovie(searchMovie,currentPage));
-    
-  }, []);
+  
 
   const handldleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchMovie(e.target.value);
     dispatch(requestSearchQuery(e.target.value));
+    dispatch(requestSearchMovie(searchMovie,currentPage));
     <Redirect to="/sreachresults" />;
   };
   

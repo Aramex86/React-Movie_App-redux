@@ -152,8 +152,8 @@ export const requestSearchMovie = (query: string,currentPage:number) => async (d
   const res = await getSearchApi.getMovies(query,currentPage);
   console.log('Movies',res);
   dispatch(getMovies(res));
-  dispatch(getTotalPages(res?.total_pages));
   dispatch(getCurrentPage(currentPage));
+  dispatch(getTotalPages(res?.total_pages));
 };
 
 export const requestSearchTv = (query: string) => async (dispatch: any) => {
