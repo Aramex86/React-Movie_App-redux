@@ -255,35 +255,23 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
-  getMovies(query: string) {
+  getMovies(query: string,currentPage:number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
+        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
       )
       .then((res) => {
-        console.log(res.data)
+        //console.log(res.data)
         return res.data;
       })
       .catch((err) => {
         return err.response.data.status_message;
       });
   },
-  getTv(query: string) {
+  getTv(query: string,currentPage:number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
-      )
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        return err.response.data.status_message;
-      });
-  },
-  getPeople(query: string) {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/search/person?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
+        `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
       )
       .then((res) => {
         return res.data;
@@ -292,10 +280,22 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
-  getCollection(query: string) {
+  getPeople(query: string,currentPage:number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/search/collection?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
+        `https://api.themoviedb.org/3/search/person?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+  },
+  getCollection(query: string,currentPage:number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/search/collection?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
       )
       .then((res) => {
         return res.data;

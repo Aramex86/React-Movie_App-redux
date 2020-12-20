@@ -430,7 +430,7 @@ export type SearchObjectType = {
 };
 
 //Collections
-type CollectionType = {
+export type CollectionType = {
   adult: boolean;
   backdrop_path: string;
   id: number;

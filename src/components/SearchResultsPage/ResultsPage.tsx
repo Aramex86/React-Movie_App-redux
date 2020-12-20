@@ -2,7 +2,6 @@ import React, { Key, useEffect, useState } from "react";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import SearchResults from "./SearchResults";
 import SearchResultsItems from "./SearchResultsItems";
-import Paginator from "../Common/Paginator";
 import { useDispatch, useSelector } from "react-redux";
 import { AppStateType } from "../Store/store";
 import {
@@ -15,7 +14,7 @@ import {
   totalPagesSelector,
 } from "../Store/Selectors/SearchSelector";
 import {
-  requestCurrentPage,
+  // requestCurrentPage,
   requestSearchCollections,
   requestSearchMovie,
   requestSearchPeople,
@@ -26,9 +25,6 @@ import {
 const ResultsPage = () => {
   const [show, setShow] = useState<string>("movie");
   const [newValue, setNewValue] = useState<string>("");
-  const [page, setPage] = useState(1);
-
-  
 
   const searchQuery = useSelector((state: AppStateType) =>
     searchMoviesQuerySelector(state)
@@ -58,32 +54,19 @@ const ResultsPage = () => {
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      dispatch(requestSearchMovie(searchQuery));
-      dispatch(requestSearchTv(searchQuery));
-      dispatch(requestSearchPeople(searchQuery));
-      dispatch(requestSearchCollections(searchQuery));
+      dispatch(requestSearchMovie(searchQuery, currentPage));
+      dispatch(requestSearchTv(searchQuery, currentPage));
+      dispatch(requestSearchPeople(searchQuery, currentPage));
+      dispatch(requestSearchCollections(searchQuery, currentPage));
     }
   };
-  
-  useEffect(() => {
-    dispatch(requestSearchMovie(searchQuery));
-    dispatch(requestSearchTv(searchQuery));
-    dispatch(requestSearchPeople(searchQuery));
-    dispatch(requestSearchCollections(searchQuery));
-  }, [newValue]);
-  
-  
-  const handalePageChange = (e: any, value: number) => {
-    setPage(value);
-    //dispatch(requestSearchMovie(searchQuery,currentPage))
-  };
-  
 
-  // const handalePageChange=(e:any,value:number)=>{
-  //   setPage(value)
-  //   dispatch(requestSearchMovie(searchQuery,currentPage))
-  // }
-  //console.log(page);
+  useEffect(() => {
+    dispatch(requestSearchMovie(searchQuery, currentPage));
+    dispatch(requestSearchTv(searchQuery, currentPage));
+    dispatch(requestSearchPeople(searchQuery, currentPage));
+    dispatch(requestSearchCollections(searchQuery, currentPage));
+  }, [newValue]);
 
   return (
     <>
@@ -107,18 +90,13 @@ const ResultsPage = () => {
               person={people?.total_results}
               collections={collection?.total_results}
               showSearchtype={showSearchtype}
-              handalePageChange={handalePageChange}
-              page={page}
             />
           </div>
           <div className="resultspagewrapp__body__right">
-            <SearchResultsItems show={show}  handalePageChange={handalePageChange}
-              page={page}/>
+            <SearchResultsItems show={show} />
           </div>
         </div>
-        <div className="paginator">
-          
-        </div>
+        <div className="paginator"></div>
       </div>
     </>
   );

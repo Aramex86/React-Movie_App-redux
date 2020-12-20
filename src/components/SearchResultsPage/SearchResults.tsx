@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   requestSearchCollections,
@@ -6,11 +6,7 @@ import {
   requestSearchPeople,
   requestSearchTv,
 } from "../Store/Reducers/SearchReducer";
-import {
-  currentPagesSelector,
-  searchMoviesSelector,
-  searchTvSelector,
-} from "../Store/Selectors/SearchSelector";
+import { currentPagesSelector } from "../Store/Selectors/SearchSelector";
 import { AppStateType } from "../Store/store";
 // import { MovieListType, SearchType } from "../../Types/Types";
 
@@ -21,8 +17,8 @@ type PropsType = {
   collections: number | undefined;
   query: string;
   showSearchtype: (value: string) => void;
-  handalePageChange:(e:any,value:number)=>void
-  page:number
+  // handalePageChange:(e:any,value:number)=>void
+  // page:number
 };
 
 const SearchResults: FC<PropsType> = ({
@@ -33,20 +29,25 @@ const SearchResults: FC<PropsType> = ({
   collections,
   showSearchtype,
 }) => {
-  const currentPage = useSelector((state:AppStateType)=>currentPagesSelector(state))
+  let currentPage = useSelector((state: AppStateType) =>
+    currentPagesSelector(state)
+  );
   const dispatch = useDispatch();
 
   const showMovie = () => {
-    dispatch(requestSearchMovie(query));
+    dispatch(requestSearchMovie(query, currentPage));
   };
   const showTv = () => {
-    dispatch(requestSearchTv(query));
+    currentPage = 1;
+    dispatch(requestSearchTv(query, currentPage));
   };
   const showPerson = () => {
-    dispatch(requestSearchPeople(query));
+    currentPage = 1;
+    dispatch(requestSearchPeople(query, currentPage));
   };
   const showCollections = () => {
-    dispatch(requestSearchCollections(query));
+    currentPage = 1;
+    dispatch(requestSearchCollections(query, currentPage));
   };
 
   return (

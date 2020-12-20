@@ -1,14 +1,14 @@
-import React, {FC, useEffect} from 'react';
-import Pagination from '@material-ui/lab/Pagination';
+import React, { FC } from "react";
+import Pagination from "@material-ui/lab/Pagination";
 
 type PropsType = {
   handalePageChange: (e: any, value: number) => void;
-  totalPages: number;
+  totalPages: number | undefined;
 };
 
-const Paginator: FC<PropsType> = ({handalePageChange, totalPages}) => {
+const Paginator: FC<PropsType> = ({ handalePageChange, totalPages }) => {
   return (
-    <div>
+    <div className='paginator'>
       <Pagination onChange={handalePageChange} count={totalPages} />
     </div>
   );

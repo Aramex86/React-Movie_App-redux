@@ -1,0 +1,10 @@
+.paginator{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    @include respond(small-phone){
+        & ul{
+            flex-wrap: nowrap;
+        }
+    }
+}

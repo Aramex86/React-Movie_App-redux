@@ -4,20 +4,24 @@ import NoPoster from "../../../assets/comingSoon.jpg";
 import { Link } from "react-router-dom";
 import Paginator from "../../Common/Paginator";
 import { useDispatch, useSelector } from "react-redux";
-import { requestSearchMovie } from "../../Store/Reducers/SearchReducer";
+import {
+  requestSearchMovie,
+  requestSearchTv,
+} from "../../Store/Reducers/SearchReducer";
 import { searchMoviesQuerySelector } from "../../Store/Selectors/SearchSelector";
 import { AppStateType } from "../../Store/store";
+// import { requestCurrentPage } from "../../Store/Reducers/SearchReducer";
 type PropsType = {
   movies: Array<SearchType> | undefined;
   totalPages: number | undefined;
 };
 
-const Movie: FC<PropsType> = ({ movies, totalPages }) => {
+const Tv: FC<PropsType> = ({ movies, totalPages }) => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestSearchMovie(searchQuery, page));
+    dispatch(requestSearchTv(searchQuery, page));
   }, [page]);
 
   const searchQuery = useSelector((state: AppStateType) =>
@@ -27,29 +31,26 @@ const Movie: FC<PropsType> = ({ movies, totalPages }) => {
     setPage(value);
   };
 
-  //console.log(page);
   return (
     <>
       {movies?.map((movie) => (
-        <Link to={`/movie-card/${movie.id}`} key={movie.id}>
-          <div className="searchresultitems">
-            <div className="searchresultitems__img">
-              {movie.poster_path === null ? (
-                <img src={NoPoster} alt="pic" />
-              ) : (
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt="pic"
-                />
-              )}
-            </div>
-            <div className="searchresultitems__desc">
-              <h4>{movie.title}</h4>
-              <span>{movie.release_date}</span>
-              <p>{movie.overview.slice(0, 150)}</p>
-            </div>
+        <div className="searchresultitems" key={movie.id}>
+          <div className="searchresultitems__img">
+            {movie.poster_path === null ? (
+              <img src={NoPoster} alt="pic" />
+            ) : (
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt="pic"
+              />
+            )}
           </div>
-        </Link>
+          <div className="searchresultitems__desc">
+            <h4>{movie.title ? movie.title : movie.name}</h4>
+            <span>{movie.release_date}</span>
+            <p>{movie.overview.slice(0, 150)}</p>
+          </div>
+        </div>
       ))}
       <Paginator
         handalePageChange={handalePageChange}
@@ -59,4 +60,4 @@ const Movie: FC<PropsType> = ({ movies, totalPages }) => {
   );
 };
 
-export default Movie;
+export default Tv;

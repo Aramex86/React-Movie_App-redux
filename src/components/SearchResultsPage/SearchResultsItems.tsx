@@ -1,5 +1,5 @@
-import React, {FC, useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   currentPagesSelector,
   searchCollectionsSelector,
@@ -8,33 +8,35 @@ import {
   searchPeopleSelector,
   searchTvSelector,
   totalPagesSelector,
-} from '../Store/Selectors/SearchSelector';
-import {AppStateType} from '../Store/store';
-import Person from '../Common/Pesrson';
-import NoPoster from '../../assets/comingSoon.jpg';
-import {Link} from 'react-router-dom';
-import Paginator from '../Common/Paginator';
+} from "../Store/Selectors/SearchSelector";
+import { AppStateType } from "../Store/store";
+import NoPoster from "../../assets/comingSoon.jpg";
+import { Link } from "react-router-dom";
+import Paginator from "../Common/Paginator";
 import {
-  requestCurrentPage,
+  // requestCurrentPage,
   requestSearchMovie,
   requestSearchTv,
-} from '../Store/Reducers/SearchReducer';
-import Movies from './SerachResult/Movie'
+} from "../Store/Reducers/SearchReducer";
+import Movies from "./SerachResult/Movie";
+import Tv from "./SerachResult/Tvs";
+import Persons from "./SerachResult/Person";
+import Collections from "./SerachResult/Collections";
 
 type PropsType = {
   // results: Array<SearchType> | undefined;
   show: string;
-  handalePageChange:(e:any,value:number)=>void
-  page:number
+  // handalePageChange:(e:any,value:number)=>void
+  // page:number
 };
 
-const SearchResultsItems: FC<PropsType> = ({show,handalePageChange,page}) => {
+const SearchResultsItems: FC<PropsType> = ({ show }) => {
   const dispatch = useDispatch();
-  dispatch(requestCurrentPage(page));
+  //dispatch(requestCurrentPage(page));
 
   const movies = useSelector((state: AppStateType) =>
-  searchMoviesSelector(state)
-);
+    searchMoviesSelector(state)
+  );
   const tv = useSelector((state: AppStateType) => searchTvSelector(state));
   const persons = useSelector((state: AppStateType) =>
     searchPeopleSelector(state)
@@ -48,100 +50,44 @@ const SearchResultsItems: FC<PropsType> = ({show,handalePageChange,page}) => {
   const currentPage = useSelector((state: AppStateType) =>
     currentPagesSelector(state)
   );
-  const totalPages = useSelector((state: AppStateType) =>
-    totalPagesSelector(state)
-  );
 
-
- 
-  console.log(movies)
+  //console.log(movies)
   // console.log(collections)
 
   return (
     <>
-      {show === 'movie' ? 
-      <Movies movies={movies?.results}/>
-      : (
-        ''
+      {show === "movie" ? (
+        <Movies movies={movies?.results} totalPages={movies?.total_pages} />
+      ) : (
+        ""
       )}
-      {show === 'tv' ? (
+      {show === "tv" ? (
         <>
-          {tv?.results.map((movie) => (
-            <div className="searchresultitems" key={movie.id}>
-              <div className="searchresultitems__img">
-                {movie.poster_path === null ? (
-                  <img src={NoPoster} alt="pic" />
-                ) : (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt="pic"
-                  />
-                )}
-              </div>
-              <div className="searchresultitems__desc">
-                <h4>{movie.title ? movie.title : movie.name}</h4>
-                <span>{movie.release_date}</span>
-                <p>{movie.overview.slice(0, 150)}</p>
-              </div>
-            </div>
-          ))}
-          
+          <Tv movies={tv?.results} totalPages={tv?.total_pages} />
         </>
       ) : (
-        ''
+        ""
       )}
-      {show === 'person' ? (
+      {show === "person" ? (
         <>
-          {persons?.results.map((person) => (
-            <div
-              className="searchresultitems searchresultitems--person"
-              key={person.id}
-            >
-              <div className="searchresultitems__img">
-                {person.profile_path === null ? (
-                  <Person />
-                ) : (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${person.profile_path}`}
-                    alt="pic"
-                  />
-                )}
-              </div>
-              <div className="searchresultitems__desc">
-                <h4>{person.name}</h4>
-                <span>{person.known_for_department}</span>
-              </div>
-            </div>
-          ))}
+          <Persons
+            persons={persons?.results}
+            totalPages={persons?.total_pages}
+          />
         </>
       ) : (
-        ''
+        ""
       )}
-      {show === 'collections' ? (
+      {show === "collections" ? (
         <>
-          {collections?.results.map((collection) => (
-            <div className="searchresultitems" key={collection.id}>
-              <div className="searchresultitems__img">
-                {collection.poster_path === null ? (
-                  <img src={NoPoster} alt="pic" />
-                ) : (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${collection.poster_path}`}
-                    alt="pic"
-                  />
-                )}
-              </div>
-              <div className="searchresultitems__desc">
-                <h4>{collection.name}</h4>
-                <p>{collection.overview.slice(0, 150)}</p>
-              </div>
-            </div>
-          ))}
+          <Collections
+            collections={collections?.results}
+            totalPages={collections?.total_pages}
+          />
         </>
       ) : (
-        ''
+        ""
       )}
-    
     </>
   );
 };

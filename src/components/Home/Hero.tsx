@@ -61,7 +61,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
         <Link
           to="/sreachresults"
           className="btn btn--hero"
-          onClick={() => dispatch(requestSearchMovie(searchMovie))}
+          onClick={() => dispatch(requestSearchMovie(searchMovie,currentPage))}
         >
           Search
         </Link>
