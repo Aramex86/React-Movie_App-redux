@@ -148,19 +148,19 @@ export const getCurrentPage = (currentPage: number): CurrentPagesType => {
 
 
 
-export const requestSearchMovie = (query: string,currentPage:number) => async (dispatch: any) => {
-  const res = await getSearchApi.getMovies(query,currentPage);
+export const requestSearchMovie = (query: string) => async (dispatch: any) => {
+  const res = await getSearchApi.getMovies(query);
   console.log('Movies',res);
   dispatch(getMovies(res));
-  dispatch(getCurrentPage(currentPage));
+  //dispatch(getCurrentPage(currentPage));
   dispatch(getTotalPages(res?.total_pages));
 };
 
 export const requestSearchTv = (query: string) => async (dispatch: any) => {
   const res = await getSearchApi.getTv(query);
-  //console.log('TV',res);
+  console.log('TV',res);
   dispatch(getTv(res));
- // dispatch(getCurrentPages(currentPage));
+ // dispatch(getCurrentPage(currentPage));
   dispatch(getTotalPages(res?.total_pages));
   
 };

@@ -25,7 +25,6 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
   const handldleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchMovie(e.target.value);
     dispatch(requestSearchQuery(e.target.value));
-    dispatch(requestSearchMovie(searchMovie,currentPage));
     <Redirect to="/sreachresults" />;
   };
   
@@ -62,7 +61,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular }) => {
         <Link
           to="/sreachresults"
           className="btn btn--hero"
-          onClick={() => dispatch(requestSearchMovie(searchMovie,currentPage))}
+          onClick={() => dispatch(requestSearchMovie(searchMovie))}
         >
           Search
         </Link>

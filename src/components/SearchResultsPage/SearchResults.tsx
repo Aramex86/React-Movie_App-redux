@@ -21,6 +21,8 @@ type PropsType = {
   collections: number | undefined;
   query: string;
   showSearchtype: (value: string) => void;
+  handalePageChange:(e:any,value:number)=>void
+  page:number
 };
 
 const SearchResults: FC<PropsType> = ({
@@ -35,7 +37,7 @@ const SearchResults: FC<PropsType> = ({
   const dispatch = useDispatch();
 
   const showMovie = () => {
-    dispatch(requestSearchMovie(query,currentPage));
+    dispatch(requestSearchMovie(query));
   };
   const showTv = () => {
     dispatch(requestSearchTv(query));

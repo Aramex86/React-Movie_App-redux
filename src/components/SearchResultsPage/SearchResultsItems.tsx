@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {FC, useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   currentPagesSelector,
   searchCollectionsSelector,
@@ -8,33 +8,39 @@ import {
   searchPeopleSelector,
   searchTvSelector,
   totalPagesSelector,
-} from "../Store/Selectors/SearchSelector";
-import { AppStateType } from "../Store/store";
+} from '../Store/Selectors/SearchSelector';
+import {AppStateType} from '../Store/store';
 import Person from '../Common/Pesrson';
 import NoPoster from '../../assets/comingSoon.jpg';
-import { Link } from "react-router-dom";
-import Paginator from "../Common/Paginator";
-import { requestCurrentPage, requestSearchMovie } from "../Store/Reducers/SearchReducer";
-
+import {Link} from 'react-router-dom';
+import Paginator from '../Common/Paginator';
+import {
+  requestCurrentPage,
+  requestSearchMovie,
+  requestSearchTv,
+} from '../Store/Reducers/SearchReducer';
+import Movies from './SerachResult/Movie'
 
 type PropsType = {
   // results: Array<SearchType> | undefined;
   show: string;
+  handalePageChange:(e:any,value:number)=>void
+  page:number
 };
 
-const SearchResultsItems: FC<PropsType> = ({ show }) => {
-  const [page, setPage] = useState(1);
+const SearchResultsItems: FC<PropsType> = ({show,handalePageChange,page}) => {
   const dispatch = useDispatch();
-  dispatch(requestCurrentPage(page))
+  dispatch(requestCurrentPage(page));
+
   const movies = useSelector((state: AppStateType) =>
-    searchMoviesSelector(state)
-  );
+  searchMoviesSelector(state)
+);
   const tv = useSelector((state: AppStateType) => searchTvSelector(state));
   const persons = useSelector((state: AppStateType) =>
     searchPeopleSelector(state)
   );
   const collections = useSelector((state: AppStateType) =>
-  searchCollectionsSelector(state)
+    searchCollectionsSelector(state)
   );
   const searchQuery = useSelector((state: AppStateType) =>
     searchMoviesQuerySelector(state)
@@ -46,73 +52,45 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
     totalPagesSelector(state)
   );
 
-  useEffect(() => {
-   
-    const handalePageChange=(e:any,value:number)=>{
-      setPage(value)
-      dispatch(requestSearchMovie(searchQuery,currentPage))
-    }
 
-    
-  }, []);
-
-  // console.log(tv)
+ 
+  console.log(movies)
   // console.log(collections)
 
   return (
     <>
-      {show === "movie" ? (
-        <>
-          {movies?.results.map((movie) => (
-            <Link to={`/movie-card/${movie.id}`}  key={movie.id}>
-            <div className="searchresultitems">
-              <div className="searchresultitems__img">
-              {movie.poster_path===null? <img
-                  src={NoPoster}
-                  alt="pic"
-                />: <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt="pic"
-                />}
-              </div>
-              <div className="searchresultitems__desc">
-                <h4>{movie.title}</h4>
-                <span>{movie.release_date}</span>
-                <p>{movie.overview.slice(0, 150)}</p>
-              </div>
-            </div>
-            </Link>
-          ))}
-        </>
-      ) : (
-        ""
+      {show === 'movie' ? 
+      <Movies movies={movies?.results}/>
+      : (
+        ''
       )}
-      {show === "tv" ? (
+      {show === 'tv' ? (
         <>
           {tv?.results.map((movie) => (
             <div className="searchresultitems" key={movie.id}>
               <div className="searchresultitems__img">
-              {movie.poster_path===null? <img
-                  src={NoPoster}
-                  alt="pic"
-                />: <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt="pic"
-                />}
-               
+                {movie.poster_path === null ? (
+                  <img src={NoPoster} alt="pic" />
+                ) : (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt="pic"
+                  />
+                )}
               </div>
               <div className="searchresultitems__desc">
-                <h4>{movie.title?movie.title:movie.name}</h4>
+                <h4>{movie.title ? movie.title : movie.name}</h4>
                 <span>{movie.release_date}</span>
                 <p>{movie.overview.slice(0, 150)}</p>
               </div>
             </div>
           ))}
+          
         </>
       ) : (
-        ""
+        ''
       )}
-      {show === "person" ? (
+      {show === 'person' ? (
         <>
           {persons?.results.map((person) => (
             <div
@@ -121,7 +99,7 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
             >
               <div className="searchresultitems__img">
                 {person.profile_path === null ? (
-                  <Person/>
+                  <Person />
                 ) : (
                   <img
                     src={`https://image.tmdb.org/t/p/w500${person.profile_path}`}
@@ -137,36 +115,33 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
           ))}
         </>
       ) : (
-        ""
+        ''
       )}
-       {show === "collections" ? (
+      {show === 'collections' ? (
         <>
           {collections?.results.map((collection) => (
             <div className="searchresultitems" key={collection.id}>
-            <div className="searchresultitems__img">
-            {collection.poster_path===null? <img
-                src={NoPoster}
-                alt="pic"
-              />: <img
-                src={`https://image.tmdb.org/t/p/w500${collection.poster_path}`}
-                alt="pic"
-              />}
-             
+              <div className="searchresultitems__img">
+                {collection.poster_path === null ? (
+                  <img src={NoPoster} alt="pic" />
+                ) : (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${collection.poster_path}`}
+                    alt="pic"
+                  />
+                )}
+              </div>
+              <div className="searchresultitems__desc">
+                <h4>{collection.name}</h4>
+                <p>{collection.overview.slice(0, 150)}</p>
+              </div>
             </div>
-            <div className="searchresultitems__desc">
-              <h4>{collection.name}</h4>
-              <p>{collection.overview.slice(0, 150)}</p>
-            </div>
-          </div>
           ))}
         </>
       ) : (
-        ""
+        ''
       )}
-      <Paginator
-            handalePageChange={handalePageChange}
-            totalPages={totalPages}
-          />
+    
     </>
   );
 };

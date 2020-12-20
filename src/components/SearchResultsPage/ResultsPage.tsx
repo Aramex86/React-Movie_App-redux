@@ -26,7 +26,7 @@ import {
 const ResultsPage = () => {
   const [show, setShow] = useState<string>("movie");
   const [newValue, setNewValue] = useState<string>("");
-  // const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
   
 
@@ -48,7 +48,6 @@ const ResultsPage = () => {
   );
   const dispatch = useDispatch();
 
-//  dispatch(requestCurrentPage(page))
   const showSearchtype = (value: string) => {
     setShow(value);
   };
@@ -59,21 +58,27 @@ const ResultsPage = () => {
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      dispatch(requestSearchMovie(searchQuery,currentPage));
+      dispatch(requestSearchMovie(searchQuery));
       dispatch(requestSearchTv(searchQuery));
       dispatch(requestSearchPeople(searchQuery));
       dispatch(requestSearchCollections(searchQuery));
     }
   };
-
+  
   useEffect(() => {
-    dispatch(requestSearchMovie(searchQuery,currentPage));
+    dispatch(requestSearchMovie(searchQuery));
     dispatch(requestSearchTv(searchQuery));
     dispatch(requestSearchPeople(searchQuery));
     dispatch(requestSearchCollections(searchQuery));
   }, [newValue]);
+  
+  
+  const handalePageChange = (e: any, value: number) => {
+    setPage(value);
+    //dispatch(requestSearchMovie(searchQuery,currentPage))
+  };
+  
 
- 
   // const handalePageChange=(e:any,value:number)=>{
   //   setPage(value)
   //   dispatch(requestSearchMovie(searchQuery,currentPage))
@@ -102,10 +107,13 @@ const ResultsPage = () => {
               person={people?.total_results}
               collections={collection?.total_results}
               showSearchtype={showSearchtype}
+              handalePageChange={handalePageChange}
+              page={page}
             />
           </div>
           <div className="resultspagewrapp__body__right">
-            <SearchResultsItems show={show} />
+            <SearchResultsItems show={show}  handalePageChange={handalePageChange}
+              page={page}/>
           </div>
         </div>
         <div className="paginator">
