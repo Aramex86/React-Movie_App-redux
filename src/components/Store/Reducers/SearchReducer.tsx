@@ -155,9 +155,6 @@ export const requestTotalPages = (totalPages: number) => async (
 ) => {
   dispatch(getTotalPages(totalPages));
 };
-// export const requestCurrentPage = (currentPage: number) => async (dispatch: any) => {
-//   dispatch(getCurrentPage(currentPage));
-// };
 
 export const requestSearchMovie = (
   query: string,
@@ -184,7 +181,7 @@ export const requestSearchPeople = (
   currentPage: number
 ) => async (dispatch: any) => {
   const res = await getSearchApi.getPeople(query, currentPage);
-  console.log("Pep", res);
+  //console.log("Pep", res);
   dispatch(getPeople(res));
   dispatch(getCurrentPage(currentPage));
   dispatch(getTotalPages(res?.total_pages));
@@ -194,21 +191,11 @@ export const requestSearchCollections = (
   currentPage: number
 ) => async (dispatch: any) => {
   const res = await getSearchApi.getCollection(query, currentPage);
-  console.log("collections", res);
+  //console.log("collections", res);
   dispatch(getCollections(res));
   dispatch(getCurrentPage(currentPage));
   dispatch(getTotalPages(res?.total_pages));
 };
 
-// export const requestSearchQuery = (query: string) => async (dispatch: any) => {
-//   dispatch(getSerachQuery(query));
-// };
-
-// export const requestTotalPages = (totalPages: number) => async (dispatch: any) => {
-//   dispatch(getTotalPages(totalPages));
-// };
-// export const requestCurrentPage = (currentPage: number) => async (dispatch: any) => {
-//   dispatch(getCurrentPage(currentPage));
-// };
 
 export default searchReducer;

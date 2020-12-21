@@ -9,6 +9,7 @@ import CardSocialAll from "./components/MovieCard/CardSocial/CardSocialAll";
 import CardMediaAll from "./components/MovieCard/CardMedia/CardMediaAll";
 import PosterStaffPage from "./components/MovieCard/Poster/PosterStaffPage";
 import ResultsPage from "./components/SearchResultsPage/ResultsPage";
+import Movies from "./components/Movies/Movies";
 
 function App() {
   return (
@@ -20,30 +21,17 @@ function App() {
             path="/movie-card/:id"
             component={withMovies(MovieCardContainer)}
           />
-           <Route
-          exact
-            path="/posterstaff/:id"
-            component={PosterStaffPage}
-          />
-          <Route
-            path="/actorslist/"
-            component={withMovies(FullList)}
-          />
+          <Route exact path="/posterstaff/:id" component={PosterStaffPage} />
+
+          <Route path="/actorslist/" component={withMovies(FullList)} />
           <Route
             exact
             path="/allreview/"
             component={withMovies(CardSocialAll)}
           />
-          <Route
-            exact
-            path="/allmedia/"
-            component={withMovies(CardMediaAll)}
-          />
-          <Route
-            exact
-            path="/sreachresults/"
-            component={ResultsPage}
-          />
+          <Route exact path="/allmedia/" component={withMovies(CardMediaAll)} />
+          <Route exact path="/sreachresults/" component={ResultsPage} />
+          <Route exact path="/movies" component={Movies}/>
         </Switch>
       </WithHeaderFooter>
     </div>

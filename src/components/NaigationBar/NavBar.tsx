@@ -58,19 +58,19 @@ const NavBar = () => {
             <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
               <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
                 <li className="navbarwrapp__left__list__item">
-                  <a href="#" className="navbarwrapp__left__list__link">
+                  <span className="navbarwrapp__left__list__link">
                     movies
-                  </a>
+                  </span>
                   <ul className="dropdown-navbar">
                     <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                      <Link to="/movies" className="dropdown-navbar__link">
                         popular
-                      </a>
+                      </Link>
                     </li>
                     <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                      <Link to='' className="dropdown-navbar__link">
                         now playing
-                      </a>
+                      </Link>
                     </li>
                     <li className="dropdown-navbar__item">
                       <a href="#" className="dropdown-navbar__link">
@@ -158,9 +158,9 @@ const NavBar = () => {
                   </a>
                   <ul className="dropdown-navbar">
                     <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                      <Link to='/movies' className="dropdown-navbar__link">
                         popular
-                      </a>
+                      </Link>
                     </li>
                     <li className="dropdown-navbar__item">
                       <a href="#" className="dropdown-navbar__link">

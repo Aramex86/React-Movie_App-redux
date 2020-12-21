@@ -1,0 +1,21 @@
+.filter {
+  width: 17%;
+  &__sort{
+  }
+&__heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(163, 163, 163, 0.699);
+    margin-bottom: 10px;
+}
+&__body{
+    padding: .5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    & span {
+        margin-bottom: 15px;
+    }
+}
+}
