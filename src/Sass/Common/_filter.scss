@@ -1,27 +1,142 @@
-  .sort {
-    cursor: pointer;
-    border: 2px solid #c7c7c778;
-    border-radius: 5px;
-  
+.sort,
+.filter {
+  cursor: pointer;
+  border: 2px solid #c7c7c778;
+  border-radius: 5px;
+  margin-bottom: 15px;
+
   &__heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
-    
   }
   &__body {
     display: flex;
     flex-direction: column;
     border-top: 1px solid rgba(163, 163, 163, 0.699);
-    & span {
-      margin-bottom: 5px;
-      margin-top: 10px;
-      padding: 0 .5rem;
+   
+  }
+}
+
+.Calendar__day.-selected,
+.Calendar__day.-selectedStart,
+.Calendar__day.-selectedEnd {
+  background: #0ecaca;
+  color: #fff;
+}
+
+.filter {
+  cursor: pointer;
+  border: 2px solid #c7c7c778;
+  border-radius: 5px;
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+  &__body {
+  
+    &__date {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(163, 163, 163, 0.699);
+      border-bottom: 1px solid rgba(163, 163, 163, 0.699);
+      .from,
+      .to {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        position: relative;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        & span {
+          width: 50px;
+        }
+        & input {
+          width: 75%;
+          min-height: 30px;
+          padding: 0 10px;
+          border: 1px solid rgba(163, 163, 163, 0.699);
+          border-radius: 7px 0 0 7px;
+          border-right: none;
+          outline: none;
+          &:focus {
+            border: 1px solid #10b6de;
+          }
+        }
+        .icon {
+          background: #80808085;
+          min-height: 30px;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          right: 17px;
+          width: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          & svg {
+            color: #fff;
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+    }
+    &__genres {
+      padding: 0.5rem 0.5rem;
+      border-bottom: 1px solid rgba(163, 163, 163, 0.699);
+
+      & div {
+        display: flex;
+        flex-wrap: wrap;
+        & span {
+          background: rgb(226, 226, 226);
+          padding: 5px 7px;
+          margin-right: 10px;
+          border-radius: 50px;
+          margin: 5px;
+          &:hover {
+            background: #10b6de;
+            color: #fff;
+          }
+        }
+      }
+    }
+    &__keywords {
+      padding: 1rem 0;
+      & div{
+        margin-top: 10px;
+      }
+      & input {
+        margin-top: 10px;
+        display: block;
+        padding: .8rem 1rem;
+        margin: 0 auto;
+        outline:none;
+        border: 1px solid rgba(163, 163, 163, 0.699);
+        border-radius: 5px;
+        width: 80%;
+
+      }
     }
   }
 }
 
-.MuiOutlinedInput-input{
-    padding: 10.5px 14px !important;
+.heading {
+  padding: 1rem .5rem;
+  margin: 10px 0 10px 0;
+}
+
+
+/* DayPicker styles */
+
+.DayPicker-Months {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 300px;
+  font-size: 1.6rem;
 }

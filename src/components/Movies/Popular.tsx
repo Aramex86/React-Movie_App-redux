@@ -10,6 +10,7 @@ const Popular = () => {
         <div className="popularwrap__filters">
           <Sort />
           <Filter />
+          <button className='btn btn--search_filter' disabled={true}>Search</button>
         </div>
         <div className="popularwrap__movielist">Movies</div>
       </div>
