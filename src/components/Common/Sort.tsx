@@ -39,8 +39,8 @@ const Sort = () => {
     setOpenSort(!openSort)
   }
 
-  console.log(state)
-  console.log(openSort)
+  // console.log(state)
+  // console.log(openSort)
 
   return (
       <div className="sort">

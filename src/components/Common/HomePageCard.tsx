@@ -36,15 +36,15 @@ const HomePageCard: FC<PropsType> = ({
   };
 
   return (
-    <div className="card">
-      <div className="card__img">
+    <div className="card card--movie">
+      <div className="card__img card__img--movie">
         {poster === null ? (
           <img src={NoPoster} alt="pic" />
         ) : (
           <img src={`https://image.tmdb.org/t/p/w500${poster}`} alt="pic" />
         )}
       </div>
-      <div className="card__popular">
+      <div className="card__popular card__popular--movie">
         <CircularProgressbar
           value={voteNumber}
           text={`${voteNumber}%`}
@@ -59,7 +59,7 @@ const HomePageCard: FC<PropsType> = ({
           })}
         />
       </div>
-      <div className="card__info">
+      <div className="card__info card__info--movie">
         <h3 className="card__info__title">{title ? title : name}</h3>
         <span className="card__info__realease">
           {realese ? realese : firstAirDate}

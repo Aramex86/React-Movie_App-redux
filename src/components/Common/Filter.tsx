@@ -35,12 +35,12 @@ const Filter = () => {
     setKeyword(e.target.value);
   };
 
-  const date = new Date(selectedDate);
+  const date = new Date(selectedDate).toLocaleDateString();
 
-  console.log(openSort);
-  console.log(date.toLocaleDateString());
-  console.log(moviegenres);
+  //console.log(date.toLocaleDateString());
+  //console.log(moviegenres);
   console.log(keyword);
+  console.log(date)
 
   return (
     <div className="filter">
@@ -75,7 +75,7 @@ const Filter = () => {
             <span className="heading">Genres</span>
             <div>
               {moviegenres.map((movie) => (
-                <span>{movie.name}</span>
+                <span key={movie.id}>{movie.name}</span>
               ))}
             </div>
           </div>

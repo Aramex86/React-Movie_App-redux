@@ -7,14 +7,18 @@
   }
 
   &__movielist {
-    outline: 1px solid gray;
     width: 70%;
-    @include respond(tab-port) {
-      width: 65%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    @include respond(tab-land){
+      width: 80%;
     }
+   
     @include respond(phone) {
-      width: 90%;
+      width: 100%;
       margin: 0 auto;
+      margin-top: 25px;
   }
 }
   &__filters {
@@ -22,7 +26,7 @@
     flex-direction: column;
     width: 17%;
     @include respond(tab-port) {
-      width: 25%;
+      width: 21%;
     }
     @include respond(phone) {
       width: 75%;
