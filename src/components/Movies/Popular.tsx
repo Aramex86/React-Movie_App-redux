@@ -24,7 +24,11 @@ const Popular: FC<PropsType> = ({ popular }) => {
         <div className="popularwrap__movielist">
           {popular.map((p) => (
             <>
-              <Link to={`movie-card/${p.id}`} key={p.id} className='popularwrap__movielist-link'>
+              <Link
+                to={`movie-card/${p.id}`}
+                key={p.id}
+                className="popularwrap__movielist-link"
+              >
                 <Card
                   poster={p.poster_path}
                   title={p.title}

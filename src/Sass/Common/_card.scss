@@ -81,6 +81,9 @@
       object-fit: cover;
       border-radius: 0;
       height: 270px;
+      @include respond(small-phone){
+        height: 316px;
+    }
     }
   }
   &-popular {

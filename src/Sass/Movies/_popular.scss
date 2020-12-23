@@ -11,42 +11,39 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    @include respond(tab-land){
+    @include respond(tab-land) {
       width: 80%;
     }
-   
+
     @include respond(phone) {
       width: 100%;
       margin: 0 auto;
       margin-top: 25px;
+    }
+    &-link {
+      width: 20%;
+      margin-right: 10px;
+
+      @include respond(big-desktop) {
+        width: 16%;
+      }
+      @include respond(tab-land) {
+        width: 22%;
+      }
+      @include respond(tab-port) {
+        width: 28%;
+      }
+      @include respond(phone) {
+        width: 46%;
+      }
+      @include respond(small-phone) {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   }
-  &-link{
-    width: 20%;
-    
-  //   @include respond(small-phone) {
-  //     width: 50%;
-  //   padding: 0 10px;
-  // }
-  @include respond(big-desktop){
-    width: 16%;
-}
-@include respond(tab-land){
-    width: 22%;
-}
-@include respond(tab-port){
-    width: 28%;
-}
-@include respond(phone){
-    width: 46%;
-}
-@include respond(small-phone){
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  }
-}
   &__filters {
     display: flex;
     flex-direction: column;
