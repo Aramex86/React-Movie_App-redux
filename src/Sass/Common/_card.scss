@@ -1,3 +1,5 @@
+//home Page card
+
 .card {
   margin-right: 20px;
   width: 100%;
@@ -5,48 +7,14 @@
   flex-direction: column;
   border-radius: 7px;
   cursor: pointer;
-  &--movie {
-    width: 22%;
-    border: 1px solid #e6e6e62e;
-    display: flex;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0px 2px 7px 1px #ababab80;
-    transition: all .5s ease;
-    &:hover{
-        transform: scale(1.09);
-    }
-    @include respond(big-desktop){
-        width: 16%;
-    }
-    @include respond(tab-land){
-        width: 22%;
-    }
-    @include respond(tab-port){
-        width: 28%;
-    }
-    @include respond(phone){
-        width: 46%;
-    }
-    @include respond(small-phone){
-        width: 45%;
-        margin-right: 5px;
-    }
-  }
+  
+ 
   &__img {
     & img {
       width: 18rem;
       object-fit: cover;
       border-radius: 11px;
       height: 270px;
-    }
-    &--movie {
-      width: 100%;
-      & img {
-        width: 100%;
-        border-radius: 0;
-      }
     }
   }
   &__popular {
@@ -62,21 +30,75 @@
         top: -21px;
       }
     }
-    &--movie {
-      & svg {
-        width: 18%;
-        top: -24px;
-      }
-    }
   }
   &__info {
     margin-bottom: 30px;
-    &--movie{
-        padding: 0 1.5rem;
-    }
   }
 }
 
 .CircularProgressbar-background {
   fill: green;
+}
+
+
+// Popular Movies Card
+
+.card__movie {
+  width: 100%;
+  border: 1px solid #e6e6e62e;
+  display: flex;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 2px 7px 1px #ababab80;
+  transition: all .5s ease;
+  flex-direction: column;
+  margin-right: 20px;
+  cursor: pointer;
+  &:hover{
+      transform: scale(1.09);
+  }
+  @include respond(big-desktop){
+      width: 80%;
+  }
+  @include respond(tab-land){
+      width: 97%;
+  }
+  @include respond(tab-port){
+      width: 98%;
+  }
+  @include respond(phone){
+      width: 90%;
+  }
+  @include respond(small-phone){
+      width: 90%;
+      margin-right: 5px;
+  }
+  &-img{
+    width: 100%;
+    & img{
+      width: 100%;
+      object-fit: cover;
+      border-radius: 0;
+      height: 270px;
+    }
+  }
+  &-popular {
+    position: relative;
+    margin-bottom: 25px;
+    & svg {
+      width: 18%;
+      position: absolute;
+      top: -22px;
+      left: 9px;
+      font-weight: bold;
+      @include respond(tab-port) {
+        top: -21px;
+      }
+    }
+  }
+  &-info {
+    margin-bottom: 30px;
+    padding: 0rem 1rem;
+}
 }
