@@ -27,3 +27,6 @@ export const upComingSelector = (state: AppStateType) => {
 export const fetchingSelector = (state: AppStateType) => {
   return state.homePage.fetching;
 };
+export const loadMoreSelector=(state:AppStateType)=>{
+  return state.homePage.loadMore;
+}

@@ -190,6 +190,17 @@
     height: 50px;
     border-radius: 50px;
   }
+  &--loadmore{
+    position: absolute;
+    bottom: 0;
+    background: #00d0ff;
+    padding: 1rem;
+    width: 100%;
+    font-size: 2rem;
+    &:hover{
+      color: #010131;
+    }
+  }
 }
 
 

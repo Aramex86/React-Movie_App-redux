@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 
 type PropsType = {
   popular: Array<PopularType>;
+  loadMore:()=>void;
 };
 
-const Popular: FC<PropsType> = ({ popular }) => {
+const Popular: FC<PropsType> = ({ popular,loadMore }) => {
   return (
     <>
       <h1 className="heading">Popular Movies</h1>
@@ -22,24 +23,25 @@ const Popular: FC<PropsType> = ({ popular }) => {
           </button>
         </div>
         <div className="popularwrap__movielist">
-          {popular.map((p) => (
-            <>
-              <Link
-                to={`movie-card/${p.id}`}
-                key={p.id}
-                className="popularwrap__movielist-link"
-              >
-                <Card
-                  poster={p.poster_path}
-                  title={p.title}
-                  voteAverage={p.vote_average}
-                  realese={p.release_date}
-                  firstAirDate={p.first_air_date}
-                  name={p.name}
-                />
-              </Link>
-            </>
+          {popular.map((p, index) => (
+            <Link
+              to={`movie-card/${p.id}`}
+              key={index}
+              className="popularwrap__movielist-link"
+            >
+              <Card
+                poster={p.poster_path}
+                title={p.title}
+                voteAverage={p.vote_average}
+                realese={p.release_date}
+                firstAirDate={p.first_air_date}
+                name={p.name}
+              />
+            </Link>
           ))}
+          <button className="btn btn--loadmore" onClick={loadMore}>
+            LOAD MORE
+          </button>
         </div>
       </div>
     </>

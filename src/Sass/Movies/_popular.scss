@@ -11,6 +11,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    position: relative;
+    padding-bottom: 6rem;
     @include respond(tab-land) {
       width: 80%;
     }
@@ -21,8 +23,8 @@
       margin-top: 25px;
     }
     &-link {
-      width: 20%;
-      margin-right: 10px;
+      width: 22%;
+    margin-right: 25px;
 
       @include respond(big-desktop) {
         width: 16%;

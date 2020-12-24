@@ -35,6 +35,9 @@ const HomePageCard: FC<PropsType> = ({
     }
   };
 
+  
+  
+  
   return (
     <div className="card__movie">
       <div className="card__movie-img">
@@ -60,7 +63,7 @@ const HomePageCard: FC<PropsType> = ({
         />
       </div>
       <div className="card__movie-info">
-        <h3 className="card__movie-info-title">{title ? title : name}</h3>
+        <h3 className="card__movie-info-title">{title.length >=20?`${title.slice(0,20)}...`:title}</h3>
         <span className="card__movie-info-realease">
           {realese ? realese : firstAirDate}
         </span>

@@ -1,4 +1,4 @@
-import {getHomePgeApi, getMoviesApi, getSearchApi} from '../../../Api/Api';
+import { getHomePgeApi, getMoviesApi, getSearchApi } from "../../../Api/Api";
 import {
   NowPlayngType,
   PopularType,
@@ -6,17 +6,18 @@ import {
   TVPopularType,
   UpComingType,
   VideoType,
-} from '../../../Types/Types';
+} from "../../../Types/Types";
 
-const GET_POPULAR_MOVIES = 'GET_POPULAR_MOVIES';
-const GET_CURRENT_PAGE = 'GET_CURRENT_PAGE';
-const GET_NOW_PLAYING = 'GET_NOW_PLAYING';
-const GET_NOW_TVPLAYING = 'GET_NOW_TVPLAYING';
-const GET_SEARCH_MOVIES = 'GET_SEARCH_MOVIES';
-const GET_TRAILERS = 'GET_TRAILERS';
-const GET_TREDINGS = 'GET_TREDINGS';
-const GET_UPCOMING = 'GET_UPCOMING';
-const FETCHING = 'FETCHING';
+const GET_POPULAR_MOVIES = "GET_POPULAR_MOVIES";
+const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
+const GET_NOW_PLAYING = "GET_NOW_PLAYING";
+const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
+//const GET_SEARCH_MOVIES = 'GET_SEARCH_MOVIES';
+const GET_TRAILERS = "GET_TRAILERS";
+const GET_TREDINGS = "GET_TREDINGS";
+const GET_UPCOMING = "GET_UPCOMING";
+const FETCHING = "FETCHING";
+const LOAD__MORE = "LOAD__MORE";
 
 const initialState = {
   popularMovies: [] as Array<PopularType>,
@@ -27,6 +28,7 @@ const initialState = {
   traidings: [] as Array<TraidingsType>,
   upComing: [] as Array<UpComingType>,
   fetching: true,
+  loadMore: [] as Array<PopularType>,
 };
 
 type initialStateType = typeof initialState;
@@ -85,7 +87,12 @@ const homePageReducer = (
         fetching: action.fetching,
       };
     }
-
+    case LOAD__MORE: {
+      return {
+        ...state,
+        loadMore: [...state.loadMore, ...action.loadMore],
+      };
+    }
     default:
       return state;
   }
@@ -100,7 +107,7 @@ type GetPopularType = {
 export const getPopularMovies = (
   popularMovies: Array<PopularType>
 ): GetPopularType => {
-  return {type: GET_POPULAR_MOVIES, popularMovies};
+  return { type: GET_POPULAR_MOVIES, popularMovies };
 };
 //
 type GetCurrentPage = {
@@ -109,7 +116,7 @@ type GetCurrentPage = {
 };
 
 export const getCurrentPage = (currentPage: number): GetCurrentPage => {
-  return {type: GET_CURRENT_PAGE, currentPage};
+  return { type: GET_CURRENT_PAGE, currentPage };
 };
 
 //
@@ -121,7 +128,7 @@ type GetNowPlayingtype = {
 export const getNowPlaying = (
   nowPlaying: Array<NowPlayngType>
 ): GetNowPlayingtype => {
-  return {type: GET_NOW_PLAYING, nowPlaying};
+  return { type: GET_NOW_PLAYING, nowPlaying };
 };
 // TV
 type GetNowTvPlaing = {
@@ -132,7 +139,7 @@ type GetNowTvPlaing = {
 export const getNowTvPlaying = (
   nowTvPlaying: Array<TVPopularType>
 ): GetNowTvPlaing => {
-  return {type: GET_NOW_TVPLAYING, nowTvPlaying};
+  return { type: GET_NOW_TVPLAYING, nowTvPlaying };
 };
 //Trailers
 type GetTrailersType = {
@@ -141,7 +148,7 @@ type GetTrailersType = {
 };
 
 export const getTrailers = (trailers: Array<VideoType>): GetTrailersType => {
-  return {type: GET_TRAILERS, trailers};
+  return { type: GET_TRAILERS, trailers };
 };
 //Traidings
 type GetTraidingsType = {
@@ -151,7 +158,7 @@ type GetTraidingsType = {
 export const getTraidings = (
   traidings: Array<TraidingsType>
 ): GetTraidingsType => {
-  return {type: GET_TREDINGS, traidings};
+  return { type: GET_TREDINGS, traidings };
 };
 
 type GetUpComingType = {
@@ -160,14 +167,23 @@ type GetUpComingType = {
 };
 
 export const getUpComing = (upComing: Array<UpComingType>): GetUpComingType => {
-  return {type: GET_UPCOMING, upComing};
+  return { type: GET_UPCOMING, upComing };
 };
 type FetchingType = {
   type: typeof FETCHING;
   fetching: boolean;
 };
 export const getFetching = (fetching: boolean): FetchingType => {
-  return {type: FETCHING, fetching};
+  return { type: FETCHING, fetching };
+};
+
+type LoadMoreType = {
+  type: typeof LOAD__MORE;
+  loadMore: Array<PopularType>;
+};
+
+export const getLoadMore = (loadMore: Array<PopularType>): LoadMoreType => {
+  return { type: LOAD__MORE, loadMore };
 };
 
 //Thunk
@@ -218,6 +234,14 @@ export const requestUpComing = (randomPage: number) => async (
   const res = await getHomePgeApi.getUpcomming(randomPage);
   dispatch(getUpComing(res));
   dispatch(getFetching(false));
+};
+
+export const requestloadMore = (currentPage: number) => async (
+  dispatch: any
+) => {
+  const res = await getHomePgeApi.getPopular(currentPage);
+  dispatch(getLoadMore(res.results));
+  dispatch(getCurrentPage(currentPage));
 };
 
 export default homePageReducer;
