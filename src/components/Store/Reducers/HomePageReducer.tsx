@@ -92,7 +92,7 @@ const homePageReducer = (
     case LOAD__MORE__POP: {
       return {
         ...state,
-        loadMorePop: [...state.loadMorePop,action.loadMorePop].flat(),
+        loadMorePop: [...state.loadMorePop,...action.loadMorePop],
       };
     }
     case LOAD__MORE__NPL: {

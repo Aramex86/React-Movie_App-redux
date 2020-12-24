@@ -7,26 +7,24 @@ import NowPlaying from "./NowPlaying";
 import Popular from "./Popular";
 
 const Movies = () => {
-  const popular = useSelector((state: AppStateType) => loadMorePopSelector(state));
-  const nowPlaying = useSelector((state: AppStateType) => loadMoreNplSelector(state));
-  const dispatch = useDispatch();
-  const[state,setState]=useState<any>(popular);
+//   const popular = useSelector((state: AppStateType) => loadMorePopSelector(state));
+//   const nowPlaying = useSelector((state: AppStateType) => loadMoreNplSelector(state));
+//   const dispatch = useDispatch();
   
-  useEffect(() => {
-   
-    dispatch(requestloadMorePopular(1));
-    dispatch(requestloadMoreNowPlaying(1))
-}, []);
+//   useEffect(() => {
+//     dispatch(requestloadMorePopular(1));
+//     dispatch(requestloadMoreNowPlaying(1))
+// }, []);
 
-console.log(nowPlaying);
-console.log(popular);
+// console.log(nowPlaying);
+// console.log(popular);
 
  
-  return (
-    <div className="movieswrapp">
-      <Popular popular={popular} />
-      <NowPlaying nowPlaying={nowPlaying} />
-    </div>
+  return (<></>
+    // <div className="movieswrapp">
+    //   <Popular popular={popular} />
+    //   <NowPlaying nowPlaying={nowPlaying} />
+    // </div>
   );
 };
 

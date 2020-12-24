@@ -44,7 +44,7 @@
 // Popular Movies Card
 
 .card__movie {
-  width: 100%;
+  width: 80%;
   border: 1px solid #e6e6e62e;
   display: flex;
   margin-bottom: 15px;
@@ -53,7 +53,7 @@
   box-shadow: 0px 2px 7px 1px #ababab80;
   transition: all .5s ease;
   flex-direction: column;
-  margin-right: 20px;
+  //margin-right: 20px;
   cursor: pointer;
   &:hover{
       transform: scale(1.09);

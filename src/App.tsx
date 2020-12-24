@@ -11,7 +11,7 @@ import PosterStaffPage from "./components/MovieCard/Poster/PosterStaffPage";
 import ResultsPage from "./components/SearchResultsPage/ResultsPage";
 import Popular from "./components/Movies/Popular";
 import NowPlaying from "./components/Movies/NowPlaying";
-import Movies from "./components/Movies/Movies";
+//import Movies from "./components/Movies/Movies";
 
 function App() {
   return (
@@ -33,11 +33,11 @@ function App() {
           />
           <Route exact path="/allmedia/" component={withMovies(CardMediaAll)} />
           <Route exact path="/sreachresults/" component={ResultsPage} />
-          <Route exact path="/movies/popular" component={Movies} />
-          <Route exact path="/movies/nowplaying" component={Movies} />
+          {/* <Route exact path="/movies/popular" component={Movies} />
+          <Route exact path="/movies/nowplaying" component={Movies} /> */}
 
-          {/* <Route exact path="/movies/popular" component={Popular}/>
-          <Route exact path="/movies/nowplaying" component={NowPlaying}/> */}
+          <Route exact path="/movies/popular" component={Popular}/>
+          <Route exact path="/movies/nowplaying" component={NowPlaying}/>
         </Switch>
       </WithHeaderFooter>
     </div>

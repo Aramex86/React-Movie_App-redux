@@ -3,23 +3,29 @@ import Filter from "../Common/Filter";
 import Sort from "../Common/Sort";
 import Card from "../Common/Card";
 import { Link } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import {  requestloadMorePopular } from "../Store/Reducers/HomePageReducer";
 import { PopularType } from "../../Types/Types";
 import { FC } from "react";
-type Propstype={
-  popular:Array<PopularType>
-}
+import { loadMorePopSelector } from "../Store/Selectors/HomePageSelector";
+import { AppStateType } from "../Store/store";
+import { useEffect } from "react";
+// type Propstype={
+//   popular:Array<PopularType>
+// }
 
-const Popular:FC<Propstype> =  ({popular}) => {
-
-  const [increment, setIncrement] = useState(2);
+const Popular:FC =  () => {
+  const popular = useSelector((state: AppStateType) => loadMorePopSelector(state));
+  const [increment, setIncrement] = useState(3);
   const dispatch = useDispatch();
   
   const loadMore = () => {
     setIncrement((prev) =>  prev +1);
     dispatch(requestloadMorePopular(increment));
   };
+  useEffect(() => {
+    dispatch(requestloadMorePopular(1));
+}, []);
  
   return (
     <>

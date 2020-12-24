@@ -1,18 +1,22 @@
 import React, {  useState } from "react";
+import { useEffect } from "react";
 import { FC } from "react";
-import {  useDispatch } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { NowPlayngType } from "../../Types/Types";
 import Card from "../Common/Card";
 import Filter from "../Common/Filter";
 import Sort from "../Common/Sort";
 import { requestloadMoreNowPlaying } from "../Store/Reducers/HomePageReducer";
+import { loadMoreNplSelector } from "../Store/Selectors/HomePageSelector";
+import { AppStateType } from "../Store/store";
 
-type Propstype={
-    nowPlaying:Array<NowPlayngType>
-}
+// type Propstype={
+//     nowPlaying:Array<NowPlayngType>
+// }
 
-const NowPlaying:FC<Propstype> = ({nowPlaying}) => {
+const NowPlaying:FC = () => {
+    const nowPlaying = useSelector((state: AppStateType) => loadMoreNplSelector(state));
     const dispatch = useDispatch();
   const [increment, setIncrement] = useState(2);
 
@@ -20,6 +24,9 @@ const NowPlaying:FC<Propstype> = ({nowPlaying}) => {
     setIncrement((prev) =>  prev +1);
     dispatch(requestloadMoreNowPlaying(increment));
   };
+  useEffect(() => {
+    dispatch(requestloadMoreNowPlaying(2))
+}, []);
  
   return (
     <>

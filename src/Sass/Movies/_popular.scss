@@ -10,7 +10,7 @@
     width: 70%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
     padding-bottom: 6rem;
     @include respond(tab-land) {
@@ -21,13 +21,16 @@
       width: 100%;
       margin: 0 auto;
       margin-top: 25px;
+      justify-content: center;
     }
     &-link {
-      width: 22%;
-    margin-right: 25px;
+      width: 21%;
+      /* margin-right: 25px; */
+      display: flex;
+      justify-content: center;
 
       @include respond(big-desktop) {
-        width: 16%;
+        width: 20%;
       }
       @include respond(tab-land) {
         width: 22%;
@@ -36,7 +39,7 @@
         width: 28%;
       }
       @include respond(phone) {
-        width: 46%;
+        width: 38%;
       }
       @include respond(small-phone) {
         width: 70%;
