@@ -5,11 +5,13 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { ImPlus } from "react-icons/im";
+import { useDispatch } from "react-redux";
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const dispatch = useDispatch()
   const [state, setState] = React.useState<{
     age: string | number;
     name: string;
@@ -41,6 +43,7 @@ const NavBar = () => {
 
   const screenWidth = window.innerWidth;
 
+
   // console.log(screenWidth);
   // console.log(showMenu);
 
@@ -61,12 +64,12 @@ const NavBar = () => {
                   <span className="navbarwrapp__left__list__link">movies</span>
                   <ul className="dropdown-navbar">
                     <li className="dropdown-navbar__item">
-                      <Link to="/movies" className="dropdown-navbar__link">
+                      <Link to="/movies/popular" className="dropdown-navbar__link">
                         popular
                       </Link>
                     </li>
                     <li className="dropdown-navbar__item">
-                      <Link to="" className="dropdown-navbar__link">
+                      <Link to="/movies/nowplaying" className="dropdown-navbar__link">
                         now playing
                       </Link>
                     </li>
@@ -156,14 +159,14 @@ const NavBar = () => {
                 </a>
                 <ul className="dropdown-navbar">
                   <li className="dropdown-navbar__item">
-                    <Link to="/movies" className="dropdown-navbar__link">
+                    <Link to="/movies/popular" className="dropdown-navbar__link" >
                       popular
                     </Link>
                   </li>
                   <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
+                    <Link to='/movies/nowplaying' className="dropdown-navbar__link" >
                       now playing
-                    </a>
+                    </Link>
                   </li>
                   <li className="dropdown-navbar__item">
                     <a href="#" className="dropdown-navbar__link">

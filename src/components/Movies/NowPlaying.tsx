@@ -1,29 +1,29 @@
-import React, {  useMemo, useState } from "react";
+import React, {  useState } from "react";
+import { FC } from "react";
+import {  useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { NowPlayngType } from "../../Types/Types";
+import Card from "../Common/Card";
 import Filter from "../Common/Filter";
 import Sort from "../Common/Sort";
-import Card from "../Common/Card";
-import { Link } from "react-router-dom";
-import { useDispatch} from "react-redux";
-import {  requestloadMorePopular } from "../Store/Reducers/HomePageReducer";
-import { PopularType } from "../../Types/Types";
-import { FC } from "react";
+import { requestloadMoreNowPlaying } from "../Store/Reducers/HomePageReducer";
+
 type Propstype={
-  popular:Array<PopularType>
+    nowPlaying:Array<NowPlayngType>
 }
 
-const Popular:FC<Propstype> =  ({popular}) => {
-
+const NowPlaying:FC<Propstype> = ({nowPlaying}) => {
+    const dispatch = useDispatch();
   const [increment, setIncrement] = useState(2);
-  const dispatch = useDispatch();
-  
+
   const loadMore = () => {
     setIncrement((prev) =>  prev +1);
-    dispatch(requestloadMorePopular(increment));
+    dispatch(requestloadMoreNowPlaying(increment));
   };
  
   return (
     <>
-      <h1 className="heading">Popular Movies</h1>
+      <h1 className="heading">Now Playing</h1>
       <div className="popularwrap">
         <div className="popularwrap__filters">
           <Sort />
@@ -33,7 +33,7 @@ const Popular:FC<Propstype> =  ({popular}) => {
           </button>
         </div>
         <div className="popularwrap__movielist">
-          {popular.map((p, index) => (
+          {nowPlaying.map((p, index) => (
             <Link
               to={`/movie-card/${p.id}`}
               key={index}
@@ -58,4 +58,4 @@ const Popular:FC<Propstype> =  ({popular}) => {
   );
 };
 
-export default Popular;
+export default NowPlaying;

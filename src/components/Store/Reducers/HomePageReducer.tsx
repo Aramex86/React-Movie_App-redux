@@ -17,7 +17,8 @@ const GET_TRAILERS = "GET_TRAILERS";
 const GET_TREDINGS = "GET_TREDINGS";
 const GET_UPCOMING = "GET_UPCOMING";
 const FETCHING = "FETCHING";
-const LOAD__MORE = "LOAD__MORE";
+const LOAD__MORE__POP = "LOAD__MORE_POP";
+const LOAD__MORE__NPL = "LOAD__MORE__NPL";
 
 const initialState = {
   popularMovies: [] as Array<PopularType>,
@@ -28,7 +29,8 @@ const initialState = {
   traidings: [] as Array<TraidingsType>,
   upComing: [] as Array<UpComingType>,
   fetching: true,
-  loadMore: [] as Array<PopularType>,
+  loadMorePop: [] as Array<PopularType>,
+  loadMoreNowPl: [] as Array<NowPlayngType>,
 };
 
 type initialStateType = typeof initialState;
@@ -87,10 +89,16 @@ const homePageReducer = (
         fetching: action.fetching,
       };
     }
-    case LOAD__MORE: {
+    case LOAD__MORE__POP: {
       return {
         ...state,
-        loadMore: [...state.loadMore, ...action.loadMore],
+        loadMorePop: [...state.loadMorePop,action.loadMorePop].flat(),
+      };
+    }
+    case LOAD__MORE__NPL: {
+      return {
+        ...state,
+        loadMoreNowPl: [...state.loadMoreNowPl, ...action.loadMoreNowPl],
       };
     }
     default:
@@ -176,16 +184,24 @@ type FetchingType = {
 export const getFetching = (fetching: boolean): FetchingType => {
   return { type: FETCHING, fetching };
 };
-
-type LoadMoreType = {
-  type: typeof LOAD__MORE;
-  loadMore: Array<PopularType>;
+/////////////////////////////////////////////
+type LoadMorePopType = {
+  type: typeof LOAD__MORE__POP;
+  loadMorePop: Array<PopularType>;
 };
 
-export const getLoadMore = (loadMore: Array<PopularType>): LoadMoreType => {
-  return { type: LOAD__MORE, loadMore };
+export const getLoadMorePop = (loadMorePop: Array<PopularType>): LoadMorePopType => {
+  return { type: LOAD__MORE__POP, loadMorePop };
+};
+type LoadMoreNPLType = {
+  type: typeof LOAD__MORE__NPL;
+  loadMoreNowPl: Array<NowPlayngType>;
 };
 
+export const getLoadMoreNPL = (loadMoreNowPl: Array<PopularType>): LoadMoreNPLType => {
+  return { type: LOAD__MORE__NPL, loadMoreNowPl };
+};
+///////////////////////////////
 //Thunk
 export const requestPopularMovies = (currentPage: number) => async (
   dispatch: any
@@ -193,7 +209,7 @@ export const requestPopularMovies = (currentPage: number) => async (
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getPopular(currentPage);
-  //console.log(res)
+  console.log(res)
   dispatch(getPopularMovies(res.results));
   dispatch(getFetching(false));
 };
@@ -236,11 +252,20 @@ export const requestUpComing = (randomPage: number) => async (
   dispatch(getFetching(false));
 };
 
-export const requestloadMore = (currentPage: number) => async (
+export const requestloadMorePopular = (currentPage: number) => async (
   dispatch: any
 ) => {
   const res = await getHomePgeApi.getPopular(currentPage);
-  dispatch(getLoadMore(res.results));
+  //console.log(res);
+  dispatch(getLoadMorePop(res.results));
+  dispatch(getCurrentPage(currentPage));
+};
+export const requestloadMoreNowPlaying = (currentPage: number) => async (
+  dispatch: any
+) => {
+  const res = await getHomePgeApi.getNowPlaying(currentPage);
+  //console.log(res);
+  dispatch(getLoadMoreNPL(res.results));
   dispatch(getCurrentPage(currentPage));
 };
 

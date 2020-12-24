@@ -71,7 +71,7 @@ const Trailers = () => {
               <div className="container__title">
                 <span>{item.title}</span>
                 <br/>
-                <span>Realese Date : {item.release_date.toLocaleString(Date())}</span>
+                <span>Realese Date : {item.release_date}</span>
                 </div>
             </div>
           ))}

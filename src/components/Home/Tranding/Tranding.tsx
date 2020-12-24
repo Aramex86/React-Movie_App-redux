@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Today from "./Today";
 import Week from "./Week";
 import TraidingNav from "./TraidingNav";

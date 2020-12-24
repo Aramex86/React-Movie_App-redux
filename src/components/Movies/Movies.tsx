@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { requestloadMore } from "../Store/Reducers/HomePageReducer";
-import { loadMoreSelector } from "../Store/Selectors/HomePageSelector";
+import { requestloadMoreNowPlaying, requestloadMorePopular } from "../Store/Reducers/HomePageReducer";
+import { loadMorePopSelector, loadMoreNplSelector } from "../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../Store/store";
+import NowPlaying from "./NowPlaying";
 import Popular from "./Popular";
 
 const Movies = () => {
-  const popular = useSelector((state: AppStateType) => loadMoreSelector(state));
+  const popular = useSelector((state: AppStateType) => loadMorePopSelector(state));
+  const nowPlaying = useSelector((state: AppStateType) => loadMoreNplSelector(state));
   const dispatch = useDispatch();
-  const [increment, setIncrement] = useState(1);
-
-  const loadMore = () => {
-    setIncrement((prev) =>  prev +1);
-    dispatch(requestloadMore(increment));
-  };
+  const[state,setState]=useState<any>(popular);
+  
   useEffect(() => {
-    dispatch(requestloadMore(increment));
+   
+    dispatch(requestloadMorePopular(1));
+    dispatch(requestloadMoreNowPlaying(1))
 }, []);
- console.log(increment);
+
+console.log(nowPlaying);
+console.log(popular);
+
+ 
   return (
     <div className="movieswrapp">
-      <Popular popular={popular} loadMore={loadMore}/>
+      <Popular popular={popular} />
+      <NowPlaying nowPlaying={nowPlaying} />
     </div>
   );
 };
