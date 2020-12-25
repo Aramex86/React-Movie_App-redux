@@ -13,6 +13,13 @@
     justify-content: flex-start;
     position: relative;
     padding-bottom: 6rem;
+    @include respond(big-desktop) {
+      justify-content: center;
+    }
+    @include respond(laptop){
+      justify-content: center;
+      width: 75%;
+    }
     @include respond(tab-land) {
       width: 80%;
     }
@@ -25,15 +32,18 @@
     }
     &-link {
       width: 21%;
-      /* margin-right: 25px; */
       display: flex;
       justify-content: center;
 
       @include respond(big-desktop) {
-        width: 20%;
-      }
-      @include respond(tab-land) {
         width: 22%;
+      }
+      @include respond(laptop){
+        width: 25%;
+       
+        }
+      @include respond(tab-land) {
+        width: 25%;
       }
       @include respond(tab-port) {
         width: 28%;

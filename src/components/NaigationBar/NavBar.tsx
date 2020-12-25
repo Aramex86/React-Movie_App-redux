@@ -6,6 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { ImPlus } from "react-icons/im";
 import { useDispatch } from "react-redux";
+import { requestloadMorePopular } from "../Store/Reducers/HomePageReducer";
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
@@ -63,7 +64,7 @@ const NavBar = () => {
                 <li className="navbarwrapp__left__list__item">
                   <span className="navbarwrapp__left__list__link">movies</span>
                   <ul className="dropdown-navbar">
-                    <li className="dropdown-navbar__item">
+                    <li className="dropdown-navbar__item" >
                       <Link to="/movies/popular" className="dropdown-navbar__link">
                         popular
                       </Link>
@@ -158,7 +159,7 @@ const NavBar = () => {
                   movies
                 </a>
                 <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
+                  <li className="dropdown-navbar__item" >
                     <Link to="/movies/popular" className="dropdown-navbar__link" >
                       popular
                     </Link>

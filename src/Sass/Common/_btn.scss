@@ -184,23 +184,27 @@
     font-size: 1.8rem;
     letter-spacing: 1px;
   }
-  &--search_filter{
+  &--search_filter {
     color: #fff;
     background: rgb(192, 192, 192);
     height: 50px;
     border-radius: 50px;
   }
-  &--loadmore{
+  &--loadmore {
     position: absolute;
     bottom: 0;
     background: #00d0ff;
     padding: 1rem;
     width: 100%;
     font-size: 2rem;
-    &:hover{
+    left: 0%;
+    &:hover {
       color: #010131;
+    }
+    @include respond(laptop){
+    width: 80%;
+    margin: 0 auto;
+    left: 10%;
     }
   }
 }
-
-

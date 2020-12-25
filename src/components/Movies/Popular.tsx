@@ -1,32 +1,37 @@
-import React, {  useMemo, useState } from "react";
-import Filter from "../Common/Filter";
-import Sort from "../Common/Sort";
-import Card from "../Common/Card";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector} from "react-redux";
-import {  requestloadMorePopular } from "../Store/Reducers/HomePageReducer";
-import { PopularType } from "../../Types/Types";
-import { FC } from "react";
-import { loadMorePopSelector } from "../Store/Selectors/HomePageSelector";
-import { AppStateType } from "../Store/store";
-import { useEffect } from "react";
+import React, {useMemo, useState} from 'react';
+import Filter from '../Common/Filter';
+import Sort from '../Common/Sort';
+import Card from '../Common/Card';
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {requestloadMorePopular} from '../Store/Reducers/HomePageReducer';
+import {PopularType} from '../../Types/Types';
+import {FC} from 'react';
+import {loadMorePopSelector} from '../Store/Selectors/HomePageSelector';
+import {AppStateType} from '../Store/store';
+import {useEffect} from 'react';
 // type Propstype={
 //   popular:Array<PopularType>
 // }
 
-const Popular:FC =  () => {
-  const popular = useSelector((state: AppStateType) => loadMorePopSelector(state));
-  const [increment, setIncrement] = useState(3);
+const Popular: FC = () => {
+  let popular = useSelector((state: AppStateType) =>
+    loadMorePopSelector(state)
+  );
+  const [increment, setIncrement] = useState(2);
   const dispatch = useDispatch();
-  
+
   const loadMore = () => {
-    setIncrement((prev) =>  prev +1);
+    setIncrement((prev) => prev + 1);
     dispatch(requestloadMorePopular(increment));
   };
-  useEffect(() => {
-    dispatch(requestloadMorePopular(1));
-}, []);
- 
+  const emptyArray = () => {
+    popular = [];
+  };
+  //   useEffect(() => {
+  //     dispatch(requestloadMorePopular(1));
+  // }, []);
+
   return (
     <>
       <h1 className="heading">Popular Movies</h1>
@@ -52,6 +57,7 @@ const Popular:FC =  () => {
                 realese={p.release_date}
                 firstAirDate={p.first_air_date}
                 name={p.name}
+                emptyArray={emptyArray}
               />
             </Link>
           ))}

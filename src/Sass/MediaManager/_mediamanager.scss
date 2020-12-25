@@ -34,6 +34,11 @@ $breakpoint argument choises:
       @content;
     } //1200px
   }
+  @if $breakepoit == laptop{
+    @media only screen and(min-width:75em) and (max-width:112.5em){
+      @content;
+    }//1200 -1800
+  }
   @if $breakepoit == big-desktop {
     @media only screen and (min-width: 112.5em) {
       @content;

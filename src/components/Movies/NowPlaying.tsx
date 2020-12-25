@@ -18,7 +18,7 @@ import { AppStateType } from "../Store/store";
 const NowPlaying:FC = () => {
     const nowPlaying = useSelector((state: AppStateType) => loadMoreNplSelector(state));
     const dispatch = useDispatch();
-  const [increment, setIncrement] = useState(2);
+  const [increment, setIncrement] = useState(3);
 
   const loadMore = () => {
     setIncrement((prev) =>  prev +1);
@@ -27,6 +27,9 @@ const NowPlaying:FC = () => {
   useEffect(() => {
     dispatch(requestloadMoreNowPlaying(2))
 }, []);
+const emptyArray = () => {
+  //popular = [];
+};
  
   return (
     <>
@@ -53,6 +56,7 @@ const NowPlaying:FC = () => {
                 realese={p.release_date}
                 firstAirDate={p.first_air_date}
                 name={p.name}
+                emptyArray={emptyArray}
               />
             </Link>
           ))}

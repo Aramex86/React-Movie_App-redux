@@ -90,9 +90,11 @@ const homePageReducer = (
       };
     }
     case LOAD__MORE__POP: {
+      
+      console.log(state.loadMorePop)
       return {
         ...state,
-        loadMorePop: [...state.loadMorePop,...action.loadMorePop],
+        loadMorePop: [...state.loadMorePop,...action.loadMorePop]
       };
     }
     case LOAD__MORE__NPL: {
@@ -251,7 +253,7 @@ export const requestUpComing = (randomPage: number) => async (
   dispatch(getUpComing(res));
   dispatch(getFetching(false));
 };
-
+////////////////////////
 export const requestloadMorePopular = (currentPage: number) => async (
   dispatch: any
 ) => {
@@ -268,5 +270,5 @@ export const requestloadMoreNowPlaying = (currentPage: number) => async (
   dispatch(getLoadMoreNPL(res.results));
   dispatch(getCurrentPage(currentPage));
 };
-
+///////////////////////////////
 export default homePageReducer;
