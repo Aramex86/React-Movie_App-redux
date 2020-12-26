@@ -9,7 +9,6 @@ type PropsType = {
   voteAverage: number;
   name: string;
   firstAirDate: string;
-  emptyArray:() => void;
 };
 
 const HomePageCard: FC<PropsType> = ({
@@ -19,7 +18,7 @@ const HomePageCard: FC<PropsType> = ({
   voteAverage,
   name,
   firstAirDate,
-  emptyArray,
+  //emptyArray,
 }) => {
   let votes = voteAverage.toLocaleString().replace('.', '');
   if (votes.length < 2) {
@@ -38,7 +37,7 @@ const HomePageCard: FC<PropsType> = ({
   };
 
   return (
-    <div className="card__movie" onClick={emptyArray}>
+    <div className="card__movie">
       <div className="card__movie-img">
         {poster === null ? (
           <img src={NoPoster} alt="pic" />

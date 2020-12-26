@@ -27,9 +27,3 @@ export const upComingSelector = (state: AppStateType) => {
 export const fetchingSelector = (state: AppStateType) => {
   return state.homePage.fetching;
 };
-export const loadMorePopSelector=(state:AppStateType)=>{
-  return state.homePage.loadMorePop;
-}
-export const loadMoreNplSelector=(state:AppStateType)=>{
-  return state.homePage.loadMoreNowPl;
-}

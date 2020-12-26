@@ -318,6 +318,7 @@ export type PopularType = {
   vote_count: number;
   name: string;
   first_air_date: string;
+
 };
 // NOw Playing
 export type NowPlayngType = {
@@ -444,6 +445,22 @@ export type CollectionType = {
 
 export type CollectionObjectType={
   results:Array<CollectionType>
+  total_pages: number
+  total_results: number
+  page:number
+}
+
+//Movie Page Type
+
+export type PopularObjectType={
+  results:Array<PopularType>
+  total_pages: number
+  total_results: number
+  page:number
+}
+
+export type NowPlayingObjectType={
+  results:Array<NowPlayngType>
   total_pages: number
   total_results: number
   page:number

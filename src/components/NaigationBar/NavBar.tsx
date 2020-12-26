@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import { ImPlus } from "react-icons/im";
-import { useDispatch } from "react-redux";
-import { requestloadMorePopular } from "../Store/Reducers/HomePageReducer";
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import {ImPlus} from 'react-icons/im';
+import {useDispatch} from 'react-redux';
+import { requestPopularMoviesPage } from '../Store/Reducers/MoviesReducer';
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [state, setState] = React.useState<{
     age: string | number;
     name: string;
   }>({
-    age: "",
-    name: "hai",
+    age: '',
+    name: 'hai',
   });
 
   const handleChange = (
-    event: React.ChangeEvent<{ name?: string; value: unknown }>
+    event: React.ChangeEvent<{name?: string; value: unknown}>
   ) => {
     const name = event.target.name as keyof typeof state;
     setState({
@@ -44,7 +44,6 @@ const NavBar = () => {
 
   const screenWidth = window.innerWidth;
 
-
   // console.log(screenWidth);
   // console.log(showMenu);
 
@@ -64,13 +63,19 @@ const NavBar = () => {
                 <li className="navbarwrapp__left__list__item">
                   <span className="navbarwrapp__left__list__link">movies</span>
                   <ul className="dropdown-navbar">
-                    <li className="dropdown-navbar__item" >
-                      <Link to="/movies/popular" className="dropdown-navbar__link">
+                    <li className="dropdown-navbar__item">
+                      <Link
+                        to="/movies/popular"
+                        className="dropdown-navbar__link"
+                      >
                         popular
                       </Link>
                     </li>
                     <li className="dropdown-navbar__item">
-                      <Link to="/movies/nowplaying" className="dropdown-navbar__link">
+                      <Link
+                        to="/movies/nowplaying"
+                        className="dropdown-navbar__link"
+                      >
                         now playing
                       </Link>
                     </li>
@@ -150,7 +155,7 @@ const NavBar = () => {
               </ul>
             </nav>
           ) : (
-            ""
+            ''
           )}
           <nav className="navbarwrapp__left__navbar ">
             <ul className="navbarwrapp__left__list ">
@@ -159,13 +164,19 @@ const NavBar = () => {
                   movies
                 </a>
                 <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item" >
-                    <Link to="/movies/popular" className="dropdown-navbar__link" >
+                  <li className="dropdown-navbar__item">
+                    <Link
+                      to="/movies/popular"
+                      className="dropdown-navbar__link"
+                    >
                       popular
                     </Link>
                   </li>
                   <li className="dropdown-navbar__item">
-                    <Link to='/movies/nowplaying' className="dropdown-navbar__link" >
+                    <Link
+                      to="/movies/nowplaying"
+                      className="dropdown-navbar__link"
+                    >
                       now playing
                     </Link>
                   </li>
@@ -263,14 +274,14 @@ const NavBar = () => {
                   </span>
                 </div>
               ) : (
-                ""
+                ''
               )}
             </li>
             <li className="navbarwrapp__right__list__item">
               <button
                 className="btn btn--navbar"
                 onClick={showLang}
-                style={showlang ? { background: "white", color: "#000" } : {}}
+                style={showlang ? {background: 'white', color: '#000'} : {}}
               >
                 EN
               </button>
@@ -286,8 +297,8 @@ const NavBar = () => {
                       value={state.age}
                       onChange={handleChange}
                       inputProps={{
-                        name: "age",
-                        id: "filled-age-native-simple",
+                        name: 'age',
+                        id: 'filled-age-native-simple',
                       }}
                     >
                       <option aria-label="None" value="" />
@@ -298,7 +309,7 @@ const NavBar = () => {
                   </FormControl>
                 </div>
               ) : (
-                ""
+                ''
               )}
             </li>
             <li className="navbarwrapp__right__list__item">
@@ -309,7 +320,7 @@ const NavBar = () => {
             <li className="navbarwrapp__right__list__item">
               <button className="btn btn--navbarsearch">
                 <SearchOutlinedIcon
-                  style={{ color: "#1acee0", fontWeight: "bold" }}
+                  style={{color: '#1acee0', fontWeight: 'bold'}}
                 />
               </button>
             </li>

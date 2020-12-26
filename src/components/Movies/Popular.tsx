@@ -1,40 +1,35 @@
-import React, {useMemo, useState} from 'react';
+import React, {useState} from 'react';
+import {useEffect} from 'react';
+import {FC} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
+import Card from '../Common/Card';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import Card from '../Common/Card';
-import {Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {requestloadMorePopular} from '../Store/Reducers/HomePageReducer';
-import {PopularType} from '../../Types/Types';
-import {FC} from 'react';
-import {loadMorePopSelector} from '../Store/Selectors/HomePageSelector';
+import {  popularSelector } from '../Store/Selectors/MoviesSelector';
 import {AppStateType} from '../Store/store';
-import {useEffect} from 'react';
-// type Propstype={
-//   popular:Array<PopularType>
-// }
+import Paginatior from '../Common/Paginator';
+import { requestPopularMoviesPage } from '../Store/Reducers/MoviesReducer';
+
+
 
 const Popular: FC = () => {
-  let popular = useSelector((state: AppStateType) =>
-    loadMorePopSelector(state)
+  const popularMovies = useSelector((state: AppStateType) =>
+  popularSelector(state)
   );
-  const [increment, setIncrement] = useState(2);
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
-  const loadMore = () => {
-    setIncrement((prev) => prev + 1);
-    dispatch(requestloadMorePopular(increment));
-  };
-  const emptyArray = () => {
-    popular = [];
-  };
-  //   useEffect(() => {
-  //     dispatch(requestloadMorePopular(1));
-  // }, []);
+    useEffect(() => {
+     dispatch(requestPopularMoviesPage(page))
+  }, [page]);
 
+  const handalePageChange=(e:any,value:number)=>{
+    setPage(value);
+  }
   return (
     <>
-      <h1 className="heading">Popular Movies</h1>
+      <h1 className="heading">Now Playing</h1>
       <div className="popularwrap">
         <div className="popularwrap__filters">
           <Sort />
@@ -44,11 +39,12 @@ const Popular: FC = () => {
           </button>
         </div>
         <div className="popularwrap__movielist">
-          {popular.map((p, index) => (
+          {popularMovies?.results.map((p, index) => (
             <Link
               to={`/movie-card/${p.id}`}
               key={index}
               className="popularwrap__movielist-link"
+              target="_blank"
             >
               <Card
                 poster={p.poster_path}
@@ -57,13 +53,13 @@ const Popular: FC = () => {
                 realese={p.release_date}
                 firstAirDate={p.first_air_date}
                 name={p.name}
-                emptyArray={emptyArray}
               />
             </Link>
           ))}
-          <button className="btn btn--loadmore" onClick={loadMore}>
-            LOAD MORE
-          </button>
+          <Paginatior
+            handalePageChange={handalePageChange}
+            totalPages={popularMovies?.total_pages}
+          />
         </div>
       </div>
     </>

@@ -17,8 +17,6 @@ const GET_TRAILERS = "GET_TRAILERS";
 const GET_TREDINGS = "GET_TREDINGS";
 const GET_UPCOMING = "GET_UPCOMING";
 const FETCHING = "FETCHING";
-const LOAD__MORE__POP = "LOAD__MORE_POP";
-const LOAD__MORE__NPL = "LOAD__MORE__NPL";
 
 const initialState = {
   popularMovies: [] as Array<PopularType>,
@@ -29,8 +27,6 @@ const initialState = {
   traidings: [] as Array<TraidingsType>,
   upComing: [] as Array<UpComingType>,
   fetching: true,
-  loadMorePop: [] as Array<PopularType>,
-  loadMoreNowPl: [] as Array<NowPlayngType>,
 };
 
 type initialStateType = typeof initialState;
@@ -89,20 +85,7 @@ const homePageReducer = (
         fetching: action.fetching,
       };
     }
-    case LOAD__MORE__POP: {
-      
-      console.log(state.loadMorePop)
-      return {
-        ...state,
-        loadMorePop: [...state.loadMorePop,...action.loadMorePop]
-      };
-    }
-    case LOAD__MORE__NPL: {
-      return {
-        ...state,
-        loadMoreNowPl: [...state.loadMoreNowPl, ...action.loadMoreNowPl],
-      };
-    }
+   
     default:
       return state;
   }
@@ -186,24 +169,6 @@ type FetchingType = {
 export const getFetching = (fetching: boolean): FetchingType => {
   return { type: FETCHING, fetching };
 };
-/////////////////////////////////////////////
-type LoadMorePopType = {
-  type: typeof LOAD__MORE__POP;
-  loadMorePop: Array<PopularType>;
-};
-
-export const getLoadMorePop = (loadMorePop: Array<PopularType>): LoadMorePopType => {
-  return { type: LOAD__MORE__POP, loadMorePop };
-};
-type LoadMoreNPLType = {
-  type: typeof LOAD__MORE__NPL;
-  loadMoreNowPl: Array<NowPlayngType>;
-};
-
-export const getLoadMoreNPL = (loadMoreNowPl: Array<PopularType>): LoadMoreNPLType => {
-  return { type: LOAD__MORE__NPL, loadMoreNowPl };
-};
-///////////////////////////////
 //Thunk
 export const requestPopularMovies = (currentPage: number) => async (
   dispatch: any
@@ -253,22 +218,5 @@ export const requestUpComing = (randomPage: number) => async (
   dispatch(getUpComing(res));
   dispatch(getFetching(false));
 };
-////////////////////////
-export const requestloadMorePopular = (currentPage: number) => async (
-  dispatch: any
-) => {
-  const res = await getHomePgeApi.getPopular(currentPage);
-  //console.log(res);
-  dispatch(getLoadMorePop(res.results));
-  dispatch(getCurrentPage(currentPage));
-};
-export const requestloadMoreNowPlaying = (currentPage: number) => async (
-  dispatch: any
-) => {
-  const res = await getHomePgeApi.getNowPlaying(currentPage);
-  //console.log(res);
-  dispatch(getLoadMoreNPL(res.results));
-  dispatch(getCurrentPage(currentPage));
-};
-///////////////////////////////
+
 export default homePageReducer;
