@@ -9,7 +9,7 @@ import { AppStateType } from '../Store/store';
 import Paginatior from '../Common/Paginator';
 import { requestPopularMovies } from '../Store/Reducers/HomePageReducer';
 
-const NowPlaying: FC = () => {
+const Upcoming: FC = () => {
     const popularMovies = useSelector((state: AppStateType) =>
     popularSelector(state)
     );
@@ -25,7 +25,7 @@ const NowPlaying: FC = () => {
     }
     return (
       <>
-        <h1 className="heading">Now Playing Movies</h1>
+        <h1 className="heading">Upcoming Movies</h1>
         <div className="popularwrap">
           <div className="popularwrap__filters">
             <Sort />
@@ -62,4 +62,4 @@ const NowPlaying: FC = () => {
     );
   };
   
-  export default NowPlaying;
+  export default Upcoming;

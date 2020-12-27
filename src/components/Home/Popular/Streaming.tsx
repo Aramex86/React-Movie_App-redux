@@ -9,7 +9,7 @@ import { AppStateType } from "../../Store/store";
 
 
 
-const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
+const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies=[] }) => {
   const fetching = useSelector((state: AppStateType) =>
   fetchingSelector(state)
 );

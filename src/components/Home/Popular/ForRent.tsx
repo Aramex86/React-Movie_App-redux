@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import Skeleton from '../../Common/Skeleton';
 
 
-const ForRent: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
+const ForRent: FC<PropsMovieComponentstype> = ({ popularMovies =[]}) => {
   const fetching = useSelector((state: AppStateType) =>
     fetchingSelector(state)
   );

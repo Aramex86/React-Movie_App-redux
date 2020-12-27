@@ -11,10 +11,10 @@ import { currentPagesSelector } from "../Store/Selectors/SearchSelector";
 import { AppStateType } from "../Store/store";
 
 type PropsType = {
-  bgPopular: Array<PopularType>;
+  bgPopular: Array<PopularType> | undefined;
 };
 
-const Hero: React.FC<PropsType> = ({ bgPopular }) => {
+const Hero: React.FC<PropsType> = ({ bgPopular=[] }) => {
   const dispatch = useDispatch();
 
   const [searchMovie, setSearchMovie] = useState("");

@@ -6,7 +6,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {ImPlus} from 'react-icons/im';
 import {useDispatch} from 'react-redux';
-import { requestPopularMoviesPage } from '../Store/Reducers/MoviesReducer';
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
@@ -80,14 +79,20 @@ const NavBar = () => {
                       </Link>
                     </li>
                     <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                      <Link
+                        to="/movies/upcoming"
+                        className="dropdown-navbar__link"
+                      >
                         upcoming
-                      </a>
+                      </Link>
                     </li>
                     <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                      <Link
+                        to="/movies/toprated"
+                        className="dropdown-navbar__link"
+                      >
                         top rated
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -181,14 +186,20 @@ const NavBar = () => {
                     </Link>
                   </li>
                   <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
+                    <Link
+                      to="/movies/upcoming"
+                      className="dropdown-navbar__link"
+                    >
                       upcoming
-                    </a>
+                    </Link>
                   </li>
                   <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
+                    <Link
+                      to="/movies/toprated"
+                      className="dropdown-navbar__link"
+                    >
                       top rated
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

@@ -1,6 +1,8 @@
 import { getHomePgeApi, getMoviesApi, getSearchApi } from "../../../Api/Api";
 import {
+  NowPlayingObjectType,
   NowPlayngType,
+  PopularObjectType,
   PopularType,
   TraidingsType,
   TVPopularType,
@@ -19,9 +21,9 @@ const GET_UPCOMING = "GET_UPCOMING";
 const FETCHING = "FETCHING";
 
 const initialState = {
-  popularMovies: [] as Array<PopularType>,
+  popularMovies: null as PopularObjectType |null,
   currentPage: 1,
-  nowPlaying: [] as Array<NowPlayngType>,
+  nowPlaying: null as NowPlayingObjectType | null,
   nowTvPlaying: [] as Array<TVPopularType>,
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
@@ -94,11 +96,11 @@ const homePageReducer = (
 //Popular Movies
 type GetPopularType = {
   type: typeof GET_POPULAR_MOVIES;
-  popularMovies: Array<PopularType>;
+  popularMovies: PopularObjectType
 };
 
 export const getPopularMovies = (
-  popularMovies: Array<PopularType>
+  popularMovies: PopularObjectType
 ): GetPopularType => {
   return { type: GET_POPULAR_MOVIES, popularMovies };
 };
@@ -115,11 +117,11 @@ export const getCurrentPage = (currentPage: number): GetCurrentPage => {
 //
 type GetNowPlayingtype = {
   type: typeof GET_NOW_PLAYING;
-  nowPlaying: Array<NowPlayngType>;
+  nowPlaying: NowPlayingObjectType;
 };
 
 export const getNowPlaying = (
-  nowPlaying: Array<NowPlayngType>
+  nowPlaying: NowPlayingObjectType
 ): GetNowPlayingtype => {
   return { type: GET_NOW_PLAYING, nowPlaying };
 };
@@ -176,8 +178,8 @@ export const requestPopularMovies = (currentPage: number) => async (
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getPopular(currentPage);
-  console.log(res)
-  dispatch(getPopularMovies(res.results));
+  // console.log(res)
+  dispatch(getPopularMovies(res));
   dispatch(getFetching(false));
 };
 export const requestNowPlaying = (currentPage: number) => async (
@@ -186,7 +188,8 @@ export const requestNowPlaying = (currentPage: number) => async (
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getNowPlaying(currentPage);
-  dispatch(getNowPlaying(res.results));
+  console.log(res)
+  dispatch(getNowPlaying(res));
   dispatch(getFetching(false));
 };
 

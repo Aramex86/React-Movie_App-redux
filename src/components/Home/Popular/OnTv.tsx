@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { fetchingSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
 
-const OnTv: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
+const OnTv: FC<PropsMovieComponentstype> = ({ popularMovies=[] }) => {
   const fetching = useSelector((state: AppStateType) =>
     fetchingSelector(state)
   );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { MovieListType, PopularType, VideoType } from "../../Types/Types";
+import { MovieListType, PopularObjectType, PopularType, VideoType } from "../../Types/Types";
 import { requestMovieList } from "../Store/Reducers/MovieListReducer";
 
 import {
@@ -30,7 +30,7 @@ type MapStateToPropsType = {
   movieList: Array<MovieListType>;
   isFetching: boolean;
   movies?: any;
-  popularMovies: Array<PopularType>;
+  popularMovies: PopularObjectType | undefined |null;
   //homeVideo: Array<VideoType>;
 };
 
@@ -49,15 +49,16 @@ type PropsType = MapStateToPropsType &
 class MovielistContainer extends Component<PropsType> {
   componentDidMount() {
     this.props.requestMovieList();
-    this.props.requestPopularMovies(Math.floor(Math.random() * 10) + 1);
+    this.props.requestPopularMovies(1);
+    // this.props.requestPopularMovies(Math.floor(Math.random() * 10) + 1);
   }
 
   render() {
-    //console.log(this.props);
+    console.log(this.props);
     return (
       <>
-        <HeroSection bgPopular={this.props.popularMovies} />
-        <Popular popularMovies={this.props.popularMovies} />
+        <HeroSection bgPopular={this.props.popularMovies?.results} />
+        <Popular popularMovies={this.props.popularMovies?.results} />
         <FreeToWatch />
         <Trailers />
         <Tranding />

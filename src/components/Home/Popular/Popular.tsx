@@ -7,11 +7,11 @@ import InTheater from "./InTheater";
 import { PopularType } from "../../../Types/Types";
 
 type PropsPopularMoviesType = {
-  popularMovies: Array<PopularType>;
+  popularMovies: Array<PopularType>|undefined;
 };
 
 export type PropsMovieComponentstype = {
-  popularMovies: Array<PopularType>;
+  popularMovies: Array<PopularType>|undefined;
 };
 
 const Popular: FC<PropsPopularMoviesType> = ({ popularMovies }) => {

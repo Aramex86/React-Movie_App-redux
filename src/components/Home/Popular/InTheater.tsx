@@ -7,7 +7,7 @@ import { fetchingSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
 import Skeleton from "../../Common/Skeleton";
 
-const InTheater: FC<PropsMovieComponentstype> = ({ popularMovies }) => {
+const InTheater: FC<PropsMovieComponentstype> = ({ popularMovies=[] }) => {
   const fetching = useSelector((state: AppStateType) =>
     fetchingSelector(state)
   );

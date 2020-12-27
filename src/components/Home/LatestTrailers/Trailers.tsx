@@ -20,19 +20,16 @@ const Trailers = () => {
   const dispatch = useDispatch();
 
   const checkIds = (valueId: number) => {
-    popular.find((item) => {
+    popular?.results.find((item) => {
       if (item.id === valueId) {
         setBg(item);
       }
     });
   };
 
-  const closeModal=()=>{
+  const closeModal = () => {
     setOpenModal(false);
-  }
-
-
- 
+  };
 
   return (
     <div
@@ -42,12 +39,16 @@ const Trailers = () => {
       }}
     >
       <div className="videos">
-        <Video trailers={trailers} openModal={openModal} closeModal={closeModal}/>
+        <Video
+          trailers={trailers}
+          openModal={openModal}
+          closeModal={closeModal}
+        />
       </div>
       <div className="trailerswrapp__substrate">
         <h2 className="trailerswrapp__substrate__heading">Latest Trailers</h2>
         <div className="videowrap">
-          {popular.map((item) => (
+          {popular?.results.map((item) => (
             <div
               className="container"
               key={item.id}
@@ -70,9 +71,9 @@ const Trailers = () => {
               </div>
               <div className="container__title">
                 <span>{item.title}</span>
-                <br/>
+                <br />
                 <span>Realese Date : {item.release_date}</span>
-                </div>
+              </div>
             </div>
           ))}
         </div>
