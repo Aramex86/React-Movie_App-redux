@@ -24,6 +24,9 @@ export const traidingsSelector = (state: AppStateType) => {
 export const upComingSelector = (state: AppStateType) => {
   return state.homePage.upComing;
 };
+export const topRatedSelector = (state: AppStateType) => {
+  return state.homePage.topRated;
+};
 export const fetchingSelector = (state: AppStateType) => {
   return state.homePage.fetching;
 };

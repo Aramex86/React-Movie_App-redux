@@ -20,13 +20,13 @@ const Upcoming = () => {
     dispatch(requestUpComing(Math.floor(Math.random() * 20) + 1));
   }, []);
 
-console.log(upComing)
+//console.log(upComing?.results)
 
   return (
     <div className="upcomingwrapp">
       <h2>Upcoming</h2>
       <div className="cardwrapp">
-      {upComing.map((movie) => fetching?<Skeleton key={movie.id}/>:
+      {upComing?.results.map((movie) => fetching?<Skeleton key={movie.id}/>:
         <Link to={`movie-card/${movie.id}`} key={movie.id}>
           <Card
             poster={movie.poster_path}

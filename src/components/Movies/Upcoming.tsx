@@ -4,20 +4,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import { popularSelector } from '../Store/Selectors/HomePageSelector';
+import {  upComingSelector } from '../Store/Selectors/HomePageSelector';
 import { AppStateType } from '../Store/store';
 import Paginatior from '../Common/Paginator';
-import { requestPopularMovies } from '../Store/Reducers/HomePageReducer';
+import {  requestUpComing } from '../Store/Reducers/HomePageReducer';
 
 const Upcoming: FC = () => {
-    const popularMovies = useSelector((state: AppStateType) =>
-    popularSelector(state)
+    const upcoming = useSelector((state: AppStateType) =>
+    upComingSelector(state)
     );
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
   
       useEffect(() => {
-       dispatch(requestPopularMovies(page))
+       dispatch(requestUpComing(page))
     }, [page]);
   
     const handalePageChange=(e:any,value:number)=>{
@@ -35,7 +35,7 @@ const Upcoming: FC = () => {
             </button>
           </div>
           <div className="popularwrap__movielist">
-            {popularMovies?.results.map((p, index) => (
+            {upcoming?.results.map((p, index) => (
               <Link
                 to={`/movie-card/${p.id}`}
                 key={index}
@@ -54,7 +54,7 @@ const Upcoming: FC = () => {
             ))}
             <Paginatior
               handalePageChange={handalePageChange}
-              totalPages={popularMovies?.total_pages}
+              totalPages={upcoming?.total_pages}
             />
           </div>
         </div>

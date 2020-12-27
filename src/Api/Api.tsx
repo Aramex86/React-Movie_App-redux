@@ -10,7 +10,7 @@ import axios from "axios";
 //api_key TMDb = 647b39ccfb59105c511c2df9019bc7ec; -> apikey
 //https://cors-anywhere.herokuapp.com/ ->corsanywhere
 //https://api.themoviedb.org/4/list/1?page=1&api_key=647b39ccfb59105c511c2df9019bc7ec&sort_by=title.asc";
-export const api_key = "647b39ccfb59105c511c2df9019bc7ec";
+ const api_key = "647b39ccfb59105c511c2df9019bc7ec";
 //https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
 
 export const getMoviesApi = {
@@ -227,19 +227,33 @@ export const getHomePgeApi = {
         return err.response.data.status_message;
       });
   },
-  getUpcomming(randomPage:number) {
+  getUpcomming(currentPage: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}&language=en-US&page=${randomPage}`
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}&language=en-US&page=${currentPage}`
       )
       .then((res) => {
-        return res.data.results;
+        return res.data;
       })
       .catch((err) => {
         console.log(err.response.data.status_message);
         return err.response.data.status_message;
       });
   },
+  getTopRated(currentPage: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=${api_key}&language=en-US&page=${currentPage}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err.response.data.status_message);
+        return err.response.data.status_message;
+      });
+  },
+
 };
 
 export const getSearchApi = {

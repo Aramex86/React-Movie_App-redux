@@ -23,7 +23,7 @@ const Movies = () => {
   }, []);
   return (
     <div className="cardwrapp">
-      {nowPlayingMovies.map((movie) =>
+      {nowPlayingMovies?.results.map((movie) =>
         fetching ? (
           <Skeleton key={movie.id}/>
         ) : (

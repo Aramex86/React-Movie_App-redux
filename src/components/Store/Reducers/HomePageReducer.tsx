@@ -1,12 +1,11 @@
 import { getHomePgeApi, getMoviesApi, getSearchApi } from "../../../Api/Api";
 import {
   NowPlayingObjectType,
-  NowPlayngType,
   PopularObjectType,
-  PopularType,
+  TopRatedObjectType,
   TraidingsType,
   TVPopularType,
-  UpComingType,
+  UpComingObjectType,
   VideoType,
 } from "../../../Types/Types";
 
@@ -18,6 +17,7 @@ const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
 const GET_TRAILERS = "GET_TRAILERS";
 const GET_TREDINGS = "GET_TREDINGS";
 const GET_UPCOMING = "GET_UPCOMING";
+const GET__TOP__RATED ="GET__TOP__RATED"
 const FETCHING = "FETCHING";
 
 const initialState = {
@@ -27,7 +27,8 @@ const initialState = {
   nowTvPlaying: [] as Array<TVPopularType>,
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
-  upComing: [] as Array<UpComingType>,
+  upComing: null as UpComingObjectType|null,
+  topRated: null as TopRatedObjectType |null,
   fetching: true,
 };
 
@@ -79,6 +80,12 @@ const homePageReducer = (
       return {
         ...state,
         upComing: action.upComing,
+      };
+    }
+    case GET__TOP__RATED: {
+      return {
+        ...state,
+        topRated: action.topRated,
       };
     }
     case FETCHING: {
@@ -158,12 +165,26 @@ export const getTraidings = (
 
 type GetUpComingType = {
   type: typeof GET_UPCOMING;
-  upComing: Array<UpComingType>;
+  upComing: UpComingObjectType;
 };
 
-export const getUpComing = (upComing: Array<UpComingType>): GetUpComingType => {
+export const getUpComing = (upComing: UpComingObjectType): GetUpComingType => {
   return { type: GET_UPCOMING, upComing };
 };
+
+//
+
+type GetTopRatedtype = {
+  type: typeof GET__TOP__RATED;
+  topRated: TopRatedObjectType;
+};
+
+export const getTopRated = (
+  topRated: TopRatedObjectType
+): GetTopRatedtype => {
+  return { type:GET__TOP__RATED, topRated };
+};
+
 type FetchingType = {
   type: typeof FETCHING;
   fetching: boolean;
@@ -172,6 +193,8 @@ export const getFetching = (fetching: boolean): FetchingType => {
   return { type: FETCHING, fetching };
 };
 //Thunk
+
+//Movies
 export const requestPopularMovies = (currentPage: number) => async (
   dispatch: any
 ) => {
@@ -188,19 +211,35 @@ export const requestNowPlaying = (currentPage: number) => async (
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getNowPlaying(currentPage);
-  console.log(res)
+  // console.log(res)
   dispatch(getNowPlaying(res));
   dispatch(getFetching(false));
 };
 
-export const requestNowTvPlaying = (currentPage: number) => async (
+export const requestUpComing = (currentPage: number) => async (
   dispatch: any
 ) => {
   dispatch(getFetching(true));
-  const res = await getHomePgeApi.getNowTvPlaying(currentPage);
-  dispatch(getNowTvPlaying(res.results));
+  dispatch(getCurrentPage(currentPage));
+  const res = await getHomePgeApi.getUpcomming(currentPage);
+  console.log(res)
+  dispatch(getUpComing(res));
   dispatch(getFetching(false));
 };
+
+export const requestTopRated = (currentPage: number) => async (
+  dispatch: any
+) => {
+  dispatch(getFetching(true));
+  dispatch(getCurrentPage(currentPage));
+  const res = await getHomePgeApi.getTopRated(currentPage);
+  console.log(res)
+  dispatch(getTopRated(res));
+  dispatch(getFetching(false));
+};
+
+
+
 
 export const requestTrailers = (movieId: number) => async (dispatch: any) => {
   const res = await getMoviesApi.getVideos(movieId);
@@ -213,13 +252,15 @@ export const requestTraidings = (value: string) => async (dispatch: any) => {
   dispatch(getTraidings(res));
   dispatch(getFetching(false));
 };
-export const requestUpComing = (randomPage: number) => async (
+///TV
+export const requestNowTvPlaying = (currentPage: number) => async (
   dispatch: any
 ) => {
   dispatch(getFetching(true));
-  const res = await getHomePgeApi.getUpcomming(randomPage);
-  dispatch(getUpComing(res));
+  const res = await getHomePgeApi.getNowTvPlaying(currentPage);
+  dispatch(getNowTvPlaying(res.results));
   dispatch(getFetching(false));
 };
+
 
 export default homePageReducer;

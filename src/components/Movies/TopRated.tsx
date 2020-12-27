@@ -4,22 +4,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import { popularSelector } from '../Store/Selectors/HomePageSelector';
+import {topRatedSelector } from '../Store/Selectors/HomePageSelector';
 import { AppStateType } from '../Store/store';
 import Paginatior from '../Common/Paginator';
-import { requestPopularMovies } from '../Store/Reducers/HomePageReducer';
+import {  requestTopRated } from '../Store/Reducers/HomePageReducer';
 
 const TopRated: FC = () => {
-    const popularMovies = useSelector((state: AppStateType) =>
-    popularSelector(state)
+    const topRated = useSelector((state: AppStateType) =>
+    topRatedSelector(state)
     );
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
   
       useEffect(() => {
-       dispatch(requestPopularMovies(page))
+       dispatch(requestTopRated(page))
     }, [page]);
   
+    console.log(topRated)
     const handalePageChange=(e:any,value:number)=>{
       setPage(value);
     }
@@ -35,7 +36,7 @@ const TopRated: FC = () => {
             </button>
           </div>
           <div className="popularwrap__movielist">
-            {popularMovies?.results.map((p, index) => (
+            {topRated?.results.map((p, index) => (
               <Link
                 to={`/movie-card/${p.id}`}
                 key={index}
@@ -54,7 +55,7 @@ const TopRated: FC = () => {
             ))}
             <Paginatior
               handalePageChange={handalePageChange}
-              totalPages={popularMovies?.total_pages}
+              totalPages={topRated?.total_pages}
             />
           </div>
         </div>

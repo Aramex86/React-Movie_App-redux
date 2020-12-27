@@ -465,3 +465,16 @@ export type NowPlayingObjectType={
   total_results: number
   page:number
 }
+
+export type UpComingObjectType={
+  results:Array<UpComingType>
+  total_pages: number
+  total_results: number
+  page:number
+}
+export type TopRatedObjectType={
+  results:Array<AllMediaType>
+  total_pages: number
+  total_results: number
+  page:number
+}
