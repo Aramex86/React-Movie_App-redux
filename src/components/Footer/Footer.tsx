@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Footer = () => {
   const slideToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
@@ -16,24 +16,28 @@ const Footer = () => {
           <h3>Movies</h3>
           <ul className="list">
             <li className="list__item">
-              <Link to="/movies" className="list__link" onClick={slideToTop}>
+              <Link
+                to="/movies/popular"
+                className="list__link"
+                onClick={slideToTop}
+              >
                 Popular
               </Link>
             </li>
             <li className="list__item">
-              <a href="#" className="list__link">
+              <Link to="/movies/nowplaying" className="list__link" onClick={slideToTop}>
                 Now Playing
-              </a>
+              </Link>
             </li>
             <li className="list__item">
-              <a href="#" className="list__link">
+              <Link to="/movies/upcoming" className="list__link" onClick={slideToTop}>
                 Upcoming
-              </a>
+              </Link>
             </li>
             <li className="list__item">
-              <a href="#" className="list__link">
+              <Link to="/movies/toprated" className="list__link" onClick={slideToTop}>
                 Top Rated
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
