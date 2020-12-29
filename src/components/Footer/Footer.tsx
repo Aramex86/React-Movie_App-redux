@@ -70,9 +70,9 @@ const Footer = () => {
           <h3>People</h3>
           <ul className="list">
             <li className="list__item">
-              <a href="#" className="list__link">
+              <Link to='/people/popular' className="list__link">
                 Popular People
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

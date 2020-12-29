@@ -488,3 +488,25 @@ export type PopularTvObjectType={
   total_results: number
   page:number
 }
+
+//People 
+
+type PopularPeopleType={
+  adult: boolean,
+  gender: number,
+  id: number,
+  known_for: Array<AllMediaType>,
+  known_for_department: string
+  name: string
+  popularity: number,
+  profile_path: string
+}
+
+
+
+export type PopularPeopleObjectType={
+  results:Array<PopularPeopleType>
+  total_pages: number
+  total_results: number
+  page:number
+}

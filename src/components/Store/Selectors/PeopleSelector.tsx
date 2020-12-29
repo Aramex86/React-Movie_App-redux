@@ -12,3 +12,6 @@ export const combineCrewSelector=(state:AppStateType)=>{
 export const socialSelector=(state:AppStateType)=>{
     return state.people.social
 }
+export const popularSelector=(state:AppStateType)=>{
+    return state.people.popularPeople
+}

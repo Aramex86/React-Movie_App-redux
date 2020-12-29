@@ -10,7 +10,7 @@ import axios from "axios";
 //api_key TMDb = 647b39ccfb59105c511c2df9019bc7ec; -> apikey
 //https://cors-anywhere.herokuapp.com/ ->corsanywhere
 //https://api.themoviedb.org/4/list/1?page=1&api_key=647b39ccfb59105c511c2df9019bc7ec&sort_by=title.asc";
- const api_key = "647b39ccfb59105c511c2df9019bc7ec";
+const api_key = "647b39ccfb59105c511c2df9019bc7ec";
 //https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
 
 export const getMoviesApi = {
@@ -174,12 +174,20 @@ export const getPeopleApi = {
         return err.response.data.status_message;
       });
   },
+  getPopular(currentPage: number) {
+    return axios.get(
+      `https://api.themoviedb.org/3/person/popular?api_key=${api_key}&language=en-US&page=${currentPage}`
+    ).then((res)=>{
+      return res.data;
+    }).catch((err)=>{
+      return err.response.data.status_message;
+    });
+  },
 };
 
 //Home Page
 
 export const getHomePgeApi = {
-  
   getPopular(currentPage: number) {
     return axios
       .get(
@@ -253,7 +261,6 @@ export const getHomePgeApi = {
       });
   },
 
-
   getTraidings(value: string) {
     return axios
       .get(
@@ -292,7 +299,6 @@ export const getHomePgeApi = {
         return err.response.data.status_message;
       });
   },
-
 };
 
 export const getSearchApi = {
@@ -308,7 +314,7 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
-  getMovies(query: string,currentPage:number) {
+  getMovies(query: string, currentPage: number) {
     return axios
       .get(
         `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
@@ -321,7 +327,7 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
-  getTv(query: string,currentPage:number) {
+  getTv(query: string, currentPage: number) {
     return axios
       .get(
         `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
@@ -333,7 +339,7 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
-  getPeople(query: string,currentPage:number) {
+  getPeople(query: string, currentPage: number) {
     return axios
       .get(
         `https://api.themoviedb.org/3/search/person?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
@@ -345,7 +351,7 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
-  getCollection(query: string,currentPage:number) {
+  getCollection(query: string, currentPage: number) {
     return axios
       .get(
         `https://api.themoviedb.org/3/search/collection?api_key=${api_key}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
@@ -357,6 +363,4 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
-  
 };
-

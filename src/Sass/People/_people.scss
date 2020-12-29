@@ -1,0 +1,14 @@
+.peoplewrapp{
+    width: 85%;
+    margin: auto;
+   &__people{
+    display: flex;
+    flex-wrap: wrap;
+   }
+   &__link{
+       width: 20%;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+}

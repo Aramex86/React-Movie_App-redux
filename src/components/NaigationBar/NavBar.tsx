@@ -156,9 +156,12 @@ const NavBar = () => {
                   </a>
                   <ul className="dropdown-navbar">
                     <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                      <Link
+                        to="/people/popula"
+                        className="dropdown-navbar__link"
+                      >
                         popular people
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -268,10 +271,16 @@ const NavBar = () => {
                   people
                 </a>
                 <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
+                  <li
+                    className="dropdown-navbar__item"
+                    onClick={() => setShowMenu(false)}
+                  >
+                    <Link
+                      to="/people/popular"
+                      className="dropdown-navbar__link"
+                    >
                       popular people
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
