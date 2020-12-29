@@ -2,9 +2,9 @@ import { getHomePgeApi, getMoviesApi, getSearchApi } from "../../../Api/Api";
 import {
   NowPlayingObjectType,
   PopularObjectType,
+  PopularTvObjectType,
   TopRatedObjectType,
   TraidingsType,
-  TVPopularType,
   UpComingObjectType,
   VideoType,
 } from "../../../Types/Types";
@@ -13,6 +13,7 @@ const GET_POPULAR_MOVIES = "GET_POPULAR_MOVIES";
 const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
 const GET_NOW_PLAYING = "GET_NOW_PLAYING";
 const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
+const GET_AIRING_TODAY = "GET_AIRING_TODAY";
 //const GET_SEARCH_MOVIES = 'GET_SEARCH_MOVIES';
 const GET_TRAILERS = "GET_TRAILERS";
 const GET_TREDINGS = "GET_TREDINGS";
@@ -24,7 +25,8 @@ const initialState = {
   popularMovies: null as PopularObjectType |null,
   currentPage: 1,
   nowPlaying: null as NowPlayingObjectType | null,
-  nowTvPlaying: [] as Array<TVPopularType>,
+  nowTvPlaying: null as PopularTvObjectType | null,
+  airingToday: null as PopularTvObjectType | null,
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
   upComing: null as UpComingObjectType|null,
@@ -61,6 +63,12 @@ const homePageReducer = (
       return {
         ...state,
         nowTvPlaying: action.nowTvPlaying,
+      };
+    }
+    case GET_AIRING_TODAY: {
+      return {
+        ...state,
+        airingToday: action.airingToday,
       };
     }
 
@@ -135,13 +143,23 @@ export const getNowPlaying = (
 // TV
 type GetNowTvPlaing = {
   type: typeof GET_NOW_TVPLAYING;
-  nowTvPlaying: Array<TVPopularType>;
+  nowTvPlaying:PopularTvObjectType;
 };
 
 export const getNowTvPlaying = (
-  nowTvPlaying: Array<TVPopularType>
+  nowTvPlaying: PopularTvObjectType
 ): GetNowTvPlaing => {
   return { type: GET_NOW_TVPLAYING, nowTvPlaying };
+};
+type GetAiringToday = {
+  type: typeof GET_AIRING_TODAY;
+  airingToday:PopularTvObjectType;
+};
+
+export const getAiringToday= (
+  airingToday: PopularTvObjectType
+): GetAiringToday => {
+  return { type: GET_AIRING_TODAY, airingToday };
 };
 //Trailers
 type GetTrailersType = {
@@ -258,7 +276,15 @@ export const requestNowTvPlaying = (currentPage: number) => async (
 ) => {
   dispatch(getFetching(true));
   const res = await getHomePgeApi.getNowTvPlaying(currentPage);
-  dispatch(getNowTvPlaying(res.results));
+  dispatch(getNowTvPlaying(res));
+  dispatch(getFetching(false));
+};
+export const requestAiringToday = (currentPage: number) => async (
+  dispatch: any
+) => {
+  dispatch(getFetching(true));
+  const res = await getHomePgeApi.geAiringTodayTv(currentPage);
+  dispatch(getAiringToday(res));
   dispatch(getFetching(false));
 };
 

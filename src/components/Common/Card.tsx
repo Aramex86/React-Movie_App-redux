@@ -36,6 +36,14 @@ const HomePageCard: FC<PropsType> = ({
     }
   };
 
+  const setTitle = () => {
+    if (title === undefined) {
+      return name.length >= 20 ? `${name.slice(0, 20)}...` : name;
+    } else {
+      return title.length >= 20 ? `${title.slice(0, 20)}...` : title;
+    }
+  };
+
   return (
     <div className="card__movie">
       <div className="card__movie-img">
@@ -62,7 +70,9 @@ const HomePageCard: FC<PropsType> = ({
       </div>
       <div className="card__movie-info">
         <h3 className="card__movie-info-title">
-          {title.length >= 20 ? `${title.slice(0, 20)}...` : title}
+          {/* {title.length >= 20 ? `${title.slice(0, 20)}...` : title}
+          {name.length >= 20 ? `${name.slice(0, 20)}...` : name} */}
+          {setTitle()}
         </h3>
         <span className="card__movie-info-realease">
           {realese ? realese : firstAirDate}

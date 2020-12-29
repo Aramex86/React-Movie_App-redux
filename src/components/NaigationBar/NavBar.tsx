@@ -62,7 +62,10 @@ const NavBar = () => {
                 <li className="navbarwrapp__left__list__item">
                   <span className="navbarwrapp__left__list__link">movies</span>
                   <ul className="dropdown-navbar">
-                    <li className="dropdown-navbar__item">
+                    <li
+                      className="dropdown-navbar__item"
+                      onClick={() => setShowMenu(false)}
+                    >
                       <Link
                         to="/movies/popular"
                         className="dropdown-navbar__link"
@@ -70,7 +73,10 @@ const NavBar = () => {
                         popular
                       </Link>
                     </li>
-                    <li className="dropdown-navbar__item">
+                    <li
+                      className="dropdown-navbar__item"
+                      onClick={() => setShowMenu(false)}
+                    >
                       <Link
                         to="/movies/nowplaying"
                         className="dropdown-navbar__link"
@@ -78,7 +84,10 @@ const NavBar = () => {
                         now playing
                       </Link>
                     </li>
-                    <li className="dropdown-navbar__item">
+                    <li
+                      className="dropdown-navbar__item"
+                      onClick={() => setShowMenu(false)}
+                    >
                       <Link
                         to="/movies/upcoming"
                         className="dropdown-navbar__link"
@@ -86,7 +95,10 @@ const NavBar = () => {
                         upcoming
                       </Link>
                     </li>
-                    <li className="dropdown-navbar__item">
+                    <li
+                      className="dropdown-navbar__item"
+                      onClick={() => setShowMenu(false)}
+                    >
                       <Link
                         to="/movies/toprated"
                         className="dropdown-navbar__link"
@@ -101,15 +113,24 @@ const NavBar = () => {
                     tv shows
                   </a>
                   <ul className="dropdown-navbar">
-                    <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                    <li
+                      className="dropdown-navbar__item"
+                      onClick={() => setShowMenu(false)}
+                    >
+                      <Link to="/tv/popular" className="dropdown-navbar__link">
                         popular
-                      </a>
+                      </Link>
                     </li>
-                    <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                    <li
+                      className="dropdown-navbar__item"
+                      onClick={() => setShowMenu(false)}
+                    >
+                      <Link
+                        to="/tv/airingtoday"
+                        className="dropdown-navbar__link"
+                      >
                         airing today
-                      </a>
+                      </Link>
                     </li>
                     <li className="dropdown-navbar__item">
                       <a href="#" className="dropdown-navbar__link">
@@ -209,14 +230,17 @@ const NavBar = () => {
                 </a>
                 <ul className="dropdown-navbar">
                   <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
+                    <Link to="/tv/popular" className="dropdown-navbar__link">
                       popular
-                    </a>
+                    </Link>
                   </li>
                   <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
+                    <Link
+                      to="/tv/airingtoday"
+                      className="dropdown-navbar__link"
+                    >
                       airing today
-                    </a>
+                    </Link>
                   </li>
                   <li className="dropdown-navbar__item">
                     <a href="#" className="dropdown-navbar__link">

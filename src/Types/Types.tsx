@@ -354,6 +354,8 @@ export type TVPopularType = {
   poster_path: string | null;
   vote_average: number;
   vote_count: number;
+  release_date:string
+  title:string
 };
 
 //Traidings
@@ -474,6 +476,14 @@ export type UpComingObjectType={
 }
 export type TopRatedObjectType={
   results:Array<AllMediaType>
+  total_pages: number
+  total_results: number
+  page:number
+}
+
+//TV
+export type PopularTvObjectType={
+  results:Array<TVPopularType>
   total_pages: number
   total_results: number
   page:number

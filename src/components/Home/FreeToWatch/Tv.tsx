@@ -21,9 +21,11 @@ const Tv = () => {
     dispatch(requestNowTvPlaying(Math.floor(Math.random() * 20) + 1));
   }, []);
 
+  console.log(nowTvPlaying)
+
   return (
     <div className="cardwrapp">
-      {nowTvPlaying.map((movie:any)=> 
+      {nowTvPlaying?.results.map((movie:any)=> 
       fetching?<Skeleton key={movie.id}/>:
       /*   <Link to={`movie-card/${movie.id}`} key={movie.id}> */
           <Card key={movie.id}

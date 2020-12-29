@@ -14,6 +14,9 @@ export const nowPlayingSelector = (state: AppStateType) => {
 export const nowTvPlayingSelector = (state: AppStateType) => {
   return state.homePage.nowTvPlaying;
 };
+export const airingTodaySelector = (state: AppStateType) => {
+  return state.homePage.airingToday;
+};
 
 export const homeVideosSelector = (state: AppStateType) => {
   return state.homePage.trailers;
