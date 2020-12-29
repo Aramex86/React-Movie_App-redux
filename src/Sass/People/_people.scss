@@ -1,14 +1,27 @@
 .peoplewrapp{
     width: 85%;
     margin: auto;
+    @include respond(phone){
+        width: 100%;
+    }
    &__people{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
    }
    &__link{
        width: 20%;
        display: flex;
        justify-content: center;
        align-items: center;
+       @include respond(tab-port){
+        width: 30%;
+       }
+       @include respond(phone){
+        width: 40%;
+       }
+       @include respond(small-phone){
+        width: 49%;
+       }
    }
 }

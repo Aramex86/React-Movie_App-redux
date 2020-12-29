@@ -45,22 +45,22 @@ const Footer = () => {
           <h3>TV Shows</h3>
           <ul className="list">
             <li className="list__item">
-              <Link to="/tv/popular" className="list__link">
+              <Link to="/tv/popular" className="list__link" onClick={slideToTop}>
                 Popular
               </Link>
             </li>
             <li className="list__item">
-              <Link to="/tv/airingtoday" className="list__link">
+              <Link to="/tv/airingtoday" className="list__link" onClick={slideToTop}>
                 Airing Today
               </Link>
             </li>
             <li className="list__item">
-              <Link to="/tv/ontv" className="list__link">
+              <Link to="/tv/ontv" className="list__link" onClick={slideToTop}>
                 On Tv
               </Link>
             </li>
             <li className="list__item">
-              <Link to="/tv/toprated" className="list__link">
+              <Link to="/tv/toprated" className="list__link" onClick={slideToTop}>
                 Top Rated
               </Link>
             </li>
@@ -69,8 +69,8 @@ const Footer = () => {
         <div className="footerwrapp__people">
           <h3>People</h3>
           <ul className="list">
-            <li className="list__item">
-              <Link to='/people/popular' className="list__link">
+            <li className="list__item" onClick={slideToTop}>
+              <Link to='/people/popular' className="list__link" >
                 Popular People
               </Link>
             </li>
