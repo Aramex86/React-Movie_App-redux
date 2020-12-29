@@ -4,20 +4,20 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import {airingTodaySelector} from '../Store/Selectors/HomePageSelector';
+import { topRatedTvSelector} from '../Store/Selectors/HomePageSelector';
 import {AppStateType} from '../Store/store';
 import Paginatior from '../Common/Paginator';
-import {requestAiringToday} from '../Store/Reducers/HomePageReducer';
+import { requestTopRatedTv} from '../Store/Reducers/HomePageReducer';
 
 const Popular: FC = () => {
-  const airingToday = useSelector((state: AppStateType) =>
-  airingTodaySelector(state)
+  const topRatedTv = useSelector((state: AppStateType) =>
+  topRatedTvSelector(state)
   );
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestAiringToday(page));
+    dispatch(requestTopRatedTv(page));
   }, [page]);
 
   const handalePageChange = (e: any, value: number) => {
@@ -35,7 +35,7 @@ const Popular: FC = () => {
           </button>
         </div>
         <div className="popularwrap__movielist">
-          {airingToday?.results.map((p, index) => (
+          {topRatedTv?.results.map((p, index) => (
             <Link
               to="/somewere in space" /* {`/movie-card/${p.id}`} */
               key={index}
@@ -54,7 +54,7 @@ const Popular: FC = () => {
           ))}
           <Paginatior
             handalePageChange={handalePageChange}
-            totalPages={airingToday?.total_pages}
+            totalPages={topRatedTv?.total_pages}
           />
         </div>
       </div>

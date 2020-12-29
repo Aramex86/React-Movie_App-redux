@@ -15,6 +15,8 @@ import Upcoming from './components/Movies/Upcoming';
 import TopRated from './components/Movies/TopRated';
 import PopularTv from './components/Tv/PopularTv';
 import AiringToday from './components/Tv/AiringToday';
+import OnTv from './components/Tv/OnTv';
+import TopRatedTv from './components/Tv/TopRatedTv';
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           <Route exact path="/movies/toprated" component={TopRated} />
           <Route exact path="/tv/popular" component={PopularTv} />
           <Route exact path="/tv/airingtoday" component={AiringToday} />
+          <Route exact path="/tv/ontv" component={OnTv} />
+          <Route exact path="/tv/toprated" component={TopRatedTv} />
 
         </Switch>
       </WithHeaderFooter>

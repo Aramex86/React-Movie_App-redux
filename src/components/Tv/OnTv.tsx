@@ -4,28 +4,29 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import {airingTodaySelector} from '../Store/Selectors/HomePageSelector';
+import { onTvSelector} from '../Store/Selectors/HomePageSelector';
 import {AppStateType} from '../Store/store';
 import Paginatior from '../Common/Paginator';
-import {requestAiringToday} from '../Store/Reducers/HomePageReducer';
+import { requestOnTv} from '../Store/Reducers/HomePageReducer';
 
 const Popular: FC = () => {
-  const airingToday = useSelector((state: AppStateType) =>
-  airingTodaySelector(state)
+  const onTv = useSelector((state: AppStateType) =>
+  onTvSelector(state)
   );
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestAiringToday(page));
+    dispatch(requestOnTv(page));
   }, [page]);
 
   const handalePageChange = (e: any, value: number) => {
     setPage(value);
   };
+
   return (
     <>
-      <h1 className="heading">Popular TV Shows</h1>
+      <h1 className="heading">On Tv</h1>
       <div className="popularwrap">
         <div className="popularwrap__filters">
           <Sort />
@@ -35,7 +36,7 @@ const Popular: FC = () => {
           </button>
         </div>
         <div className="popularwrap__movielist">
-          {airingToday?.results.map((p, index) => (
+          {onTv?.results.map((p, index) => (
             <Link
               to="/somewere in space" /* {`/movie-card/${p.id}`} */
               key={index}
@@ -54,7 +55,7 @@ const Popular: FC = () => {
           ))}
           <Paginatior
             handalePageChange={handalePageChange}
-            totalPages={airingToday?.total_pages}
+            totalPages={onTv?.total_pages}
           />
         </div>
       </div>

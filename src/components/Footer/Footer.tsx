@@ -45,24 +45,24 @@ const Footer = () => {
           <h3>TV Shows</h3>
           <ul className="list">
             <li className="list__item">
-              <a href="#" className="list__link">
+              <Link to="/tv/popular" className="list__link">
                 Popular
-              </a>
+              </Link>
             </li>
             <li className="list__item">
-              <a href="#" className="list__link">
+              <Link to="/tv/airingtoday" className="list__link">
                 Airing Today
-              </a>
+              </Link>
             </li>
             <li className="list__item">
-              <a href="#" className="list__link">
+              <Link to="/tv/ontv" className="list__link">
                 On Tv
-              </a>
+              </Link>
             </li>
             <li className="list__item">
-              <a href="#" className="list__link">
+              <Link to="/tv/toprated" className="list__link">
                 Top Rated
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import {ImPlus} from 'react-icons/im';
-import {useDispatch} from 'react-redux';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { ImPlus } from "react-icons/im";
+import { useDispatch } from "react-redux";
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
@@ -16,12 +16,12 @@ const NavBar = () => {
     age: string | number;
     name: string;
   }>({
-    age: '',
-    name: 'hai',
+    age: "",
+    name: "hai",
   });
 
   const handleChange = (
-    event: React.ChangeEvent<{name?: string; value: unknown}>
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => {
     const name = event.target.name as keyof typeof state;
     setState({
@@ -132,15 +132,21 @@ const NavBar = () => {
                         airing today
                       </Link>
                     </li>
-                    <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
-                        on tv
-                      </a>
+                    <li
+                      className="dropdown-navbar__item"
+                      onClick={() => setShowMenu(false)}
+                    >
+                      <Link to="/tv/ontv" className="dropdown-navbar__link">
+                        on air
+                      </Link>
                     </li>
-                    <li className="dropdown-navbar__item">
-                      <a href="#" className="dropdown-navbar__link">
+                    <li
+                      className="dropdown-navbar__item"
+                      onClick={() => setShowMenu(false)}
+                    >
+                      <Link to="/tv/toprated" className="dropdown-navbar__link">
                         top rated
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -181,7 +187,7 @@ const NavBar = () => {
               </ul>
             </nav>
           ) : (
-            ''
+            ""
           )}
           <nav className="navbarwrapp__left__navbar ">
             <ul className="navbarwrapp__left__list ">
@@ -242,15 +248,18 @@ const NavBar = () => {
                       airing today
                     </Link>
                   </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
-                      on tv
-                    </a>
+                  <li
+                    className="dropdown-navbar__item"
+                    onClick={() => setShowMenu(false)}
+                  >
+                    <Link to="/tv/ontv" className="dropdown-navbar__link">
+                      on air
+                    </Link>
                   </li>
                   <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
+                    <Link to="/tv/toprated" className="dropdown-navbar__link">
                       top rated
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
@@ -309,14 +318,14 @@ const NavBar = () => {
                   </span>
                 </div>
               ) : (
-                ''
+                ""
               )}
             </li>
             <li className="navbarwrapp__right__list__item">
               <button
                 className="btn btn--navbar"
                 onClick={showLang}
-                style={showlang ? {background: 'white', color: '#000'} : {}}
+                style={showlang ? { background: "white", color: "#000" } : {}}
               >
                 EN
               </button>
@@ -332,8 +341,8 @@ const NavBar = () => {
                       value={state.age}
                       onChange={handleChange}
                       inputProps={{
-                        name: 'age',
-                        id: 'filled-age-native-simple',
+                        name: "age",
+                        id: "filled-age-native-simple",
                       }}
                     >
                       <option aria-label="None" value="" />
@@ -344,7 +353,7 @@ const NavBar = () => {
                   </FormControl>
                 </div>
               ) : (
-                ''
+                ""
               )}
             </li>
             <li className="navbarwrapp__right__list__item">
@@ -355,7 +364,7 @@ const NavBar = () => {
             <li className="navbarwrapp__right__list__item">
               <button className="btn btn--navbarsearch">
                 <SearchOutlinedIcon
-                  style={{color: '#1acee0', fontWeight: 'bold'}}
+                  style={{ color: "#1acee0", fontWeight: "bold" }}
                 />
               </button>
             </li>

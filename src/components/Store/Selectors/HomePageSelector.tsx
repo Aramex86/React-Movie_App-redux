@@ -17,6 +17,12 @@ export const nowTvPlayingSelector = (state: AppStateType) => {
 export const airingTodaySelector = (state: AppStateType) => {
   return state.homePage.airingToday;
 };
+export const onTvSelector = (state: AppStateType) => {
+  return state.homePage.onTv;
+};
+export const topRatedTvSelector = (state: AppStateType) => {
+  return state.homePage.topRatedTv;
+};
 
 export const homeVideosSelector = (state: AppStateType) => {
   return state.homePage.trailers;

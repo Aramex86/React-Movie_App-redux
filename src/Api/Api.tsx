@@ -179,6 +179,7 @@ export const getPeopleApi = {
 //Home Page
 
 export const getHomePgeApi = {
+  
   getPopular(currentPage: number) {
     return axios
       .get(
@@ -219,6 +220,30 @@ export const getHomePgeApi = {
     return axios
       .get(
         `https://api.themoviedb.org/3/tv/airing_today?api_key=${api_key}&language=en-US&page=${currentPage}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+  },
+  getOnTv(currentPage: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/tv/on_the_air?api_key=${api_key}&language=en-US&page=${currentPage}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+  },
+  getTopRatedTv(currentPage: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/tv/top_rated?api_key=${api_key}&language=en-US&page=${currentPage}`
       )
       .then((res) => {
         return res.data;

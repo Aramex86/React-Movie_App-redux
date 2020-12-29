@@ -14,6 +14,8 @@ const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
 const GET_NOW_PLAYING = "GET_NOW_PLAYING";
 const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
 const GET_AIRING_TODAY = "GET_AIRING_TODAY";
+const GET_ON_TV ='GET_ON_TV';
+const GET__TOP__RATED__TV = "GET__TOP__RATED__TV";
 //const GET_SEARCH_MOVIES = 'GET_SEARCH_MOVIES';
 const GET_TRAILERS = "GET_TRAILERS";
 const GET_TREDINGS = "GET_TREDINGS";
@@ -27,6 +29,8 @@ const initialState = {
   nowPlaying: null as NowPlayingObjectType | null,
   nowTvPlaying: null as PopularTvObjectType | null,
   airingToday: null as PopularTvObjectType | null,
+  onTv: null as PopularTvObjectType | null,
+  topRatedTv: null as PopularTvObjectType | null,
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
   upComing: null as UpComingObjectType|null,
@@ -69,6 +73,18 @@ const homePageReducer = (
       return {
         ...state,
         airingToday: action.airingToday,
+      };
+    }
+    case GET_ON_TV: {
+      return {
+        ...state,
+        onTv: action.onTv,
+      };
+    }
+    case GET__TOP__RATED__TV: {
+      return {
+        ...state,
+        topRatedTv: action.topRatedTv,
       };
     }
 
@@ -160,6 +176,26 @@ export const getAiringToday= (
   airingToday: PopularTvObjectType
 ): GetAiringToday => {
   return { type: GET_AIRING_TODAY, airingToday };
+};
+type GetOnTv = {
+  type: typeof GET_ON_TV;
+  onTv:PopularTvObjectType;
+};
+
+export const getOnTv= (
+  onTv: PopularTvObjectType
+): GetOnTv => {
+  return { type: GET_ON_TV, onTv };
+};
+type GetTopRatedTvType = {
+  type: typeof GET__TOP__RATED__TV;
+  topRatedTv:PopularTvObjectType;
+};
+
+export const getTopRatedTv= (
+  topRatedTv: PopularTvObjectType
+): GetTopRatedTvType => {
+  return { type: GET__TOP__RATED__TV, topRatedTv };
 };
 //Trailers
 type GetTrailersType = {
@@ -285,6 +321,22 @@ export const requestAiringToday = (currentPage: number) => async (
   dispatch(getFetching(true));
   const res = await getHomePgeApi.geAiringTodayTv(currentPage);
   dispatch(getAiringToday(res));
+  dispatch(getFetching(false));
+};
+export const requestOnTv = (currentPage: number) => async (
+  dispatch: any
+) => {
+  dispatch(getFetching(true));
+  const res = await getHomePgeApi.getOnTv(currentPage);
+  dispatch(getOnTv(res));
+  dispatch(getFetching(false));
+};
+export const requestTopRatedTv = (currentPage: number) => async (
+  dispatch: any
+) => {
+  dispatch(getFetching(true));
+  const res = await getHomePgeApi.getTopRatedTv(currentPage);
+  dispatch(getTopRatedTv(res));
   dispatch(getFetching(false));
 };
 
