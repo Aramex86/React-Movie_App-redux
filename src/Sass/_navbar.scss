@@ -73,10 +73,10 @@ a {
       &--mobile {
         flex-direction: column;
         position: absolute;
-        background: #02161bc4;
+        background:linear-gradient(to right, #025885,80%, #0a7f9bad);
         left: -8px;
         top: 40px;
-        width: 100%;
+        width: 100vw;
         height: 100vh;
         z-index: 99;
       }
@@ -88,7 +88,7 @@ a {
         }
         @include respond(tab-land) {
           padding: 2rem 3rem;
-          font-size: 1.5rem;
+          font-size: 2.5rem;
         }
         
       }
