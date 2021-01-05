@@ -1,23 +1,22 @@
-import React, { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { FC} from "react";
+import {  useSelector } from "react-redux";
 import {
-  currentPagesSelector,
+  // currentPagesSelector,
   searchCollectionsSelector,
-  searchMoviesQuerySelector,
+  // searchMoviesQuerySelector,
   searchMoviesSelector,
   searchPeopleSelector,
   searchTvSelector,
-  totalPagesSelector,
 } from "../Store/Selectors/SearchSelector";
 import { AppStateType } from "../Store/store";
-import NoPoster from "../../assets/comingSoon.jpg";
-import { Link } from "react-router-dom";
-import Paginator from "../Common/Paginator";
-import {
-  // requestCurrentPage,
-  requestSearchMovie,
-  requestSearchTv,
-} from "../Store/Reducers/SearchReducer";
+// import NoPoster from "../../assets/comingSoon.jpg";
+// import { Link } from "react-router-dom";
+// import Paginator from "../Common/Paginator";
+// import {
+//   // requestCurrentPage,
+//   requestSearchMovie,
+//   requestSearchTv,
+// } from "../Store/Reducers/SearchReducer";
 import Movies from "./SerachResult/Movie";
 import Tv from "./SerachResult/Tvs";
 import Persons from "./SerachResult/Person";
@@ -31,7 +30,7 @@ type PropsType = {
 };
 
 const SearchResultsItems: FC<PropsType> = ({ show }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   //dispatch(requestCurrentPage(page));
 
   const movies = useSelector((state: AppStateType) =>
@@ -44,12 +43,12 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
   const collections = useSelector((state: AppStateType) =>
     searchCollectionsSelector(state)
   );
-  const searchQuery = useSelector((state: AppStateType) =>
-    searchMoviesQuerySelector(state)
-  );
-  const currentPage = useSelector((state: AppStateType) =>
-    currentPagesSelector(state)
-  );
+  // const searchQuery = useSelector((state: AppStateType) =>
+  //   searchMoviesQuerySelector(state)
+  // );
+  // const currentPage = useSelector((state: AppStateType) =>
+  //   currentPagesSelector(state)
+  // );
 
   //console.log(movies)
   // console.log(collections)

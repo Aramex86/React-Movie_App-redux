@@ -18,7 +18,7 @@ const Popular: FC = () => {
 
   useEffect(() => {
     dispatch(requestAiringToday(page));
-  }, [page]);
+  }, [page,dispatch]);
 
   const handalePageChange = (e: any, value: number) => {
     setPage(value);

@@ -18,7 +18,7 @@ const TopRated: FC = () => {
   
       useEffect(() => {
        dispatch(requestTopRated(page))
-    }, [page]);
+    }, [page,dispatch]);
   
     console.log(topRated)
     const handalePageChange=(e:any,value:number)=>{

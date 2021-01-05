@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 import { getMoviesApi } from "../../../Api/Api";
 import {
   CreditsType,
@@ -194,7 +195,7 @@ export const getKeywords = (keywords: Array<KeywordsType>): GetKeywordsType => {
 };
 
 // Thuck
-export const requestMovieList = () => async (dispatch: any) => {
+export const requestMovieList = () => async (dispatch: Dispatch):Promise<void> => {
   dispatch(isFetchingReq(true));
   const res = await getMoviesApi.getMovies();
   dispatch(getMoviesList(res));

@@ -18,7 +18,7 @@ const Upcoming: FC = () => {
   
       useEffect(() => {
        dispatch(requestUpComing(page))
-    }, [page]);
+    }, [page,dispatch]);
   
     const handalePageChange=(e:any,value:number)=>{
       setPage(value);

@@ -18,7 +18,7 @@ const NowPlaying: FC = () => {
   
       useEffect(() => {
        dispatch(requestNowPlaying(page))
-    }, [page]);
+    }, [page,dispatch]);
   
     const handalePageChange=(e:any,value:number)=>{
       setPage(value);

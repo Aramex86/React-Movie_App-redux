@@ -13,12 +13,12 @@ const Popular: FC = () => {
   const onTv = useSelector((state: AppStateType) =>
   onTvSelector(state)
   );
-  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     dispatch(requestOnTv(page));
-  }, [page]);
+  }, [page,dispatch]);
 
   const handalePageChange = (e: any, value: number) => {
     setPage(value);

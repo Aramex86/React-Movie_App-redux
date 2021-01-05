@@ -1,3 +1,5 @@
+import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { getSearchApi } from "../../../Api/Api";
 import {
   CollectionObjectType,
@@ -5,6 +7,7 @@ import {
   NowPlayngType,
   SearchObjectType,
 } from "../../../Types/Types";
+import { AppStateType } from "../store";
 
 const GET__MOVIES = "GET__MOVIES";
 const GET__TV = "GET__TV";
@@ -32,7 +35,24 @@ const initialState = {
 
 type initialStateType = typeof initialState;
 
-const searchReducer = (state = initialState, action: any): initialStateType => {
+type ActionsTypes =
+  | GetMoviesType
+  | GetTvType
+  | GetPeopleType
+  | GetPeopleType
+  | GetCollectionsType
+  | GetSearchQueryType
+  | TotalPagesType
+  | CurrentPagesType;
+
+  type DispatchType = Dispatch<ActionsTypes>
+  type GetStateType = ()=> AppStateType
+  type ThunkType =ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+
+const searchReducer = (
+  state = initialState,
+  action: ActionsTypes
+): initialStateType => {
   switch (action.type) {
     case GET__MOVIES: {
       return {
@@ -84,28 +104,26 @@ const searchReducer = (state = initialState, action: any): initialStateType => {
 
 type GetMoviesType = {
   type: typeof GET__MOVIES;
-  searchMovies: Array<NowPlayngType>;
+  searchMovies: SearchObjectType;
 };
 
-export const getMovies = (
-  searchMovies: Array<NowPlayngType>
-): GetMoviesType => {
+export const getMovies = (searchMovies: SearchObjectType): GetMoviesType => {
   return { type: GET__MOVIES, searchMovies };
 };
 type GetTvType = {
   type: typeof GET__TV;
-  searchTv: Array<NowPlayngType>;
+  searchTv: SearchObjectType;
 };
 
-export const getTv = (searchTv: Array<NowPlayngType>): GetTvType => {
+export const getTv = (searchTv: SearchObjectType): GetTvType => {
   return { type: GET__TV, searchTv };
 };
 type GetPeopleType = {
   type: typeof GET__PEOPLE;
-  searchPeople: Array<DetailType>;
+  searchPeople: SearchObjectType;
 };
 
-export const getPeople = (searchPeople: Array<DetailType>): GetPeopleType => {
+export const getPeople = (searchPeople: SearchObjectType): GetPeopleType => {
   return { type: GET__PEOPLE, searchPeople };
 };
 
@@ -120,12 +138,12 @@ export const getCollections = (
   return { type: GET__COLLECTIONS, searchCollection };
 };
 //Query String
-type GetSearchQuery = {
+type GetSearchQueryType = {
   type: typeof GET__SEARCH__QUERY;
   searchQuery: string;
 };
 
-export const getSerachQuery = (searchQuery: string): GetSearchQuery => {
+export const getSerachQuery = (searchQuery: string): GetSearchQueryType => {
   return { type: GET__SEARCH__QUERY, searchQuery };
 };
 //Total Pages
@@ -146,12 +164,12 @@ export const getCurrentPage = (currentPage: number): CurrentPagesType => {
   return { type: CURRENT__PAGE, currentPage };
 };
 
-export const requestSearchQuery = (query: string) => async (dispatch: any) => {
+export const requestSearchQuery = (query: string) => async (dispatch: DispatchType) => {
   dispatch(getSerachQuery(query));
 };
 
 export const requestTotalPages = (totalPages: number) => async (
-  dispatch: any
+  dispatch: DispatchType
 ) => {
   dispatch(getTotalPages(totalPages));
 };
@@ -159,7 +177,7 @@ export const requestTotalPages = (totalPages: number) => async (
 export const requestSearchMovie = (
   query: string,
   currentPage: number
-) => async (dispatch: any) => {
+):ThunkType => async (dispatch: DispatchType) => {
   const res = await getSearchApi.getMovies(query, currentPage);
   //console.log('Movies',res);
   dispatch(getCurrentPage(currentPage));
@@ -167,8 +185,8 @@ export const requestSearchMovie = (
   dispatch(getTotalPages(res?.total_pages));
 };
 
-export const requestSearchTv = (query: string, currentPage: number) => async (
-  dispatch: any
+export const requestSearchTv = (query: string, currentPage: number):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   const res = await getSearchApi.getTv(query, currentPage);
   //console.log('TV',res);
@@ -179,7 +197,7 @@ export const requestSearchTv = (query: string, currentPage: number) => async (
 export const requestSearchPeople = (
   query: string,
   currentPage: number
-) => async (dispatch: any) => {
+):ThunkType => async (dispatch: DispatchType) => {
   const res = await getSearchApi.getPeople(query, currentPage);
   //console.log("Pep", res);
   dispatch(getPeople(res));
@@ -189,13 +207,12 @@ export const requestSearchPeople = (
 export const requestSearchCollections = (
   query: string,
   currentPage: number
-) => async (dispatch: any) => {
+):ThunkType => async (dispatch: DispatchType) => {
   const res = await getSearchApi.getCollection(query, currentPage);
   //console.log("collections", res);
   dispatch(getCollections(res));
   dispatch(getCurrentPage(currentPage));
   dispatch(getTotalPages(res?.total_pages));
 };
-
 
 export default searchReducer;

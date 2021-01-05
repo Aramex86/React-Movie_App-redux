@@ -1,3 +1,5 @@
+import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { getPeopleApi } from "../../../Api/Api";
 import {
   CombineCreditsCrewType,
@@ -6,6 +8,7 @@ import {
   ExternalIdsType,
   PopularPeopleObjectType,
 } from "../../../Types/Types";
+import { AppStateType } from "../store";
 
 const GET_DETAIL = "GET_DETAIL";
 const GET_COMBINE_CREDITS_CAST = "GET__COMBINE_CREDITS_CAST";
@@ -22,7 +25,18 @@ const initialState = {
 };
 type initialStateType = typeof initialState;
 
-const peopleReducer = (state = initialState, action: any): initialStateType => {
+type ActionsTypes =
+  | GetPeopleDetailType
+  | GetCombineCastType
+  | GetCombineCrewType
+  | GetSocialType
+  | GetPopularPeopleType
+
+  type DispatchType = Dispatch<ActionsTypes>
+  type GetStateType = ()=> AppStateType
+  type ThunkType =ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+
+const peopleReducer = (state = initialState, action: ActionsTypes): initialStateType => {
   switch (action.type) {
     case GET_DETAIL: {
       return {
@@ -72,25 +86,24 @@ export const getPeopleDetail = (detail: DetailType): GetPeopleDetailType => {
 };
 
 //CombineCreditsCast
-type GetCombineCast = {
+type GetCombineCastType = {
   type: typeof GET_COMBINE_CREDITS_CAST;
-  combinedCreditsCast: CombinedCreditsCastType;
+  combinedCreditsCast: Array<CombinedCreditsCastType>
 };
-
 export const getCombineCreditsCast = (
-  combinedCreditsCast: CombinedCreditsCastType
-): GetCombineCast => {
+  combinedCreditsCast:Array<CombinedCreditsCastType>
+): GetCombineCastType => {
   return { type: GET_COMBINE_CREDITS_CAST, combinedCreditsCast };
 };
 //CombineCreditsCrew
-type GetCombineCrew = {
+type GetCombineCrewType = {
   type: typeof GET_COMBINE_CREDITS_CREW;
-  combinedCreditsCrew: CombineCreditsCrewType;
+  combinedCreditsCrew:Array<CombineCreditsCrewType>;
 };
 
 export const getCombineCreditsCrew = (
-  combinedCreditsCrew: CombineCreditsCrewType
-): GetCombineCrew => {
+  combinedCreditsCrew: Array<CombineCreditsCrewType>
+): GetCombineCrewType => {
   return { type: GET_COMBINE_CREDITS_CREW, combinedCreditsCrew };
 };
 
@@ -103,42 +116,44 @@ export const getSocial = (social: ExternalIdsType): GetSocialType => {
   return { type: GET_EXTERNAL_ID, social };
 };
 //Popular
-type GetPopularPeople = {
+type GetPopularPeopleType = {
   type: typeof GET_POPULAR_PEOPLE;
   popularPeople: PopularPeopleObjectType;
 };
 export const getPopularPeolple = (
   popularPeople: PopularPeopleObjectType
-): GetPopularPeople => {
+): GetPopularPeopleType => {
   return { type: GET_POPULAR_PEOPLE, popularPeople };
 };
 
 //Thunk
-export const requestDetail = (personId: string) => async (dispatch: any) => {
+export const requestDetail = (personId: string):ThunkType => async (dispatch: DispatchType) => {
   const res = await getPeopleApi.getDetails(personId);
   dispatch(getPeopleDetail(res));
 };
 
-export const requestCombineCast = (personId: string) => async (
-  dispatch: any
+export const requestCombineCast = (personId: string):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   const res = await getPeopleApi.getCombinedCreditsCast(personId);
   dispatch(getCombineCreditsCast(res));
 };
-export const requestCombineCrew = (personId: string) => async (
-  dispatch: any
+export const requestCombineCrew = (personId: string):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   const res = await getPeopleApi.getCombinedCreditsCrew(personId);
   dispatch(getCombineCreditsCrew(res));
 };
-export const requestSocial = (personId: string) => async (dispatch: any) => {
+export const requestSocial = (personId: string):ThunkType => async (dispatch: DispatchType) => {
   const res = await getPeopleApi.getExternalId(personId);
   dispatch(getSocial(res));
 };
 
-export const requestPopularPeople=(currentPage:number)=> async (dispatch:any)=>{
+export const requestPopularPeople = (currentPage: number):ThunkType => async (
+  dispatch: DispatchType
+) => {
   const res = await getPeopleApi.getPopular(currentPage);
-   dispatch(getPopularPeolple(res))
-}
+  dispatch(getPopularPeolple(res));
+};
 
 export default peopleReducer;

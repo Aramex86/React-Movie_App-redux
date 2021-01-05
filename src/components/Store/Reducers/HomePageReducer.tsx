@@ -1,4 +1,6 @@
-import { getHomePgeApi, getMoviesApi, getSearchApi } from "../../../Api/Api";
+import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+import { getHomePgeApi, getMoviesApi } from "../../../Api/Api";
 import {
   NowPlayingObjectType,
   PopularObjectType,
@@ -8,23 +10,24 @@ import {
   UpComingObjectType,
   VideoType,
 } from "../../../Types/Types";
+import { AppStateType } from "../store";
 
 const GET_POPULAR_MOVIES = "GET_POPULAR_MOVIES";
 const GET_CURRENT_PAGE = "GET_CURRENT_PAGE";
 const GET_NOW_PLAYING = "GET_NOW_PLAYING";
 const GET_NOW_TVPLAYING = "GET_NOW_TVPLAYING";
 const GET_AIRING_TODAY = "GET_AIRING_TODAY";
-const GET_ON_TV ='GET_ON_TV';
+const GET_ON_TV = "GET_ON_TV";
 const GET__TOP__RATED__TV = "GET__TOP__RATED__TV";
 //const GET_SEARCH_MOVIES = 'GET_SEARCH_MOVIES';
 const GET_TRAILERS = "GET_TRAILERS";
 const GET_TREDINGS = "GET_TREDINGS";
 const GET_UPCOMING = "GET_UPCOMING";
-const GET__TOP__RATED ="GET__TOP__RATED"
+const GET__TOP__RATED = "GET__TOP__RATED";
 const FETCHING = "FETCHING";
 
 const initialState = {
-  popularMovies: null as PopularObjectType |null,
+  popularMovies: null as PopularObjectType | null,
   currentPage: 1,
   nowPlaying: null as NowPlayingObjectType | null,
   nowTvPlaying: null as PopularTvObjectType | null,
@@ -33,16 +36,34 @@ const initialState = {
   topRatedTv: null as PopularTvObjectType | null,
   trailers: [] as Array<VideoType>,
   traidings: [] as Array<TraidingsType>,
-  upComing: null as UpComingObjectType|null,
-  topRated: null as TopRatedObjectType |null,
+  upComing: null as UpComingObjectType | null,
+  topRated: null as TopRatedObjectType | null,
   fetching: true,
 };
 
 type initialStateType = typeof initialState;
 
+type ActionsTypes =
+  | GetPopularType
+  | GetCurrentPageType
+  | GetNowPlayingType
+  | GetNowTvPlaingType
+  | GetAiringTodayType
+  | GetOnTvType
+  | GetTopRatedTvType
+  | GetTrailersType
+  | GetTraidingsType
+  | GetUpComingType
+  | GetTopRatedtype
+  | FetchingType;
+
+  type DispatchType = Dispatch<ActionsTypes>
+  type GetStateType = ()=> AppStateType
+  type ThunkType =ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+
 const homePageReducer = (
   state = initialState,
-  action: any
+  action: ActionsTypes
 ): initialStateType => {
   switch (action.type) {
     case GET_POPULAR_MOVIES: {
@@ -118,7 +139,7 @@ const homePageReducer = (
         fetching: action.fetching,
       };
     }
-   
+
     default:
       return state;
   }
@@ -127,7 +148,7 @@ const homePageReducer = (
 //Popular Movies
 type GetPopularType = {
   type: typeof GET_POPULAR_MOVIES;
-  popularMovies: PopularObjectType
+  popularMovies: PopularObjectType;
 };
 
 export const getPopularMovies = (
@@ -136,63 +157,61 @@ export const getPopularMovies = (
   return { type: GET_POPULAR_MOVIES, popularMovies };
 };
 //
-type GetCurrentPage = {
+type GetCurrentPageType = {
   type: typeof GET_CURRENT_PAGE;
   currentPage: number;
 };
 
-export const getCurrentPage = (currentPage: number): GetCurrentPage => {
+export const getCurrentPage = (currentPage: number): GetCurrentPageType => {
   return { type: GET_CURRENT_PAGE, currentPage };
 };
 
 //
-type GetNowPlayingtype = {
+type GetNowPlayingType = {
   type: typeof GET_NOW_PLAYING;
   nowPlaying: NowPlayingObjectType;
 };
 
 export const getNowPlaying = (
   nowPlaying: NowPlayingObjectType
-): GetNowPlayingtype => {
+): GetNowPlayingType => {
   return { type: GET_NOW_PLAYING, nowPlaying };
 };
 // TV
-type GetNowTvPlaing = {
+type GetNowTvPlaingType = {
   type: typeof GET_NOW_TVPLAYING;
-  nowTvPlaying:PopularTvObjectType;
+  nowTvPlaying: PopularTvObjectType;
 };
 
 export const getNowTvPlaying = (
   nowTvPlaying: PopularTvObjectType
-): GetNowTvPlaing => {
+): GetNowTvPlaingType => {
   return { type: GET_NOW_TVPLAYING, nowTvPlaying };
 };
-type GetAiringToday = {
+type GetAiringTodayType = {
   type: typeof GET_AIRING_TODAY;
-  airingToday:PopularTvObjectType;
+  airingToday: PopularTvObjectType;
 };
 
-export const getAiringToday= (
+export const getAiringToday = (
   airingToday: PopularTvObjectType
-): GetAiringToday => {
+): GetAiringTodayType => {
   return { type: GET_AIRING_TODAY, airingToday };
 };
-type GetOnTv = {
+type GetOnTvType = {
   type: typeof GET_ON_TV;
-  onTv:PopularTvObjectType;
+  onTv: PopularTvObjectType;
 };
 
-export const getOnTv= (
-  onTv: PopularTvObjectType
-): GetOnTv => {
+export const getOnTv = (onTv: PopularTvObjectType): GetOnTvType => {
   return { type: GET_ON_TV, onTv };
 };
 type GetTopRatedTvType = {
   type: typeof GET__TOP__RATED__TV;
-  topRatedTv:PopularTvObjectType;
+  topRatedTv: PopularTvObjectType;
 };
 
-export const getTopRatedTv= (
+export const getTopRatedTv = (
   topRatedTv: PopularTvObjectType
 ): GetTopRatedTvType => {
   return { type: GET__TOP__RATED__TV, topRatedTv };
@@ -233,10 +252,8 @@ type GetTopRatedtype = {
   topRated: TopRatedObjectType;
 };
 
-export const getTopRated = (
-  topRated: TopRatedObjectType
-): GetTopRatedtype => {
-  return { type:GET__TOP__RATED, topRated };
+export const getTopRated = (topRated: TopRatedObjectType): GetTopRatedtype => {
+  return { type: GET__TOP__RATED, topRated };
 };
 
 type FetchingType = {
@@ -249,9 +266,10 @@ export const getFetching = (fetching: boolean): FetchingType => {
 //Thunk
 
 //Movies
-export const requestPopularMovies = (currentPage: number) => async (
-  dispatch: any
-) => {
+export const requestPopularMovies = (currentPage: number):ThunkType => async (
+  dispatch:DispatchType ,getState:GetStateType
+): Promise<void> => {
+  
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getPopular(currentPage);
@@ -259,8 +277,8 @@ export const requestPopularMovies = (currentPage: number) => async (
   dispatch(getPopularMovies(res));
   dispatch(getFetching(false));
 };
-export const requestNowPlaying = (currentPage: number) => async (
-  dispatch: any
+export const requestNowPlaying = (currentPage: number):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
@@ -270,75 +288,69 @@ export const requestNowPlaying = (currentPage: number) => async (
   dispatch(getFetching(false));
 };
 
-export const requestUpComing = (currentPage: number) => async (
-  dispatch: any
+export const requestUpComing = (currentPage: number):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getUpcomming(currentPage);
-  console.log(res)
+  console.log(res);
   dispatch(getUpComing(res));
   dispatch(getFetching(false));
 };
 
-export const requestTopRated = (currentPage: number) => async (
-  dispatch: any
+export const requestTopRated = (currentPage: number):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getTopRated(currentPage);
-  console.log(res)
+  console.log(res);
   dispatch(getTopRated(res));
   dispatch(getFetching(false));
 };
 
-
-
-
-export const requestTrailers = (movieId: number) => async (dispatch: any) => {
+export const requestTrailers = (movieId: number):ThunkType => async (dispatch: DispatchType) => {
   const res = await getMoviesApi.getVideos(movieId);
   dispatch(getTrailers(res));
 };
 
-export const requestTraidings = (value: string) => async (dispatch: any) => {
+export const requestTraidings = (value: string):ThunkType => async (dispatch: DispatchType) => {
   dispatch(getFetching(true));
   const res = await getHomePgeApi.getTraidings(value);
   dispatch(getTraidings(res));
   dispatch(getFetching(false));
 };
 ///TV
-export const requestNowTvPlaying = (currentPage: number) => async (
-  dispatch: any
+export const requestNowTvPlaying = (currentPage: number):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   dispatch(getFetching(true));
   const res = await getHomePgeApi.getNowTvPlaying(currentPage);
   dispatch(getNowTvPlaying(res));
   dispatch(getFetching(false));
 };
-export const requestAiringToday = (currentPage: number) => async (
-  dispatch: any
+export const requestAiringToday = (currentPage: number):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   dispatch(getFetching(true));
   const res = await getHomePgeApi.geAiringTodayTv(currentPage);
   dispatch(getAiringToday(res));
   dispatch(getFetching(false));
 };
-export const requestOnTv = (currentPage: number) => async (
-  dispatch: any
-) => {
+export const requestOnTv = (currentPage: number):ThunkType => async (dispatch: DispatchType) => {
   dispatch(getFetching(true));
   const res = await getHomePgeApi.getOnTv(currentPage);
   dispatch(getOnTv(res));
   dispatch(getFetching(false));
 };
-export const requestTopRatedTv = (currentPage: number) => async (
-  dispatch: any
+export const requestTopRatedTv = (currentPage: number):ThunkType => async (
+  dispatch: DispatchType
 ) => {
   dispatch(getFetching(true));
   const res = await getHomePgeApi.getTopRatedTv(currentPage);
   dispatch(getTopRatedTv(res));
   dispatch(getFetching(false));
 };
-
 
 export default homePageReducer;

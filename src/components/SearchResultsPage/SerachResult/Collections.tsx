@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { CollectionType } from "../../../Types/Types";
 import NoPoster from "../../../assets/comingSoon.jpg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { requestSearchCollections } from "../../Store/Reducers/SearchReducer";
 import { searchMoviesQuerySelector } from "../../Store/Selectors/SearchSelector";
@@ -15,13 +15,13 @@ const Collections: FC<PropsType> = ({ collections, totalPages }) => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(requestSearchCollections(searchQuery, page));
-  }, [page]);
-
   const searchQuery = useSelector((state: AppStateType) =>
     searchMoviesQuerySelector(state)
   );
+  useEffect(() => {
+    dispatch(requestSearchCollections(searchQuery, page));
+  }, [page,dispatch,searchQuery]);
+
   const handalePageChange = (e: any, value: number) => {
     setPage(value);
   };

@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState } from "react";
 import { SearchType } from "../../../Types/Types";
 import NoPoster from "../../../assets/comingSoon.jpg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Paginator from "../../Common/Paginator";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  requestSearchMovie,
+  // requestSearchMovie,
   requestSearchTv,
 } from "../../Store/Reducers/SearchReducer";
 import { searchMoviesQuerySelector } from "../../Store/Selectors/SearchSelector";
@@ -20,13 +20,13 @@ const Tv: FC<PropsType> = ({ movies, totalPages }) => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(requestSearchTv(searchQuery, page));
-  }, [page]);
-
   const searchQuery = useSelector((state: AppStateType) =>
     searchMoviesQuerySelector(state)
   );
+  useEffect(() => {
+    dispatch(requestSearchTv(searchQuery, page));
+  }, [page,dispatch,searchQuery]);
+
   const handalePageChange = (e: any, value: number) => {
     setPage(value);
   };

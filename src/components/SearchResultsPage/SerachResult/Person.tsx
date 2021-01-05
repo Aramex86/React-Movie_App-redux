@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { SearchType } from "../../../Types/Types";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import NoPerson from "../../Common/NoPesrson";
 import { useDispatch, useSelector } from "react-redux";
 import { requestSearchPeople } from "../../Store/Reducers/SearchReducer";
@@ -15,14 +15,14 @@ type PropsType = {
 const Person: FC<PropsType> = ({ persons, totalPages }) => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(requestSearchPeople(searchQuery, page));
-  }, [page]);
-
   const searchQuery = useSelector((state: AppStateType) =>
     searchMoviesQuerySelector(state)
   );
+
+  useEffect(() => {
+    dispatch(requestSearchPeople(searchQuery, page));
+  }, [page,searchQuery,dispatch]);
+
   const handalePageChange = (e: any, value: number) => {
     setPage(value);
   };

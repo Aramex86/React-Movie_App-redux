@@ -16,13 +16,13 @@ const Movie: FC<PropsType> = ({ movies, totalPages }) => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(requestSearchMovie(searchQuery, page));
-  }, [page]);
-
   const searchQuery = useSelector((state: AppStateType) =>
     searchMoviesQuerySelector(state)
   );
+  useEffect(() => {
+    dispatch(requestSearchMovie(searchQuery, page));
+  }, [page,searchQuery,dispatch]);
+
   const handalePageChange = (e: any, value: number) => {
     setPage(value);
   };

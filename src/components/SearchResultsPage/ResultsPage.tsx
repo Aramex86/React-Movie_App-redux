@@ -1,4 +1,4 @@
-import React, { Key, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import SearchResults from "./SearchResults";
 import SearchResultsItems from "./SearchResultsItems";
@@ -11,7 +11,7 @@ import {
   searchMoviesSelector,
   searchPeopleSelector,
   searchTvSelector,
-  totalPagesSelector,
+  // totalPagesSelector,
 } from "../Store/Selectors/SearchSelector";
 import {
   // requestCurrentPage,
@@ -66,7 +66,7 @@ const ResultsPage = () => {
     dispatch(requestSearchTv(searchQuery, currentPage));
     dispatch(requestSearchPeople(searchQuery, currentPage));
     dispatch(requestSearchCollections(searchQuery, currentPage));
-  }, [newValue]);
+  }, [newValue,dispatch,searchQuery,currentPage]);
 
   return (
     <>

@@ -5,13 +5,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {ImPlus} from 'react-icons/im';
-import {useDispatch} from 'react-redux';
+// import {useDispatch} from 'react-redux';
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [state, setState] = React.useState<{
     age: string | number;
     name: string;
