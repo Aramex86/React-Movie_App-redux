@@ -60,14 +60,15 @@
     }
   }
   &--navbar {
-    width: 21px;
-    height: 21px;
-    outline: 1px solid #fff;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #fff;
     font-size: 1.5rem;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 3px;
     &:hover {
       background: #fff;
       color: black;

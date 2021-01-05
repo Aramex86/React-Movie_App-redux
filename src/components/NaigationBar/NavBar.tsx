@@ -1,34 +1,52 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import {ImPlus} from 'react-icons/im';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+// import InputLabel from '@material-ui/core/InputLabel';
+// import FormControl from '@material-ui/core/FormControl';
+// import Select from '@material-ui/core/Select';
+import { ImPlus } from "react-icons/im";
 // import {useDispatch} from 'react-redux';
+import Select, { ActionTypes } from "react-select";
 
+type OptionsType={
+  value:string
+  label:string
+  selectOption: () => void;
+}
+
+
+const options = [
+  {lang:'us-Us',label:'English' },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+  { value: "red", label: "Red" },
+];
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  // const dispatch = useDispatch();
-  const [state, setState] = React.useState<{
-    age: string | number;
-    name: string;
-  }>({
-    age: '',
-    name: 'hai',
-  });
+  const [selectedOption, setSelectedOption] = useState<any>(null);
 
-  const handleChange = (
-    event: React.ChangeEvent<{name?: string; value: unknown}>
-  ) => {
-    const name = event.target.name as keyof typeof state;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
+  console.log(selectedOption);
+
+  // const dispatch = useDispatch();
+  // const [state, setState] = React.useState<{
+  //   age: string | number;
+  //   name: string;
+  // }>({
+  //   age: '',
+  //   name: 'hai',
+  // });
+
+  // const handleChange = (
+  //   event: React.ChangeEvent<{name?: string; value: unknown}>
+  // ) => {
+  //   const name = event.target.name as keyof typeof state;
+  //   setState({
+  //     ...state,
+  //     [name]: event.target.value,
+  //   });
+  // };
 
   const handleClick = () => {
     setShowToolTip(!showToolTip);
@@ -191,7 +209,7 @@ const NavBar = () => {
               </ul>
             </nav>
           ) : (
-            ''
+            ""
           )}
           <nav className="navbarwrapp__left__navbar ">
             <ul className="navbarwrapp__left__list ">
@@ -322,21 +340,26 @@ const NavBar = () => {
                   </span>
                 </div>
               ) : (
-                ''
+                ""
               )}
             </li>
             <li className="navbarwrapp__right__list__item">
               <button
                 className="btn btn--navbar"
                 onClick={showLang}
-                style={showlang ? {background: 'white', color: '#000'} : {}}
+                style={showlang ? { background: "white", color: "#000" } : {}}
               >
                 EN
               </button>
               {showlang ? (
                 <div className="navbarwrapp__right__tooltip navbarwrapp__right__tooltip--lang">
                   <h3>Language Preferences</h3>
-                  <FormControl variant="filled" className="languageform">
+                  <Select
+                    defaultValue={selectedOption}
+                    onChange={setSelectedOption}
+                    options={options}
+                  />
+                  {/* <FormControl variant="filled" className="languageform">
                     <InputLabel htmlFor="filled-age-native-simple">
                       Language
                     </InputLabel>
@@ -354,10 +377,10 @@ const NavBar = () => {
                       <option value={20}>Twenty</option>
                       <option value={30}>Thirty</option>
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
                 </div>
               ) : (
-                ''
+                ""
               )}
             </li>
             <li className="navbarwrapp__right__list__item">
@@ -368,7 +391,7 @@ const NavBar = () => {
             <li className="navbarwrapp__right__list__item">
               <button className="btn btn--navbarsearch">
                 <SearchOutlinedIcon
-                  style={{color: '#1acee0', fontWeight: 'bold'}}
+                  style={{ color: "#1acee0", fontWeight: "bold" }}
                 />
               </button>
             </li>

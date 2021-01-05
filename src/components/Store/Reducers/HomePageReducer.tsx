@@ -39,6 +39,7 @@ const initialState = {
   upComing: null as UpComingObjectType | null,
   topRated: null as TopRatedObjectType | null,
   fetching: true,
+  
 };
 
 type initialStateType = typeof initialState;
