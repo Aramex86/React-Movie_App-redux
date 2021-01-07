@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // const instance  = axios.create({
 //     baseUrl:'https://api.themoviedb.org',
@@ -10,7 +10,7 @@ import axios from "axios";
 //api_key TMDb = 647b39ccfb59105c511c2df9019bc7ec; -> apikey
 //https://cors-anywhere.herokuapp.com/ ->corsanywhere
 //https://api.themoviedb.org/4/list/1?page=1&api_key=647b39ccfb59105c511c2df9019bc7ec&sort_by=title.asc";
-const api_key = "647b39ccfb59105c511c2df9019bc7ec";
+const api_key = '647b39ccfb59105c511c2df9019bc7ec';
 //https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
 
 export const getMoviesApi = {
@@ -175,13 +175,16 @@ export const getPeopleApi = {
       });
   },
   getPopular(currentPage: number) {
-    return axios.get(
-      `https://api.themoviedb.org/3/person/popular?api_key=${api_key}&language=en-US&page=${currentPage}`
-    ).then((res)=>{
-      return res.data;
-    }).catch((err)=>{
-      return err.response.data.status_message;
-    });
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/person/popular?api_key=${api_key}&language=en-US&page=${currentPage}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
   },
 };
 
@@ -191,7 +194,7 @@ export const getHomePgeApi = {
   getPopular(currentPage: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${currentPage}`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-EN&page=${currentPage}`
       )
       .then((res) => {
         return res.data;
@@ -363,4 +366,31 @@ export const getSearchApi = {
         return err.response.data.status_message;
       });
   },
+};
+
+export const getLangsApi = {
+  getLangs() {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/configuration/languages?api_key=${api_key}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+    },
+    getTranslations(){
+      return axios
+        .get(
+          `https://api.themoviedb.org/3/configuration/primary_translations?api_key=${api_key}`
+        )
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          return err.response.data.status_message;
+        });
+  }
 };

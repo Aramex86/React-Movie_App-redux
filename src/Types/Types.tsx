@@ -510,3 +510,12 @@ export type PopularPeopleObjectType={
   total_results: number
   page:number
 }
+
+// Langs
+
+export type LangsType={
+  iso_639_1: string
+  english_name: string
+  name: string
+  value: string
+}

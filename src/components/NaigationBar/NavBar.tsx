@@ -1,34 +1,55 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import {ImPlus} from 'react-icons/im';
-// import {useDispatch} from 'react-redux';
+import {ImArrowUp2, ImPlus} from 'react-icons/im';
+import Select from 'react-select';
+import {useDispatch, useSelector} from 'react-redux';
+import {langSelector, transSelector} from '../Store/Selectors/LangSelector';
+import {AppStateType} from '../Store/store';
+import {requestLangs, requestTranslations} from '../Store/Reducers/LangReducer';
+
+type LanguagesType = {
+  iso_639_1: string;
+  english_name: string;
+  name: string;
+  value: string;
+  label: string;
+};
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  // const dispatch = useDispatch();
-  const [state, setState] = React.useState<{
-    age: string | number;
-    name: string;
-  }>({
-    age: '',
-    name: 'hai',
-  });
+  const [selectedOption, setSelectedOption] = useState<null | LanguagesType>();
 
-  const handleChange = (
-    event: React.ChangeEvent<{name?: string; value: unknown}>
-  ) => {
-    const name = event.target.name as keyof typeof state;
-    setState({
-      ...state,
-      [name]: event.target.value,
+  const langs = useSelector((state: AppStateType) => langSelector(state));
+  const translations = useSelector((state: AppStateType) =>
+    transSelector(state)
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(requestLangs());
+    dispatch(requestTranslations());
+  }, []);
+
+  const languages: Array<LanguagesType> = [];
+
+  const concatValues = (arr1: any, arr2: any) => {
+    arr1.filter((item: any) => {
+      for (let i = 0; i < arr2.length; i++) {
+        if (item.iso_639_1 === arr2[i].slice(0, 2)) {
+          languages.push({
+            ...item,
+            value: `${arr2[i]}`,
+            label: `${item.english_name} (${arr2[i]})`,
+          });
+        }
+      }
     });
   };
+  concatValues(langs, translations);
+  console.log(selectedOption?.value)
 
   const handleClick = () => {
     setShowToolTip(!showToolTip);
@@ -42,9 +63,6 @@ const NavBar = () => {
   };
 
   const screenWidth = window.innerWidth;
-
-  // console.log(screenWidth);
-  // console.log(showMenu);
 
   return (
     <div className="navbarwrapp">
@@ -336,25 +354,7 @@ const NavBar = () => {
               {showlang ? (
                 <div className="navbarwrapp__right__tooltip navbarwrapp__right__tooltip--lang">
                   <h3>Language Preferences</h3>
-                  <FormControl variant="filled" className="languageform">
-                    <InputLabel htmlFor="filled-age-native-simple">
-                      Language
-                    </InputLabel>
-                    <Select
-                      native
-                      value={state.age}
-                      onChange={handleChange}
-                      inputProps={{
-                        name: 'age',
-                        id: 'filled-age-native-simple',
-                      }}
-                    >
-                      <option aria-label="None" value="" />
-                      <option value={10}>Ten</option>
-                      <option value={20}>Twenty</option>
-                      <option value={30}>Thirty</option>
-                    </Select>
-                  </FormControl>
+                  <Select options={languages} onChange={setSelectedOption} />
                 </div>
               ) : (
                 ''

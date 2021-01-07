@@ -27,9 +27,7 @@ const Hero: React.FC<PropsType> = ({ bgPopular=[] }) => {
     dispatch(requestSearchQuery(e.target.value));
     <Redirect to="/sreachresults" />;
   };
-  
 
-  console.log(searchMovie)
   const baseUrl = "https://image.tmdb.org/t/p/w500";
 
   const bgImages: Array<string> = bgPopular.map(
