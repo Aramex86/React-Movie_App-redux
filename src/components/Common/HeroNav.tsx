@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { requestPopularMovies } from "../Store/Reducers/HomePageReducer";
+import { selectedSelector } from "../Store/Selectors/HomePageSelector";
+import { AppStateType } from "../Store/store";
 
 type PropsType = {
   show: string;
@@ -8,8 +10,8 @@ type PropsType = {
 };
 
 const HeroNav: React.FC<PropsType> = ({ show, showValue}) => {
-  //const currentPages = useSelector((state:AppStateType) =>curentPageSelector(state))
   const dispatch = useDispatch();
+
 
   const selectPage = () => {
     dispatch(requestPopularMovies(Math.floor(Math.random() * 20) + 1));

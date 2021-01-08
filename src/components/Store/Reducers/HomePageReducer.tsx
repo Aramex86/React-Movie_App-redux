@@ -1,7 +1,8 @@
 import {Dispatch} from 'redux';
 import {ThunkAction} from 'redux-thunk';
-import {getHomePgeApi, getMoviesApi} from '../../../Api/Api';
+import {getHomePgeApi, getLangsApi, getMoviesApi} from '../../../Api/Api';
 import {
+  LangsType,
   NowPlayingObjectType,
   PopularObjectType,
   PopularTvObjectType,
@@ -25,6 +26,7 @@ const GET_TREDINGS = 'GET_TREDINGS';
 const GET_UPCOMING = 'GET_UPCOMING';
 const GET__TOP__RATED = 'GET__TOP__RATED';
 const FETCHING = 'FETCHING';
+const LANG_SELECTED = 'LANG_SELECTED';
 
 const initialState = {
   popularMovies: null as PopularObjectType | null,
@@ -39,6 +41,7 @@ const initialState = {
   upComing: null as UpComingObjectType | null,
   topRated: null as TopRatedObjectType | null,
   fetching: true,
+  langSlected: 'en-En' as string,
 };
 
 type initialStateType = typeof initialState;
@@ -55,7 +58,8 @@ type ActionsTypes =
   | GetTraidingsType
   | GetUpComingType
   | GetTopRatedtype
-  | FetchingType;
+  | FetchingType
+  | LangSelectedType;
 
 type DispatchType = Dispatch<ActionsTypes>;
 type GetStateType = () => AppStateType;
@@ -142,6 +146,12 @@ const homePageReducer = (
       return {
         ...state,
         fetching: action.fetching,
+      };
+    }
+    case LANG_SELECTED: {
+      return {
+        ...state,
+        langSlected: action.langSlected,
       };
     }
 
@@ -268,6 +278,16 @@ type FetchingType = {
 export const getFetching = (fetching: boolean): FetchingType => {
   return {type: FETCHING, fetching};
 };
+
+type LangSelectedType = {
+  type: typeof LANG_SELECTED;
+  langSlected: string;
+};
+
+export const getLangSelected = (langSlected: string): LangSelectedType => {
+  return {type: LANG_SELECTED, langSlected};
+};
+
 //Thunk
 
 //Movies
@@ -299,7 +319,7 @@ export const requestUpComing = (currentPage: number): ThunkType => async (
   dispatch(getFetching(true));
   dispatch(getCurrentPage(currentPage));
   const res = await getHomePgeApi.getUpcomming(currentPage);
- // console.log(res);
+  // console.log(res);
   dispatch(getUpComing(res));
   dispatch(getFetching(false));
 };
@@ -362,6 +382,12 @@ export const requestTopRatedTv = (currentPage: number): ThunkType => async (
   const res = await getHomePgeApi.getTopRatedTv(currentPage);
   dispatch(getTopRatedTv(res));
   dispatch(getFetching(false));
+};
+
+export const getSelectedLang = (lang: any): ThunkType => async (
+  dispatch: DispatchType
+) => {
+  dispatch(getLangSelected(lang));
 };
 
 export default homePageReducer;

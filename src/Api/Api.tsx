@@ -194,7 +194,7 @@ export const getHomePgeApi = {
   getPopular(currentPage: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-EN&page=${currentPage}`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${currentPage}`
       )
       .then((res) => {
         return res.data;
@@ -380,17 +380,29 @@ export const getLangsApi = {
       .catch((err) => {
         return err.response.data.status_message;
       });
-    },
-    getTranslations(){
-      return axios
-        .get(
-          `https://api.themoviedb.org/3/configuration/primary_translations?api_key=${api_key}`
-        )
-        .then((res) => {
-          return res.data;
-        })
-        .catch((err) => {
-          return err.response.data.status_message;
-        });
-  }
+  },
+  getTranslations() {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/configuration/primary_translations?api_key=${api_key}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+  },
+  getLanguage(language: string) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=${language}}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+  },
 };

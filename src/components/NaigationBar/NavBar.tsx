@@ -1,26 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import {ImArrowUp2, ImPlus} from 'react-icons/im';
+import {ImPlus} from 'react-icons/im';
 import Select from 'react-select';
 import {useDispatch, useSelector} from 'react-redux';
 import {langSelector, transSelector} from '../Store/Selectors/LangSelector';
 import {AppStateType} from '../Store/store';
 import {requestLangs, requestTranslations} from '../Store/Reducers/LangReducer';
-
-type LanguagesType = {
-  iso_639_1: string;
-  english_name: string;
-  name: string;
-  value: string;
-  label: string;
-};
+import {LangsType} from '../../Types/Types';
+import {getSelectedLang} from '../Store/Reducers/HomePageReducer';
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<null | LanguagesType>();
+  const [selectedOption, setSelectedOption] = useState<
+    LangsType | undefined | null
+  >(null);
 
   const langs = useSelector((state: AppStateType) => langSelector(state));
   const translations = useSelector((state: AppStateType) =>
@@ -31,9 +27,10 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(requestLangs());
     dispatch(requestTranslations());
-  }, []);
+    dispatch(getSelectedLang(selectedOption?.value));
+  }, [selectedOption]);
 
-  const languages: Array<LanguagesType> = [];
+  const languages: Array<LangsType> = [];
 
   const concatValues = (arr1: any, arr2: any) => {
     arr1.filter((item: any) => {
@@ -49,7 +46,7 @@ const NavBar = () => {
     });
   };
   concatValues(langs, translations);
-  console.log(selectedOption?.value)
+  //console.log(selectedOption);
 
   const handleClick = () => {
     setShowToolTip(!showToolTip);
@@ -354,7 +351,11 @@ const NavBar = () => {
               {showlang ? (
                 <div className="navbarwrapp__right__tooltip navbarwrapp__right__tooltip--lang">
                   <h3>Language Preferences</h3>
-                  <Select options={languages} onChange={setSelectedOption} />
+                  <Select
+                    options={languages}
+                    onChange={setSelectedOption}
+                    defaultValue={selectedOption}
+                  />
                 </div>
               ) : (
                 ''

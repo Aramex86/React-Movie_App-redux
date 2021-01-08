@@ -518,4 +518,5 @@ export type LangsType={
   english_name: string
   name: string
   value: string
+  label:string
 }
