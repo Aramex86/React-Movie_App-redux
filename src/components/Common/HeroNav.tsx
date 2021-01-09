@@ -14,7 +14,7 @@ const HeroNav: React.FC<PropsType> = ({ show, showValue}) => {
 
 
   const selectPage = () => {
-    dispatch(requestPopularMovies(Math.floor(Math.random() * 20) + 1));
+    dispatch(requestPopularMovies(1));
   };
 
   return (

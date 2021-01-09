@@ -18,7 +18,7 @@ const Tv = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestNowTvPlaying(Math.floor(Math.random() * 20) + 1));
+    dispatch(requestNowTvPlaying(1));
   }, []);
 
   console.log(nowTvPlaying)

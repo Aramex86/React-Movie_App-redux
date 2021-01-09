@@ -3,17 +3,19 @@ import { PropsMovieComponentstype } from "./Popular";
 import Card from "../../Common/HomePageCard";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { fetchingSelector } from "../../Store/Selectors/HomePageSelector";
+import { fetchingSelector, traidingsSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
 import Skeleton from "../../Common/Skeleton";
 
-const InTheater: FC<PropsMovieComponentstype> = ({ popularMovies=[] }) => {
+const InTheater = () => {
   const fetching = useSelector((state: AppStateType) =>
     fetchingSelector(state)
   );
+  const theater = useSelector((state:AppStateType)=>traidingsSelector(state))
+
   return (
     <div className="cardwrapp">
-      {popularMovies.map((movie) =>
+      {theater.map((movie) =>
         fetching ? (
           <Skeleton key={movie.id}/>
         ) : (

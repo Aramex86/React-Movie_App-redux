@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import {airingTodaySelector} from '../Store/Selectors/HomePageSelector';
+import {airingTodaySelector, curentPageSelector} from '../Store/Selectors/HomePageSelector';
 import {AppStateType} from '../Store/store';
 import Paginatior from '../Common/Paginator';
 import {requestAiringToday} from '../Store/Reducers/HomePageReducer';
@@ -13,7 +13,8 @@ const Popular: FC = () => {
   const airingToday = useSelector((state: AppStateType) =>
   airingTodaySelector(state)
   );
-  const [page, setPage] = useState(1);
+  const currentPage = useSelector((state:AppStateType)=>curentPageSelector(state))
+  const [page, setPage] = useState(currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const Popular: FC = () => {
           <Paginatior
             handalePageChange={handalePageChange}
             totalPages={airingToday?.total_pages}
+            page={page}
           />
         </div>
       </div>

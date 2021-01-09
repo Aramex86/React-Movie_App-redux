@@ -61,6 +61,7 @@ type ActionsTypes =
   | FetchingType
   | LangSelectedType;
 
+
 type DispatchType = Dispatch<ActionsTypes>;
 type GetStateType = () => AppStateType;
 type ThunkType = ThunkAction<
@@ -87,6 +88,7 @@ const homePageReducer = (
         currentPage: action.currentPage,
       };
     }
+    
     case GET_NOW_PLAYING: {
       return {
         ...state,
@@ -180,6 +182,9 @@ type GetCurrentPageType = {
 export const getCurrentPage = (currentPage: number): GetCurrentPageType => {
   return {type: GET_CURRENT_PAGE, currentPage};
 };
+
+
+
 
 //
 type GetNowPlayingType = {

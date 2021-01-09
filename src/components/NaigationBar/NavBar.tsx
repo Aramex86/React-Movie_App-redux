@@ -22,6 +22,7 @@ const NavBar = () => {
   const translations = useSelector((state: AppStateType) =>
     transSelector(state)
   );
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const NavBar = () => {
   const showHideNav = () => {
     setShowMenu(!showMenu);
   };
+  
 
   const screenWidth = window.innerWidth;
 
@@ -95,6 +97,7 @@ const NavBar = () => {
                       <Link
                         to="/movies/nowplaying"
                         className="dropdown-navbar__link"
+                       
                       >
                         now playing
                       </Link>

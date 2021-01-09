@@ -4,17 +4,19 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import {popularSelector} from '../Store/Selectors/HomePageSelector';
+import {curentPageSelector, popularSelector} from '../Store/Selectors/HomePageSelector';
 import {AppStateType} from '../Store/store';
 import Paginatior from '../Common/Paginator';
-import {requestPopularMovies} from '../Store/Reducers/HomePageReducer';
+import {getSelectedLang, requestPopularMovies} from '../Store/Reducers/HomePageReducer';
 
 const Popular: FC = () => {
   const popularMovies = useSelector((state: AppStateType) =>
     popularSelector(state)
   );
+  const currentPage = useSelector((state:AppStateType)=>curentPageSelector(state))
 
-  const [page, setPage] = useState(1);
+  
+  const [page, setPage] = useState<number>(currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,7 +45,6 @@ const Popular: FC = () => {
               to={`/movie-card/${p.id}`}
               key={index}
               className="popularwrap__movielist-link"
-              target="_blank"
             >
               <Card
                 poster={p.poster_path}
@@ -58,6 +59,7 @@ const Popular: FC = () => {
           <Paginatior
             handalePageChange={handalePageChange}
             totalPages={popularMovies?.total_pages}
+            page={page}
           />
         </div>
       </div>

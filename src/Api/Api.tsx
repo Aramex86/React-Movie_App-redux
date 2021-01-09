@@ -203,6 +203,7 @@ export const getHomePgeApi = {
         return err.response.data.status_message;
       });
   },
+ 
   getNowPlaying(currentPage: number) {
     return axios
       .get(
