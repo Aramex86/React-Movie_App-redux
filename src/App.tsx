@@ -39,7 +39,7 @@ function App() {
           />
           <Route exact path="/allmedia/" component={withMovies(CardMediaAll)} />
           <Route exact path="/sreachresults/" component={ResultsPage} />
-          <Route exact path="/movies/popular" component={Popular} />
+          <Route exact path="/movies/popular" component={Popular}  />
           <Route exact path="/movies/nowplaying" component={NowPlaying} />
           <Route exact path="/movies/upcoming" component={Upcoming} />
           <Route exact path="/movies/toprated" component={TopRated} />

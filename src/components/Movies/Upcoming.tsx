@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import {  upComingSelector } from '../Store/Selectors/HomePageSelector';
+import {  curentPageSelector, upComingSelector } from '../Store/Selectors/HomePageSelector';
 import { AppStateType } from '../Store/store';
 import Paginatior from '../Common/Paginator';
 import {  requestUpComing } from '../Store/Reducers/HomePageReducer';
@@ -13,7 +13,8 @@ const Upcoming: FC = () => {
     const upcoming = useSelector((state: AppStateType) =>
     upComingSelector(state)
     );
-    const [page, setPage] = useState(1);
+    const currentPage = useSelector((state:AppStateType)=>curentPageSelector(state))
+    const [page, setPage] = useState(currentPage);
     const dispatch = useDispatch();
   
       useEffect(() => {
@@ -40,7 +41,6 @@ const Upcoming: FC = () => {
                 to={`/movie-card/${p.id}`}
                 key={index}
                 className="popularwrap__movielist-link"
-                target="_blank"
               >
                 <Card
                   poster={p.poster_path}
@@ -55,6 +55,7 @@ const Upcoming: FC = () => {
             <Paginatior
               handalePageChange={handalePageChange}
               totalPages={upcoming?.total_pages}
+              page={page}
             />
           </div>
         </div>

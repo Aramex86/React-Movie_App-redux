@@ -4,18 +4,20 @@ import Card from "../../Common/HomePageCard";
 import { Link } from "react-router-dom";
 import Skeleton from '../../Common/Skeleton';
 import { useSelector } from "react-redux";
-import { fetchingSelector } from "../../Store/Selectors/HomePageSelector";
+import { fetchingSelector, popularSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
+import { PopularType } from "../../../Types/Types";
 
 
 
-const Streaming: FC<PropsMovieComponentstype> = ({ popularMovies=[] }) => {
+const Streaming = () => {
   const fetching = useSelector((state: AppStateType) =>
   fetchingSelector(state)
 );
+const popular = useSelector((state:AppStateType)=>popularSelector(state))
   return (
     <div className="cardwrapp">
-      {popularMovies.map((movie) => 
+      {popular?.results.map((movie) => 
       fetching?<Skeleton key={movie.id}/>:
         <Link to={`movie-card/${movie.id}`} key={movie.id}>
           <Card  

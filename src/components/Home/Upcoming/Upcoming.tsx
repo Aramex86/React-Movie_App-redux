@@ -17,7 +17,7 @@ const Upcoming = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestUpComing(Math.floor(Math.random() * 20) + 1));
+    dispatch(requestUpComing(1));
   }, []);
 
 //console.log(upComing?.results)

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import { nowPlayingSelector } from '../Store/Selectors/HomePageSelector';
+import { curentPageSelector, nowPlayingSelector } from '../Store/Selectors/HomePageSelector';
 import { AppStateType } from '../Store/store';
 import Paginatior from '../Common/Paginator';
 import { requestNowPlaying } from '../Store/Reducers/HomePageReducer';
@@ -13,7 +13,8 @@ const NowPlaying: FC = () => {
     const nowPlaying = useSelector((state: AppStateType) =>
     nowPlayingSelector(state)
     );
-    const [page, setPage] = useState(1);
+    const currentPage = useSelector((state:AppStateType)=>curentPageSelector(state))
+    const [page, setPage] = useState(currentPage);
     const dispatch = useDispatch();
   
       useEffect(() => {
@@ -40,7 +41,6 @@ const NowPlaying: FC = () => {
                 to={`/movie-card/${p.id}`}
                 key={index}
                 className="popularwrap__movielist-link"
-                target="_blank"
               >
                 <Card
                   poster={p.poster_path}
@@ -55,6 +55,7 @@ const NowPlaying: FC = () => {
             <Paginatior
               handalePageChange={handalePageChange}
               totalPages={nowPlaying?.total_pages}
+              page={page}
             />
           </div>
         </div>

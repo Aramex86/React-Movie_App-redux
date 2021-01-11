@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import { onTvSelector} from '../Store/Selectors/HomePageSelector';
+import { curentPageSelector, onTvSelector} from '../Store/Selectors/HomePageSelector';
 import {AppStateType} from '../Store/store';
 import Paginatior from '../Common/Paginator';
 import { requestOnTv} from '../Store/Reducers/HomePageReducer';
@@ -13,8 +13,9 @@ const Popular: FC = () => {
   const onTv = useSelector((state: AppStateType) =>
   onTvSelector(state)
   );
+  const currentPage = useSelector((state:AppStateType)=>curentPageSelector(state))
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(currentPage);
 
   useEffect(() => {
     dispatch(requestOnTv(page));
@@ -56,6 +57,7 @@ const Popular: FC = () => {
           <Paginatior
             handalePageChange={handalePageChange}
             totalPages={onTv?.total_pages}
+            page={page}
           />
         </div>
       </div>

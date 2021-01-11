@@ -3,21 +3,31 @@ import { PropsMovieComponentstype } from "./Popular";
 import Card from "../../Common/HomePageCard";
 import { Link } from "react-router-dom";
 import { AppStateType } from "../../Store/store";
-import { fetchingSelector } from "../../Store/Selectors/HomePageSelector";
+import { fetchingSelector,  popularSelector } from "../../Store/Selectors/HomePageSelector";
 import { useSelector } from "react-redux";
 import Skeleton from '../../Common/Skeleton';
+import { PopularType } from "../../../Types/Types";
 
 
-const ForRent: FC<PropsMovieComponentstype> = ({ popularMovies =[]}) => {
+const ForRent= () => {
   const fetching = useSelector((state: AppStateType) =>
     fetchingSelector(state)
   );
+  const forRent = useSelector((state:AppStateType)=>popularSelector(state))
+
+  const forRentCopy= forRent?.results;
 
 
+  console.log(forRentCopy);
+  const random=(arr:any)=>{
+  return  [...arr].reverse()
+  }
+
+  random(forRentCopy)
   return (
     <>
       <div className="cardwrapp">
-        {popularMovies.map((movie) =>
+        {random(forRentCopy).map((movie) =>
           fetching ? (<Skeleton key={movie.id}/>
           ) : (
             <Link to={`movie-card/${movie.id}`} key={movie.id}>

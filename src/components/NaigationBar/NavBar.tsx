@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-// import InputLabel from '@material-ui/core/InputLabel';
-// import FormControl from '@material-ui/core/FormControl';
-// import Select from '@material-ui/core/Select';
-import { ImPlus } from "react-icons/im";
-// import {useDispatch} from 'react-redux';
-import Select, { ActionTypes } from "react-select";
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import {ImPlus} from 'react-icons/im';
+import Select from 'react-select';
+import {useDispatch, useSelector} from 'react-redux';
+import {langSelector, transSelector} from '../Store/Selectors/LangSelector';
+import {AppStateType} from '../Store/store';
+import {requestLangs, requestTranslations} from '../Store/Reducers/LangReducer';
+import {LangsType} from '../../Types/Types';
+import {getSelectedLang} from '../Store/Reducers/HomePageReducer';
 
 type OptionsType={
   value:string
@@ -25,28 +27,40 @@ const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<any>(null);
+  const [selectedOption, setSelectedOption] = useState<
+    LangsType | undefined | null
+  >(null);
 
-  console.log(selectedOption);
+  const langs = useSelector((state: AppStateType) => langSelector(state));
+  const translations = useSelector((state: AppStateType) =>
+    transSelector(state)
+  );
+  
+  const dispatch = useDispatch();
 
-  // const dispatch = useDispatch();
-  // const [state, setState] = React.useState<{
-  //   age: string | number;
-  //   name: string;
-  // }>({
-  //   age: '',
-  //   name: 'hai',
-  // });
+  useEffect(() => {
+    dispatch(requestLangs());
+    dispatch(requestTranslations());
+    dispatch(getSelectedLang(selectedOption?.value));
+  }, [selectedOption]);
 
-  // const handleChange = (
-  //   event: React.ChangeEvent<{name?: string; value: unknown}>
-  // ) => {
-  //   const name = event.target.name as keyof typeof state;
-  //   setState({
-  //     ...state,
-  //     [name]: event.target.value,
-  //   });
-  // };
+  const languages: Array<LangsType> = [];
+
+  const concatValues = (arr1: any, arr2: any) => {
+    arr1.filter((item: any) => {
+      for (let i = 0; i < arr2.length; i++) {
+        if (item.iso_639_1 === arr2[i].slice(0, 2)) {
+          languages.push({
+            ...item,
+            value: `${arr2[i]}`,
+            label: `${item.english_name} (${arr2[i]})`,
+          });
+        }
+      }
+    });
+  };
+  concatValues(langs, translations);
+  //console.log(selectedOption);
 
   const handleClick = () => {
     setShowToolTip(!showToolTip);
@@ -58,11 +72,9 @@ const NavBar = () => {
   const showHideNav = () => {
     setShowMenu(!showMenu);
   };
+  
 
   const screenWidth = window.innerWidth;
-
-  // console.log(screenWidth);
-  // console.log(showMenu);
 
   return (
     <div className="navbarwrapp">
@@ -98,6 +110,7 @@ const NavBar = () => {
                       <Link
                         to="/movies/nowplaying"
                         className="dropdown-navbar__link"
+                       
                       >
                         now playing
                       </Link>
@@ -355,29 +368,10 @@ const NavBar = () => {
                 <div className="navbarwrapp__right__tooltip navbarwrapp__right__tooltip--lang">
                   <h3>Language Preferences</h3>
                   <Select
-                    defaultValue={selectedOption}
+                    options={languages}
                     onChange={setSelectedOption}
-                    options={options}
+                    defaultValue={selectedOption}
                   />
-                  {/* <FormControl variant="filled" className="languageform">
-                    <InputLabel htmlFor="filled-age-native-simple">
-                      Language
-                    </InputLabel>
-                    <Select
-                      native
-                      value={state.age}
-                      onChange={handleChange}
-                      inputProps={{
-                        name: 'age',
-                        id: 'filled-age-native-simple',
-                      }}
-                    >
-                      <option aria-label="None" value="" />
-                      <option value={10}>Ten</option>
-                      <option value={20}>Twenty</option>
-                      <option value={30}>Thirty</option>
-                    </Select>
-                  </FormControl> */}
                 </div>
               ) : (
                 ""

@@ -19,7 +19,7 @@ const Movies = () => {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(requestNowPlaying(Math.floor(Math.random() * 20) + 1));
+    dispatch(requestNowPlaying(1));
   }, []);
   return (
     <div className="cardwrapp">

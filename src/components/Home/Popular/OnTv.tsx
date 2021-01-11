@@ -4,16 +4,17 @@ import Card from "../../Common/HomePageCard";
 import { Link } from "react-router-dom";
 import Skeleton from "../../Common/Skeleton";
 import { useSelector } from "react-redux";
-import { fetchingSelector } from "../../Store/Selectors/HomePageSelector";
+import { fetchingSelector, nowPlayingSelector } from "../../Store/Selectors/HomePageSelector";
 import { AppStateType } from "../../Store/store";
 
-const OnTv: FC<PropsMovieComponentstype> = ({ popularMovies=[] }) => {
+const OnTv = () => {
   const fetching = useSelector((state: AppStateType) =>
     fetchingSelector(state)
   );
+  const onTv = useSelector((state:AppStateType)=>nowPlayingSelector(state))
   return (
     <div className="cardwrapp">
-      {popularMovies.map((movie) =>
+      {onTv?.results.map((movie) =>
         fetching ? (
           <Skeleton key={movie.id}/>
         ) : (

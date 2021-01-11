@@ -5,6 +5,7 @@ import thunkMidlleWare from "redux-thunk";
 import peopleReducer from "./Reducers/PeopleReducer";
 import homePageReducer from "./Reducers/HomePageReducer";
 import searchReducer from "./Reducers/SearchReducer";
+import langsReducer from "./Reducers/LangReducer";
 
 
 
@@ -14,6 +15,7 @@ let rootReducers = combineReducers({
     people:peopleReducer,
     homePage:homePageReducer,
     search:searchReducer,
+    language:langsReducer,
 });
 
 

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Filter from '../Common/Filter';
 import Sort from '../Common/Sort';
-import {topRatedSelector } from '../Store/Selectors/HomePageSelector';
+import {curentPageSelector, topRatedSelector } from '../Store/Selectors/HomePageSelector';
 import { AppStateType } from '../Store/store';
 import Paginatior from '../Common/Paginator';
 import {  requestTopRated } from '../Store/Reducers/HomePageReducer';
@@ -13,7 +13,8 @@ const TopRated: FC = () => {
     const topRated = useSelector((state: AppStateType) =>
     topRatedSelector(state)
     );
-    const [page, setPage] = useState(1);
+    const currentPage = useSelector((state:AppStateType)=>curentPageSelector(state))
+    const [page, setPage] = useState(currentPage);
     const dispatch = useDispatch();
   
       useEffect(() => {
@@ -41,7 +42,6 @@ const TopRated: FC = () => {
                 to={`/movie-card/${p.id}`}
                 key={index}
                 className="popularwrap__movielist-link"
-                target="_blank"
               >
                 <Card
                   poster={p.poster_path}
@@ -56,6 +56,7 @@ const TopRated: FC = () => {
             <Paginatior
               handalePageChange={handalePageChange}
               totalPages={topRated?.total_pages}
+              page={page}
             />
           </div>
         </div>

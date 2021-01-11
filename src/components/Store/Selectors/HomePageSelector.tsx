@@ -39,3 +39,7 @@ export const topRatedSelector = (state: AppStateType) => {
 export const fetchingSelector = (state: AppStateType) => {
   return state.homePage.fetching;
 };
+
+export const selectedSelector=(state:AppStateType)=>{
+  return state.homePage.langSlected;
+};

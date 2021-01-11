@@ -1,21 +1,16 @@
-import React, { FC, useState } from "react";
-import HeroNav from "../../Common/HeroNav";
-import Streaming from "./Streaming";
-import OnTv from "./OnTv";
-import ForRent from "./ForRent";
-import InTheater from "./InTheater";
-import { PopularType } from "../../../Types/Types";
-
-type PropsPopularMoviesType = {
-  popularMovies: Array<PopularType>|undefined;
-};
-
+import React, {useState} from 'react';
+import HeroNav from '../../Common/HeroNav';
+import Streaming from './Streaming';
+import OnTv from './OnTv';
+import ForRent from './ForRent';
+import InTheater from './InTheater';
+import {PopularType} from '../../../Types/Types';
 export type PropsMovieComponentstype = {
-  popularMovies: Array<PopularType>|undefined;
+  popularMovies: Array<PopularType> | undefined;
 };
 
-const Popular: FC<PropsPopularMoviesType> = ({ popularMovies }) => {
-  const [show, setShow] = useState("stream");
+const Popular = () => {
+  const [show, setShow] = useState('stream');
 
   const showValue = (value: string) => {
     setShow(value);
@@ -30,10 +25,10 @@ const Popular: FC<PropsPopularMoviesType> = ({ popularMovies }) => {
         <HeroNav show={show} showValue={showValue} />
       </div>
       <div className="popular__body is__faiding">
-        {show === "stream" ? <Streaming popularMovies={popularMovies} /> : ""}
-        {show === "onTv" ? <OnTv popularMovies={popularMovies} /> : ""}
-        {show === "rent" ? <ForRent popularMovies={popularMovies} /> : ""}
-        {show === "theater" ? <InTheater popularMovies={popularMovies} /> : ""}
+        {show === 'stream' ? <Streaming /> : ''}
+        {show === 'onTv' ? <OnTv /> : ''}
+        {show === 'rent' ? <ForRent /> : ''}
+        {show === 'theater' ? <InTheater /> : ''}
       </div>
     </div>
   );
