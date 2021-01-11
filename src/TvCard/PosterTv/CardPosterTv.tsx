@@ -7,30 +7,32 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { CreditsType, GenresType, MovieDetailsType } from "../../../Types/Types";
-import { crewStaff } from "../../Helper/crewstaff";
+import { CreditsType, GenresType, TvDetailType } from "../../Types/Types";
+import { crewStaff, crewStaffTV } from "../../components/Helper/crewstaff";
 import { Link } from "react-router-dom";
 
 type PropsType = {
-  details: MovieDetailsType | null;
-  original_title: undefined | string;
+  details: null | TvDetailType;
+  original_title: string | undefined;
   release_date: undefined | string;
   original_language: undefined | string;
   genres: undefined | Array<GenresType>;
-  runtime: undefined | number;
+  runtime: undefined | Array<number>;
   popularity: undefined | number;
   overview: undefined | string;
   credits: CreditsType | null;
-  handaleplay:()=>void
+  handaleplay: () => void;
 };
 
 const CardPoster = (props: PropsType) => {
+  const creator = props.details?.created_by.map((c) => c.name).toLocaleString();
+  const id = props.details?.created_by.map((id) => id.id);
 
-  const crew:any= [];
+  const crew: any = [];
 
-  console.log(props.popularity)
- const voteAvarage = props.details?.vote_average?props.details.vote_average:'';
-
+  const voteAvarage = props.details?.vote_average
+    ? props.details.vote_average
+    : "";
 
   let votes = voteAvarage.toLocaleString().replace(".", "");
   if (votes.length < 2) {
@@ -38,26 +40,20 @@ const CardPoster = (props: PropsType) => {
   }
   const voteNumber = parseInt(votes);
 
-  const trailColorLine=(value:number)=>{
-    if(value < 30){
-      return '#fd1818'
-    }else if(value > 30 && value < 70){
-      return '#ffff5d'
-    }else{
-      return '#50ff50de'
+  const trailColorLine = (value: number) => {
+    if (value < 30) {
+      return "#fd1818";
+    } else if (value > 30 && value < 70) {
+      return "#ffff5d";
+    } else {
+      return "#50ff50de";
     }
-  }
+  };
 
-const percent = 60
+  // if (props.credits?.crew) {
+  //   crewStaffTV(props.credits?.crew, "Directing", crew);
+  // }
 
-  if (props.credits?.crew) {
-    crewStaff(props.credits?.crew, "Directing", crew);
-    crewStaff(props.credits?.crew, "Writing", crew);
-    crewStaff(props.credits?.crew, "Producer", crew);
-  }
-  
-
-  //console.log(props.credits?.cast.filter(c=> c.known_for_department === "Acting"));
   return (
     <div
       className="posterWrapp"
@@ -83,7 +79,7 @@ const percent = 60
             {props.genres?.map((g) => (
               <span key={g.id}>{g.name}</span>
             ))}{" "}
-            - {props.runtime ? `${Math.ceil(props.runtime / 60)} h` : ""}
+            - {props.runtime ? `${props.runtime[0]} min` : ""}
           </p>
         </div>
         <div className="posterWrapp__info-actions">
@@ -103,7 +99,7 @@ const percent = 60
                       textSize: "3rem",
                       backgroundColor: "#000",
                       trailColor: "#3d543fba",
-                      pathColor: trailColorLine(voteNumber)
+                      pathColor: trailColorLine(voteNumber),
                     })}
                   />
                 </div>
@@ -153,7 +149,7 @@ const percent = 60
               <p className="movieCrad__tolltip">Login to rate this movie</p>
             </li>
             <li className="posterWrapp__info-actions-item">
-              <button 
+              <button
                 className="btn btn--postertrailer"
                 onClick={props.handaleplay}
               >
@@ -167,14 +163,15 @@ const percent = 60
         </div>
         <div className="posterWrapp__info-cast">
           <ul className="posterWrapp__info-cast-list">
-            {crew.map((c: any) => (
-              <li className="posterWrapp__info-cast-item" key={c.credit_id}>
-                <Link to={`/posterstaff/${c.id}`} className="posterWrapp__info-cast-link">
-                  <p>{c.name}</p>
-                  <p>{c.job}</p>
-                </Link>
-              </li>
-            ))}
+            <li className="posterWrapp__info-cast-item">
+              <Link
+                to={`/posterstaff/${id}`}
+                className="posterWrapp__info-cast-link"
+              >
+                <p>{creator}</p>
+                <p>Creator</p>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

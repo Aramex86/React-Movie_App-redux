@@ -8,11 +8,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
-import NoPhoto from '../../assets/noImage.png';
+import NoPhoto from "../assets/noImage.png";
 
 import { Link } from "react-router-dom";
 
-import { CreditsType } from "../../Types/Types";
+import { CreditsType } from "../Types/Types";
 
 type PropsType = {
   credits: CreditsType | null;
@@ -40,8 +40,11 @@ const CardActors = ({ credits }: PropsType) => {
                     component="img"
                     alt="actor photo"
                     height="150"
-                    image={actor.profile_path===null?`${NoPhoto}`:`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
-                    //title="Contemplative Reptile"
+                    image={
+                      actor.profile_path === null
+                        ? `${NoPhoto}`
+                        : `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
+                    }
                   />
                   <CardContent>
                     <Typography
@@ -64,7 +67,9 @@ const CardActors = ({ credits }: PropsType) => {
                         whiteSpace: "nowrap",
                       }}
                     >
-                      {actor.character}
+                      {actor.roles.map((characters) =>
+                        characters.character
+                      )}
                     </Typography>
                   </CardContent>
                 </CardActionArea>

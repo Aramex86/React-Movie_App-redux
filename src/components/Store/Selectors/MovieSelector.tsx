@@ -20,6 +20,7 @@ export const detailsSelector=(state:AppStateType)=>{
     return state.movies.movieDetails
 }
 
+
 export const reviewsSelector=(state:AppStateType)=>{
     return state.movies.movieReviews;
 }

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 // const instance  = axios.create({
 //     baseUrl:'https://api.themoviedb.org',
@@ -10,7 +10,7 @@ import axios from 'axios';
 //api_key TMDb = 647b39ccfb59105c511c2df9019bc7ec; -> apikey
 //https://cors-anywhere.herokuapp.com/ ->corsanywhere
 //https://api.themoviedb.org/4/list/1?page=1&api_key=647b39ccfb59105c511c2df9019bc7ec&sort_by=title.asc";
-const api_key = '647b39ccfb59105c511c2df9019bc7ec';
+const api_key = "647b39ccfb59105c511c2df9019bc7ec";
 //https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg
 
 export const getMoviesApi = {
@@ -53,6 +53,115 @@ export const getMoviesApi = {
         if (error.response) {
           return error.response.data.status_message;
         }
+      });
+  },
+  getTvDetails(TvId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/tv/${TvId}?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        if (error.response) {
+          return error.response.data.status_message;
+        }
+      });
+  },
+  getReviews(movieId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${api_key}&language=en-US&page=1`
+      )
+      .then((res) => {
+        return res.data.results;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          return error.response.data.status_message;
+        }
+      });
+  },
+  getVideos(movieId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        //console.log(res.data.results);
+        return res.data.results;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          return error.response.data.status_message;
+        }
+      });
+  },
+  getRecomand(movieId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${api_key}&language=en-US&page=1`
+      )
+      .then((res) => {
+        return res.data.results;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          return error.response.data.status_message;
+        }
+      });
+  },
+  getKeywords(movieId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=${api_key}`
+      )
+      .then((res) => {
+        return res.data.keywords;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          return error.response.data.status_message;
+        }
+      });
+  },
+};
+export const getTvApi = {
+  getTvDetails(TvId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/tv/${TvId}?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        if (error.response) {
+          return error.response.data.status_message;
+        }
+      });
+  },
+  getCastTv(TvId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/tv/${TvId}/aggregate_credits?api_key=${api_key}`
+      )
+      .then((res) => {
+        return res.data;
+      });
+  },
+  getGenre() {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data.genres;
       });
   },
   getReviews(movieId: number) {
@@ -203,7 +312,7 @@ export const getHomePgeApi = {
         return err.response.data.status_message;
       });
   },
- 
+
   getNowPlaying(currentPage: number) {
     return axios
       .get(

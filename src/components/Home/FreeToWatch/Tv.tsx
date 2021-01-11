@@ -27,7 +27,7 @@ const Tv = () => {
     <div className="cardwrapp">
       {nowTvPlaying?.results.map((movie:any)=> 
       fetching?<Skeleton key={movie.id}/>:
-      /*   <Link to={`movie-card/${movie.id}`} key={movie.id}> */
+        <Link to={`tv-card/${movie.id}`} key={movie.id}>
           <Card key={movie.id}
             poster={movie.poster_path}
             title={movie.name}
@@ -36,7 +36,7 @@ const Tv = () => {
             name={movie.name}
             firstAirDate={movie.first_air_date}
           />
-        /* </Link> */
+         </Link> 
       )}
     </div>
   );

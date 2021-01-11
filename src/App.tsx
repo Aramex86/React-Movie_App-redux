@@ -18,6 +18,7 @@ import AiringToday from './components/Tv/AiringToday';
 import OnTv from './components/Tv/OnTv';
 import TopRatedTv from './components/Tv/TopRatedTv';
 import PopularPeople from './components/People/Popular'
+import TvCardContainer from './TvCard/TvCardContainer';
 
 function App() {
   return (
@@ -27,17 +28,22 @@ function App() {
           <Route exact path="/" component={MovielistContainer} />
           <Route
             path="/movie-card/:id"
-            component={withMovies(MovieCardContainer)}
+            component={MovieCardContainer}
           />
+          <Route
+            path="/tv-card/:id"
+            component={TvCardContainer}
+          />
+
           <Route exact path="/posterstaff/:id" component={PosterStaffPage} />
 
-          <Route path="/actorslist/" component={withMovies(FullList)} />
+          <Route path="/actorslist/" component={FullList} />
           <Route
             exact
             path="/allreview/"
-            component={withMovies(CardSocialAll)}
+            component={CardSocialAll}
           />
-          <Route exact path="/allmedia/" component={withMovies(CardMediaAll)} />
+          <Route exact path="/allmedia/" component={CardMediaAll} />
           <Route exact path="/sreachresults/" component={ResultsPage} />
           <Route exact path="/movies/popular" component={Popular}  />
           <Route exact path="/movies/nowplaying" component={NowPlaying} />

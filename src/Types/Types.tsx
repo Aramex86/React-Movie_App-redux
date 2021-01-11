@@ -16,6 +16,11 @@ export type MovieListType = {
   release_date: string;
 };
 
+type Roletype = {
+  character: string;
+  credit_id: string;
+  episode_count: number;
+};
 type CastType = {
   adult: boolean;
   cast_id: number;
@@ -29,8 +34,9 @@ type CastType = {
   original_name: string;
   popularity: number;
   profile_path: string;
+  roles: Array<Roletype>;
 };
-type CrewType = {
+export type CrewType = {
   adult: boolean;
   credit_id: string;
   department: string;
@@ -42,6 +48,7 @@ type CrewType = {
   original_name: string;
   popularity: number;
   profile_path: null;
+  total_episode_count: number
 };
 
 export type CreditsType = {
@@ -77,6 +84,7 @@ export type WithMoviePropsType = {
   requestCredits: (movieId: number) => void;
   requestGenres: () => void;
   requestDetails: (movieId: number) => void;
+  requestTvDetails: (TvId: number) => void;
   requestReviews: (movieId: number) => void;
   requestVideos: (movieId: number) => void;
   requestRecomand: (movieId: number) => void;
@@ -137,7 +145,111 @@ export type MovieDetailsType = {
   video: string;
   vote_average: number;
   vote_count: number;
-  //requestDetails: (movieId: number) => void
+};
+//TV
+
+type CreatedBytype = {
+  id: number;
+  credit_id: string;
+  name: string;
+  gender: number;
+  profile_path: string;
+};
+
+type TvGenresType = {
+  id: number;
+  name: string;
+};
+
+type LastEpisodType = {
+  air_date: string;
+  episode_number: number;
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  season_number: number;
+  still_path: string;
+  vote_average: number;
+  vote_count: number;
+};
+type NetworksType = {
+  name: string;
+  id: number;
+  logo_path: string;
+  origin_country: string;
+};
+
+type SeasonsType = {
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+};
+
+type LanguageType = {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+};
+
+export type TvDetailType = {
+  backdrop_path: string;
+  created_by: Array<CreatedBytype>;
+  episode_run_time: Array<number>;
+  first_air_date: string;
+  genres: Array<TvGenresType>;
+  homepage: string;
+  id: number;
+  in_production: boolean;
+  languages: Array<string>;
+  last_air_date: string;
+  last_episode_to_air: LastEpisodType;
+  name: string;
+  next_episode_to_air: null;
+  networks: Array<NetworksType>;
+  number_of_episodes: number;
+  number_of_seasons: number;
+  origin_country: Array<string>;
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: Array<MovieDetailsCompaniesType>;
+  production_countries: Array<MovieDetailsCompaniesType>;
+  seasons: Array<SeasonsType>;
+  spoken_languages: Array<LanguageType>;
+  status: string;
+  tagline: string;
+  type: string;
+  vote_average: number;
+  vote_count: number;
+};
+
+export type TvPropsType = {
+  movieList: Array<MovieListType>;
+  isFetching: boolean;
+  TvId: number;
+  credits: CreditsType | null;
+  genres: Array<GenresType>;
+  details: TvDetailType | null;
+  match: MatchType;
+  reviews: Array<ResultsType>;
+  videos: Array<VideoType>;
+  recomand: Array<RecomandType>;
+  keywords: Array<KeywordsType>;
+  vote_average: number;
+  requestCredits: (TvId: number) => void;
+  requestGenres: () => void;
+  requestTvDetails: (TvId: number) => void;
+  requestReviews: (TvId: number) => void;
+  requestVideos: (TvId: number) => void;
+  requestRecomand: (TvId: number) => void;
+  requestKeywords: (TvId: number) => void;
 };
 
 // REVIEWS
@@ -150,9 +262,12 @@ export type ResultsType = {
 };
 
 export type ReviewsType = {
-  id: number;
   page: number;
-  resutlts: Array<ResultsType>;
+  author: string;
+  content: string;
+  id: string;
+  url: string;
+  // resutlts: Array<ResultsType>;
 };
 
 //VIDEOS
@@ -318,7 +433,6 @@ export type PopularType = {
   vote_count: number;
   name: string;
   first_air_date: string;
-
 };
 // NOw Playing
 export type NowPlayngType = {
@@ -333,7 +447,7 @@ export type NowPlayngType = {
   poster_path: string;
   release_date: string;
   title: string;
-  video: boolean |string;
+  video: boolean | string;
   vote_average: number;
   vote_count: number;
   name: string;
@@ -354,8 +468,8 @@ export type TVPopularType = {
   poster_path: string | null;
   vote_average: number;
   vote_count: number;
-  release_date:string
-  title:string
+  release_date: string;
+  title: string;
 };
 
 //Traidings
@@ -442,81 +556,78 @@ export type CollectionType = {
   original_name: string;
   overview: string;
   poster_path: string;
- 
 };
 
-export type CollectionObjectType={
-  results:Array<CollectionType>
-  total_pages: number
-  total_results: number
-  page:number
-}
+export type CollectionObjectType = {
+  results: Array<CollectionType>;
+  total_pages: number;
+  total_results: number;
+  page: number;
+};
 
 //Movie Page Type
 
-export type PopularObjectType={
-  results:Array<PopularType>
-  total_pages: number
-  total_results: number
-  page:number
-}
+export type PopularObjectType = {
+  results: Array<PopularType>;
+  total_pages: number;
+  total_results: number;
+  page: number;
+};
 
-export type NowPlayingObjectType={
-  results:Array<NowPlayngType>
-  total_pages: number
-  total_results: number
-  page:number
-}
+export type NowPlayingObjectType = {
+  results: Array<NowPlayngType>;
+  total_pages: number;
+  total_results: number;
+  page: number;
+};
 
-export type UpComingObjectType={
-  results:Array<UpComingType>
-  total_pages: number
-  total_results: number
-  page:number
-}
-export type TopRatedObjectType={
-  results:Array<AllMediaType>
-  total_pages: number
-  total_results: number
-  page:number
-}
+export type UpComingObjectType = {
+  results: Array<UpComingType>;
+  total_pages: number;
+  total_results: number;
+  page: number;
+};
+export type TopRatedObjectType = {
+  results: Array<AllMediaType>;
+  total_pages: number;
+  total_results: number;
+  page: number;
+};
 
 //TV
-export type PopularTvObjectType={
-  results:Array<TVPopularType>
-  total_pages: number
-  total_results: number
-  page:number
-}
+export type PopularTvObjectType = {
+  results: Array<TVPopularType>;
+  total_pages: number;
+  total_results: number;
+  page: number;
+};
 
-//People 
+//People
 
-type PopularPeopleType={
-  adult: boolean,
-  gender: number,
-  id: number,
-  known_for: Array<AllMediaType>,
-  known_for_department: string
-  name: string
-  popularity: number,
-  profile_path: string
-}
+type PopularPeopleType = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for: Array<AllMediaType>;
+  known_for_department: string;
+  name: string;
+  popularity: number;
+  profile_path: string;
+};
 
-
-
-export type PopularPeopleObjectType={
-  results:Array<PopularPeopleType>
-  total_pages: number
-  total_results: number
-  page:number
-}
+export type PopularPeopleObjectType = {
+  results: Array<PopularPeopleType>;
+  total_pages: number;
+  total_results: number;
+  page: number;
+};
 
 // Langs
 
-export type LangsType={
-  iso_639_1: string
-  english_name: string
-  name: string
-  value: string
-  label:string
-}
+export type LangsType = {
+  iso_639_1: string;
+  english_name: string;
+  name: string;
+  value: string;
+  label: string;
+};

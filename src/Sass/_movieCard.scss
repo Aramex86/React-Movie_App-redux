@@ -46,7 +46,7 @@
     width: 100%;
     margin: 0 auto;
     background: #000;
-    @include respond(small-phone){
+    @include respond(small-phone) {
       width: 100%;
       min-height: 28px;
     }
@@ -60,11 +60,11 @@
     transform: translate(-50%, -50%);
     color: #ffffffbd;
     font-weight: bold;
-    @include respond(tab-port){
+    @include respond(tab-port) {
       top: 40%;
       width: 90%;
     }
-    @include respond(small-phone){
+    @include respond(small-phone) {
       top: 53%;
       width: 90%;
     }
@@ -222,7 +222,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: start;
-        @include respond(small-phone){
+        @include respond(small-phone) {
           justify-content: center;
         }
       }
@@ -281,7 +281,7 @@
 
     &-cards {
       display: inline-flex;
-      width: 134rem;
+      width: 155rem;
       align-items: center;
       & div {
         margin: 0 5px 0 5px;
@@ -373,6 +373,19 @@
     border-radius: 7px;
     //
     margin-bottom: 25px;
+    &--tv {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+      &-img {
+        width: 50%;
+        margin-right: 1rem;
+        & img {
+          width: 100%;
+          border-radius: 5px 0 0 5px;
+        }
+      }
+    }
     &-header {
       display: flex;
       margin-bottom: 25px;
@@ -451,8 +464,8 @@
       list-style: none;
       display: flex;
       margin-left: 4rem;
-      @include respond(small-phone){
-        margin-left:0;
+      @include respond(small-phone) {
+        margin-left: 0;
       }
     }
     &-item {
@@ -523,7 +536,7 @@
       justify-content: center;
       align-items: center;
       height: 19px;
-      @include respond(phone){
+      @include respond(phone) {
         padding: 13rem;
       }
       &-link {
@@ -627,8 +640,8 @@
   flex-direction: column;
   border-bottom: 1px solid #d7d7d7;
   width: 60%;
-  @include respond(small-phone){
-    margin:0;
+  @include respond(small-phone) {
+    margin: 0;
     padding: 0 1rem;
     width: 100%;
   }
@@ -636,12 +649,12 @@
 
 .cardInfoList {
   list-style: none;
-  @include respond(small-phone){
-    display:flex;
+  @include respond(small-phone) {
+    display: flex;
   }
   &__item {
     padding: 0.6rem 0;
-    @include respond(small-phone){
+    @include respond(small-phone) {
       padding: 0.6rem 11px;
       margin-bottom: 10px;
     }
