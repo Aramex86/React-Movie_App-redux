@@ -242,14 +242,16 @@ export type TvPropsType = {
   videos: Array<VideoType>;
   recomand: Array<RecomandType>;
   keywords: Array<KeywordsType>;
+  external: ExternalIdsType |null
   vote_average: number;
-  requestCredits: (TvId: number) => void;
+  requestCredits: (tvId: number) => void;
   requestGenres: () => void;
-  requestTvDetails: (TvId: number) => void;
-  requestReviews: (TvId: number) => void;
-  requestVideos: (TvId: number) => void;
-  requestRecomand: (TvId: number) => void;
-  requestKeywords: (TvId: number) => void;
+  requestTvDetails: (tvId: number) => void;
+  requestTvReviews: (tvId: number) => void;
+  requestVideos: (tvId: number) => void;
+  requestRecomand: (tvId: number) => void;
+  requestKeywords: (tvId: number) => void;
+  requestExternal: (tvId:number)=>void;
 };
 
 // REVIEWS
@@ -299,6 +301,8 @@ export type RecomandType = {
   overview: string;
   poster_path: string;
   popularity: number;
+  name:string
+  first_air_date:string
 };
 
 //Keywords

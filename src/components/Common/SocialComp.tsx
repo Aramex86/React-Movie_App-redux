@@ -12,8 +12,6 @@ type PropsType = {
 
 const SocialComp: React.FC<PropsType> = ({social}) => {
    
-    console.log(social)
-
   return (
     <>
       <a href={`https://twitter.com/${social?.twitter_id}`} target='_blank' rel="noreferrer" className="social__wrapp__link"> {social?.twitter_id?<FaTwitter/>:''}</a>

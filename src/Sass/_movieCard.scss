@@ -5,7 +5,7 @@
     //align-items: center;
     position: relative;
     //width: 80%;
-    margin: 0 auto;
+    // margin: 0 auto;
     @include respond(big-desktop) {
       justify-content: space-between;
     }
@@ -18,7 +18,7 @@
       align-items: flex-end;
       width: 90%;
       @include respond(big-desktop) {
-        width: 60%;
+        width: 100%;
       }
     }
     &-right {
@@ -26,6 +26,10 @@
       @include respond(big-desktop) {
         width: 40%;
       }
+      @include respond(tab-port) {
+        width: 47%;
+      }
+
       @include respond(small-phone) {
         width: 100%;
       }
@@ -163,6 +167,7 @@
       &-item {
         padding: 0 20px;
         position: relative;
+
         @include respond(tab-port) {
           padding: 0 10px;
         }
@@ -259,6 +264,9 @@
   flex-direction: column;
   border-bottom: 1px solid #d7d7d7;
   margin-bottom: 25px;
+  @include respond(big-desktop) {
+    width: 90%;
+  }
 
   &__heading {
     font-size: 2.5rem;
@@ -269,9 +277,17 @@
     overflow: auto;
     margin-bottom: 20px;
     padding: 0.5rem 0;
+    @include respond(big-desktop) {
+      width: 92rem;
+    }
+
     @include respond(tab-land) {
       width: 70rem;
     }
+    // @include respond(laptop) {
+    //   width: 82rem;
+    // }
+
     @include respond(phone) {
       width: 47rem;
     }
@@ -298,6 +314,12 @@
         align-items: center;
         font-weight: 700;
       }
+      @include respond(big-desktop) {
+        width: 130rem;
+      }
+      // @include respond(laptop) {
+      //   width: 170rem;
+      // }
     }
     .actorslist {
       margin-left: 0;
@@ -317,13 +339,18 @@
 //Social
 .socialWrapp {
   width: 90rem;
-  //margin: 0 auto;
   border-bottom: 1px solid #d7d7d7;
   padding: 20px 0;
   margin-bottom: 25px;
+  @include respond(big-desktop) {
+    width: 97rem;
+  }
   @include respond(tab-land) {
     width: 70rem;
   }
+  // @include respond(laptop) {
+  //   width: 82rem;
+  // }
   @include respond(phone) {
     width: 47rem;
   }
@@ -378,11 +405,41 @@
       flex-direction: row;
       padding: 0;
       &-img {
-        width: 50%;
+        width: 20%;
         margin-right: 1rem;
+        // @include respond(laptop) {
+        //   width: 35%;
+        // }
+        @include respond(tab-port) {
+          width: 70%;
+        }
+        @include respond(phone) {
+          width: 39%;
+        }
         & img {
           width: 100%;
           border-radius: 5px 0 0 5px;
+          @include respond(phone) {
+            width: 100%;
+            border-radius: 5px 0 0 5px;
+            min-height: 165px;
+            object-fit: cover;
+          }
+        }
+      }
+      &-overview {
+        &-heading {
+          font-weight: bold;
+          margin-bottom: 15px;
+          & p:nth-child(1) {
+            font-size: 2.5rem;
+          }
+          & p:nth-child(2) {
+            font-size: 1.5rem;
+          }
+        }
+        @include respond(phone) {
+          width: 64%;
         }
       }
     }
@@ -443,9 +500,15 @@
   border-bottom: 1px solid #d7d7d7;
   padding: 20px 0;
   margin-bottom: 25px;
+  @include respond(big-desktop) {
+    width: 97rem;
+  }
   @include respond(tab-land) {
     width: 70rem;
   }
+  // @include respond(laptop) {
+  //   width: 82rem;
+  // }
   @include respond(phone) {
     width: 47rem;
   }
@@ -558,14 +621,19 @@
 }
 .recomandWrapp {
   width: 90rem;
-  //margin: 0 auto;
   border-bottom: 1px solid #d7d7d7;
   padding: 20px 0;
   margin-bottom: 25px;
   overflow: auto;
+  @include respond(big-desktop) {
+    width: 97rem;
+  }
   @include respond(tab-land) {
     width: 70rem;
   }
+  // @include respond(laptop) {
+  //   width: 82rem;
+  // }
   @include respond(phone) {
     width: 47rem;
   }
@@ -596,6 +664,12 @@
       opacity: 5;
       visibility: visible;
       bottom: 0%;
+      @include respond(tab-land) {
+        transform: translate(-50%, -46%);
+      }
+      @include respond(tab-port) {
+        transform: translate(-50%, -42%);
+      }
     }
     &-info {
       display: flex;
@@ -651,15 +725,41 @@
   list-style: none;
   @include respond(small-phone) {
     display: flex;
+    flex-direction: column;
+    width: 100%;
   }
   &__item {
     padding: 0.6rem 0;
+    & img {
+      width: 35%;
+      @include respond(phone) {
+        width: 6rem;
+      }
+    }
     @include respond(small-phone) {
       padding: 0.6rem 11px;
       margin-bottom: 10px;
+      text-align: center;
     }
     &__header {
       font-weight: bold;
+    }
+    & a {
+      & svg {
+        width: 2em;
+        height: 2em;
+      }
+    }
+  }
+  &__item:nth-child(1) {
+    width: 38%;
+    display: flex;
+    justify-content: space-around;
+    @include respond(phone){
+      width: 32%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
     }
   }
 }
@@ -683,5 +783,12 @@
   }
   &__link {
     font-size: 1.5rem;
+  }
+}
+
+.makeStyles-root-1 {
+  max-width: 168px;
+  @include respond(tab-port) {
+    max-width: 131px !important;
   }
 }

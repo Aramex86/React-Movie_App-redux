@@ -3,11 +3,11 @@ import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 import PlayCircleFilledWhiteRoundedIcon from '@material-ui/icons/PlayCircleFilledWhiteRounded';
 import {Link} from 'react-router-dom';
 
-import {MovieDetailsType, VideoType} from '../../Types/Types';
+import { TvDetailType, VideoType} from '../../Types/Types';
 import {allMedia} from '../../components/Helper/allMedia';
 
 type PropsType = {
-  details: MovieDetailsType | null;
+  details: TvDetailType | null;
   videos: Array<VideoType>;
 };
 

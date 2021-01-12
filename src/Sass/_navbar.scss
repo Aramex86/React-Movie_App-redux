@@ -16,6 +16,16 @@ a {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    @include respond(big-desktop) {
+      width: 90%;
+    }
+    @include respond(laptop) {
+      width: 90%;
+    }
+    @include respond(tab-port) {
+      width: 95%;
+    }
+
     @include respond(phone) {
       width: 100%;
       padding: 0 1rem;
@@ -34,17 +44,25 @@ a {
     @include respond(phone) {
       width: 50%;
     }
+    
     &__logo {
       font-family: "Source Sans Pro", sans-serif;
       font-weight: 900;
       font-size: 2.5rem;
       margin-right: 15px;
       width: 140px;
+      @include respond(big-desktop) {
+        width: 170px;
+      }
       @include respond(tab-land) {
         //width: 91px;
         font-size: 2rem;
         margin-right: 0;
       }
+      @include respond(laptop) {
+        font-size: 2.5rem;
+      }
+     
       & a {
         font-family: "Roboto", sans-serif;
         font-weight: 700;
@@ -73,7 +91,7 @@ a {
       &--mobile {
         flex-direction: column;
         position: absolute;
-        background:linear-gradient(to right, #025885,80%, #0a7f9bad);
+        background: linear-gradient(to right, #025885, 80%, #0a7f9bad);
         left: -8px;
         top: 40px;
         width: 100vw;
@@ -90,7 +108,12 @@ a {
           padding: 2rem 3rem;
           font-size: 2.5rem;
         }
-        
+        @include respond(laptop) {
+          font-size: 2rem;
+        }
+        @include respond(tab-port) {
+          font-size: 1.5rem;
+        }
       }
       &__link {
         color: #fff;
@@ -105,6 +128,9 @@ a {
     width: 50%;
     display: flex;
     justify-content: flex-end;
+    @include respond(laptop) {
+      width: 19%;
+    }
 
     &__list {
       list-style: none;

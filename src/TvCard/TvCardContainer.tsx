@@ -1,27 +1,40 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import {
   tvCastSelector,
   tvDetailsSelector,
+  tvExternalSelector,
+  tvKeywordsSelector,
+  tvRecomandSelector,
+  tvReviewsSelector,
+  tvVideosSelector,
 } from "../components/Store/Selectors/Tvselector";
 import { AppStateType } from "../components/Store/store";
 import {
   getTvDeatails,
   requestTvDetails,
   requestCredits,
-  getCreditsTv
-  
+  getCreditsTv,
+  getTvReviews,
+  requestTvReviews,
+  requestVideos,
+  getVideos,
+  getRecomand,
+  requestRecomand,
+  requestKeywords,
+  getKeywords,
+  getExternal,
+  requestExternal
 } from "../components/Store/Reducers/TvReducer";
 
 //import MovieCrad from "./MovieCrad";
 import CradHeader from "./TvCardHeader";
 import CardPoster from "./PosterTv/CardPosterTv";
 import CardActors from "./CardActors";
-// import CardSocial from "./CardSocial/CardSocial";
-// import CardMedia from "./CardMedia/CardMedia";
-// import CardRecomand from "./Recomandations/CardRecomand";
-// import CardInfo from "./CardInfo";
+import CardSocial from "./CardSocial/CardSocial";
+import CardMedia from "./CardMedia/CardMedia";
+import CardRecomand from "./Recomandations/CardRecomand";
+import CardInfo from "./CardInfo";
 // import PopupTrailer from "./PopupTrailer";
 import { TvPropsType } from "../Types/Types";
 import CurrentSeason from "./CurrentSeason/CurrentSeason";
@@ -35,9 +48,14 @@ class TvCardContainer extends Component<TvPropsType, IState> {
     playTrailer: false,
   };
   componentDidMount() {
-    const TvId = this.props.match.params.id;
-    this.props.requestTvDetails(TvId);
-    this.props.requestCredits(TvId);
+    const tvId = this.props.match.params.id;
+    this.props.requestTvDetails(tvId);
+    this.props.requestCredits(tvId);
+    this.props.requestTvReviews(tvId);
+    this.props.requestVideos(tvId);
+    this.props.requestRecomand(tvId);
+    this.props.requestKeywords(tvId);
+    this.props.requestExternal(tvId);
   }
 
   handaleplay = () => {
@@ -77,19 +95,20 @@ class TvCardContainer extends Component<TvPropsType, IState> {
         <div className="cardWrapper__body">
           <div className="cardWrapper__body-left">
             <CardActors credits={this.props.credits} />
-            <CurrentSeason/>
-            {/* <CardSocial reviews={this.props.reviews} /> */}
-            {/*  <CardMedia
+            <CurrentSeason />
+             <CardSocial reviews={this.props.reviews} />
+             <CardMedia
               details={this.props.details}
               videos={this.props.videos}
-            /> */}
-            {/*  <CardRecomand recomand={this.props.recomand} /> */}
+            />
+             <CardRecomand recomand={this.props.recomand} />
           </div>
           <div className="cardWrapper__body-right">
-            {/* <CardInfo
+            <CardInfo
               keywords={this.props.keywords}
               details={this.props.details}
-            /> */}
+              social={this.props.external}
+            />
           </div>
         </div>
       </div>
@@ -100,7 +119,12 @@ class TvCardContainer extends Component<TvPropsType, IState> {
 const mapStateToProps = (state: AppStateType) => {
   return {
     details: tvDetailsSelector(state),
-    credits: tvCastSelector(state)
+    credits: tvCastSelector(state),
+    reviews: tvReviewsSelector(state),
+    videos: tvVideosSelector(state),
+    recomand: tvRecomandSelector(state),
+    keywords: tvKeywordsSelector(state),
+    external: tvExternalSelector(state)
   };
 };
 
@@ -108,5 +132,15 @@ export default connect(mapStateToProps, {
   requestTvDetails,
   getTvDeatails,
   requestCredits,
-  getCreditsTv
+  getCreditsTv,
+  getTvReviews,
+  requestTvReviews,
+  requestVideos,
+  getVideos,
+  getRecomand,
+  requestRecomand,
+  requestKeywords,
+  getKeywords,
+  getExternal,
+  requestExternal
 })(TvCardContainer);

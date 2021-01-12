@@ -38,10 +38,9 @@ const Popular: FC = () => {
         <div className="popularwrap__movielist">
           {airingToday?.results.map((p, index) => (
             <Link
-              to="/somewere in space" /* {`/movie-card/${p.id}`} */
+              to= {`/tv-card/${p.id}`} 
               key={index}
               className="popularwrap__movielist-link"
-              target="_blank"
             >
               <Card
                 poster={p.poster_path}

@@ -18,14 +18,9 @@ type PropsType = {
   credits: CreditsType | null;
 };
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 168,
-  },
-});
+
 
 const CardActors = ({ credits }: PropsType) => {
-  const classes = useStyles();
   const actors = credits?.cast.slice(0, 8);
   return (
     <div className="actorsWrapp">
@@ -34,7 +29,7 @@ const CardActors = ({ credits }: PropsType) => {
         <div className="actorsWrapp__cardsWrapp-cards">
           {actors?.map((actor) => (
             <Link to="/actorslist" className="actorslist" key={actor.id}>
-              <Card className={classes.root}>
+              <Card className='cardStyle'>
                 <CardActionArea>
                   <CardMedia
                     component="img"

@@ -1,25 +1,30 @@
-import Card from '../Common/Card';
-import React, {FC, useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
-import Filter from '../Common/Filter';
-import Sort from '../Common/Sort';
-import {curentPageSelector, nowTvPlayingSelector} from '../Store/Selectors/HomePageSelector';
-import {AppStateType} from '../Store/store';
-import Paginatior from '../Common/Paginator';
-import {requestNowTvPlaying} from '../Store/Reducers/HomePageReducer';
+import Card from "../Common/Card";
+import React, { FC, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import Filter from "../Common/Filter";
+import Sort from "../Common/Sort";
+import {
+  curentPageSelector,
+  nowTvPlayingSelector,
+} from "../Store/Selectors/HomePageSelector";
+import { AppStateType } from "../Store/store";
+import Paginatior from "../Common/Paginator";
+import { requestNowTvPlaying } from "../Store/Reducers/HomePageReducer";
 
 const Popular: FC = () => {
   const popularTv = useSelector((state: AppStateType) =>
     nowTvPlayingSelector(state)
   );
-  const currentPage = useSelector((state:AppStateType)=>curentPageSelector(state))
+  const currentPage = useSelector((state: AppStateType) =>
+    curentPageSelector(state)
+  );
   const [page, setPage] = useState<number>(currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(requestNowTvPlaying(page));
-  }, [page,dispatch]);
+  }, [page, dispatch]);
 
   const handalePageChange = (e: any, value: number) => {
     setPage(value);
@@ -38,10 +43,9 @@ const Popular: FC = () => {
         <div className="popularwrap__movielist">
           {popularTv?.results.map((p, index) => (
             <Link
-              to="/somewere in space" /* {`/movie-card/${p.id}`} */
+              to={`/tv-card/${p.id}`}
               key={index}
               className="popularwrap__movielist-link"
-              target="_blank"
             >
               <Card
                 poster={p.poster_path}

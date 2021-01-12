@@ -17,11 +17,11 @@ const CardRecomand = ({recomand}:PropsType) => {
         <div className="recomandWrapp__cards-card" key={r.id}>
           <img src={`https://image.tmdb.org/t/p/w500${r.backdrop_path}`} alt="" />
           <div className="recomandWrapp__cards-info">
-            <span>{r.title.length>20?`${r.title.slice(0,25)}...`: r.title}</span>
+            <span>{r.name}</span>
         <span>{r.vote_average.toLocaleString().replace('.','') + '%'}</span>
           </div>
           <div className='recomandWrapp__cards-release'>
-           <span><TodayRoundedIcon/> {r.release_date}</span>
+           <span><TodayRoundedIcon/> {r.first_air_date}</span>
           </div>
         </div>
           )}

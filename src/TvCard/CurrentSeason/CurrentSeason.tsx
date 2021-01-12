@@ -19,10 +19,9 @@ const CurrentSeason = () => {
     tvDetailsSelector(state)
   );
 
- const lastSeazonPoster = tvDetail?.seasons.find((item,index)=> index===tvDetail.seasons.length-1)
-  
-  console.log(lastSeazonPoster);
-
+  const lastSeazonPoster = tvDetail?.seasons.find(
+    (item, index) => index === tvDetail.seasons.length - 1
+  );
 
   return (
     <div className="socialWrapp">
@@ -37,13 +36,15 @@ const CurrentSeason = () => {
           />
         </div>
         <div className="socialWrapp__reviews--tv-overview">
-          <div className='socialWrapp__reviews--tv-overview-heading'>
+          <div className="socialWrapp__reviews--tv-overview-heading">
             <p>Season {lastSeazonPoster?.season_number}</p>
-            <p>{lastSeazonPoster?.air_date} | {lastSeazonPoster?.episode_count} Episodes</p>
+            <p>
+              {lastSeazonPoster?.air_date} | {lastSeazonPoster?.episode_count}{" "}
+              Episodes
+            </p>
           </div>
           <p>{lastSeazonPoster?.overview}</p>
         </div>
-
       </div>
       <h4>
         <Link to="/allreview/">View All Seasons</Link>

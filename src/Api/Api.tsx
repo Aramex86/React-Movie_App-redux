@@ -55,20 +55,7 @@ export const getMoviesApi = {
         }
       });
   },
-  getTvDetails(TvId: number) {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${TvId}?api_key=${api_key}&language=en-US`
-      )
-      .then((res) => {
-        return res.data;
-      })
-      .catch((error) => {
-        if (error.response) {
-          return error.response.data.status_message;
-        }
-      });
-  },
+
   getReviews(movieId: number) {
     return axios
       .get(
@@ -164,10 +151,10 @@ export const getTvApi = {
         return res.data.genres;
       });
   },
-  getReviews(movieId: number) {
+  getReviews(tvId: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${api_key}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/tv/${tvId}/reviews?api_key=${api_key}&language=en-US&page=1`
       )
       .then((res) => {
         return res.data.results;
@@ -179,10 +166,10 @@ export const getTvApi = {
         }
       });
   },
-  getVideos(movieId: number) {
+  getVideos(tvId: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`
+        `https://api.themoviedb.org/3/tv/${tvId}/videos?api_key=${api_key}&language=en-US`
       )
       .then((res) => {
         //console.log(res.data.results);
@@ -195,10 +182,10 @@ export const getTvApi = {
         }
       });
   },
-  getRecomand(movieId: number) {
+  getRecomand(tvId: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${api_key}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/tv/${tvId}/recommendations?api_key=${api_key}&language=en-US&page=1`
       )
       .then((res) => {
         return res.data.results;
@@ -210,19 +197,32 @@ export const getTvApi = {
         }
       });
   },
-  getKeywords(movieId: number) {
+  getKeywords(tvId: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=${api_key}`
+        `https://api.themoviedb.org/3/tv/${tvId}/keywords?api_key=${api_key}`
       )
       .then((res) => {
-        return res.data.keywords;
+        return res.data.results;
       })
       .catch((error) => {
         if (error.response) {
           console.log(error.response);
           return error.response.data.status_message;
         }
+      });
+  },
+  getExternalIds(tvId: number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/tv/${tvId}/external_ids?api_key=${api_key}&language=en-US`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        console.log(error.response);
+        return error.response.data.status_message;
       });
   },
 };

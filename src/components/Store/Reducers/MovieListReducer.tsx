@@ -45,7 +45,6 @@ type ActionsTypes =
   | IsFetchingReqType
   | GetCreditsType
   | GetGenresType
-  | GetTvDetailsType
   | GetMovieDetailsType
   | GetMovieReviewsType
   | GetVideosType
@@ -53,7 +52,12 @@ type ActionsTypes =
   | GetKeywordsType;
 
 type DispatchType = Dispatch<ActionsTypes>;
-type ThunkType =ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+type ThunkType = ThunkAction<
+  Promise<void>,
+  AppStateType,
+  unknown,
+  ActionsTypes
+>;
 
 const movieListReducer = (
   state = initialState,
@@ -88,12 +92,6 @@ const movieListReducer = (
       return {
         ...state,
         movieDetails: action.movieDetails,
-      };
-    }
-    case GET_DETAILS_TV: {
-      return {
-        ...state,
-        tvDetails: action.tvDetails,
       };
     }
     case GET_REVIEWS: {
@@ -175,14 +173,7 @@ export const getDeatails = (
 ): GetMovieDetailsType => {
   return { type: GET_DETAILS, movieDetails };
 };
-type GetTvDetailsType = {
-  type: typeof GET_DETAILS_TV;
-  tvDetails: TvDetailType;
-};
 
-export const getTvDeatails = (tvDetails: TvDetailType): GetTvDetailsType => {
-  return { type: GET_DETAILS_TV, tvDetails };
-};
 
 //Reviews
 
@@ -229,7 +220,7 @@ export const getKeywords = (keywords: Array<KeywordsType>): GetKeywordsType => {
 };
 
 // Thuck
-export const requestMovieList = ():ThunkType => async (
+export const requestMovieList = (): ThunkType => async (
   dispatch: DispatchType
 ): Promise<void> => {
   dispatch(isFetchingReq(true));
@@ -238,43 +229,52 @@ export const requestMovieList = ():ThunkType => async (
   dispatch(isFetchingReq(false));
 };
 
-export const requestCredits = (movieId: number):ThunkType => async (dispatch: DispatchType) => {
+export const requestCredits = (movieId: number): ThunkType => async (
+  dispatch: DispatchType
+) => {
   const res = await getMoviesApi.getCast(movieId);
   dispatch(getCredits(res));
 };
 
-export const requestGenres = ():ThunkType => async (dispatch: DispatchType) => {
+export const requestGenres = (): ThunkType => async (
+  dispatch: DispatchType
+) => {
   const res = await getMoviesApi.getGenre();
   dispatch(getGenres(res));
 };
 
-export const requestDetails = (movieId: number):ThunkType => async (dispatch: DispatchType) => {
+export const requestDetails = (movieId: number): ThunkType => async (
+  dispatch: DispatchType
+) => {
   const res = await getMoviesApi.getDetails(movieId);
   dispatch(isFetchingReq(true));
   dispatch(getDeatails(res));
   dispatch(isFetchingReq(false));
 };
-export const requestTvDetails = (TvId: number):ThunkType => async (dispatch: DispatchType) => {
-  dispatch(isFetchingReq(true));
-  const res = await getMoviesApi.getTvDetails(TvId);
-  dispatch(getTvDeatails(res));
-  dispatch(isFetchingReq(false));
-};
 
-export const requestReviews = (movieId: number):ThunkType => async (dispatch: DispatchType) => {
+
+export const requestReviews = (movieId: number): ThunkType => async (
+  dispatch: DispatchType
+) => {
   const res = await getMoviesApi.getReviews(movieId);
   dispatch(getReviwes(res));
 };
-export const requestVideos = (movieId: number):ThunkType => async (dispatch: any) => {
+export const requestVideos = (movieId: number): ThunkType => async (
+  dispatch: any
+) => {
   const res = await getMoviesApi.getVideos(movieId);
   dispatch(getVideos(res));
 };
 
-export const requestRecomand = (movieId: number):ThunkType => async (dispatch: DispatchType) => {
+export const requestRecomand = (movieId: number): ThunkType => async (
+  dispatch: DispatchType
+) => {
   const res = await getMoviesApi.getRecomand(movieId);
   dispatch(getRecomand(res));
 };
-export const requestKeywords = (movieId: number):ThunkType => async (dispatch: DispatchType) => {
+export const requestKeywords = (movieId: number): ThunkType => async (
+  dispatch: DispatchType
+) => {
   const res = await getMoviesApi.getKeywords(movieId);
   dispatch(getKeywords(res));
 };

@@ -11,6 +11,9 @@
   outline: none;
   &--postertrailer {
     width: 90px;
+    @include respond(big-desktop){
+      width: 107px;
+    }
   }
   cursor: pointer;
   &:hover {
