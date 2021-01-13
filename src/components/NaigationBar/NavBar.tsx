@@ -62,8 +62,11 @@ const NavBar = () => {
   concatValues(langs, translations);
   //console.log(selectedOption);
 
-  const handleClick = () => {
-    setShowToolTip(!showToolTip);
+  const handleMouseEnter = () => {
+    setShowToolTip(true);
+  };
+  const handleMouseLeave = () => {
+    setShowToolTip(false);
   };
   const showLang = () => {
     setShowlang(!showlang);
@@ -341,7 +344,8 @@ const NavBar = () => {
               <a
                 href="#"
                 className="navbarwrapp__right__list__link"
-                onClick={handleClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
                 <ImPlus />
               </a>

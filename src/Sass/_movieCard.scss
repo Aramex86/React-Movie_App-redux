@@ -317,9 +317,9 @@
       @include respond(big-desktop) {
         width: 130rem;
       }
-      // @include respond(laptop) {
-      //   width: 170rem;
-      // }
+      @include respond(phone) {
+        width: 186rem;
+      }
     }
     .actorslist {
       margin-left: 0;
@@ -405,7 +405,7 @@
       flex-direction: row;
       padding: 0;
       &-img {
-        width: 20%;
+         width: 150px;
         margin-right: 1rem;
         // @include respond(laptop) {
         //   width: 35%;
@@ -791,4 +791,11 @@
   @include respond(tab-port) {
     max-width: 131px !important;
   }
+  @include respond(phone) {
+    max-width: 131px !important;
+  }
 }
+
+// .jss1{
+//   max-width: 131px !important;
+// }

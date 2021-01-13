@@ -24,7 +24,7 @@ import {
   requestKeywords,
   getKeywords,
   getExternal,
-  requestExternal
+  requestExternal,
 } from "../components/Store/Reducers/TvReducer";
 
 //import MovieCrad from "./MovieCrad";
@@ -35,7 +35,7 @@ import CardSocial from "./CardSocial/CardSocial";
 import CardMedia from "./CardMedia/CardMedia";
 import CardRecomand from "./Recomandations/CardRecomand";
 import CardInfo from "./CardInfo";
-// import PopupTrailer from "./PopupTrailer";
+import PopupTrailer from "./PopupTrailer";
 import { TvPropsType } from "../Types/Types";
 import CurrentSeason from "./CurrentSeason/CurrentSeason";
 
@@ -47,6 +47,7 @@ class TvCardContainer extends Component<TvPropsType, IState> {
   state = {
     playTrailer: false,
   };
+
   componentDidMount() {
     const tvId = this.props.match.params.id;
     this.props.requestTvDetails(tvId);
@@ -72,13 +73,14 @@ class TvCardContainer extends Component<TvPropsType, IState> {
 
   render() {
     console.log(this.props);
+
     return (
       <div className="cardWrapper">
-        {/*  <PopupTrailer
+        <PopupTrailer
           videos={this.props.videos}
           playState={this.state}
           closePlay={this.closePlay}
-        /> */}
+        />
         <CradHeader />
         <CardPoster
           details={this.props.details}
@@ -96,12 +98,12 @@ class TvCardContainer extends Component<TvPropsType, IState> {
           <div className="cardWrapper__body-left">
             <CardActors credits={this.props.credits} />
             <CurrentSeason />
-             <CardSocial reviews={this.props.reviews} />
-             <CardMedia
+            <CardSocial reviews={this.props.reviews} />
+            <CardMedia
               details={this.props.details}
               videos={this.props.videos}
             />
-             <CardRecomand recomand={this.props.recomand} />
+            <CardRecomand recomand={this.props.recomand} />
           </div>
           <div className="cardWrapper__body-right">
             <CardInfo
@@ -124,7 +126,7 @@ const mapStateToProps = (state: AppStateType) => {
     videos: tvVideosSelector(state),
     recomand: tvRecomandSelector(state),
     keywords: tvKeywordsSelector(state),
-    external: tvExternalSelector(state)
+    external: tvExternalSelector(state),
   };
 };
 
@@ -142,5 +144,5 @@ export default connect(mapStateToProps, {
   requestKeywords,
   getKeywords,
   getExternal,
-  requestExternal
+  requestExternal,
 })(TvCardContainer);
