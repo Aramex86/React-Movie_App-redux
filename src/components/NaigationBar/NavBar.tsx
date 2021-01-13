@@ -9,6 +9,7 @@ import {AppStateType} from '../Store/store';
 import {requestLangs, requestTranslations} from '../Store/Reducers/LangReducer';
 import {LangsType} from '../../Types/Types';
 import {getSelectedLang} from '../Store/Reducers/HomePageReducer';
+import { curentPageSelector } from '../Store/Selectors/HomePageSelector';
 
 type OptionsType={
   value:string
@@ -17,12 +18,7 @@ type OptionsType={
 }
 
 
-const options = [
-  {lang:'us-Us',label:'English' },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-  { value: "red", label: "Red" },
-];
+
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
@@ -35,7 +31,8 @@ const NavBar = () => {
   const translations = useSelector((state: AppStateType) =>
     transSelector(state)
   );
-  
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -274,7 +271,7 @@ const NavBar = () => {
                 </a>
                 <ul className="dropdown-navbar">
                   <li className="dropdown-navbar__item">
-                    <Link to="/tv/popular" className="dropdown-navbar__link">
+                    <Link to="/tv/popular" className="dropdown-navbar__link" >
                       popular
                     </Link>
                   </li>

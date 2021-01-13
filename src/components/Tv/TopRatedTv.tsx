@@ -46,6 +46,7 @@ const Popular: FC = () => {
               to={`/tv-card/${p.id}`}
               key={index}
               className="popularwrap__movielist-link"
+              target="_blank"
             >
               <Card
                 poster={p.poster_path}

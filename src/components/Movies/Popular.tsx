@@ -1,29 +1,34 @@
-import Card from '../Common/Card';
-import React, {FC, useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
-import Filter from '../Common/Filter';
-import Sort from '../Common/Sort';
-import {curentPageSelector, popularSelector} from '../Store/Selectors/HomePageSelector';
-import {AppStateType} from '../Store/store';
-import Paginatior from '../Common/Paginator';
-import {getSelectedLang, requestPopularMovies} from '../Store/Reducers/HomePageReducer';
+import Card from "../Common/Card";
+import React, { FC, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import Filter from "../Common/Filter";
+import Sort from "../Common/Sort";
+import {
+  curentPageSelector,
+  popularSelector,
+} from "../Store/Selectors/HomePageSelector";
+import { AppStateType } from "../Store/store";
+import Paginatior from "../Common/Paginator";
+import {
+  getSelectedLang,
+  requestPopularMovies,
+} from "../Store/Reducers/HomePageReducer";
 
 const Popular: FC = () => {
   const popularMovies = useSelector((state: AppStateType) =>
     popularSelector(state)
   );
-  const currentPage = useSelector((state:AppStateType)=>curentPageSelector(state))
+  const currentPage = useSelector((state: AppStateType) =>
+    curentPageSelector(state)
+  );
 
-  
   const [page, setPage] = useState<number>(currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(requestPopularMovies(page));
   }, [page, dispatch]);
-
-
 
   const handalePageChange = (e: any, value: number) => {
     setPage(value);
@@ -45,6 +50,7 @@ const Popular: FC = () => {
               to={`/movie-card/${p.id}`}
               key={index}
               className="popularwrap__movielist-link"
+              target='_blank'
             >
               <Card
                 poster={p.poster_path}
