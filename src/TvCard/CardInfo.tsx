@@ -9,7 +9,6 @@ type PropType = {
 };
 
 const CardInfo = ({ details, keywords,social }: PropType) => {
-  console.log(details?.networks);
   return (
     <div className="cardInfoWrapp">
       <ul className="cardInfoList">

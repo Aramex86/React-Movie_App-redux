@@ -15,7 +15,7 @@ const scrollTop=()=>{
   })
 }
 
-const CardRecomand = ({ recomand }: PropsType) => {
+const CardRecomand = ({ recomand=[] }: PropsType) => {
   return (
     <div className="recomandWrapp">
       <h3 className="recomandWrapp__heading">Recommendations</h3>

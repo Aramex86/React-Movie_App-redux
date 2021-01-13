@@ -28,11 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const CardMedia = ({ reviews }: PropsType) => {
+const CardMedia = ({ reviews=[] }: PropsType) => {
   const classes = useStyles();
-
-
-  console.log(reviews)
   return (
     <div className="socialWrapp">
       <div className="socialWrapp__header">
@@ -43,7 +40,7 @@ const CardMedia = ({ reviews }: PropsType) => {
               to="/allreview"
               className="socialWrapp__header-link socialWrapp__header-link--active"
             >
-              Reviews <span></span>
+              Reviews <span>{reviews.length === undefined?'NO REVIEWS YET': reviews.length}</span>
             </Link>
           </li>
           <li className="socialWrapp__header-item">

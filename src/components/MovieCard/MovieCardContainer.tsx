@@ -46,8 +46,10 @@ type IState = {
 class MovieCardContainer extends Component<WithMoviePropsType, IState> {
   state = {
     playTrailer: false,
+    
   };
   componentDidMount() {
+    
     const movieId = this.props.match.params.id;
     this.props.requestCredits(movieId);
     this.props.requestGenres();
@@ -56,6 +58,19 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
     this.props.requestVideos(movieId);
     this.props.requestRecomand(movieId);
     this.props.requestKeywords(movieId);
+  }
+
+  componentDidUpdate(prevProps:WithMoviePropsType){
+    if(this.props.match.params.id !== prevProps.match.params.id){
+      const movieId = this.props.match.params.id;
+      this.props.requestCredits(movieId);
+      this.props.requestGenres();
+      this.props.requestDetails(movieId);
+      this.props.requestReviews(movieId);
+      this.props.requestVideos(movieId);
+      this.props.requestRecomand(movieId);
+      this.props.requestKeywords(movieId);
+    }
   }
 
   handaleplay = () => {

@@ -12,7 +12,7 @@ type PropsType = {
   closePlay: () => void;
 };
 
-const PopupTrailer = ({ videos, playState, closePlay }: PropsType) => {
+const PopupTrailer = ({ videos =[], playState, closePlay }: PropsType) => {
   const trailer = videos.filter((v) => v.type === "Trailer");
   const key = trailer.find((t) => {
    if (t.name.includes("Trailer")) {

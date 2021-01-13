@@ -11,7 +11,7 @@ type PropsType = {
   videos: Array<VideoType>;
 };
 
-const CardMedia = ({details, videos}: PropsType) => {
+const CardMedia = ({details, videos=[]}: PropsType) => {
   const allImg: Array<string> = [];
   allMedia(
     details?.belongs_to_collection === null

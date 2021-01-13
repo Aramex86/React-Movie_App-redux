@@ -16,7 +16,14 @@ import { Link } from "react-router-dom";
     })
   }
 
-const CardRecomand = ({recomand}:PropsType) => {
+
+
+const CardRecomand = ({recomand = []}:PropsType) => {
+
+  const title = recomand.map(t=> t.title)
+
+  console.log(title)
+
   return (
     <div className="recomandWrapp">
       <h3 className="recomandWrapp__heading">Recommendations</h3>
@@ -26,7 +33,7 @@ const CardRecomand = ({recomand}:PropsType) => {
         <div className="recomandWrapp__cards-card">
           <img src={`https://image.tmdb.org/t/p/w500${r.backdrop_path}`} alt="" />
           <div className="recomandWrapp__cards-info">
-            <span>{r.title.length>20?`${r.title.slice(0,25)}...`: r.title}</span>
+            <span>{r.title}</span>
         <span>{r.vote_average.toLocaleString().replace('.','') + '%'}</span>
           </div>
           <div className='recomandWrapp__cards-release'>

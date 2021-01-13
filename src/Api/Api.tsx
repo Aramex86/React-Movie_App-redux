@@ -119,10 +119,10 @@ export const getMoviesApi = {
   },
 };
 export const getTvApi = {
-  getTvDetails(TvId: number) {
+  getTvDetails(tvId: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/tv/${TvId}?api_key=${api_key}&language=en-US`
+        `https://api.themoviedb.org/3/tv/${tvId}?api_key=${api_key}&language=en-US`
       )
       .then((res) => {
         return res.data;
@@ -133,10 +133,10 @@ export const getTvApi = {
         }
       });
   },
-  getCastTv(TvId: number) {
+  getCastTv(tvId: number) {
     return axios
       .get(
-        `https://api.themoviedb.org/3/tv/${TvId}/aggregate_credits?api_key=${api_key}`
+        `https://api.themoviedb.org/3/tv/${tvId}/aggregate_credits?api_key=${api_key}`
       )
       .then((res) => {
         return res.data;
@@ -145,7 +145,7 @@ export const getTvApi = {
   getGenre() {
     return axios
       .get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=en-US`
+        `https://api.themoviedb.org/3/genre/tv/list?api_key=${api_key}&language=en-US`
       )
       .then((res) => {
         return res.data.genres;

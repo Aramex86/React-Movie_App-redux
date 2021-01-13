@@ -58,6 +58,18 @@ class TvCardContainer extends Component<TvPropsType, IState> {
     this.props.requestKeywords(tvId);
     this.props.requestExternal(tvId);
   }
+  componentDidUpdate(prevProps: TvPropsType) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      const tvId = this.props.match.params.id;
+      this.props.requestTvDetails(tvId);
+      this.props.requestCredits(tvId);
+      this.props.requestTvReviews(tvId);
+      this.props.requestVideos(tvId);
+      this.props.requestRecomand(tvId);
+      this.props.requestKeywords(tvId);
+      this.props.requestExternal(tvId);
+    }
+  }
 
   handaleplay = () => {
     this.setState({
