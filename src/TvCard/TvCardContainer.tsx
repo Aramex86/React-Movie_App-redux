@@ -48,7 +48,7 @@ class TvCardContainer extends Component<TvPropsType, IState> {
     playTrailer: false,
   };
 
-  componentDidMount() {
+  refetchData() {
     const tvId = this.props.match.params.id;
     this.props.requestTvDetails(tvId);
     this.props.requestCredits(tvId);
@@ -58,16 +58,13 @@ class TvCardContainer extends Component<TvPropsType, IState> {
     this.props.requestKeywords(tvId);
     this.props.requestExternal(tvId);
   }
+
+  componentDidMount() {
+    this.refetchData();
+  }
   componentDidUpdate(prevProps: TvPropsType) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      const tvId = this.props.match.params.id;
-      this.props.requestTvDetails(tvId);
-      this.props.requestCredits(tvId);
-      this.props.requestTvReviews(tvId);
-      this.props.requestVideos(tvId);
-      this.props.requestRecomand(tvId);
-      this.props.requestKeywords(tvId);
-      this.props.requestExternal(tvId);
+      this.refetchData();
     }
   }
 
@@ -84,7 +81,7 @@ class TvCardContainer extends Component<TvPropsType, IState> {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <div className="cardWrapper">

@@ -1,23 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import {ImPlus} from 'react-icons/im';
-import Select from 'react-select';
-import {useDispatch, useSelector} from 'react-redux';
-import {langSelector, transSelector} from '../Store/Selectors/LangSelector';
-import {AppStateType} from '../Store/store';
-import {requestLangs, requestTranslations} from '../Store/Reducers/LangReducer';
-import {LangsType} from '../../Types/Types';
-import {getSelectedLang} from '../Store/Reducers/HomePageReducer';
-import { curentPageSelector } from '../Store/Selectors/HomePageSelector';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import { ImPlus } from "react-icons/im";
+import { MdClose } from "react-icons/md";
+import Select from "react-select";
+import { useDispatch, useSelector } from "react-redux";
+import { langSelector, transSelector } from "../Store/Selectors/LangSelector";
+import { AppStateType } from "../Store/store";
+import {
+  requestLangs,
+  requestTranslations,
+} from "../Store/Reducers/LangReducer";
+import { LangsType } from "../../Types/Types";
+import { getSelectedLang } from "../Store/Reducers/HomePageReducer";
 
-type OptionsType={
-  value:string
-  label:string
+type OptionsType = {
+  value: string;
+  label: string;
   selectOption: () => void;
-}
-
-
+};
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
@@ -26,12 +27,12 @@ const NavBar = () => {
   const [selectedOption, setSelectedOption] = useState<
     LangsType | undefined | null
   >(null);
+  const [showSearch, setShowSearch] = useState(false);
 
   const langs = useSelector((state: AppStateType) => langSelector(state));
   const translations = useSelector((state: AppStateType) =>
     transSelector(state)
   );
-
 
   const dispatch = useDispatch();
 
@@ -72,30 +73,178 @@ const NavBar = () => {
   const showHideNav = () => {
     setShowMenu(!showMenu);
   };
-  
+  const showSearchTab = () => {
+    setShowSearch(true);
+  };
+
+  console.log(showSearch);
 
   const screenWidth = window.innerWidth;
 
   return (
-    <div className="navbarwrapp">
-      <div className="navbarwrapp__container">
-        <div className="navbarwrapp__left">
-          <button onClick={showHideNav} className="btn btn--mobile">
-            <span></span>
-          </button>
-          <div className="navbarwrapp__left__logo">
-            <Link to="/">MOVIE-APP</Link>
-          </div>
-          {screenWidth < 665 && showMenu ? (
-            <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
-              <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
+    <>
+      <div className="navbarwrapp">
+        <div className="navbarwrapp__container">
+          <div className="navbarwrapp__left">
+            <button onClick={showHideNav} className="btn btn--mobile">
+              <span></span>
+            </button>
+            <div className="navbarwrapp__left__logo">
+              <Link to="/">MOVIE-APP</Link>
+            </div>
+            {screenWidth < 665 && showMenu ? (
+              <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
+                <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
+                  <li className="navbarwrapp__left__list__item">
+                    <span className="navbarwrapp__left__list__link">
+                      movies
+                    </span>
+                    <ul className="dropdown-navbar">
+                      <li
+                        className="dropdown-navbar__item"
+                        onClick={() => setShowMenu(false)}
+                      >
+                        <Link
+                          to="/movies/popular"
+                          className="dropdown-navbar__link"
+                        >
+                          popular
+                        </Link>
+                      </li>
+                      <li
+                        className="dropdown-navbar__item"
+                        onClick={() => setShowMenu(false)}
+                      >
+                        <Link
+                          to="/movies/nowplaying"
+                          className="dropdown-navbar__link"
+                        >
+                          now playing
+                        </Link>
+                      </li>
+                      <li
+                        className="dropdown-navbar__item"
+                        onClick={() => setShowMenu(false)}
+                      >
+                        <Link
+                          to="/movies/upcoming"
+                          className="dropdown-navbar__link"
+                        >
+                          upcoming
+                        </Link>
+                      </li>
+                      <li
+                        className="dropdown-navbar__item"
+                        onClick={() => setShowMenu(false)}
+                      >
+                        <Link
+                          to="/movies/toprated"
+                          className="dropdown-navbar__link"
+                        >
+                          top rated
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="navbarwrapp__left__list__item">
+                    <a href="#" className="navbarwrapp__left__list__link">
+                      tv shows
+                    </a>
+                    <ul className="dropdown-navbar">
+                      <li
+                        className="dropdown-navbar__item"
+                        onClick={() => setShowMenu(false)}
+                      >
+                        <Link
+                          to="/tv/popular"
+                          className="dropdown-navbar__link"
+                        >
+                          popular
+                        </Link>
+                      </li>
+                      <li
+                        className="dropdown-navbar__item"
+                        onClick={() => setShowMenu(false)}
+                      >
+                        <Link
+                          to="/tv/airingtoday"
+                          className="dropdown-navbar__link"
+                        >
+                          airing today
+                        </Link>
+                      </li>
+                      <li
+                        className="dropdown-navbar__item"
+                        onClick={() => setShowMenu(false)}
+                      >
+                        <Link to="/tv/ontv" className="dropdown-navbar__link">
+                          on air
+                        </Link>
+                      </li>
+                      <li
+                        className="dropdown-navbar__item"
+                        onClick={() => setShowMenu(false)}
+                      >
+                        <Link
+                          to="/tv/toprated"
+                          className="dropdown-navbar__link"
+                        >
+                          top rated
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="navbarwrapp__left__list__item">
+                    <a href="#" className="navbarwrapp__left__list__link">
+                      people
+                    </a>
+                    <ul className="dropdown-navbar">
+                      <li className="dropdown-navbar__item">
+                        <Link
+                          to="/people/popular"
+                          className="dropdown-navbar__link"
+                          onClick={() => setShowMenu(false)}
+                        >
+                          popular people
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="navbarwrapp__left__list__item">
+                    <a href="#" className="navbarwrapp__left__list__link">
+                      more
+                    </a>
+                    <ul className="dropdown-navbar">
+                      <li className="dropdown-navbar__item">
+                        <a href="#" className="dropdown-navbar__link">
+                          discutions
+                        </a>
+                      </li>
+                      <li className="dropdown-navbar__item">
+                        <a href="#" className="dropdown-navbar__link">
+                          leaderboard
+                        </a>
+                      </li>
+                      <li className="dropdown-navbar__item">
+                        <a href="#" className="dropdown-navbar__link">
+                          suport
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            ) : (
+              ""
+            )}
+            <nav className="navbarwrapp__left__navbar ">
+              <ul className="navbarwrapp__left__list ">
                 <li className="navbarwrapp__left__list__item">
-                  <span className="navbarwrapp__left__list__link">movies</span>
+                  <a href="#" className="navbarwrapp__left__list__link">
+                    movies
+                  </a>
                   <ul className="dropdown-navbar">
-                    <li
-                      className="dropdown-navbar__item"
-                      onClick={() => setShowMenu(false)}
-                    >
+                    <li className="dropdown-navbar__item">
                       <Link
                         to="/movies/popular"
                         className="dropdown-navbar__link"
@@ -103,22 +252,15 @@ const NavBar = () => {
                         popular
                       </Link>
                     </li>
-                    <li
-                      className="dropdown-navbar__item"
-                      onClick={() => setShowMenu(false)}
-                    >
+                    <li className="dropdown-navbar__item">
                       <Link
                         to="/movies/nowplaying"
                         className="dropdown-navbar__link"
-                       
                       >
                         now playing
                       </Link>
                     </li>
-                    <li
-                      className="dropdown-navbar__item"
-                      onClick={() => setShowMenu(false)}
-                    >
+                    <li className="dropdown-navbar__item">
                       <Link
                         to="/movies/upcoming"
                         className="dropdown-navbar__link"
@@ -126,10 +268,7 @@ const NavBar = () => {
                         upcoming
                       </Link>
                     </li>
-                    <li
-                      className="dropdown-navbar__item"
-                      onClick={() => setShowMenu(false)}
-                    >
+                    <li className="dropdown-navbar__item">
                       <Link
                         to="/movies/toprated"
                         className="dropdown-navbar__link"
@@ -144,18 +283,12 @@ const NavBar = () => {
                     tv shows
                   </a>
                   <ul className="dropdown-navbar">
-                    <li
-                      className="dropdown-navbar__item"
-                      onClick={() => setShowMenu(false)}
-                    >
+                    <li className="dropdown-navbar__item">
                       <Link to="/tv/popular" className="dropdown-navbar__link">
                         popular
                       </Link>
                     </li>
-                    <li
-                      className="dropdown-navbar__item"
-                      onClick={() => setShowMenu(false)}
-                    >
+                    <li className="dropdown-navbar__item">
                       <Link
                         to="/tv/airingtoday"
                         className="dropdown-navbar__link"
@@ -163,18 +296,12 @@ const NavBar = () => {
                         airing today
                       </Link>
                     </li>
-                    <li
-                      className="dropdown-navbar__item"
-                      onClick={() => setShowMenu(false)}
-                    >
+                    <li className="dropdown-navbar__item">
                       <Link to="/tv/ontv" className="dropdown-navbar__link">
                         on air
                       </Link>
                     </li>
-                    <li
-                      className="dropdown-navbar__item"
-                      onClick={() => setShowMenu(false)}
-                    >
+                    <li className="dropdown-navbar__item">
                       <Link to="/tv/toprated" className="dropdown-navbar__link">
                         top rated
                       </Link>
@@ -190,7 +317,6 @@ const NavBar = () => {
                       <Link
                         to="/people/popular"
                         className="dropdown-navbar__link"
-                        onClick={() => setShowMenu(false)}
                       >
                         popular people
                       </Link>
@@ -221,179 +347,80 @@ const NavBar = () => {
                 </li>
               </ul>
             </nav>
-          ) : (
-            ""
-          )}
-          <nav className="navbarwrapp__left__navbar ">
-            <ul className="navbarwrapp__left__list ">
-              <li className="navbarwrapp__left__list__item">
-                <a href="#" className="navbarwrapp__left__list__link">
-                  movies
+          </div>
+          <div className="navbarwrapp__right">
+            <ul className="navbarwrapp__right__list">
+              <li className="navbarwrapp__right__list__item">
+                <a
+                  href="#"
+                  className="navbarwrapp__right__list__link"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <ImPlus />
                 </a>
-                <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <Link
-                      to="/movies/popular"
-                      className="dropdown-navbar__link"
-                    >
-                      popular
-                    </Link>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <Link
-                      to="/movies/nowplaying"
-                      className="dropdown-navbar__link"
-                    >
-                      now playing
-                    </Link>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <Link
-                      to="/movies/upcoming"
-                      className="dropdown-navbar__link"
-                    >
-                      upcoming
-                    </Link>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <Link
-                      to="/movies/toprated"
-                      className="dropdown-navbar__link"
-                    >
-                      top rated
-                    </Link>
-                  </li>
-                </ul>
+                {showToolTip ? (
+                  <div className="navbarwrapp__right__tooltip">
+                    <span>
+                      Can't find a movie or TV show?
+                      <br /> Login to create it.
+                    </span>
+                  </div>
+                ) : (
+                  ""
+                )}
               </li>
-              <li className="navbarwrapp__left__list__item">
-                <a href="#" className="navbarwrapp__left__list__link">
-                  tv shows
-                </a>
-                <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <Link to="/tv/popular" className="dropdown-navbar__link" >
-                      popular
-                    </Link>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <Link
-                      to="/tv/airingtoday"
-                      className="dropdown-navbar__link"
-                    >
-                      airing today
-                    </Link>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <Link to="/tv/ontv" className="dropdown-navbar__link">
-                      on air
-                    </Link>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <Link to="/tv/toprated" className="dropdown-navbar__link">
-                      top rated
-                    </Link>
-                  </li>
-                </ul>
+              <li className="navbarwrapp__right__list__item">
+                <button
+                  className="btn btn--navbar"
+                  onClick={showLang}
+                  style={showlang ? { background: "white", color: "#000" } : {}}
+                >
+                  EN
+                </button>
+                {showlang ? (
+                  <div className="navbarwrapp__right__tooltip navbarwrapp__right__tooltip--lang">
+                    <h3>Language Preferences</h3>
+                    <Select
+                      options={languages}
+                      onChange={setSelectedOption}
+                      defaultValue={selectedOption}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
               </li>
-              <li className="navbarwrapp__left__list__item">
-                <a href="#" className="navbarwrapp__left__list__link">
-                  people
+              <li className="navbarwrapp__right__list__item">
+                <a href="#" className="navbarwrapp__right__list__link">
+                  <span>Login</span>
                 </a>
-                <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <Link
-                      to="/people/popular"
-                      className="dropdown-navbar__link"
-                    >
-                      popular people
-                    </Link>
-                  </li>
-                </ul>
               </li>
-              <li className="navbarwrapp__left__list__item">
-                <a href="#" className="navbarwrapp__left__list__link">
-                  more
-                </a>
-                <ul className="dropdown-navbar">
-                  <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
-                      discutions
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
-                      leaderboard
-                    </a>
-                  </li>
-                  <li className="dropdown-navbar__item">
-                    <a href="#" className="dropdown-navbar__link">
-                      suport
-                    </a>
-                  </li>
-                </ul>
+              <li className="navbarwrapp__right__list__item">
+                <button className="btn btn--navbarsearch">
+                  <SearchOutlinedIcon
+                    style={{ color: "#1acee0", fontWeight: "bold" }}
+                    onClick={showSearchTab}
+                  />
+                  <MdClose style={{width:'2em',height:'2em'}}/>
+                </button>
               </li>
             </ul>
-          </nav>
-        </div>
-        <div className="navbarwrapp__right">
-          <ul className="navbarwrapp__right__list">
-            <li className="navbarwrapp__right__list__item">
-              <a
-                href="#"
-                className="navbarwrapp__right__list__link"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <ImPlus />
-              </a>
-              {showToolTip ? (
-                <div className="navbarwrapp__right__tooltip">
-                  <span>
-                    Can't find a movie or TV show?
-                    <br /> Login to create it.
-                  </span>
-                </div>
-              ) : (
-                ""
-              )}
-            </li>
-            <li className="navbarwrapp__right__list__item">
-              <button
-                className="btn btn--navbar"
-                onClick={showLang}
-                style={showlang ? { background: "white", color: "#000" } : {}}
-              >
-                EN
-              </button>
-              {showlang ? (
-                <div className="navbarwrapp__right__tooltip navbarwrapp__right__tooltip--lang">
-                  <h3>Language Preferences</h3>
-                  <Select
-                    options={languages}
-                    onChange={setSelectedOption}
-                    defaultValue={selectedOption}
-                  />
-                </div>
-              ) : (
-                ""
-              )}
-            </li>
-            <li className="navbarwrapp__right__list__item">
-              <a href="#" className="navbarwrapp__right__list__link">
-                <span>Login</span>
-              </a>
-            </li>
-            <li className="navbarwrapp__right__list__item">
-              <button className="btn btn--navbarsearch">
-                <SearchOutlinedIcon
-                  style={{ color: "#1acee0", fontWeight: "bold" }}
-                />
-              </button>
-            </li>
-          </ul>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="search__panell-wrapp">
+        <div className="search__panell">
+          <SearchOutlinedIcon className="search__panell-searchicon" style={{width:'1.5em',height:'1.5em'}}/>{" "}
+          <input
+            type="text"
+            placeholder="Search for a movie, tv show, person......"
+            className="search__panell-input"
+          />{" "}
+          <MdClose className="search__panell-closeicon" style={{width:'1.5em',height:'1.5em'}}/>
+        </div>
+      </div>
+    </>
   );
 };
 

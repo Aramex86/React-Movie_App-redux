@@ -46,10 +46,9 @@ type IState = {
 class MovieCardContainer extends Component<WithMoviePropsType, IState> {
   state = {
     playTrailer: false,
-    
   };
-  componentDidMount() {
-    
+
+  refetchData() {
     const movieId = this.props.match.params.id;
     this.props.requestCredits(movieId);
     this.props.requestGenres();
@@ -60,16 +59,13 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
     this.props.requestKeywords(movieId);
   }
 
-  componentDidUpdate(prevProps:WithMoviePropsType){
-    if(this.props.match.params.id !== prevProps.match.params.id){
-      const movieId = this.props.match.params.id;
-      this.props.requestCredits(movieId);
-      this.props.requestGenres();
-      this.props.requestDetails(movieId);
-      this.props.requestReviews(movieId);
-      this.props.requestVideos(movieId);
-      this.props.requestRecomand(movieId);
-      this.props.requestKeywords(movieId);
+  componentDidMount() {
+    this.refetchData();
+  }
+
+  componentDidUpdate(prevProps: WithMoviePropsType) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.refetchData();
     }
   }
 
@@ -86,7 +82,7 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="cardWrapper">
         <PopupTrailer

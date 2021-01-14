@@ -44,7 +44,7 @@ a {
     @include respond(phone) {
       width: 50%;
     }
-    
+
     &__logo {
       font-family: "Source Sans Pro", sans-serif;
       font-weight: 900;
@@ -62,7 +62,7 @@ a {
       @include respond(laptop) {
         font-size: 2.5rem;
       }
-     
+
       & a {
         font-family: "Roboto", sans-serif;
         font-weight: 700;
@@ -227,5 +227,39 @@ a {
   }
   & select {
     padding: 7px 12px 10px;
+  }
+}
+
+.search__panell-wrapp{
+  width: 100%;
+  background: #fff;
+  height: 50px;
+  position: absolute;
+  outline: 1px solid black;
+}
+.search__panell {
+  width: 80%;
+  height: 50px;
+  margin: auto;
+
+  &-input{
+    width: 100%;
+    padding: 0 3rem;
+    height: 50px;
+    border: none;
+    outline: none;
+    font-size: 1.8rem;
+    font-style: italic;
+  }
+  &-searchicon{
+    position: absolute;
+    left: 10%;
+    top: 32%;   
+  }
+  &-closeicon{
+    position: absolute;
+    right: 11%;
+    top: 32%;
+    cursor: pointer;
   }
 }

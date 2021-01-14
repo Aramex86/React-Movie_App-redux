@@ -30,7 +30,7 @@ const LANG_SELECTED = 'LANG_SELECTED';
 
 const initialState = {
   popularMovies: null as PopularObjectType | null,
-  //currentPage: 1,
+  currentPage: 1,
   nowPlaying: null as NowPlayingObjectType | null,
   nowTvPlaying: null as PopularTvObjectType | null,
   airingToday: null as PopularTvObjectType | null,

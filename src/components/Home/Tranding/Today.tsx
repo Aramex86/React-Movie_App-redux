@@ -27,9 +27,16 @@ const Today = () => {
     <div className="cardwrapp">
       {traidings.map((movie) =>
         fetching ? (
-          <Skeleton key={movie.id}/>
+          <Skeleton key={movie.id} />
         ) : (
-          <Link to={`movie-card/${movie.id}`} key={movie.id}>
+          <Link
+            to={
+              movie.media_type === "movie"
+                ? `movie-card/${movie.id}`
+                : `tv-card/${movie.id}`
+            }
+            key={movie.id}
+          >
             <Card
               poster={movie.poster_path}
               title={movie.title}
