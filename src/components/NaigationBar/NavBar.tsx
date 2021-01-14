@@ -13,12 +13,9 @@ import {
 } from "../Store/Reducers/LangReducer";
 import { LangsType } from "../../Types/Types";
 import { getSelectedLang } from "../Store/Reducers/HomePageReducer";
+import SearchSlide from "../Common/SearchSlide";
 
-type OptionsType = {
-  value: string;
-  label: string;
-  selectOption: () => void;
-};
+
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
@@ -76,10 +73,13 @@ const NavBar = () => {
   const showSearchTab = () => {
     setShowSearch(true);
   };
+  const hideSearchTab = () => {
+    setShowSearch(false);
+  };
 
-  console.log(showSearch);
 
   const screenWidth = window.innerWidth;
+
 
   return (
     <>
@@ -93,8 +93,8 @@ const NavBar = () => {
               <Link to="/">MOVIE-APP</Link>
             </div>
             {screenWidth < 665 && showMenu ? (
-              <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
-                <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
+              <nav className='navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile'>
+                <ul className='navbarwrapp__left__list navbarwrapp__left__list--mobile'>
                   <li className="navbarwrapp__left__list__item">
                     <span className="navbarwrapp__left__list__link">
                       movies
@@ -397,29 +397,31 @@ const NavBar = () => {
                 </a>
               </li>
               <li className="navbarwrapp__right__list__item">
-                <button className="btn btn--navbarsearch">
-                  <SearchOutlinedIcon
-                    style={{ color: "#1acee0", fontWeight: "bold" }}
-                    onClick={showSearchTab}
-                  />
-                  <MdClose style={{width:'2em',height:'2em'}}/>
-                </button>
+                {showSearch ? (
+                  <button className="btn btn--navbarclosesearch">
+                    <MdClose
+                      style={{ width: "2em", height: "2em" }}
+                      onClick={hideSearchTab}
+                    />
+                  </button>
+                ) : (
+                  <button className="btn btn--navbarsearch"  onClick={showSearchTab}>
+                    <SearchOutlinedIcon
+                      style={{ color: "#1acee0", fontWeight: "bold", width: "2em", height: "2em"}}
+                     
+                    />
+                  </button>
+                )}
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <div className="search__panell-wrapp">
-        <div className="search__panell">
-          <SearchOutlinedIcon className="search__panell-searchicon" style={{width:'1.5em',height:'1.5em'}}/>{" "}
-          <input
-            type="text"
-            placeholder="Search for a movie, tv show, person......"
-            className="search__panell-input"
-          />{" "}
-          <MdClose className="search__panell-closeicon" style={{width:'1.5em',height:'1.5em'}}/>
-        </div>
-      </div>
+      {showSearch ? (
+        <SearchSlide showSearch={showSearch} />
+      ) : (
+        <SearchSlide showSearch={showSearch} />
+      )}
     </>
   );
 };
