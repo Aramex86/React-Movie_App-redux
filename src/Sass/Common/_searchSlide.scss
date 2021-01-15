@@ -31,14 +31,13 @@
       top: 7%;
     }
     @include respond(small-phone) {
-      top: 9%;
+      top: 6%;
       height: 33px;
     }
   }
 }
 .search__panell {
   width: 80%;
-  height: 50px;
   margin: auto;
 
   &-input {
@@ -77,6 +76,9 @@
       cursor: pointer;
       &:hover{
         background: rgba(233, 233, 233, 0.645);
+      }
+      @include respond(phone){
+        padding: 1rem 5rem;
       }
     }
   }

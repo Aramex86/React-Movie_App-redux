@@ -418,9 +418,9 @@ const NavBar = () => {
         </div>
       </div>
       {showSearch ? (
-        <SearchSlide showSearch={showSearch} />
+        <SearchSlide showSearch={showSearch} hideSearchTab={hideSearchTab}/>
       ) : (
-        <SearchSlide showSearch={showSearch} />
+        <SearchSlide showSearch={showSearch} hideSearchTab={hideSearchTab}/>
       )}
     </>
   );

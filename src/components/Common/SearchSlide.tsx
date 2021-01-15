@@ -15,9 +15,10 @@ import { traidingsSelector } from "../Store/Selectors/HomePageSelector";
 
 type PropsType = {
   showSearch: boolean;
+  hideSearchTab: () => void;
 };
 
-const SearchSlide: FC<PropsType> = ({ showSearch }) => {
+const SearchSlide: FC<PropsType> = ({ showSearch, hideSearchTab }) => {
   const dispatch = useDispatch();
   let history = useHistory();
   const [query, setQuery] = useState<string>("");
@@ -33,13 +34,26 @@ const SearchSlide: FC<PropsType> = ({ showSearch }) => {
   const keyhandle = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       history.push("/sreachresults");
+      dispatch(requestSearchQuery(query));
       dispatch(requestSearchMovie(query, 1));
       dispatch(requestSearchTv(query, 1));
       dispatch(requestSearchPeople(query, 1));
       dispatch(requestSearchCollections(query, 1));
-      setQuery('');
+      hideSearchTab();
     }
   };
+
+  useEffect(() => {
+    if (window.matchMedia("(max-width:600px)").matches) {
+      dispatch(requestSearchQuery(query));
+      dispatch(requestSearchMovie(query, 1));
+      dispatch(requestSearchTv(query, 1));
+      dispatch(requestSearchPeople(query, 1));
+      dispatch(requestSearchCollections(query, 1));
+      history.push("/sreachresults");
+      hideSearchTab();
+    }
+  }, [query]);
 
   const cleanhandale = () => {
     setQuery("");
@@ -75,14 +89,19 @@ const SearchSlide: FC<PropsType> = ({ showSearch }) => {
         />
       </div>
       <ul className="search__panell-list">
-        {trandCut.map((res) => (<>
-          <li className="search__panell-list-item" key={res.id} onClick={()=>setQuery(res.title ? res.title : res.name)}>
-          <SearchOutlinedIcon
-        className="search__panell-searchicon--result"
-        style={{ width: "1.3em", height: "1.5em" }}
-      /> {res.title ? res.title : res.name}
+        {trandCut.map((res) => (
+          <li
+            className="search__panell-list-item"
+            key={res.id}
+            onClick={() => setQuery(res.title ? res.title : res.name)}
+          >
+            <SearchOutlinedIcon
+              className="search__panell-searchicon--result"
+              style={{ width: "1.3em", height: "1.5em" }}
+            />{" "}
+            {res.title ? res.title : res.name}
           </li>
-        </>))}
+        ))}
       </ul>
     </div>
   );
