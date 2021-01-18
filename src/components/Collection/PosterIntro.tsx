@@ -5,19 +5,20 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { genresSelector } from "../Store/Selectors/MovieSelector";
 import { FC } from "react";
-import { CollectionsType } from "../../Types/Types";
+import { CollectionsType, PartsType } from "../../Types/Types";
 
 type PropsType = {
-  collection: CollectionsType;
+  parts: Array<PartsType> | undefined;
+  collection: CollectionsType |null
 };
 
-const PosterIntro: FC<PropsType> = ({ collection }) => {
+const PosterIntro: FC<PropsType> = ({ parts=[],collection }) => {
   const genres = useSelector((state: AppStateType) => genresSelector(state));
 
   const bck = `linear-gradient(to left, rgb(45 45 45 / 89%), #010c29), url(https://image.tmdb.org/t/p/w500/${collection?.backdrop_path}) center center / cover no-repeat`;
 
   const collectionGeres = function () {
-    const collectionIds = collection?.parts.flatMap((g) => g.genre_ids);
+    const collectionIds = parts.flatMap((g) => g.genre_ids);
     const removeDuble = collectionIds?.filter(
       (item, index) => collectionIds.indexOf(item) === index
     );
@@ -37,9 +38,9 @@ const PosterIntro: FC<PropsType> = ({ collection }) => {
 
   const voteAvarage = function () {
     let avrage = 0;
-    for (let i = 0; i < collection?.parts.length; i++) {
+    for (let i = 0; i < parts.length; i++) {
       avrage += Math.trunc(
-        (collection.parts[i].vote_average / collection.parts.length) * 100
+        (parts[i].vote_average / parts.length) * 100
       );
     }
 
@@ -77,7 +78,6 @@ const PosterIntro: FC<PropsType> = ({ collection }) => {
               value={voteNumber}
               text={`${voteNumber}%`}
               styles={buildStyles({
-                //trail: { stroke: "#fff" },
                 textColor: "#fff",
                 textSize: "3rem",
                 backgroundColor: "#000",
@@ -95,7 +95,7 @@ const PosterIntro: FC<PropsType> = ({ collection }) => {
           <div className="posterinfo__right-info">
             <span>Number of movies {collection?.parts.length}</span>
             <br />
-            <span>revenue</span>
+            <span>revenue ?</span>
           </div>
         </div>
       </div>
@@ -104,4 +104,3 @@ const PosterIntro: FC<PropsType> = ({ collection }) => {
 };
 
 export default PosterIntro;
-//background: `linear-gradient(to left, #7f7f7f9e, black), url(https://image.tmdb.org/t/p/w500/${props.details?.poster_path}) no-repeat`,

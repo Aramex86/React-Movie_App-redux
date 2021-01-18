@@ -5,11 +5,12 @@ import { requestGenres } from "../Store/Reducers/MovieListReducer";
 import { collectionSelector } from "../Store/Selectors/CollectionSelector";
 import { AppStateType } from "../Store/store";
 import CollectionHeader from "./CollectionHeader";
+import FeaturedCast from "./FeaturedCast";
 import PosterIntro from "./PosterIntro";
 
 const Collection = () => {
-    const dispatch = useDispatch();
-    const collection = useSelector((state: AppStateType) =>
+  const dispatch = useDispatch();
+  const collection = useSelector((state: AppStateType) =>
     collectionSelector(state)
   );
   useEffect(() => {
@@ -17,12 +18,15 @@ const Collection = () => {
     dispatch(requestGenres());
   }, []);
 
-  console.log(collection);
+  const credistId = collection?.parts.map(item=>item.id);
+
+  console.log(credistId);
+
   return (
     <div>
       <CollectionHeader />
-      <PosterIntro collection={collection}/>
-      <div>Featured Cast</div>
+      <PosterIntro parts={collection?.parts} collection={collection} />
+      <FeaturedCast credistId={credistId} />
       <div>Featured Crew</div>
       <div>movies</div>
     </div>

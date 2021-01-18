@@ -20,8 +20,8 @@ type Roletype = {
   character: string;
   credit_id: string;
   episode_count: number;
-};
-type CastType = {
+}; 
+export type CastType = {
   adult: boolean;
   cast_id: number;
   character: string;
@@ -638,7 +638,7 @@ export type LangsType = {
 
 //Collection type
 
-type PartsType = {
+export type PartsType = {
   adult: boolean;
   backdrop_path: string;
   title: string;

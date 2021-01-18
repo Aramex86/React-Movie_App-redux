@@ -82,7 +82,7 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
   };
 
   render() {
-    // console.log(this.props);
+    //  console.log(this.props);
     return (
       <div className="cardWrapper">
         <PopupTrailer

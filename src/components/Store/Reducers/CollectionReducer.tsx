@@ -16,7 +16,12 @@ type ActionsTypes = GetCollectionsType;
 
 type DispatchType = Dispatch<ActionsTypes>;
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+type ThunkType = ThunkAction<
+  Promise<void>,
+  AppStateType,
+  unknown,
+  ActionsTypes
+>;
 
 const collectionReducer = (
   state = initialState,
@@ -35,23 +40,22 @@ const collectionReducer = (
   }
 };
 
+type GetCollectionsType = {
+  type: typeof GET_COLLECTION;
+  collection: CollectionsType;
+};
 
-type GetCollectionsType={
-    type: typeof GET_COLLECTION,
-    collection: CollectionsType
-}
+export const getCollection = (
+  collection: CollectionsType
+): GetCollectionsType => {
+  return { type: GET_COLLECTION, collection };
+};
 
-export const getCollection=(collection:CollectionsType):GetCollectionsType=>{
-    return {type:GET_COLLECTION,collection}
-}
-
-
-
-export const requestCollection=():ThunkType=>async(dispatch:DispatchType)=>{
-    const res = await getCollections.getCollection()
-    console.log(res);
-    dispatch(getCollection(res))
-}
-
+export const requestCollection = (): ThunkType => async (
+  dispatch: DispatchType
+) => {
+  const res = await getCollections.getCollection();
+  dispatch(getCollection(res));
+};
 
 export default collectionReducer;
