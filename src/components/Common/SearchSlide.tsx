@@ -50,8 +50,6 @@ const SearchSlide: FC<PropsType> = ({ showSearch, hideSearchTab }) => {
       dispatch(requestSearchTv(query, 1));
       dispatch(requestSearchPeople(query, 1));
       dispatch(requestSearchCollections(query, 1));
-      history.push("/sreachresults");
-      hideSearchTab();
     }
   }, [query]);
 

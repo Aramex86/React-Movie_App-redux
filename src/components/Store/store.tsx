@@ -7,6 +7,7 @@ import homePageReducer from "./Reducers/HomePageReducer";
 import searchReducer from "./Reducers/SearchReducer";
 import langsReducer from "./Reducers/LangReducer";
 import TvReducer from "./Reducers/TvReducer";
+import collectionReducer from "./Reducers/CollectionReducer";
 
 
 
@@ -17,7 +18,8 @@ let rootReducers = combineReducers({
     homePage:homePageReducer,
     search:searchReducer,
     language:langsReducer,
-    tv:TvReducer
+    tv:TvReducer,
+    collection:collectionReducer
 });
 
 

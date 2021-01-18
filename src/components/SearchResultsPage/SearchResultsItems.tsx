@@ -23,15 +23,10 @@ import Persons from "./SerachResult/Person";
 import Collections from "./SerachResult/Collections";
 
 type PropsType = {
-  // results: Array<SearchType> | undefined;
   show: string;
-  // handalePageChange:(e:any,value:number)=>void
-  // page:number
 };
 
 const SearchResultsItems: FC<PropsType> = ({ show }) => {
-  // const dispatch = useDispatch();
-  //dispatch(requestCurrentPage(page));
 
   const movies = useSelector((state: AppStateType) =>
     searchMoviesSelector(state)
@@ -43,15 +38,7 @@ const SearchResultsItems: FC<PropsType> = ({ show }) => {
   const collections = useSelector((state: AppStateType) =>
     searchCollectionsSelector(state)
   );
-  // const searchQuery = useSelector((state: AppStateType) =>
-  //   searchMoviesQuerySelector(state)
-  // );
-  // const currentPage = useSelector((state: AppStateType) =>
-  //   currentPagesSelector(state)
-  // );
-
-  //console.log(movies)
-  // console.log(collections)
+  console.log(collections)
 
   return (
     <>

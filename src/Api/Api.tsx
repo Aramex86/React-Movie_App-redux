@@ -516,3 +516,13 @@ export const getLangsApi = {
       });
   },
 };
+
+export const getCollections={
+  getCollection(){
+    return axios.get(`https://api.themoviedb.org/3/collection/1241?api_key=${api_key}&append_to_response=images,details`).then((res)=>{
+     return res.data
+    }).catch((err)=>{
+      return err.response.data.status_message;
+    })
+  }
+}

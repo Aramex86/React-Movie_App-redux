@@ -19,6 +19,7 @@ import OnTv from "./components/Tv/OnTv";
 import TopRatedTv from "./components/Tv/TopRatedTv";
 import PopularPeople from "./components/People/Popular";
 import TvCardContainer from "./TvCard/TvCardContainer";
+import Collection from "./components/Collection/Collection";
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
           <Route exact path="/tv/ontv" component={OnTv} />
           <Route exact path="/tv/toprated" component={TopRatedTv} />
           <Route exact path="/people/popular" component={PopularPeople} />
+          <Route exact path="/collection" component={Collection} />
+
         </Switch>
       </WithHeaderFooter>
     </div>

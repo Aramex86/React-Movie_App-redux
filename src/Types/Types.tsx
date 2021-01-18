@@ -48,7 +48,7 @@ export type CrewType = {
   original_name: string;
   popularity: number;
   profile_path: null;
-  total_episode_count: number
+  total_episode_count: number;
 };
 
 export type CreditsType = {
@@ -242,7 +242,7 @@ export type TvPropsType = {
   videos: Array<VideoType>;
   recomand: Array<RecomandType>;
   keywords: Array<KeywordsType>;
-  external: ExternalIdsType |null
+  external: ExternalIdsType | null;
   vote_average: number;
   requestCredits: (tvId: number) => void;
   requestGenres: () => void;
@@ -251,7 +251,7 @@ export type TvPropsType = {
   requestVideos: (tvId: number) => void;
   requestRecomand: (tvId: number) => void;
   requestKeywords: (tvId: number) => void;
-  requestExternal: (tvId:number)=>void;
+  requestExternal: (tvId: number) => void;
 };
 
 // REVIEWS
@@ -301,8 +301,8 @@ export type RecomandType = {
   overview: string;
   poster_path: string;
   popularity: number;
-  name:string
-  first_air_date:string
+  name: string;
+  first_air_date: string;
 };
 
 //Keywords
@@ -634,4 +634,32 @@ export type LangsType = {
   name: string;
   value: string;
   label: string;
+};
+
+//Collection type
+
+type PartsType = {
+  adult: boolean;
+  backdrop_path: string;
+  title: string;
+  genre_ids: Array<number>;
+  original_language: string;
+  original_title: string;
+  poster_path: string;
+  video: false;
+  vote_average: number;
+  vote_count: number;
+  overview: string;
+  id: number;
+  release_date: string;
+  popularity: number;
+};
+
+export type CollectionsType = {
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  parts: Array<PartsType>;
 };
