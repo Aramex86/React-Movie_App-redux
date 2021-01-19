@@ -6,29 +6,37 @@ import { collectionSelector } from "../Store/Selectors/CollectionSelector";
 import { AppStateType } from "../Store/store";
 import CollectionHeader from "./CollectionHeader";
 import FeaturedCast from "./FeaturedCast";
+import FeaturedCrew from "./FeaturedCrew";
+import Movies from "./Movies";
 import PosterIntro from "./PosterIntro";
+
+
+type PartsType={
+  parts:Array<PartsType>
+}
+
 
 const Collection = () => {
   const dispatch = useDispatch();
   const collection = useSelector((state: AppStateType) =>
     collectionSelector(state)
   );
+  
   useEffect(() => {
     dispatch(requestCollection());
     dispatch(requestGenres());
-  }, []);
+  }, [dispatch]);
 
-  const credistId = collection?.parts.map(item=>item.id);
-
-  console.log(credistId);
+  const parts = collection?collection.parts:[];
+  const credistId =collection?collection?.parts.map((item) => item.id):[];
 
   return (
     <div>
       <CollectionHeader />
-      <PosterIntro parts={collection?.parts} collection={collection} />
+      <PosterIntro parts={parts} collection={collection} />
       <FeaturedCast credistId={credistId} />
-      <div>Featured Crew</div>
-      <div>movies</div>
+      <FeaturedCrew credistId={credistId} />
+      <Movies parts={parts} />
     </div>
   );
 };

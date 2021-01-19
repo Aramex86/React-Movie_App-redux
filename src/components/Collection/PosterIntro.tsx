@@ -8,11 +8,11 @@ import { FC } from "react";
 import { CollectionsType, PartsType } from "../../Types/Types";
 
 type PropsType = {
-  parts: Array<PartsType> | undefined;
-  collection: CollectionsType |null
+  parts: Array<PartsType>;
+  collection: CollectionsType | null;
 };
 
-const PosterIntro: FC<PropsType> = ({ parts=[],collection }) => {
+const PosterIntro: FC<PropsType> = ({ parts = [], collection }) => {
   const genres = useSelector((state: AppStateType) => genresSelector(state));
 
   const bck = `linear-gradient(to left, rgb(45 45 45 / 89%), #010c29), url(https://image.tmdb.org/t/p/w500/${collection?.backdrop_path}) center center / cover no-repeat`;
@@ -39,9 +39,7 @@ const PosterIntro: FC<PropsType> = ({ parts=[],collection }) => {
   const voteAvarage = function () {
     let avrage = 0;
     for (let i = 0; i < parts.length; i++) {
-      avrage += Math.trunc(
-        (parts[i].vote_average / parts.length) * 100
-      );
+      avrage += Math.trunc((parts[i].vote_average / parts.length) * 100);
     }
 
     if (avrage > 101) {

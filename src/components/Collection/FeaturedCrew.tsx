@@ -1,16 +1,15 @@
-import { type } from "os";
 import React, { FC, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CollectionCard from "../Common/CollectionsCard";
-import { requestCredits } from "../Store/Reducers/MovieListReducer";
+import { requestCredits } from "../Store/Reducers/TvReducer";
 import { creditsSelector } from "../Store/Selectors/MovieSelector";
 import { AppStateType } from "../Store/store";
 
 type PropsType = {
- readonly credistId: Array<number>;
+  credistId: Array<number>;
 };
 
-const FeaturedCast: FC<PropsType> = ({ credistId }) => {
+const FeaturedCrew: FC<PropsType> = ({ credistId }) => {
   const credits = useSelector((state: AppStateType) => creditsSelector(state));
   const dispatch = useDispatch();
 
@@ -22,12 +21,12 @@ const FeaturedCast: FC<PropsType> = ({ credistId }) => {
 
   return (
     <>
-      <h1 className="heading__collection">Featured Cast</h1>
+      <h1 className="heading__collection">Featured Crew</h1>
       <div className="featuredcastwrapp">
-        <CollectionCard cast={credits?.cast} />
+        <CollectionCard crew={credits?.crew} />
       </div>
     </>
   );
 };
 
-export default FeaturedCast;
+export default FeaturedCrew;
