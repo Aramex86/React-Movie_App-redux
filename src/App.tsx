@@ -29,6 +29,7 @@ function App() {
           <Route exact path="/" component={MovielistContainer} />
           <Route path="/movie-card/:id" component={MovieCardContainer} />
           <Route path="/tv-card/:id" component={TvCardContainer} />
+          <Route path="/collection/:id" component={Collection} />
 
           <Route exact path="/posterstaff/:id" component={PosterStaffPage} />
 

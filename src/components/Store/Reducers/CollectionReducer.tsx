@@ -51,10 +51,10 @@ export const getCollection = (
   return { type: GET_COLLECTION, collection };
 };
 
-export const requestCollection = (): ThunkType => async (
+export const requestCollection = (collectionId:number): ThunkType => async (
   dispatch: DispatchType
 ) => {
-  const res = await getCollections.getCollection();
+  const res = await getCollections.getCollection(collectionId);
   dispatch(getCollection(res));
 };
 

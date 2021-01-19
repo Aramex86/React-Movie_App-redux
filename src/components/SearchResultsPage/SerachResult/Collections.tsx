@@ -7,6 +7,7 @@ import { requestSearchCollections } from "../../Store/Reducers/SearchReducer";
 import { searchMoviesQuerySelector } from "../../Store/Selectors/SearchSelector";
 import { AppStateType } from "../../Store/store";
 import Paginator from "../../Common/Paginator";
+import { Link } from "react-router-dom";
 type PropsType = {
   collections: Array<CollectionType> | undefined;
   totalPages: number | undefined;
@@ -29,7 +30,8 @@ const Collections: FC<PropsType> = ({ collections, totalPages }) => {
   return (
     <>
       {collections?.map((collection) => (
-        <div className="searchresultitems" key={collection.id}>
+         <Link to={`/collection/${collection.id}`} key={collection.id}>
+        <div className="searchresultitems" >
           <div className="searchresultitems__img">
             {collection.poster_path === null ? (
               <img src={NoPoster} alt="pic" />
@@ -45,6 +47,7 @@ const Collections: FC<PropsType> = ({ collections, totalPages }) => {
             <p>{collection.overview.slice(0, 150)}</p>
           </div>
         </div>
+        </Link>
       ))}
       <Paginator
         handalePageChange={handalePageChange}

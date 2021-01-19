@@ -7,7 +7,7 @@ import { creditsSelector } from "../Store/Selectors/MovieSelector";
 import { AppStateType } from "../Store/store";
 
 type PropsType = {
- readonly credistId: Array<number>;
+  readonly credistId: Array<number>;
 };
 
 const FeaturedCast: FC<PropsType> = ({ credistId }) => {

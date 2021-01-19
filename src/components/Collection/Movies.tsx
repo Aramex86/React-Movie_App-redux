@@ -4,7 +4,7 @@ import { PartsType } from "../../Types/Types";
 import NoPoster from "../../assets/noPoster.jpg";
 
 type PropsType = {
-  parts:Array<PartsType>;
+  parts: Array<PartsType>;
 };
 
 const Movies: FC<PropsType> = ({ parts }) => {
@@ -14,31 +14,26 @@ const Movies: FC<PropsType> = ({ parts }) => {
       behavior: "smooth",
     });
   };
-const [part,setParts]=useState(parts);
- 
+  const [part, setParts] = useState(parts);
 
   const as = function () {
-    const part = parts.sort((a:any, b:any) => b.popularity - a.popularity);
+    const part = parts.sort((a: any, b: any) => b.popularity - a.popularity);
     setParts(part);
   };
   const des = function () {
-    const part= parts?.sort((a:any, b:any) => a.popularity - b.popularity);
+    const part = parts?.sort((a: any, b: any) => a.popularity - b.popularity);
     setParts(part);
   };
 
-//   console.log(as());
-//   console.log(des());
-
-   console.log(part);
-    //console.log(des(parts));
+  console.log(part);
   return (
     <div style={{ padding: "2rem 0" }}>
       <div className="movies__header">
         <h1 className="heading__collection heading__collection--movies">
           {parts?.length} movies
         </h1>
-        <button onClick={des}>des</button>
-        <button onClick={as}>as</button>
+        {/* <button onClick={des}>des</button>
+        <button onClick={as}>as</button> */}
       </div>
       {parts?.map((movie) => (
         <Link to={`/movie-card/${movie.id}`} key={movie.id} onClick={moveToTop}>
