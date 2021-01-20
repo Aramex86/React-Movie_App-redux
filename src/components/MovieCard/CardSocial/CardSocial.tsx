@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const CardMedia = ({ reviews =[]}: PropsType) => {
+const CardMedia = ({ reviews = [] }: PropsType) => {
   const classes = useStyles();
 
   return (

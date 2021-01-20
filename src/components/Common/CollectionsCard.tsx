@@ -23,7 +23,7 @@ const CollectionCard: FC<PropsType> = ({ cast, crew }) => {
   };
   crewStaffFilter();
 
- console.log(primaryCrew);
+  //  console.log(primaryCrew);
 
   return (
     <>

@@ -36,7 +36,6 @@ const CardActors = ({ credits }: PropsType) => {
                     alt="actor photo"
                     height="150"
                     image={actor.profile_path===null?`${NoPhoto}`:`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
-                    //title="Contemplative Reptile"
                   />
                   <CardContent>
                     <Typography

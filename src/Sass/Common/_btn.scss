@@ -210,4 +210,16 @@
     left: 10%;
     }
   }
+  &--descending,&--ascending{
+    color: #000;
+    font-size: 1.7rem;
+    font-weight: 100;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0rem 0.5rem;
+    &:hover{
+      background: #c3c3c354;
+    }
+  }
 }

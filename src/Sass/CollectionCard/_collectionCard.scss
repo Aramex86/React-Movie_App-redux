@@ -2,7 +2,6 @@
   width: 100%;
   min-height: 40rem;
   padding: 4rem 0;
-  
 }
 
 .posterinfo {
@@ -11,11 +10,11 @@
   justify-content: center;
   align-items: center;
   color: #fff;
-  @include respond(tab-port){
+  @include respond(tab-port) {
     width: 100%;
     padding: 0 2rem;
   }
-  @include respond(small-phone){
+  @include respond(small-phone) {
     flex-direction: column;
     width: 100%;
   }
@@ -24,14 +23,13 @@
     display: flex;
     justify-content: flex-end;
     margin-right: 50px;
-    @include respond(tab-port){
+    @include respond(tab-port) {
       width: 50%;
-      
     }
-    @include respond(small-phone){
+    @include respond(small-phone) {
       width: 100%;
       margin-bottom: 25px;
-      margin-right:0 ;
+      margin-right: 0;
       justify-content: center;
     }
     & img {
@@ -40,18 +38,17 @@
   }
   &__right {
     width: 70%;
-    @include respond(tab-port){
+    @include respond(tab-port) {
       width: 50%;
-      
     }
-    @include respond(small-phone){
+    @include respond(small-phone) {
       width: 85%;
     }
-   
+
     &-title {
       font-size: 4rem;
       margin-bottom: 10px;
-      @include respond(tab-port){
+      @include respond(tab-port) {
         font-size: 3rem;
       }
     }
@@ -104,19 +101,18 @@
   margin: auto;
   margin-top: 20px;
   font-size: 2rem;
-  &--movies{
+  &--movies {
     width: 100px;
     margin: 0;
   }
 }
-.movies__header{
+.movies__header {
   width: 85%;
   margin: auto;
   display: flex;
   justify-content: space-between;
   padding-right: 1rem;
 }
-
 
 .movieswrapp {
   width: 85%;
@@ -129,7 +125,7 @@
   margin-bottom: 15px;
   margin: auto;
   margin-top: 25px;
-  
+
   &__img {
     width: 9%;
     height: 150px;
@@ -154,12 +150,66 @@
       height: 150px;
       object-fit: cover;
       @include respond(small-phone) {
-        height:162px;
+        height: 162px;
       }
     }
   }
   &__desc {
     padding: 20px 20px;
     width: 100%;
+  }
+}
+
+.sortwrap {
+  position: relative;
+  &__heading {
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    & svg {
+      margin-left: 5px;
+    }
+  }
+  &__list {
+    list-style: none;
+    width: 186px;
+    padding: .5rem 0;
+    position: absolute;
+    cursor: pointer;
+    left: -125px;
+    background: #fff;
+    border: 1px solid #c3c3c3b5;
+    border-radius: 5px;
+    cursor: pointer;
+    &__item {
+      padding: 0.5rem .5rem;
+      text-transform: capitalize;
+      font-size: 1.7rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      &:hover{
+        background: #01b4e4;
+        color: #fff;
+      }
+      & svg {
+        position: absolute;
+        right: 0;
+      }
+    }
+    &__subItem {
+      position: absolute;
+      left: -143px;
+      top: 2px;
+      width: 140px;
+      padding: 0.5rem 0;
+      border: 1px solid #c3c3c3b5;
+      border-radius: 5px;
+      background: #fff;
+    }
   }
 }

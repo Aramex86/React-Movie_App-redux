@@ -6,14 +6,16 @@ import "react-circular-progressbar/dist/styles.css";
 import { genresSelector } from "../Store/Selectors/MovieSelector";
 import { FC } from "react";
 import { CollectionsType, PartsType } from "../../Types/Types";
+import { partsSelector } from "../Store/Selectors/CollectionSelector";
 
 type PropsType = {
-  parts: Array<PartsType>;
+  // parts: Array<PartsType>;
   collection: CollectionsType | null;
 };
 
-const PosterIntro: FC<PropsType> = ({ parts = [], collection }) => {
+const PosterIntro: FC<PropsType> = ({ collection }) => {
   const genres = useSelector((state: AppStateType) => genresSelector(state));
+  const parts = useSelector((state: AppStateType) => partsSelector(state));
 
   const bck = `linear-gradient(to left, rgb(45 45 45 / 89%), #010c29), url(https://image.tmdb.org/t/p/w500/${collection?.backdrop_path}) center center / cover no-repeat`;
 
