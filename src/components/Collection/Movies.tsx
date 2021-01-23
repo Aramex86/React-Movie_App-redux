@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   requestPartsAsc,
   requestPartsDsc,
+  requestRaitingAsc,
+  requestRaitingDsc,
+  requestRealeseDateAsc,
+  requestRealeseDateDsc,
 } from "../Store/Reducers/CollectionReducer";
 import { AppStateType } from "../Store/store";
 import { partsSelector } from "../Store/Selectors/CollectionSelector";
@@ -18,12 +22,19 @@ import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 const Movies = () => {
   const parts = useSelector((state: AppStateType) => partsSelector(state));
   const dispatch = useDispatch();
+  const [showSort, setShowSort] = useState(false);
   const moveToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+
+  const handleShowSort = () => {
+    setShowSort(!showSort);
+  };
+
+  console.log(parts.map(i=>i.release_date));
 
   return (
     <div style={{ padding: "2rem 0" }}>
@@ -32,26 +43,60 @@ const Movies = () => {
           {parts?.length} movies
         </h1>
         <div className="sortwrap">
-          <span className="sortwrap__heading">
+          <span className="sortwrap__heading" onClick={handleShowSort}>
             Sort <MdKeyboardArrowDown />
           </span>
-          <ul className="sortwrap__list">
+          <ul className={showSort ? "sortwrap__list" : "sortwrap__list--hide"}>
             <li className="sortwrap__list__item">
               popularity <MdKeyboardArrowRight />
+              <div className="sortwrap__list__item__subItem">
+                <button
+                  className="btn btn--ascending"
+                  onClick={() => dispatch(requestPartsAsc(parts))}
+                >
+                  Ascending
+                </button>
+                <button
+                  className="btn btn--descending"
+                  onClick={() => dispatch(requestPartsDsc(parts))}
+                >
+                  Descending
+                </button>
+              </div>
             </li>
-            <div className="sortwrap__list__subItem">
-              <button className='btn btn--ascending' onClick={() => dispatch(requestPartsAsc(parts))}>
-              Ascending
-              </button>
-              <button className='btn btn--descending' onClick={() => dispatch(requestPartsDsc(parts))}>
-              Descending
-              </button>
-            </div>
             <li className="sortwrap__list__item">
               raiting <MdKeyboardArrowRight />
+              <div className="sortwrap__list__item__subItem">
+                <button
+                  className="btn btn--ascending"
+                  onClick={() => dispatch(requestRaitingAsc(parts))}
+                >
+                  Ascending
+                </button>
+                <button
+                  className="btn btn--descending"
+                  onClick={() => dispatch(requestRaitingDsc(parts))}
+                >
+                  Descending
+                </button>
+              </div>
             </li>
             <li className="sortwrap__list__item">
               realese date <MdKeyboardArrowRight />
+              <div className="sortwrap__list__item__subItem">
+                <button
+                  className="btn btn--ascending"
+                  onClick={() => dispatch(requestRealeseDateAsc(parts))}
+                >
+                  Ascending
+                </button>
+                <button
+                  className="btn btn--descending"
+                  onClick={() => dispatch(requestRealeseDateDsc(parts))}
+                >
+                  Descending
+                </button>
+              </div>
             </li>
           </ul>
         </div>

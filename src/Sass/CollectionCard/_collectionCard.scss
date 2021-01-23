@@ -162,6 +162,9 @@
 
 .sortwrap {
   position: relative;
+  &__heading:hover {
+    display: flex;
+  }
   &__heading {
     font-size: 2rem;
     font-weight: bold;
@@ -176,7 +179,7 @@
   &__list {
     list-style: none;
     width: 186px;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
     position: absolute;
     cursor: pointer;
     left: -125px;
@@ -184,32 +187,42 @@
     border: 1px solid #c3c3c3b5;
     border-radius: 5px;
     cursor: pointer;
+    &--hide {
+      display: none;
+    }
+
     &__item {
-      padding: 0.5rem .5rem;
+      padding: 0.5rem 1rem;
       text-transform: capitalize;
       font-size: 1.7rem;
       display: flex;
       align-items: center;
       position: relative;
       cursor: pointer;
-      &:hover{
+      &:hover {
         background: #01b4e4;
         color: #fff;
       }
       & svg {
         position: absolute;
-        right: 0;
+        right: 10px;
+      }
+      &__subItem {
+        position: absolute;
+        left: -143px;
+        top: 2px;
+        width: 140px;
+        padding: 0.5rem 0;
+        border: 1px solid #c3c3c3b5;
+        border-radius: 5px;
+        background: #fff;
+        display: none;
+      }
+      &:hover &__subItem{
+         display: block;
       }
     }
-    &__subItem {
-      position: absolute;
-      left: -143px;
-      top: 2px;
-      width: 140px;
-      padding: 0.5rem 0;
-      border: 1px solid #c3c3c3b5;
-      border-radius: 5px;
-      background: #fff;
-    }
+    
+    
   }
 }

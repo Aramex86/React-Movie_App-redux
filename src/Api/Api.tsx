@@ -525,7 +525,6 @@ export const getCollections = {
         `https://api.themoviedb.org/3/collection/${collectionId}?api_key=${api_key}&append_to_response=images`
       )
       .then((res) => {
-        console.log(res.data.parts);
         return res.data;
       })
       .catch((err) => {
@@ -538,7 +537,6 @@ export const getCollections = {
         `https://api.themoviedb.org/3/collection/${collectionId}?api_key=${api_key}&append_to_response=images`
       )
       .then((res) => {
-        console.log(res.data);
         return res.data.parts;
       })
       .catch((err) => {

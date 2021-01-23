@@ -6,12 +6,12 @@
   justify-content: center;
   color: #fff;
   font-weight: bold;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 1.5rem;
   outline: none;
   &--postertrailer {
     width: 90px;
-    @include respond(big-desktop){
+    @include respond(big-desktop) {
       width: 107px;
     }
   }
@@ -82,7 +82,7 @@
     align-items: center;
     justify-content: center;
   }
-  &--navbarclosesearch{
+  &--navbarclosesearch {
     background: transparent;
   }
   &--hero {
@@ -129,7 +129,7 @@
       background: #fff;
       position: relative;
       &::before {
-        content: '';
+        content: "";
         width: 15px;
         height: 1px;
         position: absolute;
@@ -138,7 +138,7 @@
         left: 0px;
       }
       &::after {
-        content: '';
+        content: "";
         width: 15px;
         height: 1px;
         position: absolute;
@@ -204,13 +204,14 @@
     &:hover {
       color: #010131;
     }
-    @include respond(laptop){
-    width: 80%;
-    margin: 0 auto;
-    left: 10%;
+    @include respond(laptop) {
+      width: 80%;
+      margin: 0 auto;
+      left: 10%;
     }
   }
-  &--descending,&--ascending{
+  &--descending,
+  &--ascending {
     color: #000;
     font-size: 1.7rem;
     font-weight: 100;
@@ -218,7 +219,7 @@
     display: flex;
     justify-content: flex-start;
     padding: 0rem 0.5rem;
-    &:hover{
+    &:hover {
       background: #c3c3c354;
     }
   }
