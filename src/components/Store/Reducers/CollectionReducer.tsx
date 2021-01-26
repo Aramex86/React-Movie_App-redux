@@ -2,7 +2,6 @@ import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { getCollections } from "../../../Api/Api";
 import { CollectionsType, PartsType } from "../../../Types/Types";
-import { filterDateAsc, filterDateDsc } from "../../Helper/filterDates";
 import { AppStateType } from "../store";
 
 const GET_COLLECTION = "movie-app/collection/GET_COLLECTION";
@@ -98,15 +97,19 @@ const collectionReducer = (
     case SORT_BY_REALESE_DATE_ASC: {
       return {
         ...state,
-        parts: filterDateAsc(action.parts)
+        parts: [...action.parts]
       };
     }
     case SORT_BY_REALESE_DATE_DSC: {
+      const sortX=(a:any,b:any)=>{
+        return b.release_date - a.release_date
+      }
+
       return {
         ...state,
-        parts: filterDateDsc(action.parts)
-      };
+        parts: [...action.parts.sort(sortX)]
     }
+  }
 
     default:
       return state;
@@ -179,6 +182,7 @@ export const sortByRealeseDateAsc = (
 ): SortByRealeseDateAscType => {
   return { type: SORT_BY_REALESE_DATE_ASC, parts };
 };
+
 type SortByRealeseDateDscType = {
   type: typeof SORT_BY_REALESE_DATE_DSC;
   parts: Array<PartsType>;
@@ -186,7 +190,7 @@ type SortByRealeseDateDscType = {
 
 export const sortByRealeseDateDsc = (
   parts: Array<PartsType>
-): SortByRealeseDateAscType => {
+): SortByRealeseDateDscType => {
   return { type: SORT_BY_REALESE_DATE_DSC, parts };
 };
 

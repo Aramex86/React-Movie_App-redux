@@ -81,7 +81,7 @@ const Movies = () => {
                 </button>
               </div>
             </li>
-            <li className="sortwrap__list__item">
+            {/* <li className="sortwrap__list__item">
               realese date <MdKeyboardArrowRight />
               <div className="sortwrap__list__item__subItem">
                 <button
@@ -97,7 +97,7 @@ const Movies = () => {
                   Descending
                 </button>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
