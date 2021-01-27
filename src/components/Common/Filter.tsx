@@ -62,7 +62,7 @@ const Filter = () => {
             <div className="to">
               <span>to</span>
               <DayPickerInput
-                value={"1/12/2021"}
+                value={"2021-1-12"}
                 onDayChange={handleDayChange}
               />
               <span className="icon">

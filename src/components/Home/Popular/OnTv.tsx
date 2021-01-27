@@ -12,6 +12,8 @@ const OnTv = () => {
     fetchingSelector(state)
   );
   const onTv = useSelector((state:AppStateType)=>nowPlayingSelector(state))
+
+  console.log(onTv);
   return (
     <div className="cardwrapp">
       {onTv?.results.map((movie) =>

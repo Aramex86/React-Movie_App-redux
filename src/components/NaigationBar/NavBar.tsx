@@ -15,8 +15,6 @@ import { LangsType } from "../../Types/Types";
 import { getSelectedLang } from "../Store/Reducers/HomePageReducer";
 import SearchSlide from "../Common/SearchSlide";
 
-
-
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [showlang, setShowlang] = useState(false);
@@ -77,9 +75,7 @@ const NavBar = () => {
     setShowSearch(false);
   };
 
-
   const screenWidth = window.innerWidth;
-
 
   return (
     <>
@@ -93,8 +89,8 @@ const NavBar = () => {
               <Link to="/">MOVIE-APP</Link>
             </div>
             {screenWidth < 665 && showMenu ? (
-              <nav className='navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile'>
-                <ul className='navbarwrapp__left__list navbarwrapp__left__list--mobile'>
+              <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
+                <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
                   <li className="navbarwrapp__left__list__item">
                     <span className="navbarwrapp__left__list__link">
                       movies
@@ -405,10 +401,17 @@ const NavBar = () => {
                     />
                   </button>
                 ) : (
-                  <button className="btn btn--navbarsearch"  onClick={showSearchTab}>
+                  <button
+                    className="btn btn--navbarsearch"
+                    onClick={showSearchTab}
+                  >
                     <SearchOutlinedIcon
-                      style={{ color: "#1acee0", fontWeight: "bold", width: "2em", height: "2em"}}
-                     
+                      style={{
+                        color: "#1acee0",
+                        fontWeight: "bold",
+                        width: "2em",
+                        height: "2em",
+                      }}
                     />
                   </button>
                 )}
@@ -418,9 +421,9 @@ const NavBar = () => {
         </div>
       </div>
       {showSearch ? (
-        <SearchSlide showSearch={showSearch} hideSearchTab={hideSearchTab}/>
+        <SearchSlide showSearch={showSearch} hideSearchTab={hideSearchTab} />
       ) : (
-        <SearchSlide showSearch={showSearch} hideSearchTab={hideSearchTab}/>
+        <SearchSlide showSearch={showSearch} hideSearchTab={hideSearchTab} />
       )}
     </>
   );

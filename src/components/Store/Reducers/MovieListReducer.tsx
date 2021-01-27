@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { getMoviesApi } from "../../../Api/Api";
+import { getFilter, getMoviesApi } from "../../../Api/Api";
 import {
   CreditsType,
   GenresType,
@@ -14,15 +14,16 @@ import {
 } from "../../../Types/Types";
 import { AppStateType } from "../store";
 
-const GET_MOVIES = "GET_MOVIES";
-const FETCHING_REQUEST = "FETCHING_REQUEST";
-const GET_CREDITS = "GET_CREDITS";
-const GET_GENRES = "GET_GENRES";
-const GET_DETAILS = "GET_DETAILS";
-const GET_REVIEWS = "GET_REVIEWS";
-const GET_VIDEOS = "GET_VIDEOS";
-const GET_RECOMAND = "GET_RECOMAND";
-const GET_KEYWORDS = "GET_KEYWORDS";
+const GET_MOVIES = "movie-app/movies/GET_MOVIES";
+const FETCHING_REQUEST = "movie-app/movies/FETCHING_REQUEST";
+const GET_CREDITS = "movie-app/movies/GET_CREDITS";
+const GET_GENRES = "movie-app/movies/GET_GENRES";
+const GET_DETAILS = "movie-app/movies/GET_DETAILS";
+const GET_REVIEWS = "movie-app/movies/GET_REVIEWS";
+const GET_VIDEOS = "movie-app/movies/GET_VIDEOS";
+const GET_RECOMAND = "movie-app/movies/GET_RECOMAND";
+const GET_KEYWORDS = "movie-app/movies/GET_KEYWORDS";
+const SORT = "movie-app/movies/SORT";
 
 const initialState = {
   movieList: [] as Array<MovieListType>,
@@ -36,6 +37,7 @@ const initialState = {
   recomad: [] as Array<RecomandType>,
   keywords: [] as Array<KeywordsType>,
   errorMessage: "",
+  sort: "",
 };
 
 type initialStateType = typeof initialState;
@@ -48,7 +50,8 @@ type ActionsTypes =
   | GetMovieReviewsType
   | GetVideosType
   | GetRecomandType
-  | GetKeywordsType;
+  | GetKeywordsType
+  | SortType;
 
 type DispatchType = Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<
@@ -117,6 +120,12 @@ const movieListReducer = (
         keywords: action.keywords,
       };
     }
+    case SORT: {
+      return {
+        ...state,
+        sort: action.sort,
+      };
+    }
     default:
       return state;
   }
@@ -173,7 +182,6 @@ export const getDeatails = (
   return { type: GET_DETAILS, movieDetails };
 };
 
-
 //Reviews
 
 type GetMovieReviewsType = {
@@ -218,6 +226,16 @@ export const getKeywords = (keywords: Array<KeywordsType>): GetKeywordsType => {
   return { type: GET_KEYWORDS, keywords };
 };
 
+//Sort
+type SortType = {
+  type: typeof SORT;
+  sort: string;
+};
+
+export const getSort = (sort: string): SortType => {
+  return { type: SORT, sort };
+};
+
 // Thuck
 export const requestMovieList = (): ThunkType => async (
   dispatch: DispatchType
@@ -251,7 +269,6 @@ export const requestDetails = (movieId: number): ThunkType => async (
   dispatch(isFetchingReq(false));
 };
 
-
 export const requestReviews = (movieId: number): ThunkType => async (
   dispatch: DispatchType
 ) => {
@@ -277,5 +294,12 @@ export const requestKeywords = (movieId: number): ThunkType => async (
   const res = await getMoviesApi.getKeywords(movieId);
   dispatch(getKeywords(res));
 };
+
+export const requestSort=(value:string):ThunkType=>async(dispatch:DispatchType)=>{
+
+  const res = await getFilter.getSortMovies(value)
+  console.log(res);
+  dispatch(getSort(res))
+}
 
 export default movieListReducer;

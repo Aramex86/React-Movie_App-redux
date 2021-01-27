@@ -1,6 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PartsType } from "../../Types/Types";
 import NoPoster from "../../assets/noPoster.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -34,7 +33,7 @@ const Movies = () => {
     setShowSort(!showSort);
   };
 
-  console.log(parts.map(i=>i.release_date));
+  //console.log(parts.map(i=>i.release_date));
 
   return (
     <div style={{ padding: "2rem 0" }}>
