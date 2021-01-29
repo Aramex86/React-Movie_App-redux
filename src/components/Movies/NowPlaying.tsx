@@ -11,6 +11,11 @@ import {
 import { AppStateType } from "../Store/store";
 import Paginatior from "../Common/Paginator";
 import { requestNowPlaying } from "../Store/Reducers/HomePageReducer";
+import { showSortAc } from "../Store/Reducers/MovieListReducer";
+import {
+  sortselector,
+  showSortselector,
+} from "../Store/Selectors/MovieSelector";
 
 const NowPlaying: FC = () => {
   const nowPlaying = useSelector((state: AppStateType) =>
@@ -18,6 +23,12 @@ const NowPlaying: FC = () => {
   );
   const currentPage = useSelector((state: AppStateType) =>
     curentPageSelector(state)
+  );
+  const sortedMovies = useSelector((state: AppStateType) =>
+    sortselector(state)
+  );
+  const showSorted = useSelector((state: AppStateType) =>
+    showSortselector(state)
   );
   const [page, setPage] = useState(currentPage);
   const dispatch = useDispatch();
@@ -29,35 +40,69 @@ const NowPlaying: FC = () => {
   const handalePageChange = (e: any, value: number) => {
     setPage(value);
   };
+  const handleDisableBtn = () => {
+    dispatch(showSortAc(false));
+    setPage(1);
+  };
+
+  const resetPage = () => {
+    setPage(1);
+  };
   return (
     <>
       <h1 className="heading">Now Playing Movies</h1>
       <div className="popularwrap">
         <div className="popularwrap__filters">
-          <Sort />
+          <Sort resetPage={resetPage} />
           <Filter />
-          <button className="btn btn--search_filter" disabled={true}>
-            Search
+          <button
+            className={
+              showSorted
+                ? "btn btn--search_filter"
+                : "btn btn--search_filter-disabled"
+            }
+            disabled={showSorted ? false : true}
+            onClick={handleDisableBtn}
+          >
+            Reset
           </button>
         </div>
         <div className="popularwrap__movielist">
-          {nowPlaying?.results.map((p, index) => (
-            <Link
-              to={`/movie-card/${p.id}`}
-              key={index}
-              className="popularwrap__movielist-link"
-              target="_blank"
-            >
-              <Card
-                poster={p.poster_path}
-                title={p.title}
-                voteAverage={p.vote_average}
-                realese={p.release_date}
-                firstAirDate={p.first_air_date}
-                name={p.name}
-              />
-            </Link>
-          ))}
+          {showSorted
+            ? sortedMovies?.results.map((p, index) => (
+                <Link
+                  to={`/movie-card/${p.id}`}
+                  key={index}
+                  className="popularwrap__movielist-link"
+                  target="_blank"
+                >
+                  <Card
+                    poster={p.poster_path}
+                    title={p.title}
+                    voteAverage={p.vote_average}
+                    realese={p.release_date}
+                    firstAirDate={p.first_air_date}
+                    name={p.name}
+                  />
+                </Link>
+              ))
+            : nowPlaying?.results.map((p, index) => (
+                <Link
+                  to={`/movie-card/${p.id}`}
+                  key={index}
+                  className="popularwrap__movielist-link"
+                  target="_blank"
+                >
+                  <Card
+                    poster={p.poster_path}
+                    title={p.title}
+                    voteAverage={p.vote_average}
+                    realese={p.release_date}
+                    firstAirDate={p.first_air_date}
+                    name={p.name}
+                  />
+                </Link>
+              ))}
           <Paginatior
             handalePageChange={handalePageChange}
             totalPages={nowPlaying?.total_pages}

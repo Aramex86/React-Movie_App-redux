@@ -33,7 +33,7 @@ const Popular: FC = () => {
       <h1 className="heading">On Tv</h1>
       <div className="popularwrap">
         <div className="popularwrap__filters">
-          <Sort />
+         {/*  <Sort /> */}
           <Filter />
           <button className="btn btn--search_filter" disabled={true}>
             Search

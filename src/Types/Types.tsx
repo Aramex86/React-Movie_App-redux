@@ -663,3 +663,12 @@ export type CollectionsType = {
   backdrop_path: string;
   parts: Array<PartsType>;
 };
+
+
+//Sort
+export type SortType = {
+  results: Array<PopularType>;
+  total_pages: number;
+  total_results: number;
+  page: number;
+};

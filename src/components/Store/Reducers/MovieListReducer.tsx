@@ -9,6 +9,7 @@ import {
   MovieListType,
   RecomandType,
   ReviewsType,
+  SortType,
   TvDetailType,
   VideoType,
 } from "../../../Types/Types";
@@ -24,6 +25,7 @@ const GET_VIDEOS = "movie-app/movies/GET_VIDEOS";
 const GET_RECOMAND = "movie-app/movies/GET_RECOMAND";
 const GET_KEYWORDS = "movie-app/movies/GET_KEYWORDS";
 const SORT = "movie-app/movies/SORT";
+const SHOW_SORT = "movie-app/movies/SHOW_SORT";
 
 const initialState = {
   movieList: [] as Array<MovieListType>,
@@ -37,7 +39,8 @@ const initialState = {
   recomad: [] as Array<RecomandType>,
   keywords: [] as Array<KeywordsType>,
   errorMessage: "",
-  sort: "",
+  sort: null as SortType |null,
+  showSort:false,
 };
 
 type initialStateType = typeof initialState;
@@ -51,7 +54,7 @@ type ActionsTypes =
   | GetVideosType
   | GetRecomandType
   | GetKeywordsType
-  | SortType;
+  | SortReducerType|ShowSortType;
 
 type DispatchType = Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<
@@ -126,6 +129,14 @@ const movieListReducer = (
         sort: action.sort,
       };
     }
+    case SHOW_SORT:{
+      return{
+        ...state,
+        showSort: action.showSort
+      }
+    }
+
+
     default:
       return state;
   }
@@ -227,14 +238,25 @@ export const getKeywords = (keywords: Array<KeywordsType>): GetKeywordsType => {
 };
 
 //Sort
-type SortType = {
+type SortReducerType = {
   type: typeof SORT;
-  sort: string;
+  sort: SortType;
 };
 
-export const getSort = (sort: string): SortType => {
+export const getSort = (sort: SortType): SortReducerType => {
   return { type: SORT, sort };
 };
+
+type ShowSortType={
+  type:typeof SHOW_SORT;
+  showSort: boolean
+}
+
+export const showSortAc=(showSort:boolean):ShowSortType=>{
+  return{type:SHOW_SORT, showSort}
+}
+
+
 
 // Thuck
 export const requestMovieList = (): ThunkType => async (
@@ -295,11 +317,9 @@ export const requestKeywords = (movieId: number): ThunkType => async (
   dispatch(getKeywords(res));
 };
 
-export const requestSort=(value:string):ThunkType=>async(dispatch:DispatchType)=>{
-
-  const res = await getFilter.getSortMovies(value)
-  console.log(res);
-  dispatch(getSort(res))
+export const requestSort=(value:string,currentPage:number):ThunkType=>async(dispatch:DispatchType)=>{
+  const res = await getFilter.getSortMovies(value,currentPage);
+   dispatch(getSort(res));
 }
 
 export default movieListReducer;

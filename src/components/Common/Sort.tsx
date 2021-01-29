@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "react-select";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { requestSort } from "../Store/Reducers/MovieListReducer";
+import { requestSort, showSortAc } from "../Store/Reducers/MovieListReducer";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +29,11 @@ type OptionType = {
   label: string;
 };
 
-const Sort = () => {
+type PropsType={
+  resetPage:()=>void;
+}
+
+const Sort:FC<PropsType> = ({resetPage}) => {
   const classes = useStyles();
   const [state, setState] = useState<OptionType | undefined | null>(null);
   const [openSort, setOpenSort] = useState(true);
@@ -38,14 +43,20 @@ const Sort = () => {
     setOpenSort(!openSort);
   };
 
-  dispatch(requestSort(state?.value === undefined ? "" : state.value));
+  useEffect(() => {
+    if (state?.value !== undefined) {
+      dispatch(showSortAc(true));
+      resetPage();
+      dispatch(requestSort(state?.value === undefined ? "" : state.value,1));
+    } 
+  }, [dispatch, state]);
 
   console.log(state?.value);
   // console.log(openSort)
 
   const options = [
-    { value: "popularity.asc", label: "Popularity Descending" },
     { value: "popularity.desc", label: "Popularity Ascending" },
+    { value: "popularity.asc", label: "Popularity Descending" },
     { value: "vote_avarage.desc", label: "Rating Descending" },
     { value: "vote_avarage.asc", label: "Rating Ascending" },
     { value: "release_date.desc", label: "Release Date Descending" },
@@ -62,7 +73,7 @@ const Sort = () => {
       </div>
       {openSort ? (
         <div className="sort__body">
-          <span>Sort Results By</span>
+          <span className='sort__body-heading'>Sort Results By</span>
           <FormControl variant="outlined" className={classes.formControl}>
             <Select
               options={options}

@@ -15,6 +15,10 @@
     display: flex;
     flex-direction: column;
     border-top: 1px solid rgba(163, 163, 163, 0.699);
+    &-heading{
+      padding: 1rem 1rem;
+      font-weight: bold;
+    }
    
   }
 }

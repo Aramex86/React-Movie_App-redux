@@ -33,3 +33,9 @@ export const recomadSelector=(state:AppStateType)=>{
 export const keywordsSelector=(state:AppStateType)=>{
     return state.movies.keywords;
 }
+export const sortselector=(state:AppStateType)=>{
+    return state.movies.sort;
+}
+export const showSortselector=(state:AppStateType)=>{
+    return state.movies.showSort;
+}

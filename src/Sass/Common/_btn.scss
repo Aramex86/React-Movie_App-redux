@@ -187,9 +187,15 @@
     font-size: 1.8rem;
     letter-spacing: 1px;
   }
-  &--search_filter {
+  &--search_filter-disabled {
     color: #fff;
     background: rgb(192, 192, 192);
+    height: 50px;
+    border-radius: 50px;
+  }
+  &--search_filter {
+    color: #fff;
+    background: rgb(27, 177, 232);
     height: 50px;
     border-radius: 50px;
   }

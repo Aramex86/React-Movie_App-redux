@@ -40,7 +40,7 @@
         width: 22%;
       }
       @include respond(laptop) {
-        width: 25%;
+        width: 20%;
       }
       @include respond(tab-land) {
         width: 25%;
