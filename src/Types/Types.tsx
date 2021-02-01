@@ -80,6 +80,7 @@ export type WithMoviePropsType = {
   recomand: Array<RecomandType>;
   keywords: Array<KeywordsType>;
   vote_average: number;
+  errors:string;
   requestMovieList: () => void;
   requestCredits: (movieId: number) => void;
   requestGenres: () => void;

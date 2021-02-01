@@ -19,6 +19,9 @@ export const genresSelector=(state:AppStateType)=>{
 export const detailsSelector=(state:AppStateType)=>{
     return state.movies.movieDetails
 }
+export const errorSelector=(state:AppStateType)=>{
+    return state.movies.errorMessage
+}
 
 
 export const reviewsSelector=(state:AppStateType)=>{

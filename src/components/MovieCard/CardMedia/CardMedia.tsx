@@ -13,9 +13,12 @@ type PropsType = {
 
 const CardMedia = ({details, videos=[]}: PropsType) => {
   const allImg: Array<string> = [];
+
+
+  // console.log(details?.belongs_to_collection.poster_path);
+  // console.log(details?.belongs_to_collection.backdrop_path);
   allMedia(
-    details?.belongs_to_collection === null
-      ? ''
+    details?.belongs_to_collection === null ? ''
       : details?.belongs_to_collection.poster_path,
     details?.poster_path,
     allImg

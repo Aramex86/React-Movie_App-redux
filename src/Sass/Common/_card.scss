@@ -80,8 +80,8 @@
       width: 100%;
       object-fit: cover;
       border-radius: 0;
-      height: 270px;
-      object-position: 0 0px;
+      height: 230px;
+      // object-position: 0 0px;
       @include respond(small-phone){
         height: 316px;
     }

@@ -1,0 +1,14 @@
+.notfoundwrapper {
+    // background-color: #131e3a;
+    min-height: 600px;
+  &_banner {
+      position: relative;
+    width: 80%;
+    // outline: 1px solid #fff;
+    margin: auto;
+    // padding: 7rem 0;
+    // background: url(../../assets/PageNotFound.png);
+    // background-size: cover;
+    height: 600px;
+  }
+}

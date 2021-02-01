@@ -5,6 +5,7 @@ import { WithMoviePropsType } from "../../Types/Types";
 import {
   creditsSelector,
   detailsSelector,
+  errorSelector,
   genresSelector,
   keywordsSelector,
   recomadSelector,
@@ -38,6 +39,7 @@ import CardMedia from "./CardMedia/CardMedia";
 import CardRecomand from "./Recomandations/CardRecomand";
 import CardInfo from "./CardInfo";
 import PopupTrailer from "./PopupTrailer";
+import PageNotFound from "../Common/PageNotFound";
 
 type IState = {
   playTrailer: boolean;
@@ -81,10 +83,16 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
     });
   };
 
+
   render() {
-    //  console.log(this.props);
+    console.log(
+      this.props
+    );
+
     return (
       <div className="cardWrapper">
+        {this.props.errors ?<PageNotFound/>:
+        <>
         <PopupTrailer
           videos={this.props.videos}
           playState={this.state}
@@ -119,7 +127,42 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
               details={this.props.details}
             />
           </div>
-        </div>
+        </div></>}
+        {/* <PopupTrailer
+          videos={this.props.videos}
+          playState={this.state}
+          closePlay={this.closePlay}
+        />
+        <CradHeader />
+        <CardPoster
+          details={this.props.details}
+          original_title={this.props.details?.original_title}
+          release_date={this.props.details?.release_date}
+          original_language={this.props.details?.original_language}
+          genres={this.props.details?.genres}
+          runtime={this.props.details?.runtime}
+          popularity={this.props.details?.popularity}
+          overview={this.props.details?.overview}
+          credits={this.props.credits}
+          handaleplay={this.handaleplay}
+        />
+        <div className="cardWrapper__body">
+          <div className="cardWrapper__body-left">
+            <CardActors credits={this.props.credits} />
+            <CardSocial reviews={this.props.reviews} />
+            <CardMedia
+              details={this.props.details}
+              videos={this.props.videos}
+            />
+            <CardRecomand recomand={this.props.recomand} />
+          </div>
+          <div className="cardWrapper__body-right">
+            <CardInfo
+              keywords={this.props.keywords}
+              details={this.props.details}
+            />
+          </div>
+        </div> */}
       </div>
     );
   }
@@ -134,6 +177,7 @@ const mapStateToProps = (state: AppStateType) => {
     videos: viedoSelector(state),
     recomand: recomadSelector(state),
     keywords: keywordsSelector(state),
+    errors:errorSelector(state),
   };
 };
 

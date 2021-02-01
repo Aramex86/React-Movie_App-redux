@@ -51,8 +51,9 @@ export const getMoviesApi = {
         return res.data;
       })
       .catch((error) => {
+        console.log(error.response)
         if (error.response) {
-          return error.response.data.status_message;
+          return error.response;
         }
       });
   },
@@ -67,7 +68,6 @@ export const getMoviesApi = {
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response);
           return error.response.data.status_message;
         }
       });

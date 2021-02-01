@@ -229,4 +229,18 @@
       background: #c3c3c354;
     }
   }
+  &--closeTab{
+    position: absolute;
+    bottom: 12%;
+    left: 48%;
+    border: 1px solid #fff;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    color:#000;
+    &:hover{
+      background: #00b3f4;
+      color:#fff;
+    }
+  }
 }

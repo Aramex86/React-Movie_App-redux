@@ -19,7 +19,7 @@ const CardInfo = ({ details, keywords }: PropType) => {
           <span className="cardInfoList__item__header">Original Language</span>
           <br />
           <span className="cardInfoList__item__info">
-            {details?.spoken_languages.map((l) => l.name)}
+            {details == undefined?'':details?.spoken_languages.map((l) => l.name)}
           </span>
         </li>
         <li className="cardInfoList__item">
