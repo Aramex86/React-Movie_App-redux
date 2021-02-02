@@ -71,7 +71,7 @@ const CardPoster = (props: PropsType) => {
       <div className="posterWrapp__img">
         {props.details?.poster_path == null ? (
           <img
-            src={`https://image.tmdb.org/t/p/w500/${NoPoster}`}
+            src={NoPoster}
             alt="poster"
           />
         ) : (

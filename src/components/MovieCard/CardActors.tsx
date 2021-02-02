@@ -52,10 +52,8 @@ const CardActors = ({ credits }: PropsType) => {
                       component="p"
                       className="name2"
                       style={{
-                        fontSize: "1.5rem",
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
+                        fontSize: "1.1rem",
+                        wordBreak:'break-word',
                       }}
                     >
                       {actor.character}

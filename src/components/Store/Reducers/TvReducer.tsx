@@ -1,10 +1,11 @@
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { getTvApi } from "../../../Api/Api";
+import { getFilter, getTvApi } from "../../../Api/Api";
 import {
   CreditsType,
   ExternalIdsType,
   KeywordsType,
+  PopularTvObjectType,
   RecomandType,
   ReviewsType,
   TvDetailType,
@@ -12,14 +13,17 @@ import {
 } from "../../../Types/Types";
 import { AppStateType } from "../store";
 
-const GET_DETAILS_TV = "GET_DETAILS_TV";
-const FETCHING_REQUEST = "FETCHING_REQUEST";
-const GET_CREDITS_TV = "GET_CREDITS_TV";
-const GET_REVIEWS = "GET_REVIEWS";
-const GET_VIDEOS = "GET_VIDEOS";
-const GET_RECOMAND = "GET_RECOMAND";
-const GET_KEYWORDS = "GET_KEYWORDS";
-const GET_EXTERNAL = "GET_EXTERNAL";
+const GET_DETAILS_TV = "movie-app/tv/GET_DETAILS_TV";
+const FETCHING_REQUEST = "movie-app/tv/FETCHING_REQUEST";
+const GET_CREDITS_TV = "movie-app/tv/GET_CREDITS_TV";
+const GET_REVIEWS = "movie-app/tv/GET_REVIEWS";
+const GET_VIDEOS = "movie-app/tv/GET_VIDEOS";
+const GET_RECOMAND = "movie-app/tv/GET_RECOMAND";
+const GET_KEYWORDS = "movie-app/tv/GET_KEYWORDS";
+const GET_EXTERNAL = "movie-app/tv/GET_EXTERNAL";
+const GET_SORTED = "movie-app/tv/GET_SORTED";
+const ERRORS = "movie-app/tv/ERROR";
+const SHOW_SORT = "movie-app/tv/SHOW_SORT";
 
 const initialState = {
   tvDetails: null as TvDetailType | null,
@@ -29,8 +33,10 @@ const initialState = {
   recomad: [] as Array<RecomandType>,
   keywords: [] as Array<KeywordsType>,
   external: null as ExternalIdsType | null,
+  sortedTv: null as PopularTvObjectType | null,
   isFetching: false,
   errorMessage: "",
+  showSort: false,
 };
 
 type initialStateType = typeof initialState;
@@ -42,7 +48,9 @@ type ActionsTypes =
   | GetVideosType
   | GetRecomandType
   | GetKeywordsType
-  | GetExternalType;
+  | GetExternalType
+  | GetErrorsType
+  | GetSortedTvType|ShowSortType;
 
 type DispatchType = Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<
@@ -103,6 +111,25 @@ const movieListReducer = (
       return {
         ...state,
         external: action.external,
+      };
+    }
+    case GET_SORTED: {
+      return {
+        ...state,
+        sortedTv: action.sortedTv,
+      };
+    }
+    case SHOW_SORT: {
+      return {
+        ...state,
+        showSort: action.showSort,
+      };
+    }
+
+    case ERRORS: {
+      return {
+        ...state,
+        errorMessage: action.errors,
       };
     }
     default:
@@ -177,6 +204,32 @@ export const getExternal = (external: ExternalIdsType): GetExternalType => {
   return { type: GET_EXTERNAL, external };
 };
 
+type GetSortedTvType = {
+  type: typeof GET_SORTED;
+  sortedTv: PopularTvObjectType;
+};
+
+export const sortedTv = (sortedTv: PopularTvObjectType): GetSortedTvType => {
+  return { type: GET_SORTED, sortedTv };
+};
+
+type ShowSortType = {
+  type: typeof SHOW_SORT;
+  showSort: boolean;
+};
+
+export const showSortAcTv = (showSort: boolean): ShowSortType => {
+  return { type: SHOW_SORT, showSort };
+};
+
+type GetErrorsType = {
+  type: typeof ERRORS;
+  errors: string;
+};
+
+export const errors = (errors: string): GetErrorsType => {
+  return { type: ERRORS, errors };
+};
 // Thunk
 
 export const requestTvDetails = (tvId: number): ThunkType => async (
@@ -226,4 +279,12 @@ export const requestExternal = (tvId: number): ThunkType => async (
   dispatch(getExternal(res));
 };
 
+export const requestSortTv = (
+  value: string,
+  currentPage: number
+): ThunkType => async (dispatch: DispatchType) => {
+  const res = await getFilter.getSortTv(value, currentPage);
+  console.log(res);
+  dispatch(sortedTv(res));
+};
 export default movieListReducer;

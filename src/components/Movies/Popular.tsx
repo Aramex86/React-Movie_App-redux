@@ -16,6 +16,7 @@ import {
   showSortselector,
 } from "../Store/Selectors/MovieSelector";
 import { requestSort, showSortAc } from "../Store/Reducers/MovieListReducer";
+import ResetBtnMov from "../Common/ResetBtnMov";
 
 const Popular: FC = () => {
   const popularMovies = useSelector((state: AppStateType) =>
@@ -52,8 +53,8 @@ const Popular: FC = () => {
     setPage(1)
   }
 
-  console.log(sortedMovies);
-  console.log(showSorted);
+  // console.log(sortedMovies);
+  // console.log(showSorted);
 
   return (
     <>
@@ -62,17 +63,7 @@ const Popular: FC = () => {
         <div className="popularwrap__filters">
           <Sort resetPage={resetPage}/>
           <Filter />
-          <button
-            className={
-              showSorted
-                ? "btn btn--search_filter"
-                : "btn btn--search_filter-disabled"
-            }
-            disabled={showSorted ? false : true}
-            onClick={handleDisableBtn}
-          >
-            Reset
-          </button>
+          <ResetBtnMov handleDisableBtn={handleDisableBtn}/>
         </div>
         <div className="popularwrap__movielist">
           {showSorted

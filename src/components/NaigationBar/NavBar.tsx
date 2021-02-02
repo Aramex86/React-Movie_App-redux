@@ -14,6 +14,8 @@ import {
 import { LangsType } from "../../Types/Types";
 import { getSelectedLang } from "../Store/Reducers/HomePageReducer";
 import SearchSlide from "../Common/SearchSlide";
+import { showSortAcTv } from "../Store/Reducers/TvReducer";
+import { showSortAc } from "../Store/Reducers/MovieListReducer";
 
 const NavBar = () => {
   const [showToolTip, setShowToolTip] = useState(false);
@@ -75,6 +77,12 @@ const NavBar = () => {
     setShowSearch(false);
   };
 
+
+  const handaleShowMovTv=()=>{
+    dispatch(showSortAc(false));
+    dispatch(showSortAcTv(false))
+  }
+
   const screenWidth = window.innerWidth;
 
   return (
@@ -92,7 +100,7 @@ const NavBar = () => {
               <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
                 <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
                   <li className="navbarwrapp__left__list__item">
-                    <span className="navbarwrapp__left__list__link">
+                    <span className="navbarwrapp__left__list__link" onClick={handaleShowMovTv}>
                       movies
                     </span>
                     <ul className="dropdown-navbar">
@@ -143,7 +151,7 @@ const NavBar = () => {
                     </ul>
                   </li>
                   <li className="navbarwrapp__left__list__item">
-                    <a href="#" className="navbarwrapp__left__list__link">
+                    <a href="#" className="navbarwrapp__left__list__link" onClick={handaleShowMovTv}>
                       tv shows
                     </a>
                     <ul className="dropdown-navbar">
@@ -236,7 +244,7 @@ const NavBar = () => {
             <nav className="navbarwrapp__left__navbar ">
               <ul className="navbarwrapp__left__list ">
                 <li className="navbarwrapp__left__list__item">
-                  <a href="#" className="navbarwrapp__left__list__link">
+                  <a href="#" className="navbarwrapp__left__list__link" onClick={handaleShowMovTv}>
                     movies
                   </a>
                   <ul className="dropdown-navbar">
@@ -275,7 +283,7 @@ const NavBar = () => {
                   </ul>
                 </li>
                 <li className="navbarwrapp__left__list__item">
-                  <a href="#" className="navbarwrapp__left__list__link">
+                  <a href="#" className="navbarwrapp__left__list__link" onClick={handaleShowMovTv}>
                     tv shows
                   </a>
                   <ul className="dropdown-navbar">

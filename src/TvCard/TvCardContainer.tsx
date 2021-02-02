@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  errorsSelector,
   tvCastSelector,
   tvDetailsSelector,
   tvExternalSelector,
@@ -136,6 +137,7 @@ const mapStateToProps = (state: AppStateType) => {
     recomand: tvRecomandSelector(state),
     keywords: tvKeywordsSelector(state),
     external: tvExternalSelector(state),
+    errors:errorsSelector(state)
   };
 };
 

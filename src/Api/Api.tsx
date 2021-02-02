@@ -51,7 +51,6 @@ export const getMoviesApi = {
         return res.data;
       })
       .catch((error) => {
-        console.log(error.response)
         if (error.response) {
           return error.response;
         }
@@ -552,7 +551,18 @@ export const getFilter = {
         `https://api.themoviedb.org/3/discover/movie?api_key=647b39ccfb59105c511c2df9019bc7ec&language=en-US&sort_by=${value}&include_adult=false&include_video=false&page=${currentPage}`
       )
       .then((res) => {
-        console.log(res)
+        return res.data;
+      })
+      .catch((err) => {
+        return err.response.data.status_message;
+      });
+  },
+  getSortTv(value:string,currentPage:number) {
+    return axios
+      .get(
+        `https://api.themoviedb.org/3/discover/tv?api_key=647b39ccfb59105c511c2df9019bc7ec&language=en-US&sort_by=${value}&include_adult=false&include_video=false&page=${currentPage}`
+      )
+      .then((res) => {
         return res.data;
       })
       .catch((err) => {

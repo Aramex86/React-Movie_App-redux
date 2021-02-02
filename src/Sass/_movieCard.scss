@@ -297,7 +297,7 @@
 
     &-cards {
       display: inline-flex;
-      width: 155rem;
+      width: 156rem;
       align-items: center;
       & div {
         margin: 0 5px 0 5px;
@@ -326,7 +326,8 @@
       width: 100%;
     }
     &-cards .MuiCardMedia-img {
-      height: auto;
+      height: 221px;
+      width: 171px;
     }
   }
 }

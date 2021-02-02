@@ -22,3 +22,12 @@ export const tvKeywordsSelector=(state:AppStateType)=>{
 export const tvExternalSelector=(state:AppStateType)=>{
     return state.tv.external
 }
+export const sortedSelector=(state:AppStateType)=>{
+    return state.tv.sortedTv
+}
+export const errorsSelector=(state:AppStateType)=>{
+    return state.tv.errorMessage
+}
+export const showSortSelector=(state:AppStateType)=>{
+    return state.tv.showSort
+}

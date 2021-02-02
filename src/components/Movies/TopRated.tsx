@@ -13,6 +13,7 @@ import Paginatior from "../Common/Paginator";
 import { requestTopRated } from "../Store/Reducers/HomePageReducer";
 import { sortselector, showSortselector } from "../Store/Selectors/MovieSelector";
 import { showSortAc } from "../Store/Reducers/MovieListReducer";
+import ResetBtnMov from "../Common/ResetBtnMov";
 
 const TopRated: FC = () => {
   const topRated = useSelector((state: AppStateType) =>
@@ -54,17 +55,7 @@ const showSorted = useSelector((state: AppStateType) =>
         <div className="popularwrap__filters">
         <Sort resetPage={resetPage}/>
           <Filter />
-          <button
-            className={
-              showSorted
-                ? "btn btn--search_filter"
-                : "btn btn--search_filter-disabled"
-            }
-            disabled={showSorted ? false : true}
-            onClick={handleDisableBtn}
-          >
-            Reset
-          </button>
+          <ResetBtnMov handleDisableBtn={handleDisableBtn}/>
         </div>
         <div className="popularwrap__movielist">
           {showSorted?sortedMovies?.results.map((p, index) => (

@@ -7,6 +7,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { requestSort, showSortAc } from "../Store/Reducers/MovieListReducer";
 import { useEffect } from "react";
+import { requestSortTv,showSortAcTv } from "../Store/Reducers/TvReducer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,19 +47,21 @@ const Sort:FC<PropsType> = ({resetPage}) => {
   useEffect(() => {
     if (state?.value !== undefined) {
       dispatch(showSortAc(true));
+      dispatch(showSortAcTv(true));
       resetPage();
       dispatch(requestSort(state?.value === undefined ? "" : state.value,1));
+      dispatch(requestSortTv(state?.value === undefined ? "" : state.value,1));
     } 
   }, [dispatch, state]);
 
-  console.log(state?.value);
+  // console.log(state?.value);
   // console.log(openSort)
 
   const options = [
     { value: "popularity.desc", label: "Popularity Ascending" },
     { value: "popularity.asc", label: "Popularity Descending" },
-    { value: "vote_avarage.desc", label: "Rating Descending" },
-    { value: "vote_avarage.asc", label: "Rating Ascending" },
+    { value: "vote_average.desc", label: "Rating Descending" },
+    { value: "vote_average.asc", label: "Rating Ascending" },
     { value: "release_date.desc", label: "Release Date Descending" },
     { value: "release_date.asc", label: "Release Date Ascending" },
     { value: "original_title.asc", label: "Title (A-Z)" },
