@@ -17,6 +17,8 @@ type ParamsType = {
   id: string;
 };
 
+type DepartamentType = {};
+
 const FullList = () => {
   let { id }: ParamsType = useParams();
   let goBack = useHistory();
@@ -33,6 +35,8 @@ const FullList = () => {
   const handleBack = () => {
     goBack.push(`/movie-card/${id}`);
   };
+
+ 
 
   console.log(details);
   console.log(credits);
@@ -59,7 +63,9 @@ const FullList = () => {
       </div>
       <div className="credistwrapp">
         <div className="credistwrapp__cast">
-            <span className='credistwrapp__cast-heading'>Cast <span>{credits?.cast.length}</span></span>
+          <span className="credistwrapp__cast-heading">
+            Cast <span>{credits?.cast.length}</span>
+          </span>
           {credits?.cast.map((elem) => (
             <Link to="somewere" key={elem.credit_id}>
               <CastCard
