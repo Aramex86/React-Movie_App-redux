@@ -22,6 +22,8 @@ type PropsType = {
 
 const CardActors = ({ credits }: PropsType) => {
   const actors = credits?.cast.slice(0, 8);
+
+  const actorsId = credits?.id;
   return (
     <div className="actorsWrapp">
       <h3 className="actorsWrapp__heading">Top Billed Cast</h3>
@@ -64,7 +66,7 @@ const CardActors = ({ credits }: PropsType) => {
               </Card>
             </Link>
           ))}
-          <Link to="/actorslist">
+          <Link to={`/actorslist/${actorsId}`}>
             View More <ArrowForwardRoundedIcon />
           </Link>
         </div>

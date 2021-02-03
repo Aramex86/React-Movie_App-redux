@@ -52,6 +52,7 @@ export type CrewType = {
 };
 
 export type CreditsType = {
+  id:number;
   cast: Array<CastType>;
   crew: Array<CrewType>;
 };
@@ -245,6 +246,7 @@ export type TvPropsType = {
   keywords: Array<KeywordsType>;
   external: ExternalIdsType | null;
   vote_average: number;
+  errors:string;
   requestCredits: (tvId: number) => void;
   requestGenres: () => void;
   requestTvDetails: (tvId: number) => void;

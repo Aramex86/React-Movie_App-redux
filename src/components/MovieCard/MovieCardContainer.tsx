@@ -31,7 +31,7 @@ import {
 } from "../Store/Reducers/MovieListReducer";
 
 //import MovieCrad from "./MovieCrad";
-import CradHeader from "./CardHeader";
+import CradHeader from "../Common/CardHeader";
 import CardPoster from "./Poster/CardPoster";
 import CardActors from "./CardActors";
 import CardSocial from "./CardSocial/CardSocial";
@@ -88,7 +88,7 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
     console.log(
       this.props
     );
-
+   
     return (
       <div className="cardWrapper">
         {this.props.errors ?<PageNotFound/>:

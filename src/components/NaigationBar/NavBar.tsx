@@ -77,11 +77,10 @@ const NavBar = () => {
     setShowSearch(false);
   };
 
-
-  const handaleShowMovTv=()=>{
+  const handaleShowMovTv = () => {
     dispatch(showSortAc(false));
-    dispatch(showSortAcTv(false))
-  }
+    dispatch(showSortAcTv(false));
+  };
 
   const screenWidth = window.innerWidth;
 
@@ -100,7 +99,10 @@ const NavBar = () => {
               <nav className="navbarwrapp__left__navbar navbarwrapp__left__navbar--mobile">
                 <ul className="navbarwrapp__left__list navbarwrapp__left__list--mobile">
                   <li className="navbarwrapp__left__list__item">
-                    <span className="navbarwrapp__left__list__link" onClick={handaleShowMovTv}>
+                    <span
+                      className="navbarwrapp__left__list__link"
+                      onMouseOver={handaleShowMovTv}
+                    >
                       movies
                     </span>
                     <ul className="dropdown-navbar">
@@ -151,7 +153,11 @@ const NavBar = () => {
                     </ul>
                   </li>
                   <li className="navbarwrapp__left__list__item">
-                    <a href="#" className="navbarwrapp__left__list__link" onClick={handaleShowMovTv}>
+                    <a
+                      href="#"
+                      className="navbarwrapp__left__list__link"
+                      onMouseOver={handaleShowMovTv}
+                    >
                       tv shows
                     </a>
                     <ul className="dropdown-navbar">
@@ -244,7 +250,11 @@ const NavBar = () => {
             <nav className="navbarwrapp__left__navbar ">
               <ul className="navbarwrapp__left__list ">
                 <li className="navbarwrapp__left__list__item">
-                  <a href="#" className="navbarwrapp__left__list__link" onClick={handaleShowMovTv}>
+                  <a
+                    href="#"
+                    className="navbarwrapp__left__list__link"
+                    onMouseOver={handaleShowMovTv}
+                  >
                     movies
                   </a>
                   <ul className="dropdown-navbar">
@@ -283,7 +293,11 @@ const NavBar = () => {
                   </ul>
                 </li>
                 <li className="navbarwrapp__left__list__item">
-                  <a href="#" className="navbarwrapp__left__list__link" onClick={handaleShowMovTv}>
+                  <a
+                    href="#"
+                    className="navbarwrapp__left__list__link"
+                    onMouseOver={handaleShowMovTv}
+                  >
                     tv shows
                   </a>
                   <ul className="dropdown-navbar">

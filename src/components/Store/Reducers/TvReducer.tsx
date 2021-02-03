@@ -50,7 +50,8 @@ type ActionsTypes =
   | GetKeywordsType
   | GetExternalType
   | GetErrorsType
-  | GetSortedTvType|ShowSortType;
+  | GetSortedTvType
+  | ShowSortType;
 
 type DispatchType = Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<
@@ -237,7 +238,11 @@ export const requestTvDetails = (tvId: number): ThunkType => async (
 ) => {
   dispatch(isFetchingReq(true));
   const res = await getTvApi.getTvDetails(tvId);
-  dispatch(getTvDeatails(res));
+  if (res.status === 404) {
+    dispatch(errors(res.data.status_message));
+  } else {
+    dispatch(getTvDeatails(res));
+  }
   dispatch(isFetchingReq(false));
 };
 export const requestCredits = (tvId: number): ThunkType => async (

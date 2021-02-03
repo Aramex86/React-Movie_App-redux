@@ -33,7 +33,7 @@ function App() {
 
           <Route exact path="/posterstaff/:id" component={PosterStaffPage} />
 
-          <Route path="/actorslist/" component={FullList} />
+          <Route path="/actorslist/:id" component={FullList} />
           <Route exact path="/allreview/" component={CardSocialAll} />
           <Route exact path="/allmedia/" component={CardMediaAll} />
           <Route exact path="/sreachresults/" component={ResultsPage} />

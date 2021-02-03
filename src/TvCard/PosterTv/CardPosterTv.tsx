@@ -10,6 +10,7 @@ import "react-circular-progressbar/dist/styles.css";
 import { CreditsType, GenresType, TvDetailType } from "../../Types/Types";
 import { crewStaff, crewStaffTV } from "../../components/Helper/crewstaff";
 import { Link } from "react-router-dom";
+import NoPoster from '../../assets/comingSoon.jpg';
 
 type PropsType = {
   details: null | TvDetailType;
@@ -62,10 +63,17 @@ const CardPoster = (props: PropsType) => {
       }}
     >
       <div className="posterWrapp__img">
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${props.details?.poster_path}`}
-          alt="poster"
-        />
+      {props.details?.poster_path == null ? (
+          <img
+            src={NoPoster}
+            alt="poster"
+          />
+        ) : (
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${props.details?.poster_path}`}
+            alt="poster"
+          />
+        )}
       </div>
       <div className="posterWrapp__info">
         <div className="posterWrapp__info-heading">

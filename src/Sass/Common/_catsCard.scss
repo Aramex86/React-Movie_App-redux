@@ -1,0 +1,27 @@
+.castwrap {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  &__img {
+    width: 61px;
+    height: 76px;
+    overflow: hidden;
+    border-radius: 4px;
+    & img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__info {
+    margin: 10px 0 0 15px;
+    display: flex;
+    flex-direction: column;
+    &-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    &-character {
+      font-weight: 100;
+    }
+  }
+}

@@ -129,7 +129,7 @@ export const getTvApi = {
       })
       .catch((error) => {
         if (error.response) {
-          return error.response.data.status_message;
+          return error.response;
         }
       });
   },

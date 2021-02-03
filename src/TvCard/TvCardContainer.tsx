@@ -39,6 +39,7 @@ import CardInfo from "./CardInfo";
 import PopupTrailer from "./PopupTrailer";
 import { TvPropsType } from "../Types/Types";
 import CurrentSeason from "./CurrentSeason/CurrentSeason";
+import PageNotFound from "../components/Common/PageNotFound";
 
 type IState = {
   playTrailer: boolean;
@@ -82,10 +83,11 @@ class TvCardContainer extends Component<TvPropsType, IState> {
   };
 
   render() {
-    // console.log(this.props);
+     console.log(this.props);
 
     return (
       <div className="cardWrapper">
+        {this.props.errors?<PageNotFound/>:<>
         <PopupTrailer
           videos={this.props.videos}
           playState={this.state}
@@ -122,7 +124,7 @@ class TvCardContainer extends Component<TvPropsType, IState> {
               social={this.props.external}
             />
           </div>
-        </div>
+        </div></>}
       </div>
     );
   }

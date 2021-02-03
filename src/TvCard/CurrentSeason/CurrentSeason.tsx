@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { tvDetailsSelector } from "../../components/Store/Selectors/Tvselector";
 import { AppStateType } from "../../components/Store/store";
+import NoImage from "../../assets/noPoster.jpg";
 
 type SeasonType = {
   air_date: "2019-11-12";
@@ -30,10 +31,19 @@ const CurrentSeason = () => {
       </div>
       <div className="socialWrapp__reviews socialWrapp__reviews--tv">
         <div className="socialWrapp__reviews--tv-img">
+        {lastSeazonPoster?.poster_path == null ? (
           <img
-            src={`https://image.tmdb.org/t/p/w500/${lastSeazonPoster?.poster_path}`}
+            src={NoImage}
             alt="poster"
+            style={{margin: '0 0 0 15px'}}
           />
+        ) : (
+          <img
+          src={`https://image.tmdb.org/t/p/w500/${lastSeazonPoster?.poster_path}`}
+          alt="poster"
+        />
+        )}
+         
         </div>
         <div className="socialWrapp__reviews--tv-overview">
           <div className="socialWrapp__reviews--tv-overview-heading">
