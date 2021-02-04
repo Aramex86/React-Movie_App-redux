@@ -8,7 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
-import NoPhoto from '../../assets/noImage.png';
+import NoPhoto from "../../assets/noImage.png";
 
 import { Link } from "react-router-dom";
 
@@ -18,26 +18,33 @@ type PropsType = {
   credits: CreditsType | null;
 };
 
-
-
 const CardActors = ({ credits }: PropsType) => {
   const actors = credits?.cast.slice(0, 8);
-
   const actorsId = credits?.id;
+  const moveToTop=()=>{
+    window.scrollTo({
+      top:0,
+      behavior:'smooth',
+    })
+  }
   return (
     <div className="actorsWrapp">
       <h3 className="actorsWrapp__heading">Top Billed Cast</h3>
       <div className="actorsWrapp__cardsWrapp">
         <div className="actorsWrapp__cardsWrapp-cards">
           {actors?.map((actor) => (
-            <Link to="/actorslist" className="actorslist" key={actor.id}>
-              <Card className='cardStyle'>
+            <Link to={`/posterstaff/${actor.id}`} className="actorslist" key={actor.id}>
+              <Card className="cardStyle">
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     alt="actor photo"
                     height="150"
-                    image={actor.profile_path===null?`${NoPhoto}`:`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+                    image={
+                      actor.profile_path === null
+                        ? `${NoPhoto}`
+                        : `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
+                    }
                   />
                   <CardContent>
                     <Typography
@@ -55,24 +62,23 @@ const CardActors = ({ credits }: PropsType) => {
                       className="name2"
                       style={{
                         fontSize: "1.1rem",
-                        wordBreak:'break-word',
+                        wordBreak: "break-word",
                       }}
                     >
                       {actor.character}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions></CardActions>
               </Card>
             </Link>
           ))}
-          <Link to={`/actorslist/${actorsId}`}>
+          <Link to={`/actorslist/${actorsId}`} onClick={moveToTop}>
             View More <ArrowForwardRoundedIcon />
           </Link>
         </div>
       </div>
       <h4>
-        <Link to="/actorslist">Full Cast & Crew</Link>
+        <Link to={`/actorslist/${actorsId}`} onClick={moveToTop}>Full Cast & Crew</Link>
       </h4>
     </div>
   );

@@ -1,45 +1,45 @@
 .fulllistwrapp {
 }
 
-.movieinfo {
+.movieinfofulllist {
   background: linear-gradient(to left, rgba(28, 28, 28, 0.905), black),
     url(https://image.tmdb.org/t/p/w500//e6SK2CAbO3ENy52UTzP3lv32peC.jpg)
       no-repeat;
   padding: 0rem 17rem;
   display: flex;
   align-items: end;
-  @include respond(tab-land){
+  @include respond(tab-land) {
     padding: 0 12rem;
- }
-  @include respond(phone){
-      padding: 0 0rem;
   }
-  @include respond(small-phone){
-      padding: 0 1rem;
+  @include respond(phone) {
+    padding: 0 0rem;
+  }
+  @include respond(small-phone) {
+    padding: 0 1rem;
   }
   &__img {
     width: 10%;
     text-align: center;
     padding: 1rem 0;
-    @include respond(tab-land){
-       width: 14%;
+    @include respond(tab-land) {
+      width: 14%;
     }
-    @include respond(tab-port){
-       width: 18%;
+    @include respond(tab-port) {
+      width: 18%;
     }
-    @include respond(phone){
-       width: 23%;
+    @include respond(phone) {
+      width: 23%;
     }
-    @include respond(small-phone){
-       width: 26%;
-       text-align: start;
+    @include respond(small-phone) {
+      width: 26%;
+      text-align: start;
     }
     & img {
       border-radius: 5px;
       width: 46%;
       height: 93px;
       object-fit: cover;
-      @include respond(small-phone){
+      @include respond(small-phone) {
         width: 69%;
       }
     }
@@ -53,32 +53,35 @@
       margin-bottom: 7px;
       margin-top: 13px;
       display: block;
-      @include respond(phone){
-       font-size: 3rem;
-    }
+      @include respond(phone) {
+        font-size: 3rem;
+      }
     }
   }
 }
 
-.credistwrapp{
-    width: 75%;
-    margin: auto;
-    margin-top: 25px;
-    display: flex;
-    @include respond(phone){
-        width: 96%;
+.credistwrapp {
+  width: 75%;
+  margin: auto;
+  margin-top: 25px;
+  display: flex;
+  @include respond(phone) {
+    width: 96%;
+  }
+  &-heading {
+    margin-bottom: 25px;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+    & span {
+      color: darkgrey;
     }
-    &__cast{
-        width: 50%;
-        &-heading{
-            margin-bottom: 25px;
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            display: block;
-            & span{
-                color: darkgrey;
-            }
-        }
-    }
+  }
+  &__cast {
+    width: 50%;
+  }
+  &__crew {
+    width: 50%;
+  }
 }

@@ -198,11 +198,15 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                 className="menuWrapp__drop-link"
                 onClick={showDirecting}
               >
-                {directing.slice(0, 1).map((d) => d.department)}{" "}
+                {directing.length === 0
+                  ? "Directing"
+                  : directing.slice(0, 1).map((d) => d.department)}{" "}
                 {directing.length}
               </a>
               <a href="#" className="menuWrapp__drop-link" onClick={showProd}>
-                {production.slice(0, 1).map((p) => p.department)}{" "}
+              {production.length === 0
+                  ? "Production"
+                  : production.slice(0, 1).map((p) => p.department)}{" "}
                 {production.length}
               </a>
               <a

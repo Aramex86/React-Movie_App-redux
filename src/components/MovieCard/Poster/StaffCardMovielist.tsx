@@ -8,6 +8,7 @@ import {
   CombineCreditsCrewType,
   CombinedCreditsCastType,
 } from "../../../Types/Types";
+import { Link } from "react-router-dom";
 
 type PropsTypes = {
   combineCast: Array<CombinedCreditsCastType>;
@@ -21,36 +22,35 @@ const StaffCardMovielist: React.FC<PropsTypes> = ({
   let data = [...combineCast, ...combineCrew];
 
   //remove the same
- const dataArr:any = data.map(item=> {
-   return[item.id,item]
- })
- const mapArr:any = new Map(dataArr)
- const result = [...mapArr.values()]
+  const dataArr: any = data.map((item) => {
+    return [item.id, item];
+  });
+  const mapArr: any = new Map(dataArr);
+  const result = [...mapArr.values()];
 
- //console.log(result)
+  // console.log(result)
 
   return (
     <div className="cardswrapp">
       {result.map((c) => (
-        <Card
-          className={c.poster_path == null ? "movies__hide" : "movies"}
-          key={c.credit_id}
-        >
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="250"
-              image={`https://image.tmdb.org/t/p/w500${c.poster_path}`}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {c.title == null ? c.name : c.title}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        <Link to={`/movie-card/${c.id}`} key={c.credit_id}>
+          <Card className={c.poster_path == null ? "movies__hide" : "movies"}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                alt={c.title}
+                height="250"
+                image={`https://image.tmdb.org/t/p/w500${c.poster_path}`}
+                title={c.title}
+              />
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {c.title == null ? c.name : c.title}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Link>
       ))}
     </div>
   );

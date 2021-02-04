@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { filterData, filterDepartament } from "../../components/Helper/filterData";
+import {
+  filterData,
+  filterDepartament,
+} from "../../components/Helper/filterData";
 import ArrowDropDownRoundedIcon from "@material-ui/icons/ArrowDropDownRounded";
 import {
   AllMediaType,
@@ -30,8 +33,8 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
   const [movies, setMovies] = useState<any>([]);
   const [tv, setTv] = useState<any>([]);
   const [showMovieTv, setShowMovieTv] = useState(false);
-  const [showDep,setShowDep]=useState(true);
-  const [showMovTv,setShowMovTv]=useState(false);
+  const [showDep, setShowDep] = useState(true);
+  const [showMovTv, setShowMovTv] = useState(false);
 
   const moviesCrew = [] as Array<AllMediaType>;
   const tvShow = [] as Array<AllMediaType>;
@@ -113,7 +116,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
     setSelectDirecting(false);
     setClearAll(false);
     setShowDep(true);
-    setShowMovTv(false)
+    setShowMovTv(false);
   };
 
   const showMovies = (e: any) => {
@@ -145,10 +148,10 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
       })
     );
   };
-  //  console.log("D", directing);
-  // console.log("P", production);
-  //  console.log("A", acting);
-  //  console.log("W", writing);
+  //   console.log("D", directing);
+  //  console.log("P", production);
+  //   console.log("A", acting);
+  //   console.log("W", writing);
   return (
     <div className="carierwrapp">
       <div className="carierwrapp__header">
@@ -198,11 +201,15 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                 className="menuWrapp__drop-link"
                 onClick={showDirecting}
               >
-                {directing.slice(0, 1).map((d) => d.department)}{" "}
+                {directing.length === 0
+                  ? "Directing"
+                  : directing.slice(0, 1).map((d) => d.department)}{" "}
                 {directing.length}
               </a>
               <a href="#" className="menuWrapp__drop-link" onClick={showProd}>
-                {production.slice(0, 1).map((p) => p.department)}{" "}
+                {production.length === 0
+                  ? "Production"
+                  : production.slice(0, 1).map((p) => p.department)}{" "}
                 {production.length}
               </a>
               <a
@@ -228,348 +235,409 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
         </ul>
       </div>
       <div className="carierwrapp__body">
-       <div style={showMovTv?{display:'table',width:'100%'}:{display:'none'}}>
-        {showMovieTv ? (
+        <div
+          style={
+            showMovTv
+              ? { display: "table", width: "100%" }
+              : { display: "none" }
+          }
+        >
+          {showMovieTv ? (
+            <TableContainer component={Paper}>
+              <Table size="medium" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableheadcell">
+                      <h3>Directing</h3>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {movies
+                    .filter((item: any) => item.department === "Directing")
+                    .map((movie: any) => (
+                      <TableRow key={movie.credit_id}>
+                        <TableCell component="th" scope="row">
+                          <div className="movieinfo">
+                            <span>
+                              {movie.release_date === undefined
+                                ? ""
+                                : movie.release_date.slice(0, 4)}
+                              {movie.first_air_date
+                                ? movie.first_air_date.slice(0, 4)
+                                : ""}
+                            </span>{" "}
+                            <span
+                              className="movieinfo__dot"
+                              onClick={() => showToolTip(movie.credit_id)}
+                              id={`${movie.id}`}
+                            ></span>{" "}
+                            {movie.title ? movie.title : movie.name}
+                            <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                            <MovieInfoToolTip
+                              poster={movie.poster_path}
+                              desc={movie.overview}
+                              title={movie.title}
+                              name={movie.name}
+                              showTip={showTip}
+                              id={movie.credit_id}
+                              hideTooltip={() => hideToolTip(movie.credit_id)}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+              <Table size="medium" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableheadcell">
+                      <h3>Writing</h3>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {movies
+                    .filter((item: any) => item.department === "Writing")
+                    .map((movie: any) => (
+                      <TableRow key={movie.credit_id}>
+                        <TableCell component="th" scope="row">
+                          <div className="movieinfo">
+                            <span>
+                              {movie.release_date === undefined
+                                ? ""
+                                : movie.release_date.slice(0, 4)}
+                              {movie.first_air_date
+                                ? movie.first_air_date.slice(0, 4)
+                                : ""}
+                            </span>{" "}
+                            <span
+                              className="movieinfo__dot"
+                              onClick={() => showToolTip(movie.credit_id)}
+                              id={`${movie.id}`}
+                            ></span>{" "}
+                            {movie.title ? movie.title : movie.name}
+                            <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                            <MovieInfoToolTip
+                              poster={movie.poster_path}
+                              desc={movie.overview}
+                              title={movie.title}
+                              name={movie.name}
+                              showTip={showTip}
+                              id={movie.credit_id}
+                              hideTooltip={() => hideToolTip(movie.credit_id)}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+              <Table size="medium" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableheadcell">
+                      <h3>Production</h3>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {movies
+                    .filter((item: any) => item.department === "Production")
+                    .map((movie: any) => (
+                      <TableRow key={movie.credit_id}>
+                        <TableCell component="th" scope="row">
+                          <div className="movieinfo">
+                            <span>
+                              {movie.release_date === undefined
+                                ? ""
+                                : movie.release_date.slice(0, 4)}
+                              {movie.first_air_date
+                                ? movie.first_air_date.slice(0, 4)
+                                : ""}
+                            </span>{" "}
+                            <span
+                              className="movieinfo__dot"
+                              onClick={() => showToolTip(movie.credit_id)}
+                              id={`${movie.id}`}
+                            ></span>{" "}
+                            {movie.title ? movie.title : movie.name}
+                            <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                            <MovieInfoToolTip
+                              poster={movie.poster_path}
+                              desc={movie.overview}
+                              title={movie.title}
+                              name={movie.name}
+                              showTip={showTip}
+                              id={movie.credit_id}
+                              hideTooltip={() => hideToolTip(movie.credit_id)}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+              <Table size="medium" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableheadcell">
+                      <h3>Acting</h3>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {movies
+                    .filter((item: any) => item.department === "Production")
+                    .map((movie: any) => (
+                      <TableRow key={movie.credit_id}>
+                        <TableCell component="th" scope="row">
+                          <div className="movieinfo">
+                            <span>
+                              {movie.release_date === undefined
+                                ? ""
+                                : movie.release_date.slice(0, 4)}
+                              {movie.first_air_date
+                                ? movie.first_air_date.slice(0, 4)
+                                : ""}
+                            </span>{" "}
+                            <span
+                              className="movieinfo__dot"
+                              onClick={() => showToolTip(movie.credit_id)}
+                              id={`${movie.id}`}
+                            ></span>{" "}
+                            {movie.title ? movie.title : movie.name}
+                            <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                            <MovieInfoToolTip
+                              poster={movie.poster_path}
+                              desc={movie.overview}
+                              title={movie.title}
+                              name={movie.name}
+                              showTip={showTip}
+                              id={movie.credit_id}
+                              hideTooltip={() => hideToolTip(movie.credit_id)}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          ) : (
+            <TableContainer component={Paper}>
+              <Table size="medium" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableheadcell">
+                      <h3>Directing</h3>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tv
+                    .filter((item: any) => item.department === "Directing")
+                    .map((movie: any) => (
+                      <TableRow key={movie.credit_id}>
+                        <TableCell component="th" scope="row">
+                          <div className="movieinfo">
+                            <span>
+                              {movie.release_date === undefined
+                                ? ""
+                                : movie.release_date.slice(0, 4)}
+                              {movie.first_air_date
+                                ? movie.first_air_date.slice(0, 4)
+                                : ""}
+                            </span>{" "}
+                            <span
+                              className="movieinfo__dot"
+                              onClick={() => showToolTip(movie.credit_id)}
+                              id={`${movie.id}`}
+                            ></span>{" "}
+                            {movie.title ? movie.title : movie.name}
+                            <span className="movieinfo__job">
+                              {movie.episode_count > 1
+                                ? `(${movie.episode_count} episodes)`
+                                : `(${movie.episode_count} episode)`}
+                              {`... as ${movie.job}`}
+                            </span>
+                            <MovieInfoToolTip
+                              poster={movie.poster_path}
+                              desc={movie.overview}
+                              title={movie.title}
+                              name={movie.name}
+                              showTip={showTip}
+                              id={movie.credit_id}
+                              hideTooltip={() => hideToolTip(movie.credit_id)}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+              <Table size="medium" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableheadcell">
+                      <h3>Writing</h3>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tv
+                    .filter((item: any) => item.department === "Writing")
+                    .map((movie: any) => (
+                      <TableRow key={movie.credit_id}>
+                        <TableCell component="th" scope="row">
+                          <div className="movieinfo">
+                            <span>
+                              {movie.release_date === undefined
+                                ? ""
+                                : movie.release_date.slice(0, 4)}
+                              {movie.first_air_date
+                                ? movie.first_air_date.slice(0, 4)
+                                : ""}
+                            </span>{" "}
+                            <span
+                              className="movieinfo__dot"
+                              onClick={() => showToolTip(movie.credit_id)}
+                              id={`${movie.id}`}
+                            ></span>{" "}
+                            {movie.title ? movie.title : movie.name}
+                            <span className="movieinfo__job">
+                              {movie.episode_count > 1
+                                ? `(${movie.episode_count} episodes)`
+                                : `(${movie.episode_count} episode)`}
+                              {`... as ${movie.job}`}
+                            </span>
+                            <MovieInfoToolTip
+                              poster={movie.poster_path}
+                              desc={movie.overview}
+                              title={movie.title}
+                              name={movie.name}
+                              showTip={showTip}
+                              id={movie.credit_id}
+                              hideTooltip={() => hideToolTip(movie.credit_id)}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+              <Table size="medium" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableheadcell">
+                      <h3>Production</h3>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tv
+                    .filter((item: any) => item.department === "Production")
+                    .map((movie: any) => (
+                      <TableRow key={movie.credit_id}>
+                        <TableCell component="th" scope="row">
+                          <div className="movieinfo">
+                            <span>
+                              {movie.release_date === undefined
+                                ? ""
+                                : movie.release_date.slice(0, 4)}
+                              {movie.first_air_date
+                                ? movie.first_air_date.slice(0, 4)
+                                : ""}
+                            </span>{" "}
+                            <span
+                              className="movieinfo__dot"
+                              onClick={() => showToolTip(movie.credit_id)}
+                              id={`${movie.id}`}
+                            ></span>{" "}
+                            {movie.title ? movie.title : movie.name}
+                            <span className="movieinfo__job">
+                              {movie.episode_count > 1
+                                ? `(${movie.episode_count} episodes)`
+                                : `(${movie.episode_count} episode)`}
+                              {`... as ${movie.job}`}
+                            </span>
+                            <MovieInfoToolTip
+                              poster={movie.poster_path}
+                              desc={movie.overview}
+                              title={movie.title}
+                              name={movie.name}
+                              showTip={showTip}
+                              id={movie.credit_id}
+                              hideTooltip={() => hideToolTip(movie.credit_id)}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+              <Table
+                size="medium"
+                aria-label="a dense table"
+                style={
+                  selectWriting ? { display: "none" } : { display: "table" }
+                }
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="tableheadcell">
+                      <h3>Acting</h3>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tv
+                    .filter((item: any) => item.department === "Production")
+                    .map((movie: any) => (
+                      <TableRow key={movie.credit_id}>
+                        <TableCell component="th" scope="row">
+                          <div className="movieinfo">
+                            <span>
+                              {movie.release_date === undefined
+                                ? ""
+                                : movie.release_date.slice(0, 4)}
+                              {movie.first_air_date
+                                ? movie.first_air_date.slice(0, 4)
+                                : ""}
+                            </span>{" "}
+                            <span
+                              className="movieinfo__dot"
+                              onClick={() => showToolTip(movie.credit_id)}
+                              id={`${movie.id}`}
+                            ></span>{" "}
+                            {movie.title ? movie.title : movie.name}
+                            <span className="movieinfo__job">
+                              {movie.episode_count > 1
+                                ? `(${movie.episode_count} episodes)`
+                                : `(${movie.episode_count} episode)`}
+                              {`... as ${movie.job}`}
+                            </span>
+                            <MovieInfoToolTip
+                              poster={movie.poster_path}
+                              desc={movie.overview}
+                              title={movie.title}
+                              name={movie.name}
+                              showTip={showTip}
+                              id={movie.credit_id}
+                              hideTooltip={() => hideToolTip(movie.credit_id)}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+        </div>
+        {showDep ? (
           <TableContainer component={Paper}>
-            <Table
-              size="medium"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell className="tableheadcell">
-                    <h3>Directing</h3>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {movies
-                  .filter((item: any) => item.department === "Directing")
-                  .map((movie: any) => (
-                    <TableRow key={movie.credit_id}>
-                      <TableCell component="th" scope="row">
-                        <div className="movieinfo">
-                          <span>
-                            {movie.release_date === undefined
-                              ? ""
-                              : movie.release_date.slice(0, 4)}
-                            {movie.first_air_date
-                              ? movie.first_air_date.slice(0, 4)
-                              : ""}
-                          </span>{" "}
-                          <span
-                            className="movieinfo__dot"
-                            onClick={() => showToolTip(movie.credit_id)}
-                            id={`${movie.id}`}
-                          ></span>{" "}
-                          {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
-                          <MovieInfoToolTip
-                            poster={movie.poster_path}
-                            desc={movie.overview}
-                            title={movie.title}
-                            name={movie.name}
-                            showTip={showTip}
-                            id={movie.credit_id}
-                            hideTooltip={() => hideToolTip(movie.credit_id)}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-            <Table
-              size="medium"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell className="tableheadcell">
-                    <h3>Writing</h3>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {movies
-                  .filter((item: any) => item.department === "Writing")
-                  .map((movie: any) => (
-                    <TableRow key={movie.credit_id}>
-                      <TableCell component="th" scope="row">
-                        <div className="movieinfo">
-                          <span>
-                            {movie.release_date === undefined
-                              ? ""
-                              : movie.release_date.slice(0, 4)}
-                            {movie.first_air_date
-                              ? movie.first_air_date.slice(0, 4)
-                              : ""}
-                          </span>{" "}
-                          <span
-                            className="movieinfo__dot"
-                            onClick={() => showToolTip(movie.credit_id)}
-                            id={`${movie.id}`}
-                          ></span>{" "}
-                          {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
-                          <MovieInfoToolTip
-                            poster={movie.poster_path}
-                            desc={movie.overview}
-                            title={movie.title}
-                            name={movie.name}
-                            showTip={showTip}
-                            id={movie.credit_id}
-                            hideTooltip={() => hideToolTip(movie.credit_id)}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-            <Table
-              size="medium"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell className="tableheadcell">
-                    <h3>Production</h3>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {movies
-                  .filter((item: any) => item.department === "Production")
-                  .map((movie: any) => (
-                    <TableRow key={movie.credit_id}>
-                      <TableCell component="th" scope="row">
-                        <div className="movieinfo">
-                          <span>
-                            {movie.release_date === undefined
-                              ? ""
-                              : movie.release_date.slice(0, 4)}
-                            {movie.first_air_date
-                              ? movie.first_air_date.slice(0, 4)
-                              : ""}
-                          </span>{" "}
-                          <span
-                            className="movieinfo__dot"
-                            onClick={() => showToolTip(movie.credit_id)}
-                            id={`${movie.id}`}
-                          ></span>{" "}
-                          {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
-                          <MovieInfoToolTip
-                            poster={movie.poster_path}
-                            desc={movie.overview}
-                            title={movie.title}
-                            name={movie.name}
-                            showTip={showTip}
-                            id={movie.credit_id}
-                            hideTooltip={() => hideToolTip(movie.credit_id)}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-            <Table
-              size="medium"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell className="tableheadcell">
-                    <h3>Acting</h3>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {movies
-                  .filter((item: any) => item.department === "Production")
-                  .map((movie: any) => (
-                    <TableRow key={movie.credit_id}>
-                      <TableCell component="th" scope="row">
-                        <div className="movieinfo">
-                          <span>
-                            {movie.release_date === undefined
-                              ? ""
-                              : movie.release_date.slice(0, 4)}
-                            {movie.first_air_date
-                              ? movie.first_air_date.slice(0, 4)
-                              : ""}
-                          </span>{" "}
-                          <span
-                            className="movieinfo__dot"
-                            onClick={() => showToolTip(movie.credit_id)}
-                            id={`${movie.id}`}
-                          ></span>{" "}
-                          {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{`... as ${movie.job}`}</span>
-                          <MovieInfoToolTip
-                            poster={movie.poster_path}
-                            desc={movie.overview}
-                            title={movie.title}
-                            name={movie.name}
-                            showTip={showTip}
-                            id={movie.credit_id}
-                            hideTooltip={() => hideToolTip(movie.credit_id)}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        ) : (
-          <TableContainer component={Paper}>
-            <Table
-              size="medium"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell className="tableheadcell">
-                    <h3>Directing</h3>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {tv
-                  .filter((item: any) => item.department === "Directing")
-                  .map((movie: any) => (
-                    <TableRow key={movie.credit_id}>
-                      <TableCell component="th" scope="row">
-                        <div className="movieinfo">
-                          <span>
-                            {movie.release_date === undefined
-                              ? ""
-                              : movie.release_date.slice(0, 4)}
-                            {movie.first_air_date
-                              ? movie.first_air_date.slice(0, 4)
-                              : ""}
-                          </span>{" "}
-                          <span
-                            className="movieinfo__dot"
-                            onClick={() => showToolTip(movie.credit_id)}
-                            id={`${movie.id}`}
-                          ></span>{" "}
-                          {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{movie.episode_count>1?`(${movie.episode_count} episodes)`:`(${movie.episode_count} episode)`}{`... as ${movie.job}`}</span>
-                          <MovieInfoToolTip
-                            poster={movie.poster_path}
-                            desc={movie.overview}
-                            title={movie.title}
-                            name={movie.name}
-                            showTip={showTip}
-                            id={movie.credit_id}
-                            hideTooltip={() => hideToolTip(movie.credit_id)}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-            <Table
-              size="medium"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell className="tableheadcell">
-                    <h3>Writing</h3>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {tv
-                  .filter((item: any) => item.department === "Writing")
-                  .map((movie: any) => (
-                    <TableRow key={movie.credit_id}>
-                      <TableCell component="th" scope="row">
-                        <div className="movieinfo">
-                          <span>
-                            {movie.release_date === undefined
-                              ? ""
-                              : movie.release_date.slice(0, 4)}
-                            {movie.first_air_date
-                              ? movie.first_air_date.slice(0, 4)
-                              : ""}
-                          </span>{" "}
-                          <span
-                            className="movieinfo__dot"
-                            onClick={() => showToolTip(movie.credit_id)}
-                            id={`${movie.id}`}
-                          ></span>{" "}
-                          {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{movie.episode_count>1?`(${movie.episode_count} episodes)`:`(${movie.episode_count} episode)`}{`... as ${movie.job}`}</span>
-                          <MovieInfoToolTip
-                            poster={movie.poster_path}
-                            desc={movie.overview}
-                            title={movie.title}
-                            name={movie.name}
-                            showTip={showTip}
-                            id={movie.credit_id}
-                            hideTooltip={() => hideToolTip(movie.credit_id)}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-            <Table
-              size="medium"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell className="tableheadcell">
-                    <h3>Production</h3>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {tv
-                  .filter((item: any) => item.department === "Production")
-                  .map((movie: any) => (
-                    <TableRow key={movie.credit_id}>
-                      <TableCell component="th" scope="row">
-                        <div className="movieinfo">
-                          <span>
-                            {movie.release_date === undefined
-                              ? ""
-                              : movie.release_date.slice(0, 4)}
-                            {movie.first_air_date
-                              ? movie.first_air_date.slice(0, 4)
-                              : ""}
-                          </span>{" "}
-                          <span
-                            className="movieinfo__dot"
-                            onClick={() => showToolTip(movie.credit_id)}
-                            id={`${movie.id}`}
-                          ></span>{" "}
-                          {movie.title ? movie.title : movie.name}
-                            <span className="movieinfo__job">{movie.episode_count>1?`(${movie.episode_count} episodes)`:`(${movie.episode_count} episode)`}{`... as ${movie.job}`}</span>
-                          <MovieInfoToolTip
-                            poster={movie.poster_path}
-                            desc={movie.overview}
-                            title={movie.title}
-                            name={movie.name}
-                            showTip={showTip}
-                            id={movie.credit_id}
-                            hideTooltip={() => hideToolTip(movie.credit_id)}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
             <Table
               size="medium"
               aria-label="a dense table"
@@ -578,245 +646,197 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
               <TableHead>
                 <TableRow>
                   <TableCell className="tableheadcell">
+                    <h3>Writing</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {writing.map((movie) => (
+                  <TableRow key={movie.credit_id}>
+                    <TableCell component="th" scope="row">
+                      <div className="movieinfo">
+                        <span>
+                          {movie.release_date === undefined
+                            ? ""
+                            : movie.release_date.slice(0, 4)}
+                          {movie.first_air_date
+                            ? movie.first_air_date.slice(0, 4)
+                            : ""}
+                        </span>{" "}
+                        <span
+                          className="movieinfo__dot"
+                          onClick={() => showToolTip(movie.credit_id)}
+                          id={`${movie.id}`}
+                        ></span>{" "}
+                        {movie.title ? movie.title : movie.name}
+                        <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                        <MovieInfoToolTip
+                          poster={movie.poster_path}
+                          desc={movie.overview}
+                          title={movie.title}
+                          name={movie.name}
+                          showTip={showTip}
+                          id={movie.credit_id}
+                          hideTooltip={() => hideToolTip(movie.credit_id)}
+                        />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={
+                selectDirecting ? { display: "none" } : { display: "table" }
+              }
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Directing</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {directing.map((movie) => (
+                  <TableRow key={movie.credit_id}>
+                    <TableCell component="th" scope="row">
+                      <div className="movieinfo">
+                        <span>
+                          {movie.release_date === undefined
+                            ? ""
+                            : movie.release_date.slice(0, 4)}
+                          {movie.first_air_date
+                            ? movie.first_air_date.slice(0, 4)
+                            : ""}
+                        </span>{" "}
+                        <span
+                          className="movieinfo__dot"
+                          onClick={() => showToolTip(movie.credit_id)}
+                          id={`${movie.id}`}
+                        ></span>{" "}
+                        {movie.title ? movie.title : movie.name}
+                        <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                        <MovieInfoToolTip
+                          poster={movie.poster_path}
+                          desc={movie.overview}
+                          title={movie.title}
+                          name={movie.name}
+                          showTip={showTip}
+                          id={movie.credit_id}
+                          hideTooltip={() => hideToolTip(movie.credit_id)}
+                        />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectProd ? { display: "none" } : { display: "table" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
+                    <h3>Production</h3>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {production.map((movie) => (
+                  <TableRow key={movie.credit_id}>
+                    <TableCell component="th" scope="row">
+                      <div className="movieinfo">
+                        <span>
+                          {movie.release_date === undefined
+                            ? movie.release_date
+                            : "---"
+                            ? movie.release_date.slice(0, 4)
+                            : ""}
+                          {movie.first_air_date
+                            ? movie.first_air_date.slice(0, 4)
+                            : ""}
+                        </span>{" "}
+                        <span
+                          className="movieinfo__dot"
+                          onClick={() => showToolTip(movie.credit_id)}
+                          id={`${movie.id}`}
+                        ></span>{" "}
+                        {movie.title ? movie.title : movie.name}
+                        <span className="movieinfo__job">{`... as ${movie.job}`}</span>
+                        <MovieInfoToolTip
+                          poster={movie.poster_path}
+                          desc={movie.overview}
+                          title={movie.title}
+                          name={movie.name}
+                          showTip={showTip}
+                          id={movie.credit_id}
+                          hideTooltip={() => hideToolTip(movie.credit_id)}
+                        />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <Table
+              size="medium"
+              aria-label="a dense table"
+              style={selectActing ? { display: "none" } : { display: "table" }}
+            >
+              {}
+              <TableHead>
+                <TableRow>
+                  <TableCell className="tableheadcell">
                     <h3>Acting</h3>
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {tv
-                  .filter((item: any) => item.department === "Production")
-                  .map((movie: any) => (
-                    <TableRow key={movie.credit_id}>
-                      <TableCell component="th" scope="row">
-                        <div className="movieinfo">
-                          <span>
-                            {movie.release_date === undefined
-                              ? ""
-                              : movie.release_date.slice(0, 4)}
-                            {movie.first_air_date
-                              ? movie.first_air_date.slice(0, 4)
-                              : ""}
-                          </span>{" "}
-                          <span
-                            className="movieinfo__dot"
-                            onClick={() => showToolTip(movie.credit_id)}
-                            id={`${movie.id}`}
-                          ></span>{" "}
-                          {movie.title ? movie.title : movie.name}
-                          <span className="movieinfo__job">{movie.episode_count>1?`(${movie.episode_count} episodes)`:`(${movie.episode_count} episode)`}{`... as ${movie.job}`}</span>
-                          <MovieInfoToolTip
-                            poster={movie.poster_path}
-                            desc={movie.overview}
-                            title={movie.title}
-                            name={movie.name}
-                            showTip={showTip}
-                            id={movie.credit_id}
-                            hideTooltip={() => hideToolTip(movie.credit_id)}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                {acting.map((movie) => (
+                  <TableRow key={movie.credit_id}>
+                    <TableCell component="th" scope="row">
+                      <div className="movieinfo">
+                        <span>
+                          {movie.release_date === undefined
+                            ? "---"
+                            : movie.release_date.slice(0, 4)}
+                          {movie.first_air_date
+                            ? movie.first_air_date.slice(0, 4)
+                            : ""}
+                        </span>{" "}
+                        <span
+                          className="movieinfo__dot"
+                          onClick={() => showToolTip(movie.credit_id)}
+                          id={`${movie.id}`}
+                        ></span>{" "}
+                        {movie.title ? movie.title : movie.name}
+                        <span className="movieinfo__job">{`... as ${
+                          movie.character ? movie.character : "Unknown"
+                        }`}</span>
+                        <MovieInfoToolTip
+                          poster={movie.poster_path}
+                          desc={movie.overview}
+                          title={movie.title}
+                          name={movie.name}
+                          showTip={showTip}
+                          id={movie.credit_id}
+                          hideTooltip={() => hideToolTip(movie.credit_id)}
+                        />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
+        ) : (
+          ""
         )}
-        </div>
-        {showDep?
-        <TableContainer component={Paper}>
-         <Table
-            size="medium"
-            aria-label="a dense table"
-            style={selectWriting ? { display: "none" } : { display: "table" }}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell className="tableheadcell">
-                  <h3>Writing</h3>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {writing.map((movie) => (
-                <TableRow key={movie.credit_id}>
-                  <TableCell component="th" scope="row">
-                    <div className="movieinfo">
-                      <span>
-                        {movie.release_date === undefined
-                          ? ""
-                          : movie.release_date.slice(0, 4)}
-                        {movie.first_air_date
-                          ? movie.first_air_date.slice(0, 4)
-                          : ""}
-                      </span>{" "}
-                      <span
-                        className="movieinfo__dot"
-                        onClick={() => showToolTip(movie.credit_id)}
-                        id={`${movie.id}`}
-                      ></span>{" "}
-                      {movie.title ? movie.title : movie.name}
-                      <span className="movieinfo__job">{`... as ${movie.job}`}</span>
-                      <MovieInfoToolTip
-                        poster={movie.poster_path}
-                        desc={movie.overview}
-                        title={movie.title}
-                        name={movie.name}
-                        showTip={showTip}
-                        id={movie.credit_id}
-                        hideTooltip={() => hideToolTip(movie.credit_id)}
-                      />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <Table
-            size="medium"
-            aria-label="a dense table"
-            style={selectDirecting ? { display: "none" } : { display: "table" }}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell className="tableheadcell">
-                  <h3>Directing</h3>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {directing.map((movie) => (
-                <TableRow key={movie.credit_id}>
-                  <TableCell component="th" scope="row">
-                    <div className="movieinfo">
-                      <span>
-                        {movie.release_date === undefined
-                          ? ""
-                          : movie.release_date.slice(0, 4)}
-                        {movie.first_air_date
-                          ? movie.first_air_date.slice(0, 4)
-                          : ""}
-                      </span>{" "}
-                      <span
-                        className="movieinfo__dot"
-                        onClick={() => showToolTip(movie.credit_id)}
-                        id={`${movie.id}`}
-                      ></span>{" "}
-                      {movie.title ? movie.title : movie.name}
-                      <span className="movieinfo__job">{`... as ${movie.job}`}</span>
-                      <MovieInfoToolTip
-                        poster={movie.poster_path}
-                        desc={movie.overview}
-                        title={movie.title}
-                        name={movie.name}
-                        showTip={showTip}
-                        id={movie.credit_id}
-                        hideTooltip={() => hideToolTip(movie.credit_id)}
-                      />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <Table
-            size="medium"
-            aria-label="a dense table"
-            style={selectProd ? { display: "none" } : { display: "table" }}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell className="tableheadcell">
-                  <h3>Production</h3>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {production.map((movie) => (
-                <TableRow key={movie.credit_id}>
-                  <TableCell component="th" scope="row">
-                    <div className="movieinfo">
-                      <span>
-                        {movie.release_date === undefined
-                          ? movie.release_date
-                          : "---"
-                          ? movie.release_date.slice(0, 4)
-                          : ""}
-                        {movie.first_air_date
-                          ? movie.first_air_date.slice(0, 4)
-                          : ""}
-                      </span>{" "}
-                      <span
-                        className="movieinfo__dot"
-                        onClick={() => showToolTip(movie.credit_id)}
-                        id={`${movie.id}`}
-                      ></span>{" "}
-                      {movie.title ? movie.title : movie.name}
-                      <span className="movieinfo__job">{`... as ${movie.job}`}</span>
-                      <MovieInfoToolTip
-                        poster={movie.poster_path}
-                        desc={movie.overview}
-                        title={movie.title}
-                        name={movie.name}
-                        showTip={showTip}
-                        id={movie.credit_id}
-                        hideTooltip={() => hideToolTip(movie.credit_id)}
-                      />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <Table
-            size="medium"
-            aria-label="a dense table"
-            style={selectActing ? { display: "none" } : { display: "table" }}
-          >{}
-            <TableHead>
-              <TableRow>
-                <TableCell className="tableheadcell">
-                  <h3>Acting</h3>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {acting.map((movie) => (
-                <TableRow key={movie.credit_id}>
-                  <TableCell component="th" scope="row">
-                    <div className="movieinfo">
-                      <span>
-                        {movie.release_date === undefined
-                          ? "---"
-                          : movie.release_date.slice(0, 4)}
-                        {movie.first_air_date
-                          ? movie.first_air_date.slice(0, 4)
-                          : ""}
-                      </span>{" "}
-                      <span
-                        className="movieinfo__dot"
-                        onClick={() => showToolTip(movie.credit_id)}
-                        id={`${movie.id}`}
-                      ></span>{" "}
-                      {movie.title ? movie.title : movie.name}
-                      <span className="movieinfo__job">{`... as ${
-                        movie.character ? movie.character : "Unknown"
-                      }`}</span>
-                      <MovieInfoToolTip
-                        poster={movie.poster_path}
-                        desc={movie.overview}
-                        title={movie.title}
-                        name={movie.name}
-                        showTip={showTip}
-                        id={movie.credit_id}
-                        hideTooltip={() => hideToolTip(movie.credit_id)}
-                      />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>:''}
       </div>
     </div>
   );
