@@ -394,7 +394,7 @@ const StaffKnowFor: React.FC<PropsTypes> = ({ combineCrew, combineCast }) => {
                     .map((movie: any) => (
                       <TableRow key={movie.credit_id}>
                         <TableCell component="th" scope="row">
-                          <div className="movieinfo" style={{background:'red'}}>
+                          <div className="movieinfo">
                             <span>
                               {movie.release_date === undefined
                                 ? ""

@@ -114,7 +114,7 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
         <div className="cardWrapper__body">
           <div className="cardWrapper__body-left">
             <CardActors credits={this.props.credits} />
-            <CardSocial reviews={this.props.reviews} />
+            <CardSocial reviews={this.props.reviews} title={this.props.details?.title}/>
             <CardMedia
               details={this.props.details}
               videos={this.props.videos}

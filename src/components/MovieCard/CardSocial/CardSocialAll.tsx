@@ -61,7 +61,7 @@ const CardSocialAll = () => {
     goBack.push(`/movie-card/${id}`);
   };
   console.log(details);
-  console.log(reviews);
+  console.log(reviews.length);
   // detailsSelector
   // reviewsSelector
   return (

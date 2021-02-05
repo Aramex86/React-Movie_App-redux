@@ -5,13 +5,15 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 
 import { ResultsType } from "../../../Types/Types";
+import { useState } from "react";
 
 type PropsType = {
   reviews: Array<ResultsType>;
+  title:string
 };
-type ParamsType={
-  id:string;
-}
+type ParamsType = {
+  id: string;
+};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,12 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const CardMedia = ({ reviews = [] }: PropsType) => {
+const CardMedia = ({ reviews = [],title }: PropsType) => {
   const classes = useStyles();
-  let {id}:ParamsType = useParams();
+  let { id }: ParamsType = useParams();
 
-
-console.log(id);
 
   return (
     <div className="socialWrapp">
@@ -44,62 +44,69 @@ console.log(id);
         <h3 className="socialWrapp__header-heading">Social</h3>
         <ul className="socialWrapp__header-list">
           <li className="socialWrapp__header-item">
-            <Link
-              to="/allreview"
-              className="socialWrapp__header-link socialWrapp__header-link--active"
-            >
+            <div className="socialWrapp__header-link socialWrapp__header-link--active">
               Reviews{" "}
               <span>
                 {reviews.length === undefined
                   ? "NO REVIEWS YET"
                   : reviews.length}
               </span>
-            </Link>
+            </div>
           </li>
           {/* <li className="socialWrapp__header-item">
             <a href="#" className="socialWrapp__header-link">
               Discussions <span>6</span>
             </a>
-          </li> */}{/*  */}
+          </li> */}
+          {/*  */}
         </ul>
       </div>
-      {reviews.slice(0, 1).map((review) => (
-        <div className="socialWrapp__reviews" key={review.id}>
-          <div className="socialWrapp__reviews-header">
-            <Avatar style={{ marginRight: "15px" }} className={classes.large} />
-            <div>
-              <a href={review.url} target="_blank" rel="noreferrer">
-                <h3>
-                  A review by {review.author}{" "}
+      {reviews.length === 0
+        ?<span style={{fontWeight:'bold',fontSize:'2rem'}}> We don't have any reviews for {title}.</span>
+        : reviews.slice(0, 2).map((review) => (
+            <div className="socialWrapp__reviews" key={review.id}>
+              <div className="socialWrapp__reviews-header">
+                <Avatar
+                  style={{ marginRight: "15px" }}
+                  className={classes.large}
+                />
+                <div>
+                  <a href={review.url} target="_blank" rel="noreferrer">
+                    <h3>
+                      A review by {review.author}{" "}
+                      <span>
+                        <StarRateRoundedIcon style={{ fontSize: 20 }} />
+                        6.0
+                      </span>
+                    </h3>
+                  </a>
                   <span>
-                    <StarRateRoundedIcon style={{ fontSize: 20 }} />
-                    6.0
+                    Written by <b>{review.author}</b> on 4 April 2017
                   </span>
-                </h3>
-              </a>
-              <span>
-                Written by <b>{review.author}</b> on 4 April 2017
-              </span>
+                </div>
+              </div>
+              <div className="socialWrapp__reviews-body">
+                <p>
+                  {`${review.content.slice(0, 300)}...`}{" "}
+                  <a
+                    href={review.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="socialWrapp__reviews-link"
+                  >
+                    read the rest
+                  </a>
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="socialWrapp__reviews-body">
-            <p>
-              {`${review.content.slice(0, 300)}...`}{" "}
-              <a
-                href={review.url}
-                target="_blank"
-                rel="noreferrer"
-                className="socialWrapp__reviews-link"
-              >
-                read the rest
-              </a>
-            </p>
-          </div>
-        </div>
-      ))}
-      <h4>
-        <Link to={`/allreview/${id}`}>Read All Reviews</Link>
-      </h4>
+          ))}
+      {reviews.length === 0 ? (
+        ""
+      ) : (
+        <h4>
+          <Link to={`/allreview/${id}`}>Read All Reviews</Link>
+        </h4>
+      )}
     </div>
   );
 };
