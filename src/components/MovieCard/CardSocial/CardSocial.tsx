@@ -2,13 +2,16 @@ import React from "react";
 import StarRateRoundedIcon from "@material-ui/icons/StarRateRounded";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 
 import { ResultsType } from "../../../Types/Types";
 
 type PropsType = {
   reviews: Array<ResultsType>;
 };
+type ParamsType={
+  id:string;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 const CardMedia = ({ reviews = [] }: PropsType) => {
   const classes = useStyles();
+  let {id}:ParamsType = useParams();
+
+
+console.log(id);
 
   return (
     <div className="socialWrapp">
@@ -49,11 +56,11 @@ const CardMedia = ({ reviews = [] }: PropsType) => {
               </span>
             </Link>
           </li>
-          <li className="socialWrapp__header-item">
+          {/* <li className="socialWrapp__header-item">
             <a href="#" className="socialWrapp__header-link">
               Discussions <span>6</span>
             </a>
-          </li>
+          </li> */}{/*  */}
         </ul>
       </div>
       {reviews.slice(0, 1).map((review) => (
@@ -91,7 +98,7 @@ const CardMedia = ({ reviews = [] }: PropsType) => {
         </div>
       ))}
       <h4>
-        <Link to="/allreview/">Read All Reviews</Link>
+        <Link to={`/allreview/${id}`}>Read All Reviews</Link>
       </h4>
     </div>
   );

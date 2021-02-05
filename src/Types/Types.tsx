@@ -20,7 +20,7 @@ type Roletype = {
   character: string;
   credit_id: string;
   episode_count: number;
-}; 
+};
 export type CastType = {
   adult: boolean;
   cast_id: number;
@@ -52,7 +52,7 @@ export type CrewType = {
 };
 
 export type CreditsType = {
-  id:number;
+  id: number;
   cast: Array<CastType>;
   crew: Array<CrewType>;
 };
@@ -81,7 +81,7 @@ export type WithMoviePropsType = {
   recomand: Array<RecomandType>;
   keywords: Array<KeywordsType>;
   vote_average: number;
-  errors:string;
+  errors: string;
   requestMovieList: () => void;
   requestCredits: (movieId: number) => void;
   requestGenres: () => void;
@@ -246,7 +246,7 @@ export type TvPropsType = {
   keywords: Array<KeywordsType>;
   external: ExternalIdsType | null;
   vote_average: number;
-  errors:string;
+  errors: string;
   requestCredits: (tvId: number) => void;
   requestGenres: () => void;
   requestTvDetails: (tvId: number) => void;
@@ -266,9 +266,17 @@ export type ResultsType = {
   url: string;
 };
 
+type AuthorDetailsType = {
+  avatar_path: string;
+  name: string;
+  rating: number;
+  username: string;
+};
+
 export type ReviewsType = {
   page: number;
   author: string;
+  author_details: AuthorDetailsType;
   content: string;
   id: string;
   url: string;
@@ -666,7 +674,6 @@ export type CollectionsType = {
   backdrop_path: string;
   parts: Array<PartsType>;
 };
-
 
 //Sort
 export type SortType = {

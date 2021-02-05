@@ -1,0 +1,33 @@
+.reviewsbody {
+  display: flex;
+  width: 85%;
+  margin: auto;
+  margin-top: 25px;
+  @include respond(phone) {
+    width: 95%;
+  }
+  @include respond(small-phone) {
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__left {
+    width: 20%;
+    text-align: center;
+    @include respond(phone) {
+      width: 30%;
+    }
+    @include respond(small-phone) {
+      width: 100%;
+      margin-bottom: 25px;
+    }
+  }
+  &__right {
+    width: 75%;
+    @include respond(tab-port) {
+      width: 77%;
+    }
+    @include respond(small-phone) {
+      width: 100%;
+    }
+  }
+}

@@ -34,7 +34,7 @@ function App() {
           <Route exact path="/posterstaff/:id" component={PosterStaffPage} />
 
           <Route path="/actorslist/:id" component={FullList} />
-          <Route exact path="/allreview/" component={CardSocialAll} />
+          <Route exact path="/allreview/:id" component={CardSocialAll} />
           <Route exact path="/allmedia/" component={CardMediaAll} />
           <Route exact path="/sreachresults/" component={ResultsPage} />
           <Route exact path="/movies/popular" component={Popular} />
@@ -47,7 +47,6 @@ function App() {
           <Route exact path="/tv/toprated" component={TopRatedTv} />
           <Route exact path="/people/popular" component={PopularPeople} />
           <Route exact path="/collection" component={Collection} />
-
         </Switch>
       </WithHeaderFooter>
     </div>
