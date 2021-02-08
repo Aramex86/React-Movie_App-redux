@@ -9,7 +9,7 @@ import { useState } from "react";
 
 type PropsType = {
   reviews: Array<ResultsType>;
-  title:string
+  title:string | undefined
 };
 type ParamsType = {
   id: string;
@@ -37,6 +37,12 @@ const CardMedia = ({ reviews = [],title }: PropsType) => {
   const classes = useStyles();
   let { id }: ParamsType = useParams();
 
+  const moveToTop=()=>{
+    window.scrollTo({
+      top:0,
+      behavior:'smooth',
+    })
+  }
 
   return (
     <div className="socialWrapp">
@@ -103,8 +109,8 @@ const CardMedia = ({ reviews = [],title }: PropsType) => {
       {reviews.length === 0 ? (
         ""
       ) : (
-        <h4>
-          <Link to={`/allreview/${id}`}>Read All Reviews</Link>
+        <h4 >
+          <Link to={`/allreview/${id}`} onClick={moveToTop}>Read All Reviews</Link>
         </h4>
       )}
     </div>

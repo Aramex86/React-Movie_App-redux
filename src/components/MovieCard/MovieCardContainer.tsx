@@ -83,51 +83,55 @@ class MovieCardContainer extends Component<WithMoviePropsType, IState> {
     });
   };
 
-
   render() {
-    console.log(
-      this.props
-    );
-   
+    // console.log(this.props);
+
     return (
       <div className="cardWrapper">
-        {this.props.errors ?<PageNotFound/>:
-        <>
-        <PopupTrailer
-          videos={this.props.videos}
-          playState={this.state}
-          closePlay={this.closePlay}
-        />
-        <CradHeader />
-        <CardPoster
-          details={this.props.details}
-          original_title={this.props.details?.original_title}
-          release_date={this.props.details?.release_date}
-          original_language={this.props.details?.original_language}
-          genres={this.props.details?.genres}
-          runtime={this.props.details?.runtime}
-          popularity={this.props.details?.popularity}
-          overview={this.props.details?.overview}
-          credits={this.props.credits}
-          handaleplay={this.handaleplay}
-        />
-        <div className="cardWrapper__body">
-          <div className="cardWrapper__body-left">
-            <CardActors credits={this.props.credits} />
-            <CardSocial reviews={this.props.reviews} title={this.props.details?.title}/>
-            <CardMedia
-              details={this.props.details}
+        {this.props.errors ? (
+          <PageNotFound />
+        ) : (
+          <>
+            <PopupTrailer
               videos={this.props.videos}
+              playState={this.state}
+              closePlay={this.closePlay}
             />
-            <CardRecomand recomand={this.props.recomand} />
-          </div>
-          <div className="cardWrapper__body-right">
-            <CardInfo
-              keywords={this.props.keywords}
+            <CradHeader />
+            <CardPoster
               details={this.props.details}
+              original_title={this.props.details?.original_title}
+              release_date={this.props.details?.release_date}
+              original_language={this.props.details?.original_language}
+              genres={this.props.details?.genres}
+              runtime={this.props.details?.runtime}
+              popularity={this.props.details?.popularity}
+              overview={this.props.details?.overview}
+              credits={this.props.credits}
+              handaleplay={this.handaleplay}
             />
-          </div>
-        </div></>}
+            <div className="cardWrapper__body">
+              <div className="cardWrapper__body-left">
+                <CardActors credits={this.props.credits} />
+                <CardSocial
+                  reviews={this.props.reviews}
+                  title={this.props.details?.title}
+                />
+                <CardMedia
+                  details={this.props.details}
+                  videos={this.props.videos}
+                />
+                <CardRecomand recomand={this.props.recomand} />
+              </div>
+              <div className="cardWrapper__body-right">
+                <CardInfo
+                  keywords={this.props.keywords}
+                  details={this.props.details}
+                />
+              </div>
+            </div>
+          </>
+        )}
         {/* <PopupTrailer
           videos={this.props.videos}
           playState={this.state}
@@ -177,7 +181,7 @@ const mapStateToProps = (state: AppStateType) => {
     videos: viedoSelector(state),
     recomand: recomadSelector(state),
     keywords: keywordsSelector(state),
-    errors:errorSelector(state),
+    errors: errorSelector(state),
   };
 };
 
