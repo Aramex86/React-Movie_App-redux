@@ -58,12 +58,7 @@ const CardMediaAll = () => {
       return (height = 200);
     }
   };
-
-  console.log(height);
-  console.log(videoHeigth());
-
-  //   console.log(details);
-  console.log(videos.length);
+videoHeigth();
   return (
     <div>
       <CardHeader />

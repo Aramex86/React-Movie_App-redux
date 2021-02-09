@@ -13,13 +13,15 @@ const InTheater = () => {
   );
   const theater = useSelector((state:AppStateType)=>traidingsSelector(state))
 
+
+  console.log(theater);
   return (
     <div className="cardwrapp">
       {theater.map((movie) =>
         fetching ? (
           <Skeleton key={movie.id}/>
         ) : (
-          <Link to={`movie-card/${movie.id}`} key={movie.id}>
+          <Link to={movie.media_type === "movie"? `movie-card/${movie.id}`:`tv-card/${movie.id}`} key={movie.id}>
             <Card
               poster={movie.poster_path}
               title={movie.title}

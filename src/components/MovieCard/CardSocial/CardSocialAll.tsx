@@ -1,17 +1,13 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  reviewsSelector,
-} from "../../Store/Selectors/MovieSelector";
-import {  useParams } from "react-router";
+import { reviewsSelector } from "../../Store/Selectors/MovieSelector";
+import { useParams } from "react-router";
 
 import { AppStateType } from "../../Store/store";
 
 import CardHeader from "../../Common/CardHeader";
-import {
-  requestReviews,
-} from "../../Store/Reducers/MovieListReducer";
+import { requestReviews } from "../../Store/Reducers/MovieListReducer";
 import Avatar from "@material-ui/core/Avatar";
 import StarRateRoundedIcon from "@material-ui/icons/StarRateRounded";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -50,7 +46,6 @@ const CardSocialAll = () => {
     dispatch(requestReviews(Number(id)));
   }, [id, dispatch]);
 
-  // console.log(reviews.length);
   return (
     <div className="reviewswrap">
       <CardHeader />
