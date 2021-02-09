@@ -50,7 +50,7 @@ const HomePageCard: FC<PropsType> = ({
         {poster === null ? (
           <img src={NoPoster} alt="pic" />
         ) : (
-          <img src={`https://image.tmdb.org/t/p/w500${poster}`} alt="pic" />
+          <img src={`https://image.tmdb.org/t/p/w500${poster}`} alt="pic" loading='lazy'/>
         )}
       </div>
       <div className="card__movie-popular">

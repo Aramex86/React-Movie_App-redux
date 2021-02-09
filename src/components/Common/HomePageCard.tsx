@@ -39,9 +39,9 @@ const HomePageCard: FC<PropsType> = ({
     <div className="card">
       <div className="card__img">
         {poster === null ? (
-          <img src={NoPoster} alt="pic" />
+          <img src={NoPoster} alt="pic"  loading='lazy'/>
         ) : (
-          <img src={`https://image.tmdb.org/t/p/w500${poster}`} alt="pic" />
+          <img src={`https://image.tmdb.org/t/p/w500${poster}`} alt="pic"  loading='lazy'/>
         )}
       </div>
       <div className="card__popular">

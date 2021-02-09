@@ -20,6 +20,7 @@ import TopRatedTv from "./components/Tv/TopRatedTv";
 import PopularPeople from "./components/People/Popular";
 import TvCardContainer from "./TvCard/TvCardContainer";
 import Collection from "./components/Collection/Collection";
+import withSuspense from "./Hoc/withSuspense";
 
 function App() {
   return (
@@ -27,26 +28,80 @@ function App() {
       <WithHeaderFooter>
         <Switch>
           <Route exact path="/" component={MovielistContainer} />
-          <Route path="/movie-card/:id" component={MovieCardContainer} />
-          <Route path="/tv-card/:id" component={TvCardContainer} />
-          <Route path="/collection/:id" component={Collection} />
+          <Route
+            path="/movie-card/:id"
+            component={withSuspense(MovieCardContainer)}
+          />
+          <Route
+            path="/tv-card/:id"
+            component={withSuspense(TvCardContainer)}
+          />
+          <Route path="/collection/:id" component={withSuspense(Collection)} />
 
-          <Route exact path="/posterstaff/:id" component={PosterStaffPage} />
+          <Route
+            exact
+            path="/posterstaff/:id"
+            component={withSuspense(PosterStaffPage)}
+          />
 
-          <Route path="/actorslist/:id" component={FullList} />
-          <Route exact path="/allreview/:id" component={CardSocialAll} />
-          <Route exact path="/allmedia/:id" component={CardMediaAll} />
-          <Route exact path="/sreachresults/" component={ResultsPage} />
-          <Route exact path="/movies/popular" component={Popular} />
-          <Route exact path="/movies/nowplaying" component={NowPlaying} />
-          <Route exact path="/movies/upcoming" component={Upcoming} />
-          <Route exact path="/movies/toprated" component={TopRated} />
-          <Route exact path="/tv/popular" component={PopularTv} />
-          <Route exact path="/tv/airingtoday" component={AiringToday} />
-          <Route exact path="/tv/ontv" component={OnTv} />
-          <Route exact path="/tv/toprated" component={TopRatedTv} />
-          <Route exact path="/people/popular" component={PopularPeople} />
-          <Route exact path="/collection" component={Collection} />
+          <Route path="/actorslist/:id" component={withSuspense(FullList)} />
+          <Route
+            exact
+            path="/allreview/:id"
+            component={withSuspense(CardSocialAll)}
+          />
+          <Route
+            exact
+            path="/allmedia/:id"
+            component={withSuspense(CardMediaAll)}
+          />
+          <Route
+            exact
+            path="/sreachresults/"
+            component={withSuspense(ResultsPage)}
+          />
+          <Route
+            exact
+            path="/movies/popular"
+            component={withSuspense(Popular)}
+          />
+          <Route
+            exact
+            path="/movies/nowplaying"
+            component={withSuspense(NowPlaying)}
+          />
+          <Route
+            exact
+            path="/movies/upcoming"
+            component={withSuspense(Upcoming)}
+          />
+          <Route
+            exact
+            path="/movies/toprated"
+            component={withSuspense(TopRated)}
+          />
+          <Route exact path="/tv/popular" component={withSuspense(PopularTv)} />
+          <Route
+            exact
+            path="/tv/airingtoday"
+            component={withSuspense(AiringToday)}
+          />
+          <Route exact path="/tv/ontv" component={withSuspense(OnTv)} />
+          <Route
+            exact
+            path="/tv/toprated"
+            component={withSuspense(TopRatedTv)}
+          />
+          <Route
+            exact
+            path="/people/popular"
+            component={withSuspense(PopularPeople)}
+          />
+          <Route
+            exact
+            path="/collection"
+            component={withSuspense(Collection)}
+          />
         </Switch>
       </WithHeaderFooter>
     </div>

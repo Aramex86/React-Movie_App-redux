@@ -16,11 +16,12 @@ const CastCard: FC<PropsType> = ({ name, profile_path, character, gender }) => {
     <div className="castwrap">
       <div className="castwrap__img">
         {profile_path === null ? (
-          <img src={gender === 2 ? noPhoto : noPhotoFem} alt={name} />
+          <img src={gender === 2 ? noPhoto : noPhotoFem} alt={name} loading='lazy'/>
         ) : (
           <img
             src={`https://image.tmdb.org/t/p/w500${profile_path}`}
             alt={name}
+            loading='lazy'
           />
         )}
       </div>

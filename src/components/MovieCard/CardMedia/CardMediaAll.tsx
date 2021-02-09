@@ -67,8 +67,8 @@ videoHeigth();
         <div className="backdrop">
           <span className="heading">backdrops</span>
           <div className="allmediacontainer">
-            {backdrops.map((el) => (
-              <a href={el} target="_blank" rel="noreferrer">
+            {backdrops.map((el,index) => (
+              <a href={el} target="_blank" rel="noreferrer" key={index}>
                 <figure className="container__back">
                   {" "}
                   <img src={el} alt="backdrop" />
@@ -80,8 +80,8 @@ videoHeigth();
         <div className="poster">
           <span className="heading">posters</span>
           <div className="allmediacontainer">
-            {posters.map((el) => (
-              <a href={el} target="_blank" rel="noreferrer">
+            {posters.map((el,index) => (
+              <a href={el} target="_blank" rel="noreferrer" key={index}>
                 <figure className="container__back">
                   {" "}
                   <img src={el} alt="backdrop" />
@@ -102,6 +102,7 @@ videoHeigth();
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 title="movie trailer"
+                key={video.id}
               ></iframe>
             ))}
           </div>

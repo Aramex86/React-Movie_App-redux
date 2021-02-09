@@ -36,6 +36,7 @@ const CollectionCard: FC<PropsType> = ({ cast, crew }) => {
               <img
                 src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}
                 alt="pic"
+                loading='lazy'
               />
             )}
           </div>
@@ -55,6 +56,7 @@ const CollectionCard: FC<PropsType> = ({ cast, crew }) => {
               <img
                 src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}
                 alt="pic"
+                loading='lazy'
               />
             )}
           </div>

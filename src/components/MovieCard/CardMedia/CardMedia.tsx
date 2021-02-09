@@ -93,7 +93,7 @@ const CardMedia = ({ details, videos = [] }: PropsType) => {
               </a>
             </div>
           ))}
-          <div>
+          <div className='mediaWrapp__wrapper-viewmore'>
             <Link to={`/allmedia/${movieId}`}>
               View More <ArrowForwardRoundedIcon />
             </Link>
