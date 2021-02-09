@@ -1,0 +1,40 @@
+.allmediawrapp {
+  width: 85%;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 1rem 0;
+}
+
+.allmediawrapp .heading {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.allmediacontainer {
+  width: 75%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  & figure {
+    padding: 0.5rem;
+    & img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+  &__video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & iframe {
+      padding: 0.5rem;
+    }
+  }
+}

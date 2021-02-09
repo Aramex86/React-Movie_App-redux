@@ -57,7 +57,6 @@
   }
   &__videobox {
     width: 90%;
-    //min-height: auto;
     position: absolute;
     left: 50%;
     top: 46%;
@@ -587,35 +586,37 @@
       }
       & a {
         color: black;
-        margin-left: 25px;
+        margin-left: 5px;
         display: flex;
-        width: 120px;
+        width: 100px;
         align-items: center;
         font-weight: 700;
       }
     }
     &-videolink {
-      background-image: url(../assets/videobg.jpg);
-      background-size: cover;
-      padding: 8.8rem;
-      margin-right: 5px;
-      background-position: center -50%;
+      // background-image: url(../assets/videobg.jpg);
+      // background-size: cover;
+      // padding: 8.8rem;
+      // margin-right: 5px;
+      // background-position: center -50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 19px;
+      // height: 19px;
       @include respond(phone) {
         padding: 13rem;
       }
       &-link {
+        background-repeat: no-repeat;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 60px;
-        height: 60px;
+        width: 400px !important;
+        height:278px;
         & svg {
           width: 5.5rem;
           height: 5.5rem;
+          fill: #fff;
           &:hover {
             transform: scale(1.1);
           }

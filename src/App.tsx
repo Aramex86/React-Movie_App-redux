@@ -35,7 +35,7 @@ function App() {
 
           <Route path="/actorslist/:id" component={FullList} />
           <Route exact path="/allreview/:id" component={CardSocialAll} />
-          <Route exact path="/allmedia/" component={CardMediaAll} />
+          <Route exact path="/allmedia/:id" component={CardMediaAll} />
           <Route exact path="/sreachresults/" component={ResultsPage} />
           <Route exact path="/movies/popular" component={Popular} />
           <Route exact path="/movies/nowplaying" component={NowPlaying} />
