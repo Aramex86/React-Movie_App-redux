@@ -4,6 +4,9 @@
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 1rem 0;
+  @include respond(small-phone) {
+    width: 95%;
+  }
 }
 
 .allmediawrapp .heading {
@@ -20,6 +23,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  @include respond(small-phone) {
+    width: 100%;
+  }
 
   & figure {
     padding: 0.5rem;
@@ -33,8 +39,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     & iframe {
       padding: 0.5rem;
+      @include respond(tab-land) {
+        width: 50%;
+      }
+      @include respond(small-phone) {
+        width: 95%;
+      }
     }
   }
 }
